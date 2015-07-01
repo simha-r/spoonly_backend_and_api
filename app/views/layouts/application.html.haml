@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title HealthyLunch
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    - flash.each do |key, value|
+      %div{:class => "alert alert-#{key}"}
+        %a.close{"data-dismiss" => "alert", :href => "#"} ×
+        %ul
+          %li
+            = value
+
+
+
+    %ul
+      - if user_signed_in?
+        = link_to current_user.name, ''
+        = link_to "Logout", destroy_user_session_path,method: :delete
+      - else
+        = link_to "Sign in", new_user_session_path
+
+    = yield
