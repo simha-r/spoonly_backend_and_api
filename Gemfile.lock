@@ -36,6 +36,9 @@ GEM
       addressable (>= 2.3.1)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
+    aws-sdk (1.42.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4)
     bcrypt (3.1.10)
     bootstrap-sass (3.2.0.2)
       sass (~> 3.2)
@@ -235,6 +238,7 @@ PLATFORMS
 
 DEPENDENCIES
   annotate
+  aws-sdk
   bootstrap-sass
   byebug
   coffee-rails (~> 4.0.0)
