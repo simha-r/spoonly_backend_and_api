@@ -1,0 +1,82 @@
+= content_for :title, 'Home#Main'
+
+%h3 About the Website
+%p
+  Homes#Main Page
+
+
+%script{src: "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places" }
+= form_tag inside_customer_homes_path,id: 'locationForm' do
+  = text_field_tag 'locality','',id: 'searchTextField',size: '50'
+  = hidden_field_tag 'latitude'
+  = hidden_field_tag 'longitude'
+  = submit_tag 'Go'
+
+
+
+:javascript
+  function initialize() {
+
+  var input = document.getElementById('searchTextField');
+  var southWest = new google.maps.LatLng( 17.323550, 78.285136 );
+  var northEast = new google.maps.LatLng( 17.627775, 78.630175 );
+  var hyderabadBounds = new google.maps.LatLngBounds( southWest, northEast );
+
+  var options = {
+      //bounds: hyderabadBounds,
+      componentRestrictions: { country: 'in' }
+  };
+
+  var autocomplete = new google.maps.places.Autocomplete(input,options);
+  google.maps.event.addListener(autocomplete, 'place_changed', function() {
+     var place = autocomplete.getPlace();
+     var dest_lat = place.geometry.location.lat()
+     var dest_long = place.geometry.location.lng()
+     dest = new google.maps.LatLng(dest_lat,dest_long);
+     $('#locationForm').find('#latitude').val(dest_lat);
+     $('#locationForm').find('#longitude').val(dest_long);
+
+
+     var source_lat = 17.418795
+     var source_long = 78.346911
+     var source = new google.maps.LatLng(source_lat,source_long)
+     var service = new google.maps.DistanceMatrixService();
+
+      service.getDistanceMatrix({
+              origins: [source],
+              destinations: [dest],
+              travelMode: google.maps.TravelMode.DRIVING,
+              unitSystem: google.maps.UnitSystem.METRIC,
+              avoidHighways: false,
+              avoidTolls: false
+          }, function (response, status) {
+              if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                  var distance = response.rows[0].elements[0].distance.text;
+                  var duration = response.rows[0].elements[0].duration.text;
+                  var dvDistance = document.getElementById("dvDistance");
+                console.log("Distance: " + distance )
+                console.log("Duration: " + duration )
+
+              } else {
+                  alert("Unable to find the distance via road.");
+              }
+          });
+
+
+
+
+
+
+
+
+
+  });
+  }
+
+  google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+
+
+

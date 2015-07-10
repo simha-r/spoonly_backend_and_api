@@ -1,9 +1,9 @@
-class CreateDishes < ActiveRecord::Migration
+class CreateProducts < ActiveRecord::Migration
   def change
-    create_table :dishes do |t|
+    create_table :products do |t|
       t.string :name
       t.string :desc
-      t.string :price
+      t.float :price
       t.integer :category_id
 
       t.timestamps

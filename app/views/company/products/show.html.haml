@@ -1,0 +1,17 @@
+.row-fluid
+  .span12
+    .widget
+      .widget-header
+        %i.icon-building
+        %h3= @product.name
+        %span.pull-right
+          = link_to 'Edit', [:edit,:company,@product], :class => 'btn btn-secondary'
+          = link_to 'Delete',[:company, @product], :method => :delete, :data => { :confirm => 'Are you sure?' },
+          :class => 'btn btn-secondary'
+      .widget-content
+        .row-fluid
+          .span8
+            = @product.name
+            = @product.price
+            = @product.desc
+            = image_tag @product.photo.url(:medium)

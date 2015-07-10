@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: authorizations
+#
+#  id         :integer          not null, primary key
+#  provider   :string(255)
+#  uid        :string(255)
+#  user_id    :integer
+#  token      :string(255)
+#  username   :string(255)
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 class Authorization < ActiveRecord::Base
   belongs_to :user
 
@@ -19,20 +33,8 @@ class Authorization < ActiveRecord::Base
 =end
   end
 
-  def fetch_details_from_twitter
+  def fetch_details_from_google
 
   end
 
-
-  def fetch_details_from_github
-  end
-
-
-  def fetch_details_from_linkedin
-
-  end
-
-  def fetch_details_from_google_oauth2
-
-  end
 end

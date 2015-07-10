@@ -1,0 +1,12 @@
+- @products.each do |product|
+  .row
+    .col-md-8
+      = image_tag product.photo.url(:thumb)
+      = link_to product.name, [:company,product]
+      = product.price
+      = product.desc
+      = product.state
+    .col-md-4
+      = link_to 'Edit', [:edit,:company,product], :class => 'btn btn-secondary'
+      = link_to 'Delete',[:company, product], :method => :delete, :data => { :confirm => 'Are you sure?' },
+      :class => 'btn btn-secondary'

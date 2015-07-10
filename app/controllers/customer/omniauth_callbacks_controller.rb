@@ -1,4 +1,4 @@
-class OmniauthCallbacksController < Devise::OmniauthCallbacksController
+class Customer::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   skip_before_filter :authenticate_user!
 
@@ -27,5 +27,5 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   alias_method :linkedin, :all
   alias_method :github, :all
   alias_method :passthru, :all
-  alias_method :google_oauth2, :all
+  alias_method :google, :all
 end

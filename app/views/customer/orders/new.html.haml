@@ -1,0 +1,13 @@
+.row
+  Order
+- @cart.line_items.each do |item|
+  .row-fluid
+    .span8
+      = item.product.name
+      = item.product.price
+      = item.product.desc
+      = item.product.state
+      = item.quantity
+.row
+  = link_to 'Confirm Order',''
+

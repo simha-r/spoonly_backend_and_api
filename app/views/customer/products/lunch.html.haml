@@ -1,0 +1,13 @@
+- @category.products.active.each do |product|
+  .row-fluid
+    .span8
+      = product.name
+      = product.price
+      = product.desc
+      = product.state
+      = link_to 'Add to Cart',customer_line_items_path(product_id: product.id),method: :post
+      = @cart.quantity_of_product(product) if @cart.contains_product? product
+
+
+  .row-fluid
+    = link_to 'Checkout',new_customer_order_path

@@ -1,0 +1,19 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title= content_for?(:title) ? yield(:title) : "Rails Bootstrap"
+    %meta{:content => "#{content_for?(:description) ? yield(:description) : "Rails Bootstrap"}", :name => "description"}/
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %header
+      = render 'layouts/company_user/navigation'
+    %main.container{:role => "main"}
+      = render 'layouts/company_user/messages'
+      %br
+      %br
+        %br
+      = yield

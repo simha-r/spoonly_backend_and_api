@@ -1,0 +1,10 @@
+.row-fluid
+  .span8.offset2
+    .widget
+      .widget-header
+        %i.icon-plus
+        %span Edit
+      .widget-content
+        = render 'form'
+        = link_to 'Show', [:company,@product]
+        = link_to 'Back', [:company,:product]
