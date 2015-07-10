@@ -163,6 +163,8 @@ GEM
       faraday
       faraday_middleware
     pg (0.17.1)
+    puma (2.11.3)
+      rack (>= 1.1, < 2.0)
     rack (1.5.5)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -257,6 +259,7 @@ DEPENDENCIES
   paperclip (~> 4.3)
   parse-ruby-client
   pg
+  puma
   rails (= 4.1.8)
   rails_12factor
   sass-rails (~> 4.0.3)

@@ -42,5 +42,5 @@ gem 'rails_12factor', group: :production
 gem 'pg'
 gem 'aws-sdk'
 
-
+gem 'puma'
 
