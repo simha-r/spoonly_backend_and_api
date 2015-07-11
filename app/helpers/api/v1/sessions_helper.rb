@@ -8,6 +8,7 @@ module Api::V1::SessionsHelper
       profile = graph.get_object("me")
       @email = profile['email']
       @uid = profile['id']
+      @name = profile['name']
     elsif provider=='google'
       #TODO get email and uid
       response = HTTParty.get("https://www.googleapis.com/oauth2/v2/userinfo",
@@ -17,6 +18,7 @@ module Api::V1::SessionsHelper
         response = JSON.parse(response.body)
         @email = response['email']
         @uid = response['uid']
+        @name = response['name']
       end
     end
     if !@email.present?

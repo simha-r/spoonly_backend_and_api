@@ -30,6 +30,9 @@ class Product < ActiveRecord::Base
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
 
+  SERVING_RADIUS = 5
+  CIRCLE_CENTRE_LAT = 17.462637
+  CIRCLE_CENTRE_LONG=78.373031
 
   def make_active
     update_attributes(state: 'active')

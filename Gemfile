@@ -43,4 +43,6 @@ gem 'pg'
 gem 'aws-sdk'
 
 gem 'puma'
+gem 'geocoder'
+
 

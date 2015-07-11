@@ -28,11 +28,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,:confirmable,:omniauthable
 
-  has_many :authorizations
-  has_many :addresses
+  delegate :name,:phone_number,:phone_number_verified, to: :profile
+
+  has_many :authorizations, dependent: :destroy
+  has_many :addresses, dependent: :destroy
   has_many :orders
-  has_one :profile
-  has_one :wallet
+  has_one :profile, dependent: :destroy
+  has_one :wallet, dependent: :destroy
 
 
   before_save :ensure_authentication_token
@@ -61,11 +63,13 @@ class User < ActiveRecord::Base
       uid = auth[:uid]
       token = auth[:access_token]
       email = auth[:info][:email]
+      name = auth[:info][:name]
     else
       provider = auth.provider
       uid = auth.uid
       token = auth.credentials.token
       email = auth["info"]["email"]
+      name = auth.info.name
     end
 
     authorization = Authorization.where(:provider => provider, :uid => uid).first_or_initialize
@@ -75,7 +79,7 @@ class User < ActiveRecord::Base
         user = User.new
         user.password = Devise.friendly_token[0,10]
         #TODO Put name in profile
-        # user.name = auth.info.name
+        user.create_profile(name: name)
         user.email = email
         user.save
       end
@@ -87,6 +91,12 @@ class User < ActiveRecord::Base
     user
   end
 
+
+  def serializable_hash(options={})
+    options ||={}
+    options[:include] = :profile
+    super
+  end
 
   private
 

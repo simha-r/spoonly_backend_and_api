@@ -47,6 +47,7 @@ Rails.application.routes.draw do
       resource :wallets,only:[:show]
       resource :accounts,only:[:show]
     end
+
   end
 
   namespace :company do
