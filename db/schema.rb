@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150710094126) do
+ActiveRecord::Schema.define(version: 20150711055904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,12 +35,6 @@ ActiveRecord::Schema.define(version: 20150710094126) do
   end
 
   create_table "carts", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "categories", force: true do |t|
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -74,6 +68,23 @@ ActiveRecord::Schema.define(version: 20150710094126) do
     t.datetime "updated_at"
   end
 
+  create_table "menu_products", force: true do |t|
+    t.integer  "menu_id"
+    t.integer  "product_id"
+    t.string   "category"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "menu_products", ["menu_id"], name: "index_menu_products_on_menu_id", using: :btree
+  add_index "menu_products", ["product_id"], name: "index_menu_products_on_product_id", using: :btree
+
+  create_table "menus", force: true do |t|
+    t.date     "menu_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "orders", force: true do |t|
     t.datetime "delivery_time"
     t.string   "state"
@@ -88,10 +99,8 @@ ActiveRecord::Schema.define(version: 20150710094126) do
     t.string   "name"
     t.string   "desc"
     t.float    "price"
-    t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "state"
     t.string   "photo_file_name"
     t.string   "photo_content_type"
     t.integer  "photo_file_size"

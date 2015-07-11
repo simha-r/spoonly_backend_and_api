@@ -46,12 +46,22 @@ Rails.application.routes.draw do
       resources :sessions
       resource :wallets,only:[:show]
       resource :accounts,only:[:show]
+      resource :menu do
+        get :lunch
+        get :dinner
+      end
     end
 
   end
 
   namespace :company do
     resources :products
+    resources :menus do
+      member do
+        get :add_items
+      end
+    end
+    resource :menu_products,only: [:create,:update]
   end
 
 end

@@ -1,0 +1,30 @@
+.row-fluid
+  .span12
+    .widget
+      .widget-header
+        %h3 Menu
+        %i.icon-building
+        %span.pull-right
+          = link_to 'Edit', [:edit,:company,@menu], :class => 'btn btn-secondary'
+          = link_to 'Delete',[:company, @menu], :method => :delete, :data => { :confirm => 'Are you sure?' },
+          :class => 'btn btn-secondary'
+          = link_to 'Add Items',[:add_items,:company,@menu]
+      .widget-content
+        .row-fluid
+          .span8
+            = @menu.menu_date
+
+.row
+  %br
+
+- @menu.products.each do |product|
+  .row
+    .col-md-8
+      = image_tag product.photo.url(:thumb)
+      = link_to product.name, [:company,product]
+      = product.price
+      = product.desc
+
+
+
+

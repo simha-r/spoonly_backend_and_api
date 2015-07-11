@@ -1,0 +1,2 @@
+module Company::MenusHelper
+end

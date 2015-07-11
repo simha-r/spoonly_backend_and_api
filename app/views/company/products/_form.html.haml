@@ -16,9 +16,6 @@
     = f.label :price
     = f.text_field :price
 
-    = f.collection_select(:category_id, Category.all, :id, :name, prompt: true)
-
-    = f.collection_select(:state, Product::VALID_STATES, :to_s, :to_s, prompt: true)
     = f.file_field :photo
 
 
