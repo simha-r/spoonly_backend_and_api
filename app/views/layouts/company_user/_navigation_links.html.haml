@@ -1,4 +1,4 @@
 - if company_user_signed_in?
   %li= link_to "Logout", destroy_user_session_path,method: :delete
 - else
-  %li= link_to "Sign in", new_user_session_path
+  %li= link_to "Sign in", new_company_user_session_path

@@ -55,6 +55,7 @@ Rails.application.routes.draw do
   end
 
   namespace :company do
+    root 'products#index'
     resources :products
     resources :menus do
       member do
