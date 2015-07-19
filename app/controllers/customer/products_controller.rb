@@ -9,7 +9,7 @@ class Customer::ProductsController < ApplicationController
   end
 
   def lunch
-    @category = Category.where(name: 'lunch').first
+    @dishes = Dish.where(name: 'lunch').first
   end
 
 

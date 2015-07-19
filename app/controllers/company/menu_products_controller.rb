@@ -11,7 +11,7 @@ class Company::MenuProductsController < Company::BaseController
   end
 
   def menu_product_params
-    params.require(:menu_product).permit(:product_id,:menu_id)
+    params.require(:menu_product).permit(:product_id,:menu_id,:category)
   end
 
 

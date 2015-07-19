@@ -17,10 +17,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :products do
+    resources :menus do
       collection do
         get :home
         get :lunch
+        get :dinner
       end
     end
 

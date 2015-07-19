@@ -17,7 +17,8 @@
 .row
   %br
 
-- @menu.products.each do |product|
+%h3 Lunch
+- @menu.lunch_products.each do |product|
   .row
     .col-md-8
       = image_tag product.photo.url(:thumb)
@@ -25,6 +26,14 @@
       = product.price
       = product.desc
 
+%h3 Dinner
+- @menu.dinner_products.each do |product|
+  .row
+    .col-md-8
+      = image_tag product.photo.url(:thumb)
+      = link_to product.name, [:company,product]
+      = product.price
+      = product.desc
 
 
 

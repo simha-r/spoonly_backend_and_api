@@ -13,4 +13,7 @@
 class MenuProduct < ActiveRecord::Base
   belongs_to :menu
   belongs_to :product
+
+  CATEGORIES = ['lunch','dinner']
+
 end
