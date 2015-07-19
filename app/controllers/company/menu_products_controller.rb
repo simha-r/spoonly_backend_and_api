@@ -10,6 +10,15 @@ class Company::MenuProductsController < Company::BaseController
     end
   end
 
+  def destroy
+    @menu_product = MenuProduct.find params[:id]
+    @menu_product.destroy
+    redirect_to request.referrer,notice: 'Item has been removed from the Menu'
+  end
+
+
+  private
+
   def menu_product_params
     params.require(:menu_product).permit(:product_id,:menu_id,:category)
   end

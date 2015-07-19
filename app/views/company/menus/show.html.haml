@@ -18,22 +18,22 @@
   %br
 
 %h3 Lunch
-- @menu.lunch_products.each do |product|
+- @menu.menu_lunch_products.each do |menu_lunch_product|
+  - product = menu_lunch_product.product
   .row
     .col-md-8
       = image_tag product.photo.url(:thumb)
       = link_to product.name, [:company,product]
       = product.price
       = product.desc
-
+      = link_to 'Remove Item',company_menu_product_path(menu_lunch_product), method: :delete
 %h3 Dinner
-- @menu.dinner_products.each do |product|
+- @menu.menu_dinner_products.each do |menu_dinner_product|
+  - product = menu_dinner_product.product
   .row
     .col-md-8
       = image_tag product.photo.url(:thumb)
       = link_to product.name, [:company,product]
       = product.price
       = product.desc
-
-
-
+      = link_to 'Remove Item',company_menu_product_path(menu_dinner_product), method: :delete

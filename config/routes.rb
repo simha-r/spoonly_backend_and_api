@@ -63,7 +63,7 @@ Rails.application.routes.draw do
         get :add_items
       end
     end
-    resource :menu_products,only: [:create,:update]
+    resources :menu_products,only: [:create,:update,:destroy]
   end
 
 end

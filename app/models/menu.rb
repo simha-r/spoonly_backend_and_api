@@ -14,6 +14,9 @@ class Menu < ActiveRecord::Base
   has_many :products,through: :menu_products
 
 
+  has_many :menu_lunch_products,-> { where(menu_products: {category: 'lunch'}) }, class_name: 'MenuProduct'
+  has_many :menu_dinner_products,-> { where(menu_products: {category: 'dinner'}) }, class_name: 'MenuProduct'
+
   has_many :lunch_products, -> { where(menu_products: {category: 'lunch'}) },
            :through => :menu_products, source: :product
 
