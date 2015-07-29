@@ -10,6 +10,7 @@
   = text_field_tag 'locality','',id: 'searchTextField',size: '50'
   = hidden_field_tag 'latitude'
   = hidden_field_tag 'longitude'
+  = hidden_field_tag 'distance'
   = submit_tag 'Go'
 
 
@@ -37,8 +38,8 @@
      $('#locationForm').find('#longitude').val(dest_long);
 
 
-     var source_lat = 17.418795
-     var source_long = 78.346911
+     var source_lat = 17.447181
+     var source_long =  78.358624
      var source = new google.maps.LatLng(source_lat,source_long)
      var service = new google.maps.DistanceMatrixService();
 
@@ -56,6 +57,8 @@
                   var dvDistance = document.getElementById("dvDistance");
                 console.log("Distance: " + distance )
                 console.log("Duration: " + duration )
+                $('#locationForm').find('#distance').val(distance);
+
 
               } else {
                   alert("Unable to find the distance via road.");

@@ -43,6 +43,7 @@ gem 'pg'
 gem 'aws-sdk'
 
 gem 'puma'
-gem 'geocoder'
+gem 'will_paginate', '~> 3.0.6'
+
 
 

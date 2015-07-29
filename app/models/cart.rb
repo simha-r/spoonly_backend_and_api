@@ -3,21 +3,24 @@
 # Table name: carts
 #
 #  id         :integer          not null, primary key
+#  category   :string(255)
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class Cart < ActiveRecord::Base
 
-  has_many :line_items
+  has_many :line_items,dependent: :destroy
+  has_many :menu_products,through: :line_items
 
-  def add_product(product_id)
-    current_item = line_items.find_by(product_id: product_id)
+  def add_menu_product(menu_product_id)
+    current_item = line_items.find_by(menu_product_id: menu_product_id)
+    set_category MenuProduct.find(menu_product_id).category
     if current_item
       current_item.quantity += 1
     else
-      current_item = line_items.build(product_id: product_id)
-      current_item.price = current_item.product.price
+      current_item = line_items.build(menu_product_id: menu_product_id)
+      current_item.price = current_item.menu_product.product.price
     end
     current_item
   end
@@ -26,12 +29,21 @@ class Cart < ActiveRecord::Base
     line_items.to_a.sum { |item| item.total_price }
   end
 
-  def quantity_of_product product
-    line_items.where(product_id: product.id).count
+  def quantity_of_menu_product menu_product
+    line_items.where(menu_product_id: menu_product.id).first.quantity
+
+
   end
 
-  def contains_product? product
-    line_items.where(product_id: product.id).first
+  def contains_menu_product? menu_product
+    line_items.where(menu_product_id: menu_product.id).first
+  end
+
+  def set_category line_item_category
+    if category!=line_item_category
+      update_attributes(category: line_item_category)
+      line_items.destroy_all
+    end
   end
 
 end

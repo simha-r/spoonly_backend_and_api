@@ -1,0 +1,9 @@
+- product = menu_product.product
+.row-fluid
+  .span8
+    = product.name
+    = product.price
+    = product.desc
+    = link_to 'Add to Cart',customer_line_items_path(menu_product_id: menu_product.id),method: :post
+    = @cart.quantity_of_menu_product(menu_product) if @cart.contains_menu_product? menu_product
+

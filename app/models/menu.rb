@@ -28,17 +28,21 @@ class Menu < ActiveRecord::Base
   def show_lunch
     hash = {}
     hash[:lunch] = {start_time: lunch_start_time, end_time: lunch_end_time,end_order_time: lunch_order_end_time,
-                    products: lunch_products}
+                    # products: lunch_products}
+
+    products: menu_lunch_products.collect{|menu_product| [menu_product.id,menu_product.product]}}
   end
 
   def show_dinner
     hash = {}
     hash[:dinner] = {start_time: dinner_start_time, end_time: dinner_end_time,end_order_time: dinner_order_end_time,
-                     products: dinner_products}
+                     # products: dinner_products}
+                     products: menu_dinner_products.collect{|menu_product| [menu_product.id,menu_product.product]}}
+
   end
 
   def lunch_start_time
-    Time.zone.local(menu_date.year,menu_date.month,menu_date.day,12,0,0)
+    Time.zone.local(menu_date.year,menu_date.month,menu_date.day,21,0,0)
   end
 
   def lunch_end_time

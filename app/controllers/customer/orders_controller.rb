@@ -2,7 +2,7 @@ class Customer::OrdersController < ApplicationController
 
   include CurrentCart
 
-  before_action :authenticate_user_before_checkout!,except: [:new_trial]
+  before_action :authenticate_user!,except: [:new]
 
   before_action :set_cart, only: [:new, :create]
   before_action :set_order, only: [:show, :edit, :update, :destroy]
@@ -12,14 +12,10 @@ class Customer::OrdersController < ApplicationController
   # GET /orders/new
   def new
     if @cart.line_items.empty?
-      redirect_to home_customer_products_path, notice: "Your cart is empty"
+      redirect_to root_path, notice: "Your cart is empty"
       return
     end
     @order = Order.new
-  end
-
-  def new_trial
-    store_specific_location new_customer_order_path
   end
 
   # POST /orders
@@ -28,23 +24,25 @@ class Customer::OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.add_line_items_from_cart(@cart)
 
-    respond_to do |format|
-      if @order.save
-        Cart.destroy(session[:cart_id])
-        session[:cart_id] = nil
-        OrderNotifier.received(@order).deliver
-        format.html { redirect_to store_url, notice:
-          I18n.t('.thanks') }
-        format.json { render action: 'show', status: :created,
-                             location: @order }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @order.errors,
-                             status: :unprocessable_entity }
-      end
+
+    if @order.category=='lunch'
+      @order.delivery_time = DateTime.parse(order_params['delivery_time'])
+    end
+
+    if @order.save
+      byebug
+      Cart.destroy(session[:cart_id])
+      session[:cart_id] = nil
+      # OrderNotifier.received(@order).deliver
+      redirect_to success_customer_orders_path,notice: 'Your order has been created !'
+    else
+       render action: 'new'
     end
   end
 
+  def success
+
+  end
 
   def resource_name
     :user
@@ -71,14 +69,8 @@ class Customer::OrdersController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
-    params.require(:order).permit(:name, :address, :email, :pay_type)
+    params.require(:order).permit(:address_id, :pay_type,:category,:delivery_time)
   end
 
-  def authenticate_user_before_checkout!
-    if !user_signed_in?
-      redirect_to new_trial_orders_path
-      return
-    end
-  end
 
 end

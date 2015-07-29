@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   devise_for :company_users
   devise_for :users, controllers: { omniauth_callbacks: "customer/omniauth_callbacks" }
-  root to: 'customer/homes#main'
+  root to: 'customer/menus#home'
 
 
   namespace :customer do
@@ -28,9 +28,14 @@ Rails.application.routes.draw do
     resources :line_items,only: [:create]
 
     resources :orders,only:[:new,:create] do
-      collection do
-        get :new_trial
-      end
+        collection do
+          get :success
+        end
+    end
+
+    resource :number_verifications,only:[] do
+      post :start_verification_request
+      post :end_verification_request
     end
 
   end
@@ -56,7 +61,7 @@ Rails.application.routes.draw do
   end
 
   namespace :company do
-    root 'products#index'
+    root 'menus#index'
     resources :products
     resources :menus do
       member do
@@ -64,6 +69,7 @@ Rails.application.routes.draw do
       end
     end
     resources :menu_products,only: [:create,:update,:destroy]
+    resources :orders,only:[:index,:show]
   end
 
 end

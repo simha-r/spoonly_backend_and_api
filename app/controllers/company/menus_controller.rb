@@ -7,11 +7,7 @@ class Company::MenusController < Company::BaseController
     @menus = Menu.all
   end
 
-
   def show
-  end
-
-  def add_items
   end
 
   def new

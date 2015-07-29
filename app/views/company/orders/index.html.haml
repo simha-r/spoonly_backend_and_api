@@ -1,0 +1,6 @@
+- @orders.each do |order|
+  .row
+    = link_to order.id,[:company,order]
+
+.row
+  = will_paginate @orders

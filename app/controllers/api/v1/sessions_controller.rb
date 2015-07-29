@@ -14,7 +14,7 @@ class Api::V1::SessionsController < Api::V1::BaseController
       user.confirm!
       render json: user, status: 200
     else
-      render json: { errors: "Invalide email or password" }, status: 422
+      render json: { errors: "Authentication failed" }, status: 422
     end
   end
 

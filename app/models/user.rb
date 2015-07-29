@@ -99,6 +99,10 @@ class User < ActiveRecord::Base
     super
   end
 
+  def set_number_verified
+    profile.update_attributes(phone_number_verified: true)
+  end
+
   private
 
   def generate_authentication_token

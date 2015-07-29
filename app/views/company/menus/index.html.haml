@@ -1,8 +1,16 @@
+.row
+  .col4
+    = link_to 'ADD MENU',new_company_menu_path
+%br
+  %br
 - @menus.each do |menu|
   .row
-    .col-md-8
-      = link_to menu.menu_date, [:company,menu]
+    .col-md-2
+      = link_to menu.menu_date, [:company,menu],class: 'btn btn-primary'
     .col-md-4
       = link_to 'Edit', [:edit,:company,menu], :class => 'btn btn-secondary'
       = link_to 'Delete',[:company, menu], :method => :delete, :data => { :confirm => 'Are you sure?' },
-      :class => 'btn btn-secondary'
+      :class => 'btn '
+  .row
+    %br
+

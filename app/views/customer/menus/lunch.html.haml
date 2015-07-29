@@ -1,1 +1,5 @@
-= @menu.show_lunch
+- @menu.menu_lunch_products.each do |menu_product|
+  = render 'customer/menus/menu_product_preview',menu_product: menu_product
+
+.row-fluid
+  = link_to 'Checkout',new_customer_order_path(menu_date: @menu_date)

@@ -1,4 +1,3 @@
-
 class Customer::LineItemsController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: [:create]
@@ -6,8 +5,8 @@ class Customer::LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
-    product = Product.find(params[:product_id])
-    @line_item = @cart.add_product(product.id)
+    menu_product = MenuProduct.find(params[:menu_product_id])
+    @line_item = @cart.add_menu_product(menu_product.id)
 
     respond_to do |format|
       if @line_item.save
@@ -27,7 +26,7 @@ class Customer::LineItemsController < ApplicationController
 
 
   def line_item_params
-    params.require(:line_item).permit(:product_id)
+    params.require(:line_item).permit(:menu_product_id)
   end
   #...
 end

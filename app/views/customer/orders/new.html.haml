@@ -1,12 +1,52 @@
-.row
-  Order
-- @cart.line_items.each do |item|
-  .row-fluid
-    .span8
-      = item.product.name
-      = item.product.price
-      = item.product.desc
-      = item.quantity
-.row
-  = link_to 'Confirm Order',''
+- if !user_signed_in?
+  .row
+    Please login before continuing
+    - if devise_mapping.omniauthable?
+      - resource_class.omniauth_providers.each do |provider|
+        = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
+        %br/
 
+- else
+
+  - if !current_user.phone_number_verified
+    #phone_number_verification
+      = form_tag start_verification_request_customer_number_verifications_path,class: '',remote: true do
+        = number_field_tag 'phone_number'
+        = submit_tag 'Continue'
+
+      .row#enter_code{style: 'display: none'}
+        Please Enter the code you received
+        = form_tag end_verification_request_customer_number_verifications_path,remote: true do
+          = number_field_tag 'verification_code'
+          = submit_tag 'Verify'
+
+  -else
+
+  #final_order{style: 'display: none'}
+    .row
+      Cash On Delivery
+
+
+    .row
+      Order
+    - @cart.line_items.each do |item|
+      - product = item.menu_product.product
+      .row-fluid
+        .span8
+          = product.name
+          = product.price
+          = product.desc
+          = item.quantity
+    .row
+      = form_tag customer_orders_path do
+        = select_tag 'order[delivery_time]',options_from_collection_for_select(MenuProduct.show_lunch_times,:first,
+        :last)
+        = hidden_field_tag 'order[pay_type]','cash_on_delivery'
+        = hidden_field_tag 'order[address_id]',2
+
+        = submit_tag 'Confirm Order'
+
+:javascript
+  $('#phone_number').keypress(function(){
+    $('#enter_code').hide();
+  })
