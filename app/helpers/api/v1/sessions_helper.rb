@@ -26,6 +26,7 @@ module Api::V1::SessionsHelper
     end
   rescue Exception=>e
     HealthyLunchUtils.log_error e.message,e
+    return false
   end
 
 =begin

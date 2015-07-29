@@ -73,6 +73,7 @@ class User < ActiveRecord::Base
     end
 
     authorization = Authorization.where(:provider => provider, :uid => uid).first_or_initialize
+
     if authorization.user.blank?
       user = current_user || User.where('email = ?', email).first
       if user.blank?
@@ -81,11 +82,9 @@ class User < ActiveRecord::Base
         #TODO Put name in profile
         user.create_profile(name: name)
         user.email = email
-        user.confirm!
-        user.save
+        user.confirm! if user.save
       end
-      authorization.user_id = user.id
-      authorization.save
+      authorization.save if authorization.user_id = user.id
     else
       user = authorization.user
     end
