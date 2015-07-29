@@ -82,6 +82,7 @@ class User < ActiveRecord::Base
         #TODO Put name in profile
         user.create_profile(name: name)
         user.email = email
+        user.skip_confirmation!
         user.confirm! if user.save
       end
       authorization.save if authorization.user_id = user.id
