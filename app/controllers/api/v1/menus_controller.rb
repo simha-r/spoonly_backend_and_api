@@ -26,13 +26,13 @@ class Api::V1::MenusController < Api::V1::BaseController
   end
 
   def dinner
-    if todays_menu = Menu.where(menu_date: Date.today).first.todays_menu = Menu.where(menu_date: Date.today).first
-    if Time.now< todays_menu.dinner_order_end_time
-      @menu = todays_menu
-    else
-      @menu = Menu.where(menu_date: Date.tomorrow).first
-    end
-    render json: @menu.show_dinner
+    if todays_menu = Menu.where(menu_date: Date.today).first
+      if Time.now< todays_menu.dinner_order_end_time
+        @menu = todays_menu
+      else
+        @menu = Menu.where(menu_date: Date.tomorrow).first
+      end
+      render json: @menu.show_dinner
     else
       render json:  {}
     end
