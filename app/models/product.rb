@@ -29,4 +29,13 @@ class Product < ActiveRecord::Base
     update_attributes(state: 'active')
   end
 
+  def serializable_hash(options={})
+    options ||={}
+    options[:methods] = [:photo_url]
+    super
+  end
+
+  def photo_url
+    photo.url
+  end
 end
