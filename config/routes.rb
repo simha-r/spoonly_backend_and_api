@@ -34,8 +34,8 @@ Rails.application.routes.draw do
     end
 
     resource :number_verifications,only:[] do
-      post :start_verification_request
-      post :end_verification_request
+      post :start
+      post :finish
     end
 
   end
@@ -55,6 +55,10 @@ Rails.application.routes.draw do
       resource :menu do
         get :lunch
         get :dinner
+      end
+      resource :number_verifications,only:[] do
+        post :start
+        post :finish
       end
     end
 

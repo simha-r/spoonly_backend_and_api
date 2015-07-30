@@ -1,14 +1,25 @@
 module NumberVerification
 
-   def request_verification_for number
-     # curl "https://api.nexmo.com/verify/json?api_key={api_key}&api_secret={api_secret}&number=447525856424&brand=MyApp"
+  require 'nexmo'
 
-   end
+  def self.start user,number
+    user.update_number number
+    code = Random.rand(10000..99999).to_s
+    user.profile.update_attributes(phone_number_verification_code: code)
+    text = "Spoonly code: #{user.profile.phone_number_verification_code}. Valid for 5 minutes."
 
-  def get_verification_status request_id,code
-#     curl "https://api.nexmo.com/verify/check/json?api_key={api_key}&api_secret={api_secret}
-# &request_id=8g88g88eg8g8gg9g90&code=123445"
+    nexmo = Nexmo::Client.new(key: ENV['NEXMO_API_KEY'], secret: ENV['NEXMO_API_SECRET'])
+    nexmo.send_message(from: 'SPOONL', to: "91#{number}", text: text)
   end
 
+  def self.finish user,code
+    tries = user.profile.phone_number_verify_tries.to_i
+    user.profile.update_attributes(phone_number_verify_tries: (tries+1))
+    if user.profile.phone_number_verification_code == code
+      return true
+    else
+      false
+    end
+  end
 
 end

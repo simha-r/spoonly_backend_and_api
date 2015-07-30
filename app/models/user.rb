@@ -99,9 +99,14 @@ class User < ActiveRecord::Base
     super
   end
 
-  def set_number_verified
+  def mark_number_verified
     profile.update_attributes(phone_number_verified: true)
   end
+
+  def update_number phone_number
+    profile.update_attributes(phone_number: phone_number)
+  end
+
 
   private
 

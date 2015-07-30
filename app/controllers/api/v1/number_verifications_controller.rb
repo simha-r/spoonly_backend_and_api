@@ -4,14 +4,24 @@ class Api::V1::NumberVerificationsController < Api::V1::BaseController
 
 
   # POST /api/number_verifications params {phone_number: 98989898898}
-  def start_verification_request
-    NumberVerification.request_verification_for params[:phone_number]
+  def start
+
+    response = NumberVerification.start current_user,params[:phone_number]
+    if response
+      render json: {},status: :ok
+    else
+      head 422,content_type: 'application/json'
+    end
   end
 
-  # POST /api/number_verifications params {code: 4567}
-  def end_verification_request
-    NumberVerification.get_verification_status current_user.profile.phone_number_verification_req_id,
-                                               params[:verification_code]
+  # POST /api/number_verifications params {verification_code: 4567}
+  def finish
+    if NumberVerification.finish current_user,params[:verification_code]
+      current_user.mark_number_verified
+      render json: current_user, status: :ok
+    else
+      head 422,content_type: 'application/json'
+    end
   end
 
 end

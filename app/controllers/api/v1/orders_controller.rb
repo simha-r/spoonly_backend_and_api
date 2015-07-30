@@ -5,11 +5,10 @@ class Api::V1::OrdersController < Api::V1::BaseController
 
   respond_to :json
 
-
-  # POST /orders
-  # POST /orders.json
+  # POST /api/orders
+  # POST /api/orders.json
   def create
-    @order = Order.create! order_params
+    @order = current_user.orders.create! order_params
     params[:line_item].each { |li| @order.line_items.create!(custom_line_item_params(li)) }
     render json: @order
   rescue Exception=>e
@@ -20,12 +19,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
-    delivery_time = MenuProduct::LUNCH_TIMES[params[:order][:delivery_time]]
-    tomorrows_order =
-
-
-
-    params.require(:order).permit(:address_id, :pay_type,:delivery_time)
+    params.require(:order).permit(:address_id, :pay_type,:delivery_time,:category)
   end
 
   def custom_line_item_params(par = {})

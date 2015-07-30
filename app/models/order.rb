@@ -20,6 +20,8 @@ class Order < ActiveRecord::Base
   belongs_to :user
 
 
+  validates_presence_of :address_id,:user_id,:delivery_time,:category
+  validates_presence_of :category,in: MenuProduct::CATEGORIES
 
   def add_line_items_from_cart(cart)
     cart.line_items.each do |item|

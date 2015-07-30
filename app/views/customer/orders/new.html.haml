@@ -10,15 +10,16 @@
 
   - if !current_user.phone_number_verified
     #phone_number_verification
-      = form_tag start_verification_request_customer_number_verifications_path,class: '',remote: true do
+      = form_tag start_customer_number_verifications_path,class: '',remote: true do
         = number_field_tag 'phone_number'
         = submit_tag 'Continue'
 
       .row#enter_code{style: 'display: none'}
         Please Enter the code you received
-        = form_tag end_verification_request_customer_number_verifications_path,remote: true do
+        = form_tag finish_customer_number_verifications_path,remote: true do
           = number_field_tag 'verification_code'
           = submit_tag 'Verify'
+      .row.errors#wrong_code{style: 'display: none'}
 
   -else
 
