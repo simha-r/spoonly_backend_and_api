@@ -20,32 +20,12 @@
           = number_field_tag 'verification_code'
           = submit_tag 'Verify'
       .row.errors#wrong_code{style: 'display: none'}
-
+    #final_order{style: 'display: none'}
+      = render 'customer/orders/final_order'
   -else
+    #final_order
+      = render 'customer/orders/final_order'
 
-  #final_order{style: 'display: none'}
-    .row
-      Cash On Delivery
-
-
-    .row
-      Order
-    - @cart.line_items.each do |item|
-      - product = item.menu_product.product
-      .row-fluid
-        .span8
-          = product.name
-          = product.price
-          = product.desc
-          = item.quantity
-    .row
-      = form_tag customer_orders_path do
-        = select_tag 'order[delivery_time]',options_from_collection_for_select(MenuProduct.show_lunch_times,:first,
-        :last)
-        = hidden_field_tag 'order[pay_type]','cash_on_delivery'
-        = hidden_field_tag 'order[address_id]',2
-
-        = submit_tag 'Confirm Order'
 
 :javascript
   $('#phone_number').keypress(function(){

@@ -42,11 +42,11 @@ class Menu < ActiveRecord::Base
   end
 
   def lunch_start_time
-    Time.zone.local(menu_date.year,menu_date.month,menu_date.day,21,0,0)
+    Time.zone.local(menu_date.year,menu_date.month,menu_date.day,MenuProduct::LUNCH_START_TIME,0,0)
   end
 
   def lunch_end_time
-    lunch_start_time+6.hours
+    lunch_start_time+4.hours
   end
 
   def lunch_order_end_time
@@ -54,7 +54,7 @@ class Menu < ActiveRecord::Base
   end
 
   def dinner_start_time
-    Time.zone.local(menu_date.year,menu_date.month,menu_date.day,19,0,0)
+    Time.zone.local(menu_date.year,menu_date.month,menu_date.day,MenuProduct::DINNER_START_TIME,0,0)
   end
   def dinner_end_time
     dinner_start_time+3.hours

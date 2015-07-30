@@ -21,16 +21,10 @@ class Customer::OrdersController < ApplicationController
   # POST /orders
   # POST /orders.json
   def create
-    @order = Order.new(order_params)
+    @order = current_user.orders.build(order_params)
     @order.add_line_items_from_cart(@cart)
-
-
-    if @order.category=='lunch'
-      @order.delivery_time = DateTime.parse(order_params['delivery_time'])
-    end
-
+    @order.category = @cart.category
     if @order.save
-      byebug
       Cart.destroy(session[:cart_id])
       session[:cart_id] = nil
       # OrderNotifier.received(@order).deliver

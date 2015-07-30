@@ -15,8 +15,10 @@ class MenuProduct < ActiveRecord::Base
   belongs_to :product
 
   CATEGORIES = ['lunch','dinner']
-  LUNCH_TIMES =['2100','2200','2230','2330']
-  DINNER_TIMES =['1200','1230','1830']
+  LUNCH_TIMES =['1200','1230','1330']
+  DINNER_TIMES =['2100','2200','2230','2330']
+  LUNCH_START_TIME=12
+  DINNER_START_TIME=19
 
 
   def as_json
