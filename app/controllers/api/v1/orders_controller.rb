@@ -10,9 +10,11 @@ class Api::V1::OrdersController < Api::V1::BaseController
   def create
     @order = current_user.orders.create! order_params
     params[:line_item].each { |li| @order.line_items.create!(custom_line_item_params(li)) }
+    @order.start_process
     render json: @order
   rescue Exception=>e
     HealthyLunchUtils.log_error e.message,e
+    @order.destroy if @order
     render status: :error
   end
 

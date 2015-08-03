@@ -47,5 +47,7 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'nexmo'
 
 gem 'social-share-button'
-
+gem 'rolify'
+gem 'pusher'
+gem 'state_machines'
 

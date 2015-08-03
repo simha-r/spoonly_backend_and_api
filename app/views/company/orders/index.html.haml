@@ -1,6 +1,48 @@
+.alert.alert-danger#new_order_alert{'style'=> "display: none"}
+  New order has been received..Reload page to see it !
+
+
+
+
+
+
+
+
+
+
+
 - @orders.each do |order|
   .row
     = link_to order.id,[:company,order]
 
 .row
   = will_paginate @orders
+
+
+
+
+
+
+%script{:src => "https://js.pusher.com/2.2/pusher.min.js"}
+:javascript
+  // Enable pusher logging - don't include this in production
+  Pusher.log = function(message) {
+    if (window.console && window.console.log) {
+      window.console.log(message);
+    }
+  };
+
+  var pusher = new Pusher('a34c18a895f3a863013b', {
+    encrypted: true
+  });
+  var channel = pusher.subscribe('orders');
+  channel.bind('purchased', function(data) {
+  var sound = new Howl({
+    urls: ['new_order.mp3'],
+    loop: true
+  }).play();
+
+  $('#new_order_alert').show()
+
+    //sound.stop();
+  });

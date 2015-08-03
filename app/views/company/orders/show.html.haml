@@ -1,0 +1,20 @@
+%table
+  %thead
+    %tr
+      %th
+        User
+      %th
+        Address Id
+      %th
+        Delivery Time
+      %th
+        State
+  %tr
+    %td
+      = @order.user.name
+    %td
+      = @order.address_id
+    %td
+      = @order.delivery_time
+    %td
+      = @order.state

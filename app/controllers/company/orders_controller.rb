@@ -6,7 +6,10 @@ class Company::OrdersController < Company::BaseController
   end
 
    def show
-     @order = order.find params[:id]
+     @order = Order.find params[:id]
    end
 
 end
+
+
+

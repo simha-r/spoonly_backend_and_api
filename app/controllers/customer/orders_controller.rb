@@ -27,6 +27,7 @@ class Customer::OrdersController < ApplicationController
     if @order.save
       Cart.destroy(session[:cart_id])
       session[:cart_id] = nil
+      @order.start_process
       # OrderNotifier.received(@order).deliver
       redirect_to success_customer_orders_path,notice: 'Your order has been created !'
     else
