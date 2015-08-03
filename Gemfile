@@ -49,5 +49,5 @@ gem 'nexmo'
 gem 'social-share-button'
 gem 'rolify'
 gem 'pusher'
-gem 'state_machines'
+gem 'aasm'
 

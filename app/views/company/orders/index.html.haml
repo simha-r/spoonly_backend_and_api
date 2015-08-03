@@ -9,11 +9,32 @@
 
 
 
+%table.table
+  %thead
+    %tr
+      %th
+        Order #
+      %th
+        User
+      %th
+        Address Id
+      %th
+        Delivery Time
+      %th
+        State
+  - @orders.each do |order|
+    %tr
+      %td
+        = link_to order.id,[:company,order]
+      %td
+        = order.user.name
+      %td
+        = order.address_id
+      %td
+        = order.delivery_time.strftime("%l%p %a %d,%b")
+      %td
+        = order.state
 
-
-- @orders.each do |order|
-  .row
-    = link_to order.id,[:company,order]
 
 .row
   = will_paginate @orders
