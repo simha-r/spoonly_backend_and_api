@@ -1,4 +1,40 @@
 - if user_signed_in?
   %li= link_to "Logout", destroy_user_session_path,method: :delete
+  %li
+    %a.share-button{ "data-href"=> ""}
+      Share
+  = hidden_field_tag :user_id,current_user.id
 - else
   %li= link_to "Sign in", new_user_session_path
+
+:javascript
+
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '759735217418229',
+      xfbml      : true,
+      version    : 'v2.4'
+    });
+  };
+
+  (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "//connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+   }(document, 'script', 'facebook-jssdk'));
+
+
+   $(".share-button").click(function(){
+     href = this.attributes['data-href'].value
+     FB.ui(
+      {
+       method: 'share',
+       href: href
+     }, function(response){});
+
+   })
+
+
+

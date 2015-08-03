@@ -10,3 +10,48 @@
     .collapse.navbar-collapse
       %ul.nav.navbar-nav
         = render 'layouts/user/navigation_links'
+:javascript
+  //TODO All Branch.io stuff for referrral users....only for testing..not to be used on the web interface
+
+  (function(b,r,a,n,c,h,_,s,d,k){if(!b[n]||!b[n]._q){for(;s<_.length;)c(h,_[s++]);d=r.createElement(a);d.async=1;d.src="https://cdn.branch.io/branch-v1.6.5.min.js";k=r.getElementsByTagName(a)[0];k.parentNode.insertBefore(d,k);b[n]=h}})(window,document,"script","branch",function(b,r){b[r]=function(){b._q.push([r,arguments])}},{_q:[],_v:1},"init data first addListener removeListener setIdentity logout track link sendSMS referrals credits creditHistory applyCode validateCode getCode redeem banner closeBanner".split(" "), 0);
+
+  branch.init('key_live_bfbQnPu3w0BdFF2pNjWfDmfkutk6z4SW', function(err, data) {
+      // callback to handle err or data
+  });
+  branch.setIdentity(
+      $('#user_id').val(),
+      function(err,data){}
+  );
+  branch.data(function(err,data){
+    ref_data = data
+    console.log(ref_data);
+    //b = JSON.parse(ref_data.data)
+    //This object contains referrer_id etc
+
+
+  });
+  var l = branch.link({
+            tags: [ 'tag1', 'tag2' ],
+            channel: 'facebook',
+            feature: 'dashboard',
+            stage: 'new user',
+            data: {
+                mydata: 'something',
+                foo: 'bar',
+                '$desktop_url': 'http://localhost:3000',
+                '$ios_url': 'http://localhost:3000',
+                '$ipad_url': 'http://localhost:3000',
+                '$android_url': 'http://localhost:3000',
+                '$og_app_id': '12345',
+                '$og_title': 'Spoonly - Eat Better. Live better.',
+                '$og_description': 'Get Fresh Food Delivered To Your Desk',
+                '$og_image_url': 'http://myappwebsite.com/image.png'
+            }
+        }, function(err, link) {
+            console.log(err, link);
+             $('.share-button').attr('data-href',link);
+        });
+
+
+
+

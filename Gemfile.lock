@@ -213,6 +213,9 @@ GEM
       faraday (~> 0.9)
       jwt (~> 1.0)
       multi_json (~> 1.10)
+    social-share-button (0.1.8)
+      coffee-rails
+      sass-rails
     spring (1.3.6)
     sprockets (2.12.4)
       hike (~> 1.2)
@@ -267,6 +270,7 @@ DEPENDENCIES
   rails_12factor
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  social-share-button
   spring
   turbolinks
   uglifier (>= 1.3.0)

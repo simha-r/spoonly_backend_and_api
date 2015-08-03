@@ -15,3 +15,4 @@
 //= require turbolinks
 //= require homes
 //= require_tree .
+//= require social-share-button
