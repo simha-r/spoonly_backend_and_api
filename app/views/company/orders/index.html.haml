@@ -32,7 +32,7 @@
     }
   };
 
-  var pusher = new Pusher('a34c18a895f3a863013b', {
+  var pusher = new Pusher(Pusher.key, {
     encrypted: true
   });
   var channel = pusher.subscribe('orders');
