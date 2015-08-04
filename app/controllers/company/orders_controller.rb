@@ -34,7 +34,7 @@ class Company::OrdersController < Company::BaseController
       puts order_ids
       if message[0].downcase=='sp'
         puts 'going to find orders and mark delivered'
-        @orders = Order.find order_ids
+        @orders = Order.where id: order_ids
         @orders.where(state: 'dispatched').each(&:deliver!)
         return render nothing: true
       else
