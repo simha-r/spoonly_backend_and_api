@@ -20,7 +20,7 @@ class DeliveryExecutive < ActiveRecord::Base
 
 
   def self.allowed_numbers
-    DeliveryExecutive.all.collect(&:phone_number) + ['+918179422804','+919618374300']
+    DeliveryExecutive.all.collect(&:phone_number) + ['+918179422804','+919618347300']
   end
 
 end

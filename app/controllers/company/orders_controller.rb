@@ -26,7 +26,7 @@ class Company::OrdersController < Company::BaseController
   end
 
   def sms_update
-    if DeliveryExecutive.allowed_numbers.include? params['contact']['from_number']
+    if DeliveryExecutive.allowed_numbers.include? params['from_number']
       message = params['content'].strip
       message = message.split(' ')
       order_ids = message[1]
@@ -35,7 +35,7 @@ class Company::OrdersController < Company::BaseController
       if message[0].downcase=='sp'
         puts 'going to find orders and mark delivered'
         @orders = Order.find order_ids
-        @orders.each(&:deliver!)
+        @orders.where(state: 'dispatched').each(&:deliver!)
         return render nothing: true
       else
         puts 'format is wrong'
