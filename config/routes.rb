@@ -79,7 +79,7 @@ Rails.application.routes.draw do
         put :acknowledge
         put :assign
       end
-      colection do
+      collection do
         post :sms_update
       end
     end
