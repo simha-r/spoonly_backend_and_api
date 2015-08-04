@@ -17,4 +17,10 @@ class DeliveryExecutive < ActiveRecord::Base
     orders.where(state: 'delivered')
   end
 
+
+
+  def self.allowed_numbers
+    DeliveryExecutive.all.collect(&:phone_number) + ['+918179422804','+919618374300']
+  end
+
 end

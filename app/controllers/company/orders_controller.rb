@@ -2,6 +2,7 @@ class Company::OrdersController < Company::BaseController
 
   before_filter :authenticate_dispatcher!,except: [:sms_update]
   before_filter :set_order,except: [:index,:sms_update]
+  before_filter :authenticate_sms_sender!,only: [:sms_update]
 
   def index
     @orders = Order.paginate page: params[:page]
@@ -25,9 +26,23 @@ class Company::OrdersController < Company::BaseController
   end
 
   def sms_update
-    puts params
-    puts params.inspect
-    raise params.inspect
+    if DeliveryExecutive.allowed_numbers.include? params['contact']['from_number']
+      message = params['content'].strip
+      message = message.split(' ')
+      order_ids = message[1]
+      if message[0].downcase=='sp'
+        @orders = Order.find order_ids
+        @orders.collect(&:deliver!)
+        return render nothing: true
+      else
+        return
+      end
+    else
+      puts params
+      return
+    end
+  rescue Exception=>e
+    HealthyLunchUtils.log_error 'SMS not in format',e
   end
 
   private

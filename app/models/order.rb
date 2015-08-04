@@ -47,6 +47,10 @@ class Order < ActiveRecord::Base
       transitions from: :acknowledged, to: :dispatched
     end
 
+    event :deliver do
+      transitions from: :dispatched,to: :delivered
+    end
+
 
   end
 
