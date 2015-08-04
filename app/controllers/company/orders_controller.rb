@@ -30,19 +30,24 @@ class Company::OrdersController < Company::BaseController
       message = params['content'].strip
       message = message.split(' ')
       order_ids = message[1]
+      puts message
+      puts order_ids
       if message[0].downcase=='sp'
+        puts 'going to find orders and mark delivered'
         @orders = Order.find order_ids
-        @orders.collect(&:deliver!)
+        @orders.each(&:deliver!)
         return render nothing: true
       else
-        return
+        puts 'format is wrong'
+        return render nothing: true
       end
     else
       puts params
-      return
+      return render nothing: true
     end
   rescue Exception=>e
     HealthyLunchUtils.log_error 'SMS not in format',e
+    return render nothing: true
   end
 
   private
