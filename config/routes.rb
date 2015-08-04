@@ -65,7 +65,8 @@ Rails.application.routes.draw do
   end
 
   namespace :company do
-    root 'menus#index'
+    root 'homes#home'
+    resources :homes
     resources :products
     resources :menus do
       member do
@@ -76,6 +77,10 @@ Rails.application.routes.draw do
     resources :orders,only:[:index,:show] do
       member do
         put :acknowledge
+        put :assign
+      end
+      colection do
+        post :sms_update
       end
     end
   end

@@ -1,0 +1,5 @@
+- if current_company_user.has_role? :dispatcher
+  = link_to 'View Orders',[:company,:orders]
+- elsif current_company_user.has_role? :admin
+  = link_to 'View Orders',[:company,:orders]
+  = link_to 'View Menus',[:company,:menus]

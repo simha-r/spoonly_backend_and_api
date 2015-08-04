@@ -1,5 +1,7 @@
 class Company::MenuProductsController < Company::BaseController
 
+  before_filter :authenticate_admin!
+
   def create
     @menu = Menu.find menu_product_params[:menu_id]
     @menu_product = MenuProduct.new menu_product_params

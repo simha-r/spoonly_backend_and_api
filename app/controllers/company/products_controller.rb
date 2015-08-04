@@ -1,6 +1,6 @@
 class Company::ProductsController < Company::BaseController
 
-
+  before_filter :authenticate_admin!
   before_filter :load_resource,except: [:index,:new,:create]
 
 

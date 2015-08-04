@@ -45,7 +45,13 @@
 - if @order.pending?
   = link_to 'Acknowledge',[:acknowledge,:company,@order], method: :put,class: 'btn btn-primary'
 
-
+- if @order.acknowledged?
+  = form_for [:assign,:company,@order],method: :put do |f|
+    = f.collection_select :delivery_executive_id,DeliveryExecutive.all,:id,:name
+    = f.submit 'Dispatch'
+- if @order.dispatched?
+  Dispatched through:
+  = @order.delivery_executive.name
 %br
   %br
     %br

@@ -11,4 +11,13 @@ class Company::BaseController < ApplicationController
      company_products_path
   end
 
+  def authenticate_admin!
+    redirect_to(company_root_path, alert:'You don not have admin access') unless current_company_user.has_role? :admin
+  end
+
+  def authenticate_dispatcher!
+    redirect_to(company_root_path, alert:'You don not have dispatcher access') unless (current_company_user.has_role?(:dispatcher) || current_company_user.has_role?(:admin))
+  end
+
+
 end

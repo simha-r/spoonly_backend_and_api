@@ -20,6 +20,7 @@ class Order < ActiveRecord::Base
   has_many :line_items
   belongs_to :address
   belongs_to :user
+  belongs_to :delivery_executive
 
   validates_presence_of :address_id, :user_id, :delivery_time, :category
   validates_presence_of :category, in: MenuProduct::CATEGORIES
@@ -41,6 +42,11 @@ class Order < ActiveRecord::Base
     event :acknowledge do
       transitions from: :pending, to: :acknowledged
     end
+
+    event :dispatch do
+      transitions from: :acknowledged, to: :dispatched
+    end
+
 
   end
 

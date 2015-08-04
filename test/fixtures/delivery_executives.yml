@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: delivery_executives
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  phone_number :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  phone_number: MyString
+
+two:
+  name: MyString
+  phone_number: MyString
