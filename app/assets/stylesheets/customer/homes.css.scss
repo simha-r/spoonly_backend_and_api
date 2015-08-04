@@ -1,0 +1,109 @@
+@import 'customer_common';
+
+.container-fluid.main-content {
+  padding-left: 0;
+  padding-right: 0;
+
+  .section-one,
+  .section-two {
+    @include make-xs-column(12,0);
+  }
+
+  .section-one {
+    margin-bottom: 30px;
+    background-image: url(image-path('main-content-img.jpg'));
+    height: 500px;
+    min-height: 500px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    .form-horizontal {
+      input {
+        padding: 10px;
+      }
+      input.btn.btn-default {
+        background-color: #f27242;
+        color: #fff;
+      }
+    }
+
+    .col-xs-12 {
+      background-color: rgba(244,247,248,0.97);
+      width: 50%;
+      left: 25%;
+      top: 25%;
+      padding: 15px;
+      height: 330px;
+      min-height: 330px;
+
+    }
+
+    .text-container {
+      border: 1px solid #c8c8c1;
+      margin: 14px;
+
+      h1,
+      h2 {
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      h2 {
+        margin-bottom: 0;
+      }
+
+      h1 {
+        margin-top: 0;
+      }
+    }
+  }
+
+  .section-two {
+    padding-bottom: 40px;
+    border-bottom: 1px solid #ddd;
+
+    .title {
+      text-transform: uppercase;
+      text-align: center;
+      color: #42413e;
+    }
+
+    p.title {
+      font-size: 1.6rem;
+    }
+
+    h1.title {
+      margin-top: 0;
+      font-size: 3rem;
+    }
+
+    .col-xs-12 {
+      .chef {
+        background-image: url(image-path('chef_hat.png'));
+      }
+
+      .menu {
+        background-image: url(image-path('menu.svg'));
+      }
+
+      .bag {
+        background-image: url(image-path('bag.svg'));
+      }
+
+      .content {
+        padding-top: 120px;
+        background-repeat: no-repeat;
+        background-position: center 50px;
+        background-size: auto 54px;
+        text-align: center;
+      }
+    }
+  }
+
+}
+
+.footer {
+  padding-top: 20px;
+  text-align: center;
+}

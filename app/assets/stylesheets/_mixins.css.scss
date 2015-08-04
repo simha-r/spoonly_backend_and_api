@@ -1,0 +1,27 @@
+@mixin clearfix() {
+  &:before,
+  &:after {
+    content: ' ';
+    display: table;
+  }
+
+  &:after {
+    clear: both;
+  }
+}
+
+@mixin make-row($gutter) {
+  margin-left: $gutter;
+  margin-right: $gutter;
+  @include clearfix;
+}
+
+@mixin make-xs-column($columns,$gutter) {
+  position: relative;
+  float: left;
+  width: percentage(($columns / 12));
+  min-height: 1px;
+  padding-left: $gutter;
+  padding-right: $gutter;
+}
+
