@@ -1,6 +1,6 @@
 class Company::BaseController < ApplicationController
 
-  before_filter :authenticate_company_user!
+  before_filter :authenticate_company_user!,except: [:sms_update]
 
   def layout_by_resource
     'company_user/application'
@@ -18,6 +18,5 @@ class Company::BaseController < ApplicationController
   def authenticate_dispatcher!
     redirect_to(company_root_path, alert:'You don not have dispatcher access') unless (current_company_user.has_role?(:dispatcher) || current_company_user.has_role?(:admin))
   end
-
 
 end

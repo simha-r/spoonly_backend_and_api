@@ -1,8 +1,7 @@
 class Company::OrdersController < Company::BaseController
 
-  before_filter :authenticate_dispatcher!
-
-  before_filter :set_order,except: [:index]
+  before_filter :authenticate_dispatcher!,except: [:sms_update]
+  before_filter :set_order,except: [:index,:sms_update]
 
   def index
     @orders = Order.paginate page: params[:page]
