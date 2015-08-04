@@ -9,6 +9,12 @@ class Company::OrdersController < Company::BaseController
      @order = Order.find params[:id]
    end
 
+  def acknowledge
+    @order = Order.find params[:id]
+    @order.acknowledge!
+    redirect_to [:company,@order]
+  end
+
 end
 
 

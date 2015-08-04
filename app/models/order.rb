@@ -38,6 +38,10 @@ class Order < ActiveRecord::Base
       transitions from: :new, to: :pending
     end
 
+    event :acknowledge do
+      transitions from: :pending, to: :acknowledged
+    end
+
   end
 
   def notify_kitchen

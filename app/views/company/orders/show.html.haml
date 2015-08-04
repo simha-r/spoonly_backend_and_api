@@ -1,4 +1,4 @@
-%table
+%table.table
   %thead
     %tr
       %th
@@ -18,3 +18,38 @@
       = @order.delivery_time
     %td
       = @order.state
+
+
+%h3 Items
+%table.table
+  %thead
+    %tr
+      %th
+        MenuProduct #
+      %th
+        Item
+      %th
+        Quantity
+      %th
+        Photo
+
+  - @order.line_items.each do |li|
+    %tr
+      %td
+        = li.menu_product.id
+      %td
+        = li.menu_product.product.name
+      %td
+        = li.quantity
+
+- if @order.pending?
+  = link_to 'Acknowledge',[:acknowledge,:company,@order], method: :put,class: 'btn btn-primary'
+
+
+%br
+  %br
+    %br
+
+= link_to 'Back to All Orders',[:company,:orders]
+
+

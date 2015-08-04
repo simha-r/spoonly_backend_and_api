@@ -73,7 +73,11 @@ Rails.application.routes.draw do
       end
     end
     resources :menu_products,only: [:create,:update,:destroy]
-    resources :orders,only:[:index,:show]
+    resources :orders,only:[:index,:show] do
+      member do
+        put :acknowledge
+      end
+    end
   end
 
 end
