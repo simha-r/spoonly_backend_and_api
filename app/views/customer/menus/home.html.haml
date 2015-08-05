@@ -1,2 +1,24 @@
-= link_to 'Lunch', lunch_customer_menus_path
-= link_to 'Dinner', dinner_customer_menus_path
+#customer_menu
+  .location
+    - if @locality.present?
+      %p= @locality
+      = link_to "Change", main_customer_homes_path
+  .section-one
+    .col-xs-12
+      .col-md-offset-2.col-md-8.menu-container
+        .message
+          %p Get homely food delivered at your doorstep
+
+        .col-xs-12.col-md-4.lunch
+          = link_to lunch_customer_menus_path do
+            = image_tag "lunch.png"
+          %p Lunch
+          .separator
+          %p.time 12pm - 3pm
+
+        .col-xs-12.col-md-offset-4.col-md-4.dinner
+          = link_to dinner_customer_menus_path do
+            = image_tag "dinner.png"
+          %p Dinner
+          .separator
+          %p.coming-soon Coming Soon

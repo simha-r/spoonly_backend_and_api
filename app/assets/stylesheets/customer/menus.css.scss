@@ -1,0 +1,81 @@
+@import 'customer_common';
+
+#customer_menu {
+
+  .location,
+  .section-one {
+    @include make-xs-column(12,0);
+  }
+
+  .location {
+    padding-top: 16px;
+    height: 55px;
+    text-align: center;
+    p {
+      display: inline;
+    }
+    a {
+      color: #f19140;
+    }
+  }
+
+  .section-one {
+    background-image: url(image-path('home_bg_2.jpg'));
+    height: 600px;
+    min-height: 600px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+
+    .menu-container {
+      height: 384px;
+      top: 64px;
+      background: #fff;
+
+      .message {
+        @include make-xs-column(12,0);
+        margin: 15px;
+        text-align: center;
+
+        p {
+          font-size: 24px;
+        }
+      }
+
+      .lunch,
+      .dinner {
+        text-align: center;
+        margin-top: 24px;
+
+        a img {
+          border-radius: 50%;
+          margin-bottom: 15px;
+        }
+
+        p:first-of-type {
+          font-size: 18px;
+          text-transform: uppercase;
+        }
+
+        p.time {
+          font-size: 14px;
+          color: #808080;
+        }
+
+        .separator {
+          border-bottom: 1px solid #b3b3b3;
+          width: 36px;
+          margin-left: calc(50% - 18px);
+          margin-bottom: 5px;
+        }
+      }
+
+      .dinner {
+        .coming-soon {
+          font-size: 16px;
+          color: #123;
+        }
+      }
+    }
+  }
+}

@@ -1,8 +1,6 @@
 @import 'customer_common';
 
-.container-fluid.main-content {
-  padding-left: 0;
-  padding-right: 0;
+#customer_home {
 
   .section-one,
   .section-two {
@@ -61,7 +59,6 @@
 
   .section-two {
     padding-bottom: 40px;
-    border-bottom: 1px solid #ddd;
 
     .title {
       text-transform: uppercase;
@@ -103,7 +100,3 @@
 
 }
 
-.footer {
-  padding-top: 20px;
-  text-align: center;
-}
