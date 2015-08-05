@@ -6,7 +6,7 @@
     %title= content_for?(:title) ? yield(:title) : "Rails Bootstrap"
     %meta{:content => "#{content_for?(:description) ? yield(:description) : "Rails Bootstrap"}", :name => "description"}/
     = stylesheet_link_tag 'customer', media: 'all'
-    = javascript_include_tag 'application'
+    = javascript_include_tag 'application',async: Rails.env.production?,cache: Rails.env.production?
     = csrf_meta_tags
   %body
     = render 'layouts/user/header'
