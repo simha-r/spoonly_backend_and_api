@@ -60,6 +60,7 @@ Rails.application.routes.draw do
         post :start
         post :finish
       end
+      resources :addresses,only:[:index,:create,:update,:destroy]
     end
 
   end

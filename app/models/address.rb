@@ -12,6 +12,53 @@
 
 class Address < ActiveRecord::Base
 
-  belongs_to :address
+  belongs_to :user
+
+  scope :office, ->{where(address_type: 'office')}
+  scope :home, ->{where(address_type: 'home')}
+
+  scope :normal_office, ->{where(address_type: 'office').where(is_default: false)}
+  scope :normal_home, ->{where(address_type: 'home').where(is_default: false)}
+
+  scope :default_office, ->{where(address_type: 'office').where(is_default: true).first}
+  scope :default_home, ->{where(address_type: 'home').where(is_default: true).first}
+
+  validates :is_default,:address_details,presence: true
+  validates :address_type,presence: true,inclusion: {in: ['home','office']}
+
+
+  before_save :make_default_if_initial
+  before_save :undefault_other_addresses, :if => Proc.new {|address| address.is_default}
+
+
+
+
+  def make_default_if_initial
+    if address_type=='home'
+     unless user.addresses.home.present?
+       make_default!
+     end
+    else
+      unless user.addresses.office.present?
+        make_default!
+      end
+    end
+  end
+
+  def make_default!
+    update_attribute(:is_default, true) unless is_default
+  end
+
+  def undefault_other_addresses
+    if address_type=='office'
+      other_addresses = user.addresses.office - [self]
+    elsif address_type=='home'
+      other_addresses = user.addresses.home - [self]
+    end
+    other_addresses.each do |address|
+      address.update_attribute(:is_default, false)
+    end
+  end
+
 
 end
