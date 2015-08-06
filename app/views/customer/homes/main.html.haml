@@ -46,7 +46,6 @@
           schedule delivery in advance. Our mobile
           app is being buit as we speak !
 
-  %script{src: "https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places" }
 
 
 
@@ -112,3 +111,4 @@
   }
 
   google.maps.event.addDomListener(window, 'load', initialize);
+  $(document).on('page:load',initialize)

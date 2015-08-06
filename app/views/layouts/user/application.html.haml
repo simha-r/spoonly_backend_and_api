@@ -6,14 +6,17 @@
     %title= content_for?(:title) ? yield(:title) : "Rails Bootstrap"
     %meta{:content => "#{content_for?(:description) ? yield(:description) : "Rails Bootstrap"}", :name => "description"}/
     = stylesheet_link_tag 'customer', media: 'all'
+    = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places'
     = javascript_include_tag 'application',async: Rails.env.production?,cache: Rails.env.production?
     = csrf_meta_tags
+
   %body
     = render 'layouts/user/header'
     .container-fluid.main-content{:role => "main"}
       = render 'layouts/user/messages'
       = yield
     = render 'layouts/user/footer'
+
 :javascript
   var _kmq = _kmq || [];
   var _kmk = _kmk || 'bc9d65f11f045eecca7ce392067fc33b18894f8e';

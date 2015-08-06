@@ -11,9 +11,10 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery.turbolinks
 //= require jquery_ujs
-//= require turbolinks
 //= require homes
 //= require_tree .
 //= require social-share-button
 //= require bootstrap-sprockets
+//= require turbolinks
