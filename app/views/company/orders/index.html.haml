@@ -44,10 +44,7 @@
 
 
 .row
-
-  %script{:src => "https://js.pusher.com/2.2/pusher.min.js"}
   :javascript
-
     var initialize = function(){
 
     console.log('initializing');
@@ -69,13 +66,12 @@
     }).play();
 
     $('#new_order_alert').show()
-
       //sound.stop();
     });
 
     }
-
-    $(function(){ initialize(); })
-    $(document).on('page:load',initialize)
+    initialize();
+    //$(function(){ initialize(); })
+    //$(document).on('page:load',initialize)
 
 

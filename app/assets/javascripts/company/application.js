@@ -13,8 +13,6 @@
 //= require jquery
 //= require jquery.turbolinks
 //= require jquery_ujs
-//= require homes
-//= require_tree .
-//= require social-share-button
+//= require_directory .
 //= require bootstrap-sprockets
 //= require turbolinks
