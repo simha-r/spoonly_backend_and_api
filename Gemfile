@@ -38,3 +38,4 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'rack-mini-profiler'
 gem 'heroku-deflater', :group => :production
 gem 'jquery-turbolinks'
+gem 'newrelic_rpm',:group => :production
