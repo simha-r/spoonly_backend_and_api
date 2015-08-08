@@ -2,15 +2,16 @@
 #
 # Table name: orders
 #
-#  id            :integer          not null, primary key
-#  delivery_time :datetime
-#  state         :string(255)
-#  pay_type      :string(255)
-#  address_id    :integer
-#  user_id       :integer
-#  created_at    :datetime
-#  updated_at    :datetime
-#  category      :string(255)
+#  id                    :integer          not null, primary key
+#  delivery_time         :datetime
+#  state                 :string(255)
+#  pay_type              :string(255)
+#  address_id            :integer
+#  user_id               :integer
+#  created_at            :datetime
+#  updated_at            :datetime
+#  category              :string(255)
+#  delivery_executive_id :integer
 #
 
 class Order < ActiveRecord::Base

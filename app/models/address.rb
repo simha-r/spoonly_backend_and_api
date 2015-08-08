@@ -2,12 +2,18 @@
 #
 # Table name: addresses
 #
-#  id           :integer          not null, primary key
-#  name         :string(255)
-#  address_type :string(255)
-#  user_id      :integer
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id              :integer          not null, primary key
+#  address_type    :string(255)
+#  user_id         :integer
+#  created_at      :datetime
+#  updated_at      :datetime
+#  company         :string(255)
+#  floor           :string(255)
+#  building        :string(255)
+#  flat            :string(255)
+#  landmark        :string(255)
+#  address_details :string(255)
+#  is_default      :boolean          default(FALSE)
 #
 
 class Address < ActiveRecord::Base
