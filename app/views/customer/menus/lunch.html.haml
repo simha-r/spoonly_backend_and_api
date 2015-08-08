@@ -1,15 +1,25 @@
-- if @menu.menu_date!=Date.today
-  -#= render 'customer/menus/menu_unavailable'
 
-Date:
-= @menu.menu_date.strftime("%a %d,%b ")
-- @menu.menu_lunch_products.each do |menu_product|
-  = render 'customer/menus/menu_product_preview',menu_product: menu_product
+#menu_lunch
+  - if @menu.menu_date!=Date.today
+    -#= render 'customer/menus/menu_unavailable'
 
-.row-fluid
-  = link_to 'Checkout',new_customer_order_path(menu_date: @menu_date)
+    .menu-row
+      %h1 Today's Fresh Menu
+      %p= @menu.menu_date.strftime("%a %d,%b ")
+      - @menu.menu_lunch_products.each do |menu_product|
+        .col-xs-6
+          .menu-card
+            = render 'customer/menus/menu_product_preview',menu_product: menu_product
 
-:javascript
-   //$(window).load(function(){
-   //       $('#menu_unavailable_modal').modal('show');
-   //   });
+  .row-fluid
+    = link_to 'Checkout',new_customer_order_path(menu_date: @menu_date)
+
+  :javascript
+     //$(window).load(function(){
+     //       $('#menu_unavailable_modal').modal('show');
+     //   });
+     analytics.page('Lunch Menu');
+     analytics.track('Signed Up', {
+       plan: 'Startup',
+       source: 'Analytics Academy'
+     });

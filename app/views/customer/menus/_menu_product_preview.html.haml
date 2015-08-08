@@ -1,9 +1,9 @@
 - product = menu_product.product
-.row-fluid
-  .span8
-    = product.name
-    = product.price
-    = product.desc
-    = link_to 'Add to Cart',customer_line_items_path(menu_product_id: menu_product.id),method: :post
-    = @cart.quantity_of_menu_product(menu_product) if @cart.contains_menu_product? menu_product
-
+.menu-img
+  = image_tag "menu-1.jpg", class: "img-responsive"
+.menu-details
+  %span.menu-name= product.name
+  = link_to 'Add to Cart',customer_line_items_path(menu_product_id: menu_product.id),method: :post, class: "pull-right"
+  %span.pull-right= @cart.quantity_of_menu_product(menu_product) if @cart.contains_menu_product? menu_product
+  %p.menu-price= product.price
+  %p.menu-desc= product.desc
