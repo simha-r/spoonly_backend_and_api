@@ -43,27 +43,39 @@
 
 
 
+.row
 
-%script{:src => "https://js.pusher.com/2.2/pusher.min.js"}
-:javascript
-  // Enable pusher logging - don't include this in production
-  Pusher.log = function(message) {
-    if (window.console && window.console.log) {
-      window.console.log(message);
+  %script{:src => "https://js.pusher.com/2.2/pusher.min.js"}
+  :javascript
+
+    var initialize = function(){
+
+    console.log('initializing');
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) {
+        window.console.log(message);
+      }
+    };
+
+    var pusher = new Pusher("#{Pusher.key}", {
+      encrypted: true
+    });
+    var channel = pusher.subscribe('orders');
+    channel.bind('purchased', function(data) {
+    var sound = new Howl({
+      urls: ['new_order.mp3'],
+      loop: true
+    }).play();
+
+    $('#new_order_alert').show()
+
+      //sound.stop();
+    });
+
     }
-  };
 
-  var pusher = new Pusher("#{Pusher.key}", {
-    encrypted: true
-  });
-  var channel = pusher.subscribe('orders');
-  channel.bind('purchased', function(data) {
-  var sound = new Howl({
-    urls: ['new_order.mp3'],
-    loop: true
-  }).play();
+    $(function(){ initialize(); })
+    $(document).on('page:load',initialize)
 
-  $('#new_order_alert').show()
 
-    //sound.stop();
-  });
