@@ -17,10 +17,6 @@
 
 
   %body
-    :javascript
-      console.log('page loaded');
-      analytics.page();
-
     = render 'layouts/user/header'
     .container-fluid.main-content{:role => "main"}
       = render 'layouts/user/messages'

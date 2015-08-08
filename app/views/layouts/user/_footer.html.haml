@@ -1,2 +1,10 @@
 .col-xs-12.footer
   %p &copy; Spoonly 2015
+- if user_signed_in?
+  :javascript
+    var title = document.getElementsByTagName("title")[0].innerHTML;
+    analytics.identify("#{current_user.id}", {
+      name: "#{current_user.name}",
+      email: "#{current_user.email}"
+    });
+    analytics.page('a');
