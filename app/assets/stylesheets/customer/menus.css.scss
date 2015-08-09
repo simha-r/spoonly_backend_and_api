@@ -28,9 +28,9 @@
     background-position: center center;
 
     .menu-container {
-      height: 384px;
+      height: 360px;
       top: 64px;
-      background: #fff;
+      background: #536185;
 
       .message {
         @include make-xs-column(12,0);
