@@ -1,6 +1,7 @@
-
+= title 'Lunch Menu'
 #menu_lunch
   - if @menu.menu_date!=Date.today
+    #TODO @GP can we add a modal here to say "Todays menu is not available. View next available menu"
     -#= render 'customer/menus/menu_unavailable'
 
   .menu-row
