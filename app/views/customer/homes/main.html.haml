@@ -10,14 +10,16 @@
         -#  TODO Make below font size as 12 px
         %p{"font-size"=>"12px"} Fresh. Wholesome. Chef-made
         %p{"font-size"=>"12px"} Delivered to your desk.
-
-        = form_tag inside_customer_homes_path, id: 'locationForm', class: "form-horizontal" do
-          .form-group
-            = text_field_tag 'locality','',id: 'searchTextField',size: '40',placeholder: 'Enter Location eg. Hitec City '
-            = hidden_field_tag 'latitude'
-            = hidden_field_tag 'longitude'
-            = hidden_field_tag 'distance'
-            = submit_tag 'See Menu', class: "btn btn-default"
+        %br
+        .row
+          .col-xs-1
+          = form_tag inside_customer_homes_path, id: 'locationForm', class: "form-horizontal" do
+            .form-group
+              = text_field_tag 'locality','',id: 'searchTextField',size: '40',placeholder: 'Enter Location eg. Hitec City '
+              = hidden_field_tag 'latitude'
+              = hidden_field_tag 'longitude'
+              = hidden_field_tag 'distance'
+              = submit_tag 'See Menu', class: "btn btn-default"
   .section-two#about
     %h4.title "What's for lunch?"
     %h1.title
