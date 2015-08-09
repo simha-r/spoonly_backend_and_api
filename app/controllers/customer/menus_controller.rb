@@ -5,13 +5,10 @@ class Customer::MenusController < ApplicationController
 
   before_filter :check_location
   before_filter :set_cart
+  before_filter :set_locality, only: [:home, :lunch, :dinner]
+
 
   def home
-    location_hash = JSON.parse cookies[:customer]
-    full_locality  = location_hash["location"]["locality"]
-    # eg: ["DLF Cyber City", " Gachibowli", " Hyderabad", " Telangana", " India"]
-    # DLF Cyber City  Gachibowli
-    @locality = full_locality.split(',')[0,2].join(',')
   end
 
   #curl -v -H "Accept: application/vnd.healthy_lunch" -H "Content-type: application/application/x-www-form-urlencoded" -H
@@ -38,5 +35,12 @@ class Customer::MenusController < ApplicationController
     end
   end
 
-
+  private
+    def set_locality
+      location_hash = JSON.parse cookies[:customer]
+      full_locality  = location_hash["location"]["locality"]
+      # eg: ["DLF Cyber City", " Gachibowli", " Hyderabad", " Telangana", " India"]
+      # DLF Cyber City  Gachibowli
+      @locality = full_locality.split(',')[0,2].join(',')
+    end
 end

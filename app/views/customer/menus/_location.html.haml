@@ -1,0 +1,9 @@
+.location-checkout-header
+  .col-xs-offset-4.col-xs-4.location
+    - if @locality.present?
+      %p= @locality
+      = link_to "Change", main_customer_homes_path
+
+  - if params[:controller] == "customer/menus" && params[:action] == "lunch"
+    .col-xs-4.checkout
+      = link_to 'Checkout',new_customer_order_path(menu_date: @menu_date), class: "btn btn-warning"

@@ -1,5 +1,6 @@
 = title 'Lunch Menu'
 #menu_lunch
+  = render 'location'
   - if @menu.menu_date!=Date.today
     #TODO @GP can we add a modal here to say "Todays menu is not available. View next available menu"
     -#= render 'customer/menus/menu_unavailable'
@@ -12,8 +13,8 @@
         .menu-card
           = render 'customer/menus/menu_product_preview',menu_product: menu_product
 
-  .row-fluid
-    = link_to 'Checkout',new_customer_order_path(menu_date: @menu_date)
+  -#.row-fluid
+    -#= link_to 'Checkout',new_customer_order_path(menu_date: @menu_date)
 
   :javascript
      //$(window).load(function(){

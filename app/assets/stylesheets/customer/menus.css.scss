@@ -1,22 +1,36 @@
 @import 'customer_common';
 
-#customer_menu {
-
-  .location,
-  .section-one {
-    @include make-xs-column(12,0);
-  }
+.location-checkout-header {
+  @include make-xs-column(12,0);
+  border-bottom: 1px solid #ddd;
+  padding-top: 16px;
+  height: 55px;
 
   .location {
-    padding-top: 16px;
-    height: 55px;
     text-align: center;
+
     p {
       display: inline;
     }
+
     a {
       color: #f19140;
     }
+  }
+
+  .checkout {
+    top: -7px;
+    text-align: right;
+    a {
+      color: #fff;
+    }
+  }
+}
+
+#customer_menu {
+
+  .section-one {
+    @include make-xs-column(12,0);
   }
 
   .section-one {

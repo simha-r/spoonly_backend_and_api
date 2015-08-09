@@ -2,4 +2,5 @@
 *= require_self
 *= require customer/homes
 *= require customer/menus
+*= require customer/orders
 */

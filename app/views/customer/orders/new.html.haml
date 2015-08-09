@@ -1,32 +1,43 @@
 = title 'Place Order'
 
-- if !user_signed_in?
-  .row
-    Please login before continuing
-    - if devise_mapping.omniauthable?
-      - resource_class.omniauth_providers.each do |provider|
-        = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
-        %br/
 
-- else
+#orders_new
+  %ul.orders-process-list
+    %li.sign-in
+      %p.title{class:( user_signed_in? ? '' : 'active')}
+        Please login before continuing
+      - if !user_signed_in?
+        .content
+          - if devise_mapping.omniauthable?
+            - resource_class.omniauth_providers.each do |provider|
+              = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
 
-  - if !current_user.phone_number_verified
-    #phone_number_verification
-      = form_tag start_customer_number_verifications_path,class: '',remote: true do
-        = number_field_tag 'phone_number'
-        = submit_tag 'Continue'
+    %li
+      %p.title{class: (current_user.phone_number_verified ? '' : 'active')}
+        Please verify phone number
 
-      .row#enter_code{style: 'display: none'}
-        Please Enter the code you received
-        = form_tag finish_customer_number_verifications_path,remote: true do
-          = number_field_tag 'verification_code'
-          = submit_tag 'Verify'
-      .row.errors#wrong_code{style: 'display: none'}
-    #final_order{style: 'display: none'}
-      = render 'customer/orders/final_order'
-  -else
-    #final_order
-      = render 'customer/orders/final_order'
+      - if !current_user.phone_number_verified
+        #phone_number_verification.content
+          = form_tag start_customer_number_verifications_path,class: '',remote: true, class: "form-horizontal" do
+            .form-group
+              = number_field_tag 'phone_number', nil, class: "form-control"
+              = submit_tag 'Continue', class: "btn btn-warning"
+            %p.text-danger Please verify mobile number to continue.
+
+          .row#enter_code{style: 'display: none'}
+            = form_tag finish_customer_number_verifications_path,remote: true, class: "form-horizontal" do
+              .form-group
+                = number_field_tag 'verification_code', nil, class: "form-control"
+                = submit_tag 'Verify', class: "btn btn-warning"
+              %p.text-danger Please enter the codeceived
+          .row.errors#wrong_code{style: 'display: none'}
+        #final_order{style: 'display: none'}
+          - can_order = user_signed_in? && current_user.phone_number_verified
+          = render 'customer/orders/final_order', :can_order => can_order
+    %li.order_confirmation
+      - can_order = user_signed_in? && current_user.phone_number_verified
+      #final_order
+        = render 'customer/orders/final_order', :can_order => can_order
 
 
 :javascript

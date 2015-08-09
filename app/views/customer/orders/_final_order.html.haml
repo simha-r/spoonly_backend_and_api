@@ -1,23 +1,34 @@
-.row
-  Cash On Delivery
+%p.title{class: (can_order ? 'active' : '')}
+  Order Confirmation
 
+- if can_order
+  .content
+    %h3 Cash On Delivery
+    %h4 Order
 
-.row
-  Order
-- @cart.line_items.each do |item|
-  - product = item.menu_product.product
-  .row-fluid
-    .span8
-      = product.name
-      = product.price
-      = product.desc
-      = item.quantity
-.row
-  = form_tag customer_orders_path do
-    - delivery_times = MenuProduct.send("show_#{@cart.category}_times")
-    = select_tag 'order[delivery_time]',options_from_collection_for_select(delivery_times,:first,
-    :last)
-    = hidden_field_tag 'order[pay_type]','cash_on_delivery'
-    = hidden_field_tag 'order[address_id]',2
+    %table.table.table-bordered.table-striped
+      %thead
+        %tr
+          %th Item (Description)
+          %th Price
+          %th Quantity
+      %tbody
+        - @cart.line_items.each do |item|
+          - product = item.menu_product.product
+          %tr
+            %td
+              %p= product.name
+              %p= product.desc
 
-    = submit_tag 'Confirm Order'
+            %td= product.price
+
+            %td= item.quantity
+
+      = form_tag customer_orders_path, class: "form-horizontal" do
+        - delivery_times = MenuProduct.send("show_#{@cart.category}_times")
+        = select_tag 'order[delivery_time]',options_from_collection_for_select(delivery_times,:first,
+        :last)
+        = hidden_field_tag 'order[pay_type]','cash_on_delivery'
+        = hidden_field_tag 'order[address_id]',2
+
+        = submit_tag 'Confirm Order'
