@@ -13,7 +13,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
   end
 
   def index
-    render json: {default: [current_user.addresses.default_home, current_user.addresses.default_office],
+    render json: {default: [current_user.addresses.default_home, current_user.addresses.default_office].compact!,
                   home: current_user.addresses.normal_home, office: current_user.addresses.normal_office}
   end
 

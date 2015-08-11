@@ -107,7 +107,6 @@ class User < ActiveRecord::Base
     profile.update_attributes(phone_number: phone_number)
   end
 
-
   private
 
   def generate_authentication_token
