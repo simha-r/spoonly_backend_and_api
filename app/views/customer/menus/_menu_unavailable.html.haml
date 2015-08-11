@@ -1,8 +1,15 @@
-#menu_unavailable_modal.modal.fade.show{:title => "My modal"}
-  .modal-header
-    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
-    %h3#myModalLabel New Post
-  .modal-body.a-unique-class
-    New Post Body
-  .modal-footer
-    %button.btn{"aria-hidden" => "true", "data-dismiss" => "modal"} View Tomorrow's menu
+#menu_unavailable_modal.modal{:title => "My modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role=> "dialog"}
+
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      .modal-body
+        %p.msg-big Lunch orders for today are closed.
+        %a{"aria-hidden" => "true", "data-dismiss" => "modal"}
+          %p.msg View Tomorrow's menu
+
+:javascript
+  $(window).load(function(){
+        $('#menu_unavailable_modal').modal('show');
+  });

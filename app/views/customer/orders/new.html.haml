@@ -4,7 +4,7 @@
 #orders_new
   %ul.orders-process-list
     %li.sign-in
-      %p.title{class:( user_signed_in? ? '' : 'active')}
+      %p.title{class:(user_signed_in? ? '' : 'active')}
         Please login before continuing
       - if !user_signed_in?
         .content
@@ -12,11 +12,11 @@
             - resource_class.omniauth_providers.each do |provider|
               = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
 
-    %li
-      %p.title{class: (current_user.phone_number_verified ? '' : 'active')}
+    %li.phone_number_verification
+      %p.title{class: (user_signed_in? && !current_user.phone_number_verified ? 'active' : '')}
         Please verify phone number
 
-      - if !current_user.phone_number_verified
+      - if user_signed_in? && !current_user.phone_number_verified
         #phone_number_verification.content
           = form_tag start_customer_number_verifications_path,class: '',remote: true, class: "form-horizontal" do
             .form-group
@@ -25,15 +25,16 @@
             %p.text-danger Please verify mobile number to continue.
 
           .row#enter_code{style: 'display: none'}
-            = form_tag finish_customer_number_verifications_path,remote: true, class: "form-horizontal" do
+            = form_tag finish_customer_number_verifications_path, class: "form-horizontal" do
               .form-group
                 = number_field_tag 'verification_code', nil, class: "form-control"
+                = hidden_field_tag "menu_date", params[:menu_date]
                 = submit_tag 'Verify', class: "btn btn-warning"
               %p.text-danger Please enter the codeceived
           .row.errors#wrong_code{style: 'display: none'}
-        #final_order{style: 'display: none'}
-          - can_order = user_signed_in? && current_user.phone_number_verified
-          = render 'customer/orders/final_order', :can_order => can_order
+        -##final_order{style: 'display: none'}
+          -#- can_order = true
+          -#= render 'customer/orders/final_order', :can_order => can_order
     %li.order_confirmation
       - can_order = user_signed_in? && current_user.phone_number_verified
       #final_order

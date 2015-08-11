@@ -128,4 +128,27 @@
       }
     }
   }
+
+  #menu_unavailable_modal {
+
+    .modal-header {
+      border: none;
+    }
+
+    .modal-body {
+      text-align: center;
+    }
+
+    p.msg-big {
+      font-size: 18px;
+    }
+
+    p.msg {
+      color: #fdae37;
+      font-weight: 700;
+      font-size: 15px;
+      cursor: pointer;
+    }
+  }
+
 }

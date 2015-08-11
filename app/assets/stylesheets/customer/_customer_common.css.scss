@@ -12,19 +12,18 @@ body {
 
 .navbar.navbar-default {
   margin-bottom: 0;
-  height: 100px;
+  height: 40px;
   background-color: #fff;
 
   .container-fluid {
-    height: 100px;
+    height: 40px;
   }
 
   .navbar-header {
-    height: 100px;
+    height: 40px;
     width: 100%;
 
     .col-xs-4.header-menu-text {
-      padding-top: 40px;
 
       ul.nav.navbar-nav li a:hover {
         color: #f15a22;
@@ -32,11 +31,12 @@ body {
     }
 
     .col-xs-4.logo {
-      background-image: url(image-path('spoonly_grey.gif'));
+      background-image: url(image-path('spoonly_text.png'));
       background-size: 125px auto;
       background-repeat: no-repeat;
-      height: 100px;
-      background-position: center bottom;
+      background-position: center top;
+      top: 5px;
+      height: inherit;
     }
   }
 }
@@ -54,4 +54,5 @@ body {
   padding-left: 0;
   text-align: center;
   border-top: 1px solid #ddd;
+  bottom: 0;
 }

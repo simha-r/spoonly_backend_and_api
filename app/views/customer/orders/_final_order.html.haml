@@ -24,11 +24,12 @@
 
             %td= item.quantity
 
-      = form_tag customer_orders_path, class: "form-horizontal" do
-        - delivery_times = MenuProduct.send("show_#{@cart.category}_times")
+    = form_tag customer_orders_path, class: "form-horizontal" do
+      - delivery_times = MenuProduct.send("show_#{@cart.category}_times")
+      .form-group
         = select_tag 'order[delivery_time]',options_from_collection_for_select(delivery_times,:first,
-        :last)
+        :last), class: "form-control"
         = hidden_field_tag 'order[pay_type]','cash_on_delivery'
         = hidden_field_tag 'order[address_id]',2
 
-        = submit_tag 'Confirm Order'
+        = submit_tag 'Confirm Order', class: "btn btn-warning"
