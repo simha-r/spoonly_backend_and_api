@@ -20,14 +20,26 @@ class Address < ActiveRecord::Base
 
   belongs_to :user
 
-  scope :office, ->{where(address_type: 'office')}
-  scope :home, ->{where(address_type: 'home')}
+  def self.office
+    where(address_type: 'office')
+  end
+  def self.home
+    where(address_type: 'home')
+  end
+  def self.normal_office
+    where(address_type: 'office',is_default: false)
+  end
+  def self.normal_home
+   where(address_type: 'home',is_default: false)
+  end
 
-  scope :normal_office, ->{where(address_type: 'office').where(is_default: false)}
-  scope :normal_home, ->{where(address_type: 'home').where(is_default: false)}
+  def self.default_office
+    where(address_type: 'office',is_default: true).first
+  end
 
-  scope :default_office, ->{where(address_type: 'office').where(is_default: true).first}
-  scope :default_home, ->{where(address_type: 'home').where(is_default: true).first}
+  def self.default_home
+    where(address_type: 'home',is_default: true).first
+  end
 
   validates :is_default,:address_details,presence: true
   validates :address_type,presence: true,inclusion: {in: ['home','office']}
