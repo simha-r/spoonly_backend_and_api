@@ -8,7 +8,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
     if @address.save
       render json: @address
     else
-      render json: @address.errors
+      render json: @address.errors,status: 422
     end
   end
 
@@ -21,7 +21,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
     if @address.update_attributes address_params
       render json: @address
     else
-      render json: @address.errors
+      render json: @address.errors,status: 422
     end
   end
 
