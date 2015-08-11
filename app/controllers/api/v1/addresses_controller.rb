@@ -27,7 +27,7 @@ class Api::V1::AddressesController < Api::V1::BaseController
 
   def destroy
     @address.destroy
-    render nothing: true,status: :ok
+    render nothing: true,status: :ok,content_type: 'application/json'
   end
 
 
