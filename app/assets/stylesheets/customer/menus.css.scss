@@ -44,7 +44,8 @@
     .menu-container {
       height: 360px;
       top: 64px;
-      background: #536185;
+      background: #CED1E0;
+      opacity: 0.95;
 
       .message {
         @include make-xs-column(12,0);
@@ -52,7 +53,7 @@
         text-align: center;
 
         p {
-          font-size: 24px;
+          font-size: 20px;
         }
       }
 
