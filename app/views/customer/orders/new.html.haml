@@ -43,50 +43,49 @@
     - else
       %p= current_user.profile.phone_number
     %li.address
-      %p.title
+      %p.title{class: "#{(user_signed_in? && current_user.phone_number_verified) ? 'active' : ''}"}
         Delivery Address
-      .addresses
-        - current_user.addresses.each do |address|
-          .row
-            = render 'customer/addresses/show',address: address
-        = hidden_field_tag :address_id
-        = link_to 'Add Home Address','',class: 'add_office'
-        = link_to 'Add Office Address','',class: 'add_home'
-      #selected_address
-      - if !current_user.addresses.present?
-        - show_new_address = true
-        .add_office
-          = link_to 'Add Home Address'
-        .add_home
-          = link_to 'Add Office Address'
-      .new_address{'style'=>"display: #{show_new_address ? true : 'none' }"}
-        = form_tag customer_addresses_path,remote: true do
-          Office
-          = radio_button_tag 'address_type','office',default: true
-          Home
-          = radio_button_tag 'address_type','home'
-          = label_tag :company
-          = text_field_tag :company
-          = label_tag :flat
-          = text_field_tag :flat
-          = label_tag :floor
-          = text_field_tag :floor
-          = label_tag :building
-          = text_field_tag :building
-          = label_tag :address_details
-          = text_field_tag :address_details
-          = label_tag :landmark
-          = text_field_tag :landmark
-          = hidden_field_tag :is_default,true
+        - if user_signed_in?
+          .addresses
+            - current_user.addresses.each do |address|
+              .row
+                = render 'customer/addresses/show',address: address
+            = hidden_field_tag :address_id
+            = link_to 'Add Home Address','',class: 'add_office'
+            = link_to 'Add Office Address','',class: 'add_home'
+          #selected_address
+          - if !current_user.addresses.present?
+            - show_new_address = true
+            .add_office
+              = link_to 'Add Home Address'
+            .add_home
+              = link_to 'Add Office Address'
+          .new_address{'style'=>"display: #{show_new_address ? true : 'none' }"}
+            = form_tag customer_addresses_path,remote: true do
+              Office
+              = radio_button_tag 'address_type','office',default: true
+              Home
+              = radio_button_tag 'address_type','home'
+              = label_tag :company
+              = text_field_tag :company
+              = label_tag :flat
+              = text_field_tag :flat
+              = label_tag :floor
+              = text_field_tag :floor
+              = label_tag :building
+              = text_field_tag :building
+              = label_tag :address_details
+              = text_field_tag :address_details
+              = label_tag :landmark
+              = text_field_tag :landmark
+              = hidden_field_tag :is_default,true
 
-          = submit_tag 'Deliver to this address'
-
+              = submit_tag 'Deliver to this address'
 
     %li.order_confirmation
       - can_order = user_signed_in? && current_user.phone_number_verified
       #final_order
         = render 'customer/orders/final_order', :can_order => can_order
-
 
 :javascript
   $('#phone_number').keypress(function(){

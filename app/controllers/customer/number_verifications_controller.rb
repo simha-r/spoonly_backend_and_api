@@ -33,6 +33,9 @@ class Customer::NumberVerificationsController < Customer::BaseController
     if NumberVerification.finish current_user,params[:verification_code]
       current_user.mark_number_verified
       redirect_to new_customer_order_path(:menu_date => params[:menu_date])
+    else
+      redirect_to new_customer_order_path(:menu_date => params[:menu_date]),alert: 'Please enter the correct
+verification code'
     end
   end
 

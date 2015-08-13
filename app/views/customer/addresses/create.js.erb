@@ -1,4 +1,5 @@
 //TODO Write js to close address form..show address and move on to next order step
+$('.address .title').removeClass('active')
 $('#selected_address').html("<%= j render 'customer/addresses/selected_address',address: @address %>")
 $('#order_address_id').val("<%=@address.id %>")
 $('.new_address').hide();
