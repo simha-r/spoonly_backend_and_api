@@ -3,38 +3,85 @@
 
 #orders_new
   %ul.orders-process-list
-    %li.sign-in
-      %p.title{class:(user_signed_in? ? '' : 'active')}
-        Please login before continuing
-      - if !user_signed_in?
-        .content
-          - if devise_mapping.omniauthable?
-            - resource_class.omniauth_providers.each do |provider|
-              = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
+    - if !user_signed_in?
+      %li.sign-in
+        %p.title{class:(user_signed_in? ? '' : 'active')}
+          Please login before continuing
+          .content
+            - if devise_mapping.omniauthable?
+              - resource_class.omniauth_providers.each do |provider|
+                = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
+    - else
+      %p.title
+        = current_user.name
 
-    %li.phone_number_verification
-      %p.title{class: (user_signed_in? && !current_user.phone_number_verified ? 'active' : '')}
-        Please verify phone number
 
-      - if user_signed_in? && !current_user.phone_number_verified
-        #phone_number_verification.content
-          = form_tag start_customer_number_verifications_path,class: '',remote: true, class: "form-horizontal" do
-            .form-group
-              = number_field_tag 'phone_number', nil, class: "form-control"
-              = submit_tag 'Continue', class: "btn btn-warning"
-            %p.text-danger Please verify mobile number to continue.
+    - if !user_signed_in? || !current_user.phone_number_verified
+      %li.phone_number_verification
+        %p.title{class: (user_signed_in? && !current_user.phone_number_verified ? 'active' : '')}
+          Please verify phone number
 
-          .row#enter_code{style: 'display: none'}
-            = form_tag finish_customer_number_verifications_path, class: "form-horizontal" do
+        - if user_signed_in? && !current_user.phone_number_verified
+          #phone_number_verification.content
+            = form_tag start_customer_number_verifications_path,class: '',remote: true, class: "form-horizontal" do
               .form-group
-                = number_field_tag 'verification_code', nil, class: "form-control"
-                = hidden_field_tag "menu_date", params[:menu_date]
-                = submit_tag 'Verify', class: "btn btn-warning"
-              %p.text-danger Please enter the codeceived
-          .row.errors#wrong_code{style: 'display: none'}
-        -##final_order{style: 'display: none'}
-          -#- can_order = true
-          -#= render 'customer/orders/final_order', :can_order => can_order
+                = number_field_tag 'phone_number', nil, class: "form-control"
+                = submit_tag 'Continue', class: "btn btn-warning"
+              %p.text-danger Please verify mobile number to continue.
+
+            .row#enter_code{style: 'display: none'}
+              = form_tag finish_customer_number_verifications_path, class: "form-horizontal" do
+                .form-group
+                  = number_field_tag 'verification_code', nil, class: "form-control"
+                  = hidden_field_tag "menu_date", params[:menu_date]
+                  = submit_tag 'Verify', class: "btn btn-warning"
+                %p.text-danger Please enter the codeceived
+            .row.errors#wrong_code{style: 'display: none'}
+          -##final_order{style: 'display: none'}
+            -#- can_order = true
+            -#= render 'customer/orders/final_order', :can_order => can_order
+    - else
+      %p= current_user.profile.phone_number
+    %li.address
+      %p.title
+        Delivery Address
+      .addresses
+        - current_user.addresses.each do |address|
+          .row
+            = render 'customer/addresses/show',address: address
+        = hidden_field_tag :address_id
+        = link_to 'Add Home Address','',class: 'add_office'
+        = link_to 'Add Office Address','',class: 'add_home'
+      #selected_address
+      - if !current_user.addresses.present?
+        - show_new_address = true
+        .add_office
+          = link_to 'Add Home Address'
+        .add_home
+          = link_to 'Add Office Address'
+      .new_address{'style'=>"display: #{show_new_address ? true : 'none' }"}
+        = form_tag customer_addresses_path,remote: true do
+          Office
+          = radio_button_tag 'address_type','office',default: true
+          Home
+          = radio_button_tag 'address_type','home'
+          = label_tag :company
+          = text_field_tag :company
+          = label_tag :flat
+          = text_field_tag :flat
+          = label_tag :floor
+          = text_field_tag :floor
+          = label_tag :building
+          = text_field_tag :building
+          = label_tag :address_details
+          = text_field_tag :address_details
+          = label_tag :landmark
+          = text_field_tag :landmark
+          = hidden_field_tag :is_default,true
+
+          = submit_tag 'Deliver to this address'
+
+
     %li.order_confirmation
       - can_order = user_signed_in? && current_user.phone_number_verified
       #final_order
@@ -45,3 +92,18 @@
   $('#phone_number').keypress(function(){
     $('#enter_code').hide();
   })
+
+  $('.add_office').click(function(){
+    $('.new_address').show()
+    $('.addresses').hide();
+    return false;
+  })
+
+    $('.add_home').click(function(){
+      $('.new_address').show()
+      $('.addresses').hide();
+      return false;
+    })
+
+
+

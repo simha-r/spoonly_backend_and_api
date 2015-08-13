@@ -1,7 +1,7 @@
-%p.title{class: (can_order ? 'active' : '')}
+%p.title{class: ""}
   Order Confirmation
 
-- if can_order
+#order_content{'style'=>'display: none'}
   .content
     %h3 Cash On Delivery
     %h4 Order
@@ -30,6 +30,6 @@
         = select_tag 'order[delivery_time]',options_from_collection_for_select(delivery_times,:first,
         :last), class: "form-control"
         = hidden_field_tag 'order[pay_type]','cash_on_delivery'
-        = hidden_field_tag 'order[address_id]',2
+        = hidden_field_tag 'order[address_id]'
 
         = submit_tag 'Confirm Order', class: "btn btn-warning"

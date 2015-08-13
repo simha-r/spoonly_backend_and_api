@@ -9,7 +9,7 @@
     %p= @menu.menu_date.strftime("%a %d,%b ")
     - @menu.menu_lunch_products.each do |menu_product|
       .col-xs-6
-        .menu-card
+        .menu-card{'id'=>"menu_product_#{menu_product.id}"}
           = render 'customer/menus/menu_product_preview',menu_product: menu_product
 
   -#.row-fluid

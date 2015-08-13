@@ -1,0 +1,12 @@
+- if address.address_type=='office'
+  .row
+    = address.company
+    = address.building
+    = address.address_details
+    = address.landmark
+- else
+  .row
+    = address.flat
+    = address.building
+    = address.address_details
+    = address.landmark

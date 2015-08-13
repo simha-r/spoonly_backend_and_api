@@ -5,15 +5,13 @@ class Customer::LineItemsController < ApplicationController
   # POST /line_items
   # POST /line_items.json
   def create
-    menu_product = MenuProduct.find(params[:menu_product_id])
-    @line_item = @cart.add_menu_product(menu_product.id)
+    @menu_product = MenuProduct.find(params[:menu_product_id])
+    @line_item = @cart.add_menu_product(@menu_product.id)
 
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to request.referrer }
-        format.js   { @current_item = @line_item }
-        format.json { render action: 'show',
-                             status: :created, location: @line_item }
+        format.js   { render 'create.js' }
       else
         format.html { render action: 'new' }
         format.json { render json: @line_item.errors,

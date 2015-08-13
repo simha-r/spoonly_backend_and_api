@@ -38,6 +38,10 @@ Rails.application.routes.draw do
       post :finish
     end
 
+    resources :addresses do
+
+    end
+
   end
 
   namespace :api, defaults: {format: 'json'} do
