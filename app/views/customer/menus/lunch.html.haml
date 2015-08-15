@@ -1,12 +1,10 @@
 = title 'Lunch Menu'
 #menu_lunch
-  = render 'location'
+  = render 'location', date: @menu.menu_date.strftime("%a %d,%b ")
   - if @menu.menu_date != Date.today
     = render 'customer/menus/menu_unavailable'
 
   .menu-row
-    %h1 Today's Fresh Menu
-    %p= @menu.menu_date.strftime("%a %d,%b ")
     - @menu.menu_lunch_products.each do |menu_product|
       .col-xs-6
         .menu-card{'id'=>"menu_product_#{menu_product.id}"}

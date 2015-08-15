@@ -5,6 +5,7 @@
   border-bottom: 1px solid #ddd;
   padding-top: 16px;
   height: 55px;
+  margin-bottom: 30px;
 
   .location {
     text-align: center;
@@ -22,7 +23,18 @@
     top: -7px;
     text-align: right;
     a {
+      margin-left: 50px;
       color: #fff;
+    }
+    span.count {
+      background-color: #ddd;
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      position: absolute;
+      text-align: center;
+      right: 150px;
+      top: -6px;
     }
   }
 }
@@ -35,46 +47,40 @@
 
   .section-one {
     background-image: url(image-path('home_bg_2.jpg'));
-    height: 600px;
-    min-height: 600px;
+    height: 380px;
+    min-height: 380px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center center;
 
     .menu-container {
-      height: 360px;
-      top: 64px;
+      height: 200px;
+      top: 90px;
       background: #ECEEFF;
       opacity: 0.95;
-
-      .message {
-        @include make-xs-column(12,0);
-        margin: 15px;
-        text-align: center;
-
-        p {
-          font-size: 20px;
-        }
-      }
 
       .lunch,
       .dinner {
         text-align: center;
         margin-top: 24px;
+        border-radius: 50%;
+        margin-bottom: 15px;
+        height: 200px;
+        width: 200px;
+        background-color: rgba(0,0,0,0.6);
+        display: table-cell;
+        vertical-align: middle;
+        color: #fff;
 
-        a img {
-          border-radius: 50%;
-          margin-bottom: 15px;
-        }
-
-        p:first-of-type {
-          font-size: 18px;
+        a {
+          font-size: 24px;
           text-transform: uppercase;
+          text-decoration: none;
+          color: #fff;
         }
 
         p.time {
           font-size: 14px;
-          color: #808080;
         }
 
         .separator {
@@ -88,7 +94,6 @@
       .dinner {
         .coming-soon {
           font-size: 16px;
-          color: #123;
         }
       }
     }
@@ -98,7 +103,7 @@
 
 #menu_lunch {
   .menu-row {
-    @include make-xs-column(12,15px);
+    @include make-xs-column(12,45px);
   }
 
   .menu-row h1 {
@@ -109,7 +114,6 @@
   .menu-row .col-xs-6 {
     .menu-card {
       margin-bottom: 15px;
-      border: 1px solid #ddd;
       border-radius: 4px;
       box-shadow: 0px 10px 16px rgba(0,0,0,0.1);
 

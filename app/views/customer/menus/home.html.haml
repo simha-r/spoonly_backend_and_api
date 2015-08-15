@@ -4,20 +4,16 @@
   .section-one
     .col-xs-12
       .col-md-offset-3.col-md-6.menu-container
-        .message
-          %p What would you like to have ?
 
-        .col-xs-12.col-md-6.lunch
-          = link_to lunch_customer_menus_path do
-            = image_tag "lunch.png"
-          %p Lunch
-          .separator
-          %p.time 12pm - 3pm
+        .col-xs-12.col-md-6
+          .lunch
+            = link_to "Lunch", lunch_customer_menus_path
+            .separator
+            %p.time 12pm | 3pm
 
-        .col-xs-12.col-md-6.dinner
-          = link_to dinner_customer_menus_path do
-            = image_tag "dinner.png"
-          %p Dinner
-          .separator
-          %p.coming-soon Coming Soon
+        .col-xs-12.col-md-6
+          .dinner
+            = link_to "Dinner", dinner_customer_menus_path
+            .separator
+            %p.coming-soon Coming Soon
   = render 'customer/homes/how_it_works'
