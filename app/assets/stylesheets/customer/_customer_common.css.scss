@@ -12,32 +12,49 @@ body {
 
 .navbar.navbar-default {
   margin-bottom: 0;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+  padding: 7px 0;
   height: 40px;
+  min-height: 40px;
   background-color: #fff;
 
-  .container-fluid {
-    height: 40px;
-  }
+  .row {
+    padding: 0 60px;
 
-  .navbar-header {
-    height: 40px;
-    width: 100%;
+    .header-menu-text,
+    .login
+    {
+      top: 2px;
 
-    .col-xs-4.header-menu-text {
+      ul {
+        list-style: none;
+        margin-bottom: 0;
+      }
 
-      ul.nav.navbar-nav li a:hover {
+      ul li a {
+        color: #79776b;
+      }
+
+      ul li a:hover {
         color: #f15a22;
       }
     }
 
     .col-xs-4.logo {
-      background-image: url(image-path('spoonly_text.png'));
-      background-size: 125px auto;
-      background-repeat: no-repeat;
-      background-position: center top;
-      top: 5px;
-      height: inherit;
+      a img {
+        height: 26px;
+      }
     }
+
+    .login {
+      text-align: right;
+      ul {
+        padding-left: 0;
+        padding-right: 40px;
+      }
+    }
+
   }
 }
 
@@ -55,4 +72,48 @@ body {
   text-align: center;
   border-top: 1px solid #ddd;
   bottom: 0;
+}
+
+
+.section-two#about {
+  @include make-xs-column(12,0);
+  margin-top: 30px;
+  padding-bottom: 40px;
+
+  .title {
+    text-transform: uppercase;
+    text-align: center;
+    color: #42413e;
+  }
+
+  p.title {
+    font-size: 1.6rem;
+  }
+
+  h1.title {
+    margin-top: 0;
+    font-size: 3rem;
+  }
+
+  .col-xs-12 {
+    .chef {
+      background-image: url(image-path('chef_hat.png'));
+    }
+
+    .menu {
+      background-image: url(image-path('menu.svg'));
+    }
+
+    .bag {
+      background-image: url(image-path('bag.svg'));
+    }
+
+    .content {
+      padding-top: 120px;
+      background-repeat: no-repeat;
+      background-position: center 50px;
+      background-size: auto 54px;
+      text-align: center;
+    }
+  }
 }

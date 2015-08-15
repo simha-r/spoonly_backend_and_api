@@ -1,10 +1,12 @@
 %nav.navbar.navbar-default
   .container-fluid
-    .navbar-header
+    .row
       .col-xs-4.header-menu-text
-        %ul.nav.navbar-nav
+        %ul
           %li= link_to "How It Works", "#about"
       .col-xs-4.text-center.logo
+        = link_to "/" do
+          = image_tag 'spoonly_text.png'
       .col-xs-4.login
-        %ul.nav.navbar-nav
-          %li
+        %ul
+          %li= link_to "Login", "#"

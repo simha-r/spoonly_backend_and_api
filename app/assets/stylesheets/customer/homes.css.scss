@@ -8,7 +8,6 @@
   }
 
   .section-one {
-    margin-bottom: 30px;
     background-image: url(image-path('main-content-img.jpg'));
     height: 500px;
     min-height: 500px;
@@ -58,47 +57,5 @@
       }
     }
   }
-
-  .section-two {
-    padding-bottom: 40px;
-
-    .title {
-      text-transform: uppercase;
-      text-align: center;
-      color: #42413e;
-    }
-
-    p.title {
-      font-size: 1.6rem;
-    }
-
-    h1.title {
-      margin-top: 0;
-      font-size: 3rem;
-    }
-
-    .col-xs-12 {
-      .chef {
-        background-image: url(image-path('chef_hat.png'));
-      }
-
-      .menu {
-        background-image: url(image-path('menu.svg'));
-      }
-
-      .bag {
-        background-image: url(image-path('bag.svg'));
-      }
-
-      .content {
-        padding-top: 120px;
-        background-repeat: no-repeat;
-        background-position: center 50px;
-        background-size: auto 54px;
-        text-align: center;
-      }
-    }
-  }
-
 }
 

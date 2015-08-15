@@ -20,33 +20,7 @@
               = hidden_field_tag 'longitude'
               = hidden_field_tag 'distance'
               = submit_tag 'See Menu', class: "btn btn-default"
-  .section-two#about
-    %h4.title "What's for lunch?"
-    %h1.title
-      Finally has an
-      %br
-      easy answer
-
-    .col-xs-12
-      .col-xs-12.col-sm-4.content.chef
-        %h4 Chef-Made Meals
-        %p
-          Our chefs use fresh, seasonal ingredients
-          to make tasty,wholesome meals.
-
-      .col-xs-12.col-sm-4.content.menu
-        %h4 Fresh Menu Daily
-        %p
-          We love whipping up new meal choices everyday.
-          Order from a daily rotating menu of Indian
-          and International cuisine.
-
-      .col-xs-12.col-sm-4.content.bag
-        %h4 Tap to Eat
-        %p
-          Use the website to order on-demand or
-          schedule delivery in advance. Our mobile
-          app is being buit as we speak !
+  = render 'how_it_works'
 
 
 
