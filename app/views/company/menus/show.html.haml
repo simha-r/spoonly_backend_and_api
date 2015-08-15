@@ -30,6 +30,8 @@
 = form_tag company_menu_products_path do
   = select_tag 'menu_product[product_id]', options_for_select(Product.all.collect{ |p| [p.name, p.id] })
   = select_tag 'menu_product[category]',options_for_select(MenuProduct::CATEGORIES.collect{|c| [c.to_s,c.to_s]})
+  = label_tag 'menu_product[max_quantity]','Max Quantity'
+  = select_tag 'menu_product[max_quantity]',options_for_select(MenuProduct::MAX_QUANTITIES.collect{|c| [c.to_i,c.to_s]})
   = hidden_field_tag 'menu_product[menu_id]',@menu.id
   = submit_tag 'Create',class: 'btn btn-primary'
 

@@ -66,8 +66,8 @@ class Order < ActiveRecord::Base
 
   def add_line_items_from_cart(cart)
     cart.line_items.each do |item|
-      #TODO Why is cart id being set to nil ? The line items wont be destroyed in a dependent destroy if so
-      #TODO Or are the same line items being assigned to an order without duplicating them ?
+      #cart id being set to nil for each line item thereby disasociating it from the cart
+      #The same line items are being assigned to an order
       item.cart_id = nil
       line_items << item
     end

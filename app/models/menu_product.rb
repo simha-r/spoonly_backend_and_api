@@ -19,6 +19,7 @@ class MenuProduct < ActiveRecord::Base
   DINNER_TIMES =['1930','2000','2030','2100','2130','2200','2230']
   LUNCH_START_TIME=12
   DINNER_START_TIME=19
+  MAX_QUANTITIES=[20,30,40,50,60,70,80]
 
 
   def as_json

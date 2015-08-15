@@ -25,6 +25,7 @@ class Customer::OrdersController < ApplicationController
     @order.add_line_items_from_cart(@cart)
     @order.category = @cart.category
     if @order.save
+      #TODO Why not @cart.destroy
       Cart.destroy(session[:cart_id])
       session[:cart_id] = nil
       @order.start_process!

@@ -22,7 +22,7 @@ class Company::MenuProductsController < Company::BaseController
   private
 
   def menu_product_params
-    params.require(:menu_product).permit(:product_id,:menu_id,:category)
+    params.require(:menu_product).permit(:product_id,:menu_id,:category,:max_quantity)
   end
 
 
