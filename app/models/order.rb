@@ -64,7 +64,7 @@ class Order < ActiveRecord::Base
   end
 
   def notify_user
-    UserMailer.order_success(user,self).deliver
+    UserMailer.order_success(self).deliver
     #TODO Send sms confirmation
   end
 
