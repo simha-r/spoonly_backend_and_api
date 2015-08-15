@@ -1,0 +1,9 @@
+Order Details:
+
+= @order.line_items.each do |li|
+  = li.product.name
+  = li.quantity
+  = li.price
+
+Total Price:
+-#TODO Show total price here

@@ -36,7 +36,7 @@ class Order < ActiveRecord::Base
     state :delivered
     state :cancelled
 
-    event :start_process,after: :notify_kitchen do
+    event :start_process,after: [:notify_kitchen,:notify_user] do
       transitions from: :new, to: :pending
     end
 
@@ -59,9 +59,13 @@ class Order < ActiveRecord::Base
     Pusher['orders'].trigger('purchased', {
       message: 'New Order Created..Refresh your browser to see it'
     })
-      #TODO Send email and sms to customer acknowledging order
   rescue Exception => e
     HealthyLunchUtils.log_error e.message,e
+  end
+
+  def notify_user
+    UserMailer.order_success(user,self).deliver
+    #TODO Send sms confirmation
   end
 
   def add_line_items_from_cart(cart)
