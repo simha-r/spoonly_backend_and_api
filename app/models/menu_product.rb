@@ -15,8 +15,8 @@ class MenuProduct < ActiveRecord::Base
   belongs_to :product
 
   CATEGORIES = ['lunch','dinner']
-  LUNCH_TIMES =['1200','1230','1330','1400','1430']
-  DINNER_TIMES =['2100','2200','2230','2330']
+  LUNCH_TIMES =['1200','1230','1300','1330','1400','1430']
+  DINNER_TIMES =['1930','2000','2030','2100','2130','2200','2230']
   LUNCH_START_TIME=12
   DINNER_START_TIME=19
 
