@@ -31,9 +31,7 @@ class Menu < ActiveRecord::Base
                     # products: lunch_products}
 
     products: menu_lunch_products.collect{|menu_product| menu_product.product.as_json.merge(menu_product_id:
-                                                                                              menu_product.id,
-                                                                                            sold_out: menu_product
-                                                                                            .sold_out)}}
+                                                                                              menu_product.id)}}
   end
 
   def show_dinner
