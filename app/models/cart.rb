@@ -30,7 +30,13 @@ class Cart < ActiveRecord::Base
   end
 
   def quantity_of_menu_product menu_product
-    line_items.where(menu_product_id: menu_product.id).first.quantity
+    line_item  = line_items.where(menu_product_id: menu_product.id).first
+    if line_item
+     line_item.quantity
+    else
+      0
+    end
+
   end
 
   def distinct_cart_count
