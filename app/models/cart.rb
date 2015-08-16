@@ -40,7 +40,7 @@ class Cart < ActiveRecord::Base
   end
 
   def distinct_cart_count
-    menu_products.select(:menu_id).distinct(:menu_id).count
+    line_items.count
   end
 
   def contains_menu_product? menu_product
