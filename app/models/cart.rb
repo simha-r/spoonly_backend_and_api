@@ -39,6 +39,10 @@ class Cart < ActiveRecord::Base
 
   end
 
+  def line_item_of menu_product
+    line_items.where(menu_product_id: menu_product.id).first
+  end
+
   def distinct_cart_count
     line_items.count
   end

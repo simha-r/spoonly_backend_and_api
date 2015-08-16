@@ -21,4 +21,13 @@ class LineItem < ActiveRecord::Base
 
   delegate :product, to: :menu_product
 
+
+  def decrement_count
+    if quantity==1
+      destroy
+    else
+      update_attributes(quantity: (quantity-1))
+    end
+  end
+
 end

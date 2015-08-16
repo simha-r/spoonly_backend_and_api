@@ -9,6 +9,4 @@
 
   - if params[:controller] == "customer/menus" && params[:action] == "lunch"
     .col-xs-4.checkout
-      = image_tag "cart.png"
-      %span.count= cart_count
-      = link_to 'Checkout',new_customer_order_path(menu_date: @menu_date), class: "btn btn-warning"
+      = render 'customer/shared/checkout',cart_count: cart_count

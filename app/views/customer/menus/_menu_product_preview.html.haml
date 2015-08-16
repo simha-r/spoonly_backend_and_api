@@ -5,14 +5,17 @@
   %span.menu-name= product.name
   -#TODO Add remote true to the below link and make the controller return javascript to update the view
   - if @cart.quantity_of_menu_product(menu_product) <= 0
-    = link_to 'Add',customer_line_items_path(menu_product_id: menu_product.id),method: :post, class: "pull-right btn btn-primary"
+    = link_to 'Add',customer_line_items_path(menu_product_id: menu_product.id),method: :post,
+    class: "pull-right btn btn-primary",remote: true
   - else
     .pull-right
       .minus
-        %i.fa.fa-minus
+        = link_to decrease_count_customer_line_item_path(@cart.line_item_of(menu_product)),method: :put,remote: true do
+          %i.fa.fa-minus
       .count
         %span= @cart.quantity_of_menu_product(menu_product) if @cart.contains_menu_product? menu_product
       .plus
-        %i.fa.fa-plus
+        = link_to customer_line_items_path(menu_product_id: menu_product.id),method: :post,remote: true do
+          %i.fa.fa-plus
   %p.menu-price= product.price
   %p.menu-desc= product.desc

@@ -25,7 +25,11 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :line_items,only: [:create]
+    resources :line_items,only: [:create,:destroy] do
+      member do
+        put :decrease_count
+      end
+    end
 
     resources :orders,only:[:new,:create] do
         collection do

@@ -1,6 +1,6 @@
-class Customer::LineItemsController < ApplicationController
+class Customer::LineItemsController < Customer::BaseController
   include CurrentCart
-  before_action :set_cart, only: [:create]
+  before_action :set_cart
 
   # POST /line_items
   # POST /line_items.json
@@ -11,7 +11,21 @@ class Customer::LineItemsController < ApplicationController
     respond_to do |format|
       if @line_item.save
         format.html { redirect_to request.referrer }
-        format.js   { render 'create.js' }
+        format.js   { render 'update.js' }
+      else
+        format.html { render action: 'new' }
+        format.json { render json: @line_item.errors,
+                             status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def decrease_count
+    @line_item = @cart.line_items.find params[:id]
+    respond_to do |format|
+      if @line_item.decrement_count
+        format.html { redirect_to request.referrer }
+        format.js   { render 'update.js' }
       else
         format.html { render action: 'new' }
         format.json { render json: @line_item.errors,
