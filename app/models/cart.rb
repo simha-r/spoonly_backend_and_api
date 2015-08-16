@@ -31,8 +31,10 @@ class Cart < ActiveRecord::Base
 
   def quantity_of_menu_product menu_product
     line_items.where(menu_product_id: menu_product.id).first.quantity
+  end
 
-
+  def distinct_cart_count
+    menu_products.select(:menu_id).distinct(:menu_id).count
   end
 
   def contains_menu_product? menu_product
@@ -45,5 +47,4 @@ class Cart < ActiveRecord::Base
       line_items.destroy_all
     end
   end
-
 end

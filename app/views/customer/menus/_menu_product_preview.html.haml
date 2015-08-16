@@ -4,8 +4,15 @@
 .menu-details
   %span.menu-name= product.name
   -#TODO Add remote true to the below link and make the controller return javascript to update the view
-  = link_to 'Add',customer_line_items_path(menu_product_id: menu_product.id),method: :post,
-  class: "pull-right btn btn-primary"
-  %span.pull-right= @cart.quantity_of_menu_product(menu_product) if @cart.contains_menu_product? menu_product
+  - if @cart.quantity_of_menu_product(menu_product) <= 0
+    = link_to 'Add',customer_line_items_path(menu_product_id: menu_product.id),method: :post, class: "pull-right btn btn-primary"
+  - else
+    .pull-right
+      .minus
+        %i.fa.fa-minus
+      .count
+        %span= @cart.quantity_of_menu_product(menu_product) if @cart.contains_menu_product? menu_product
+      .plus
+        %i.fa.fa-plus
   %p.menu-price= product.price
   %p.menu-desc= product.desc

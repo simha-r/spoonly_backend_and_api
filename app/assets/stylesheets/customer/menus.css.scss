@@ -124,6 +124,21 @@
       .menu-details {
         padding: 10px;
 
+        .minus,
+        .plus {
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          border: 1px solid #bcbcbc;
+          text-align: center;
+          display: inline-block;
+        }
+
+        .count {
+          margin: 0 15px;
+          display: inline-block;
+        }
+
         .menu-name,
         .menu-price,
         .menu-desc {

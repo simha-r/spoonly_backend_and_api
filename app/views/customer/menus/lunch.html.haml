@@ -1,6 +1,7 @@
 = title 'Lunch Menu'
 #menu_lunch
-  = render 'location', date: @menu.menu_date.strftime("%a %d,%b ")
+  - date = @menu.menu_date.present? ? @menu.menu_date.strftime("%a %d,%b ") : nil
+  = render 'location', date: date, cart_count: @cart.distinct_cart_count
   - if @menu.menu_date != Date.today
     = render 'customer/menus/menu_unavailable'
 
@@ -10,13 +11,7 @@
         .menu-card{'id'=>"menu_product_#{menu_product.id}"}
           = render 'customer/menus/menu_product_preview',menu_product: menu_product
 
-  -#.row-fluid
-    -#= link_to 'Checkout',new_customer_order_path(menu_date: @menu_date)
-
   :javascript
-     //$(window).load(function(){
-     //       $('#menu_unavailable_modal').modal('show');
-     //   });
      analytics.page('Lunch Menu');
      analytics.track('Signed Up', {
        plan: 'Startup',
