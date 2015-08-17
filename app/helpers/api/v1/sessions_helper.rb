@@ -6,6 +6,7 @@ module Api::V1::SessionsHelper
     if provider=='facebook'
       graph = Koala::Facebook::API.new(access_token)
       profile = graph.get_object("me")
+      @picture = graph.get_picture("me")
       @email = profile['email']
       @uid = profile['id']
       @name = profile['name']
@@ -19,6 +20,7 @@ module Api::V1::SessionsHelper
         @email = response['email']
         @uid = response['id']
         @name = response['name']
+        @picture = response['picture']
       end
     end
     if !@email.present?

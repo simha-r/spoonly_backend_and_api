@@ -64,23 +64,22 @@ class User < ActiveRecord::Base
       token = auth[:access_token]
       email = auth[:info][:email]
       name = auth[:info][:name]
+      pic_url = auth[:info][:pic_url]
     else
       provider = auth.provider
       uid = auth.uid
       token = auth.credentials.token
-      email = auth["info"]["email"]
+      email = auth[:info][:email]
       name = auth.info.name
+      pic_url = auth[:info][:image]
     end
-
     authorization = Authorization.where(:provider => provider, :uid => uid).first_or_initialize
-
     if authorization.user.blank?
       user = current_user || User.where('email = ?', email).first
       if user.blank?
         user = User.new
         user.password = Devise.friendly_token[0,10]
-        #TODO Put name in profile
-        user.create_profile(name: name)
+        user.create_profile(name: name,pic_url: pic_url)
         user.email = email
         user.skip_confirmation!
         user.confirm! if user.save

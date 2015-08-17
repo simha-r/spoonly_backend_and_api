@@ -2,12 +2,13 @@
 #
 # Table name: menu_products
 #
-#  id         :integer          not null, primary key
-#  menu_id    :integer
-#  product_id :integer
-#  category   :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id           :integer          not null, primary key
+#  menu_id      :integer
+#  product_id   :integer
+#  category     :string(255)
+#  created_at   :datetime
+#  updated_at   :datetime
+#  max_quantity :integer
 #
 
 class MenuProduct < ActiveRecord::Base

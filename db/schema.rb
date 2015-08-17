@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150817084107) do
+ActiveRecord::Schema.define(version: 20150817095808) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20150817084107) do
     t.datetime "updated_at"
     t.string   "phone_number_verification_code"
     t.integer  "phone_number_verify_tries"
+    t.string   "pic_url"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
