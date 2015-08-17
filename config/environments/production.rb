@@ -96,4 +96,7 @@ Rails.application.configure do
     :enable_starttls_auto => true
   }
 
+  # For speeding up requests pagespeed google etc
+  config.middleware.use Rack::Deflater
+
 end
