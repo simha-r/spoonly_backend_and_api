@@ -24,6 +24,7 @@ module Api::V1::SessionsHelper
     if !@email.present?
       raise 'Error getting user info from'+provider.to_s
     end
+    return true
   rescue Exception=>e
     HealthyLunchUtils.log_error e.message,e
     return false
