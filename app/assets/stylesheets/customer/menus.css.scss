@@ -1,11 +1,10 @@
 @import 'customer_common';
 
 .location-checkout-header {
-  @include make-xs-column(12,0);
+  @include make-xs-column(12,90px);
   border-bottom: 1px solid #ddd;
   padding-top: 16px;
   height: 55px;
-  margin-bottom: 30px;
 
   .location {
     text-align: center;
@@ -22,18 +21,20 @@
   .checkout {
     top: -7px;
     text-align: right;
+    padding-right: 0;
     a {
       margin-left: 50px;
       color: #fff;
     }
     span.count {
-      background-color: #ddd;
+      background-color: #666;
+      color: #fff;
       height: 25px;
       width: 25px;
       border-radius: 50%;
       position: absolute;
       text-align: center;
-      right: 150px;
+      right: 128px;
       top: -6px;
     }
   }
@@ -102,8 +103,10 @@
 
 
 #menu_lunch {
+
   .menu-row {
-    @include make-xs-column(12,45px);
+    @include make-xs-column(12,90px);
+    margin-top: 30px;
   }
 
   .menu-row h1 {
@@ -116,10 +119,6 @@
       margin-bottom: 15px;
       border-radius: 4px;
       box-shadow: 0px 10px 16px rgba(0,0,0,0.1);
-
-      .menu-img {
-        padding: 1px;
-      }
 
       .menu-details {
         padding: 10px;

@@ -61,6 +61,27 @@
         }
       }
 
+      &.address {
+        .new_address {
+          text-align: left;
+
+          .address_type {
+            label {
+              text-align: left;
+              padding-left: 0;
+            }
+
+            input[type="radio"] {
+              margin-right: 10px;
+            }
+          }
+
+          .submit {
+            padding-left: 15px;
+          }
+        }
+      }
+
       &.order_confirmation {
         /*
          *min-height: 420px;

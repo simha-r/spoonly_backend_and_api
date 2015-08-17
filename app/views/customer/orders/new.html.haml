@@ -47,6 +47,7 @@
         %p.title
           Please Verify mobile number
           %span.details= current_user.profile.phone_number
+
     %li.address
       %p.title{class: "#{(user_signed_in? && current_user.phone_number_verified) ? 'active' : ''}"}
         Delivery Address
@@ -59,7 +60,7 @@
               = hidden_field_tag :address_id
               = link_to 'Add Home Address','',class: 'add_home'
               = link_to 'Add Office Address','',class: 'add_office'
-              #confirm_address= link_to 'Proceed',''
+              #confirm_address= link_to 'Proceed','', class: "btn btn-warning"
           #selected_address
           - if !current_user.addresses.present?
             - show_new_address = true
@@ -67,55 +68,8 @@
               = link_to 'Add Home Address'
             .add_home
               = link_to 'Add Office Address'
-          .new_address{'style'=>"display: #{show_new_address ? true : 'none' }"}
-
-
-            = form_tag customer_addresses_path,remote: true, class: "form-horizontal" do
-              .form-group
-                = label_tag "Address Type", nil, class: "control-label col-xs-6 col-md-4"
-                .col-xs-6.col-md-4
-                  %label{for: :address_type_office, class: "control-label col-xs-6 pull-left"}
-                    = radio_button_tag 'address_type','office',default: true
-                    Office
-                  %label{for: :address_type_home, class: "control-label col-xs-6 pull-left"}
-                    = radio_button_tag 'address_type','home', class: "control-label"
-                    Home
-
-              .form-group
-                = label_tag :company, nil, class: "control-label col-xs-6 col-md-4"
-                .col-xs-6.col-md-4
-                  = text_field_tag :company, nil, class: "form-control"
-
-              .form-group
-                = label_tag :flat, nil, class: "control-label col-xs-6 col-md-4"
-                .col-xs-4.col-md-2
-                  = text_field_tag :flat, nil, class: "form-control"
-
-              .form-group
-                = label_tag :floor, nil, class: "control-label col-xs-6 col-md-4"
-                .col-xs-4.col-md-2
-                  = text_field_tag :floor, nil, class: "form-control"
-
-              .form-group
-                = label_tag :building, nil, class: "control-label col-xs-6 col-md-4"
-                .col-xs-6.col-md-4
-                  = text_field_tag :building, nil, class: "form-control"
-
-              .form-group
-                = label_tag :address_details, nil, class: "control-label col-xs-6 col-md-4"
-                .col-xs-6.col-md-4
-                  = text_field_tag :address_details, nil, class: "form-control"
-
-              .form-group
-                = label_tag :landmark, nil, class: "control-label col-xs-6 col-md-4"
-                .col-xs-6.col-md-4
-                  = text_field_tag :landmark, nil, class: "form-control"
-
-              .form-group
-                = hidden_field_tag :is_default,true
-              .form-group
-                .col-xs-offset-6.col-md-offset-4
-                  = submit_tag 'Deliver to this address', class: "btn btn-warning"
+          .new_address{'style'=>"display: #{show_new_address ? '' : 'none' }"}
+            = render 'new_address_form'
 
     %li.order_confirmation
       - can_order = user_signed_in? && current_user.phone_number_verified
