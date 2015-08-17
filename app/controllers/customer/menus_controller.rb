@@ -22,6 +22,7 @@ class Customer::MenusController < ApplicationController
       @menu = Menu.where(menu_date: Date.tomorrow).first
       @menu_date = Date.tomorrow
     end
+    @cart.set_menu @menu
   end
 
   def dinner
@@ -33,6 +34,7 @@ class Customer::MenusController < ApplicationController
       @menu = Menu.where(menu_date: Date.tomorrow).first
       @menu_date = Date.tomorrow
     end
+    @cart.set_menu @menu
   end
 
   private

@@ -22,6 +22,8 @@ class Customer::OrdersController < ApplicationController
   # POST /orders.json
   def create
     @order = current_user.orders.build(order_params)
+    menu_date = @cart.menu.menu_date
+    @order.delivery_time = "#{menu_date.year}-#{menu_date.month}-#{menu_date.day}-"+order_params[:delivery_time]
     @order.add_line_items_from_cart(@cart)
     @order.category = @cart.category
     if @order.save

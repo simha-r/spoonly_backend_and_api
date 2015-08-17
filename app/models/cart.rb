@@ -6,12 +6,14 @@
 #  category   :string(255)
 #  created_at :datetime
 #  updated_at :datetime
+#  menu_id    :integer
 #
 
 class Cart < ActiveRecord::Base
 
   has_many :line_items,dependent: :destroy
   has_many :menu_products,through: :line_items
+  belongs_to :menu
 
   def add_menu_product(menu_product_id)
     current_item = line_items.find_by(menu_product_id: menu_product_id)
@@ -57,4 +59,9 @@ class Cart < ActiveRecord::Base
       line_items.destroy_all
     end
   end
+
+  def set_menu menu
+    update_attributes(menu_id: menu.id)
+  end
+
 end
