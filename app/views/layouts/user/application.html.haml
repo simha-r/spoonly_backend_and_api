@@ -7,7 +7,6 @@
     %title= content_for?(:title) ? yield(:title) : "Spoonly"
     %meta{:content => "#{content_for?(:description) ? yield(:description) : "Rails Bootstrap"}", :name => "description"}/
     = stylesheet_link_tag 'customer', media: 'all'
-    = javascript_include_tag 'https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places'
     = javascript_include_tag 'customers/application',async: Rails.env.production?,cache: Rails.env.production?
     = csrf_meta_tags
     :javascript
