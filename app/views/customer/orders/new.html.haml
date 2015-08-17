@@ -50,15 +50,15 @@
     %li.address
       %p.title{class: "#{(user_signed_in? && current_user.phone_number_verified) ? 'active' : ''}"}
         Delivery Address
-        - if user_signed_in?
+        - if user_signed_in? && current_user.phone_number_verified
           - if current_user.addresses.present?
             .addresses
               - current_user.addresses.each do |address|
                 .row
                   = render 'customer/addresses/show',address: address
               = hidden_field_tag :address_id
-              = link_to 'Add Home Address','',class: 'add_office'
-              = link_to 'Add Office Address','',class: 'add_home'
+              = link_to 'Add Home Address','',class: 'add_home'
+              = link_to 'Add Office Address','',class: 'add_office'
               #confirm_address= link_to 'Proceed',''
           #selected_address
           - if !current_user.addresses.present?
@@ -128,16 +128,32 @@
   })
 
   $('.add_office').click(function(){
-    $('.new_address').show()
+    $('.new_address').show();
+    $('#address_type_office').click();
     $('.addresses').hide();
     return false;
   })
 
   $('.add_home').click(function(){
-    $('.new_address').show()
+    $('.new_address').show();
+    $('#address_type_home').click();
     $('.addresses').hide();
     return false;
   })
+
+    $('#address_type_home').click(function(){
+      $('#company').hide()
+      $('label[for="company"]').hide()
+      $('#flat').show()
+      $('label[for="flat"]').show()
+    })
+
+    $('#address_type_office').click(function(){
+      $('#flat').hide()
+      $('label[for="flat"]').hide()
+      $('#company').show()
+      $('label[for="company"]').show()
+    })
 
   $('.select-address').click(function(){
     $('#order_address_id').val($(this).data().addressId)
