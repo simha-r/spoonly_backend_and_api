@@ -17,7 +17,7 @@ module Api::V1::SessionsHelper
       if response.code == 200
         response = JSON.parse(response.body)
         @email = response['email']
-        @uid = response['uid']
+        @uid = response['id']
         @name = response['name']
       end
     end
