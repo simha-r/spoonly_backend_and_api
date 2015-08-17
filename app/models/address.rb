@@ -41,7 +41,6 @@ class Address < ActiveRecord::Base
     where(address_type: 'home',is_default: true).first
   end
 
-  validates :is_default,:address_details,presence: true
   validates :address_type,presence: true,inclusion: {in: ['home','office']}
 
 
