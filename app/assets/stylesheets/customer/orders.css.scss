@@ -26,6 +26,12 @@
         text-align: left;
         font-weight: 700;
         text-transform: uppercase;
+
+        span.details {
+          text-transform: none;
+          font-weight: 400;
+          padding-left: 100px;
+        }
       }
 
       .active {

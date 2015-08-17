@@ -12,8 +12,10 @@
               - resource_class.omniauth_providers.each do |provider|
                 = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
     - else
-      %p.title
-        = current_user.name
+      %li.sign-in
+        %p.title
+          Please login before continuing
+          %span.details= current_user.name
 
 
     - if !user_signed_in? || !current_user.phone_number_verified
@@ -41,7 +43,10 @@
             -#- can_order = true
             -#= render 'customer/orders/final_order', :can_order => can_order
     - else
-      %p= current_user.profile.phone_number
+      %li.phone_number_verification
+        %p.title
+          Please Verify mobile number
+          %span.details= current_user.profile.phone_number
     %li.address
       %p.title{class: "#{(user_signed_in? && current_user.phone_number_verified) ? 'active' : ''}"}
         Delivery Address
@@ -63,26 +68,54 @@
             .add_home
               = link_to 'Add Office Address'
           .new_address{'style'=>"display: #{show_new_address ? true : 'none' }"}
-            = form_tag customer_addresses_path,remote: true do
-              Office
-              = radio_button_tag 'address_type','office',default: true
-              Home
-              = radio_button_tag 'address_type','home'
-              = label_tag :company
-              = text_field_tag :company
-              = label_tag :flat
-              = text_field_tag :flat
-              = label_tag :floor
-              = text_field_tag :floor
-              = label_tag :building
-              = text_field_tag :building
-              = label_tag :address_details
-              = text_field_tag :address_details
-              = label_tag :landmark
-              = text_field_tag :landmark
-              = hidden_field_tag :is_default,true
 
-              = submit_tag 'Deliver to this address'
+
+            = form_tag customer_addresses_path,remote: true, class: "form-horizontal" do
+              .form-group
+                = label_tag "Address Type", nil, class: "control-label col-xs-6 col-md-4"
+                .col-xs-6.col-md-4
+                  %label{for: :address_type_office, class: "control-label col-xs-6 pull-left"}
+                    = radio_button_tag 'address_type','office',default: true
+                    Office
+                  %label{for: :address_type_home, class: "control-label col-xs-6 pull-left"}
+                    = radio_button_tag 'address_type','home', class: "control-label"
+                    Home
+
+              .form-group
+                = label_tag :company, nil, class: "control-label col-xs-6 col-md-4"
+                .col-xs-6.col-md-4
+                  = text_field_tag :company, nil, class: "form-control"
+
+              .form-group
+                = label_tag :flat, nil, class: "control-label col-xs-6 col-md-4"
+                .col-xs-4.col-md-2
+                  = text_field_tag :flat, nil, class: "form-control"
+
+              .form-group
+                = label_tag :floor, nil, class: "control-label col-xs-6 col-md-4"
+                .col-xs-4.col-md-2
+                  = text_field_tag :floor, nil, class: "form-control"
+
+              .form-group
+                = label_tag :building, nil, class: "control-label col-xs-6 col-md-4"
+                .col-xs-6.col-md-4
+                  = text_field_tag :building, nil, class: "form-control"
+
+              .form-group
+                = label_tag :address_details, nil, class: "control-label col-xs-6 col-md-4"
+                .col-xs-6.col-md-4
+                  = text_field_tag :address_details, nil, class: "form-control"
+
+              .form-group
+                = label_tag :landmark, nil, class: "control-label col-xs-6 col-md-4"
+                .col-xs-6.col-md-4
+                  = text_field_tag :landmark, nil, class: "form-control"
+
+              .form-group
+                = hidden_field_tag :is_default,true
+              .form-group
+                .col-xs-offset-6.col-md-offset-4
+                  = submit_tag 'Deliver to this address', class: "btn btn-warning"
 
     %li.order_confirmation
       - can_order = user_signed_in? && current_user.phone_number_verified
