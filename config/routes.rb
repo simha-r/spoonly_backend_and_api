@@ -69,6 +69,7 @@ Rails.application.routes.draw do
         post :finish
       end
       resources :addresses,only:[:index,:create,:update,:destroy]
+      resources :feedbacks,only:[:create]
     end
 
   end

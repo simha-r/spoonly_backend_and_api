@@ -35,6 +35,7 @@ class User < ActiveRecord::Base
   has_many :orders
   has_one :profile, dependent: :destroy
   has_one :wallet, dependent: :destroy
+  has_many :feedbacks
 
 
   before_save :ensure_authentication_token

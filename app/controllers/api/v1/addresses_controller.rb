@@ -1,6 +1,6 @@
 class Api::V1::AddressesController < Api::V1::BaseController
 
-
+  before_action :authenticate_user!
   before_filter :set_address,except: [:index,:create]
 
   def create
