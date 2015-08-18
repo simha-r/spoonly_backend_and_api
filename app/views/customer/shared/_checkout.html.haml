@@ -1,3 +1,7 @@
-= image_tag "cart.png"
-%span.count= cart_count
-= link_to 'Proceed',new_customer_order_path(menu_date: @menu_date), class: "btn btn-warning"
+-#TODO
+- if cart_count==0
+  = image_tag "cart.png"
+- else
+  = image_tag "cart.png"
+  %span.count= cart_count
+  = link_to 'Proceed',new_customer_order_path(menu_date: @menu_date), class: "btn btn-warning"
