@@ -1,6 +1,6 @@
 = title 'Lunch Menu'
 #menu_lunch
-  = render 'location',category: 'lunch', cart_count: @cart.distinct_cart_count
+  = render 'location',category: 'lunch'
   - if @menu.menu_date != Date.today
     = render 'customer/menus/menu_unavailable'
 

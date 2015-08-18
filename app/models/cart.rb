@@ -64,4 +64,12 @@ class Cart < ActiveRecord::Base
     update_attributes(menu_id: menu.id)
   end
 
+  def total_price
+    total = 0
+    line_items.each do |li|
+      total = total + li.price*li.quantity
+    end
+    total
+  end
+
 end

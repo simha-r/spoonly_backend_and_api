@@ -1,7 +1,10 @@
 -#TODO
-- if cart_count==0
+- if @cart.distinct_cart_count==0
+  No items added
+  |
   = image_tag "cart.png"
 - else
   = image_tag "cart.png"
-  %span.count= cart_count
+  %span.count= @cart.distinct_cart_count
+  %span.fa.fa-inr= @cart.total_price
   = link_to 'Proceed',new_customer_order_path(menu_date: @menu_date), class: "btn btn-warning"
