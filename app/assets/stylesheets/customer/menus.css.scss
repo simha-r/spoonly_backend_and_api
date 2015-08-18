@@ -9,6 +9,11 @@
   .location {
     text-align: center;
 
+    .fa-map-marker {
+      font-size: 16px;
+      color: #f19140;
+    }
+
     p {
       display: inline;
     }
@@ -21,21 +26,33 @@
   .checkout {
     top: -7px;
     text-align: right;
-    padding-right: 0;
+
+    img {
+      width: 32px;
+    }
+
     a {
       margin-left: 50px;
       color: #fff;
     }
+
     span.count {
-      background-color: #666;
-      color: #fff;
-      height: 25px;
-      width: 25px;
-      border-radius: 50%;
       position: absolute;
+      left: 115px;
+      top: -4px;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
       text-align: center;
-      right: 128px;
-      top: -6px;
+      line-height: 20px;
+      background-color: #666;
+      font-size: 12px;
+      color: #fff;
+    }
+
+    span.fa.fa-inr {
+      margin-left: 20px;
+      font-size: 16px;
     }
   }
 }
@@ -117,7 +134,8 @@
 
   .menu-row {
     @include make-xs-column(12,90px);
-    margin-top: 30px;
+    padding-top: 30px;
+    background-color: #f7f5f9;
   }
 
   .menu-row h1 {
@@ -130,6 +148,11 @@
       margin-bottom: 15px;
       border-radius: 4px;
       box-shadow: 0px 10px 16px rgba(0,0,0,0.1);
+
+      .menu-img img {
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+      }
 
       .menu-details {
         padding: 10px;
@@ -158,6 +181,16 @@
         .menu-price,
         .menu-desc {
           margin-bottom: 0;
+        }
+
+        .menu-name,
+        .menu-price {
+          font-family: 'Dosis', sans-serif;
+          font-weight: 300;
+          font-style: normal;
+          /* text-decoration: none; */
+          letter-spacing: 1px;
+          font-size: 16px;
         }
 
       }

@@ -8,9 +8,20 @@
         %p.title{class:(user_signed_in? ? '' : 'active')}
           Please login before continuing
           .content
-            - if devise_mapping.omniauthable?
-              - resource_class.omniauth_providers.each do |provider|
-                = link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
+            .col-xs-12.col-sm-offset-5.col-sm-6.col-md-offset-5.col-md-6
+              - if devise_mapping.omniauthable?
+                - resource_class.omniauth_providers.each do |provider|
+                  .col-xs-12
+                    = link_to omniauth_authorize_path(resource_name, provider) do
+                      - if provider == :facebook
+                        .social-auth-button.fb-button
+                          %i.fa.fa-facebook
+                          %span Facebook
+                      - elsif provider == :google
+                        .social-auth-button.google-button
+                          %i.fa.fa-google
+                          %span Google
+                    -#= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider)
     - else
       %li.sign-in
         %p.title

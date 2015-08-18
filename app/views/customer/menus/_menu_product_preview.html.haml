@@ -2,7 +2,9 @@
 .menu-img
   = image_tag "menu-1.jpg", class: "img-responsive"
 .menu-details
-  %span.menu-name= product.name
+  -# veg or non-veg
+  - product_type = product.vegetarian ? 'Veg' : 'Non Veg'
+  %span.menu-name= "#{product.name} (#{product_type})"
   -#TODO Add remote true to the below link and make the controller return javascript to update the view
   - if @cart.quantity_of_menu_product(menu_product) <= 0
     = link_to 'Add',customer_line_items_path(menu_product_id: menu_product.id),method: :post,
@@ -17,5 +19,5 @@
       .plus
         = link_to customer_line_items_path(menu_product_id: menu_product.id),method: :post,remote: true do
           %i.fa.fa-plus
-  %p.menu-price= product.price
+  %p.menu-price= "Rs. #{product.price}"
   %p.menu-desc= product.desc

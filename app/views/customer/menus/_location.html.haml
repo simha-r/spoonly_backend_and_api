@@ -10,6 +10,7 @@
         %p= date.strftime("%a %d,%b ")
   .col-xs-4.location
     - if @locality.present?
+      %i.fa.fa-map-marker
       %p= @locality
       = link_to "Change", main_customer_homes_path,data: { no_turbolink: true }
 
