@@ -1,7 +1,6 @@
 = title 'Lunch Menu'
 #menu_lunch
-  - date = @menu.menu_date.present? ? @menu.menu_date.strftime("%a %d,%b ") : nil
-  = render 'location', date: date, cart_count: @cart.distinct_cart_count
+  = render 'location',category: 'lunch', cart_count: @cart.distinct_cart_count
   - if @menu.menu_date != Date.today
     = render 'customer/menus/menu_unavailable'
 
