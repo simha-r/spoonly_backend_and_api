@@ -5,13 +5,13 @@
     .col-xs-12
       .col-md-offset-3.col-md-6.menu-container
         .col-xs-12.col-md-6
-          .lunch
+          .lunch{'style'=>"border: 2px solid rgba(256,256,256,.6)"}
             = link_to "Lunch", lunch_customer_menus_path
             .separator
             %p.time 12pm | 3pm
 
         .col-xs-12.col-md-6
-          .dinner
+          .dinner{'style'=>"border: 2px solid rgba(256,256,256,.6)"}
             = link_to "Dinner", dinner_customer_menus_path
             .separator
             %p.coming-soon Coming Soon
