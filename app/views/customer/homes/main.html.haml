@@ -4,12 +4,12 @@
   .section-one
     .col-xs-12
       .text-container.text-center
-        %h2{'style'=> "font-size: 28px;"} Reclaim
-        %h1{'style'=> "font-size: 38px; font-family: Comic Sans MS"} Mealtime
+        %h2{'style'=> "font-size: 31px;"} Reclaim
+        %h1{'style'=> "font-size: 44px; "} Mealtime
         %br
         -#  TODO Make below font size as 12 px
-        %p{'style'=> "font-size: 14px;"}  Fresh. Wholesome. Chef-made
-        %p{'style'=> "font-size: 14px;"}  Delivered to your desk.
+        %p{'style'=> "font-size: 15px;"}  Fresh. Wholesome. Chef-made
+        %p{'style'=> "font-size: 15px;"}  Delivered to your desk.
         %br
         .row
           .col-xs-1
@@ -68,7 +68,8 @@
                 console.log("Distance: " + distance )
                 console.log("Duration: " + duration )
                 $('#locationForm').find('#distance').val(distance);
-
+                $('#locationForm').submit();
+                return false;
 
               } else {
                   alert("Unable to find the distance via road.");
