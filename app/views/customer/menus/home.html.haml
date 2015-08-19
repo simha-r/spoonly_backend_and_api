@@ -16,3 +16,10 @@
             .separator
             %p.coming-soon Coming Soon
   = render 'customer/homes/how_it_works'
+-#%a{"data-behavior" => "remote", "data-style" => "light", "data-text" => "Checkout with Instamojo",
+-#"data-token" => "1de0bcd6325cee2bd15a1beb86d224f8","data-amount"=>"200","intent"=>"buy", :href => "https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-40e3a/", :rel => "im-checkout"}
+-#%script{:src => "https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"}
+
+%a{"data-behavior" => "link", "data-style" => "light", "data-text" => "Checkout with Instamojo",
+"data-token" => "1de0bcd6325cee2bd15a1beb86d224f8", :href => "https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-40e3a/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=#{current_user.email}&data_name=#{current_user.name}&data_phone=#{current_user.phone_number}&intent=buy&data_Field_35054=#{current_user.id}",:rel => "im-checkout"}
+%script{:src => "https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"}

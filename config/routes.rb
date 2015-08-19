@@ -42,14 +42,18 @@ Rails.application.routes.draw do
       post :finish
     end
 
-    resources :addresses do
+    resources :addresses
 
+    resource :wallet,only:[:show] do
+      get :recharge
+      post :recharge
+      get :successful_recharge
     end
 
   end
 
   namespace :api, defaults: {format: 'json'} do
-    scope module: :v1, constraints: ApiConstraints.new(version: 1,default: true) do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1) do
       resources :products do
         collection do
           get :lunch
@@ -58,7 +62,10 @@ Rails.application.routes.draw do
       resources :line_items
       resources :orders
       resources :sessions
-      resource :wallets,only:[:show]
+      resource :wallet,only:[:show] do
+        get :recharge
+        post :recharge
+      end
       resource :accounts,only:[:show]
       resource :menu do
         get :lunch

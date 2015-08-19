@@ -107,6 +107,10 @@ class User < ActiveRecord::Base
     profile.update_attributes(phone_number: phone_number)
   end
 
+  def add_to_wallet amount
+    wallet.add_amount amount
+  end
+
   private
 
   def generate_authentication_token

@@ -37,6 +37,6 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'social-share-button'
 gem 'spring',        group: :development
 gem 'turbolinks'
+gem 'typhoeus'
 gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate', '~> 3.0.6'
-
