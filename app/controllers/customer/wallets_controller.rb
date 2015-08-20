@@ -1,5 +1,5 @@
 class Customer::WalletsController < Customer::BaseController
-
+  require 'typhoeus'
 before_action :authenticate_user!,except: [:recharge]
 
   def show
@@ -14,16 +14,16 @@ before_action :authenticate_user!,except: [:recharge]
     HealthyLunchUtils.log_info "Params are #{params.inspect}"
 
     url = "https://www.instamojo.com/api/1.1/payments/"+payment_id+"/"
-    response = Typhoeus.get(url,headers: {'X-Auth-Token'=>ENV['INSTAMOJO_AUTH_TOKEN'],'Accept'=>'application/vnd.spoonly.v1','X-Api-Key'=>ENV['INSTAMOJO_API_KEY']})
+    response = ::Typhoeus.get(url,headers: {'X-Auth-Token'=>ENV['INSTAMOJO_AUTH_TOKEN'],'X-Api-Key'=>ENV['INSTAMOJO_API_KEY']})
     HealthyLunchUtils.log_info "Response code is #{response.code}"
     HealthyLunchUtils.log_info "Response  is #{response.inspect}"
 
     if response.code==200
       response = JSON.parse(response.response_body)
-      HealthyLunchUtils.log_info "JSON Response  is #{response.inspect}"
       if response['success']==true
         amount = response['payment']['amount']
-        user_id = response['payment']['user_id']
+        user_id = response['payment']['custom_fields']['Field_35054']['value']
+        HealthyLunchUtils.log_info "User Id  is #{user_id}"
         @user = User.find user_id
         if @user.add_to_wallet amount
          return redirect_to successful_recharge_customer_wallet_path

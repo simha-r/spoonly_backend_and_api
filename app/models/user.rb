@@ -108,6 +108,7 @@ class User < ActiveRecord::Base
   end
 
   def add_to_wallet amount
+    create_wallet if !wallet
     wallet.add_amount amount
   end
 

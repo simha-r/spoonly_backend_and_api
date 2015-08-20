@@ -48,6 +48,7 @@ Rails.application.routes.draw do
       get :recharge
       post :recharge
       get :successful_recharge
+      get :failed_recharge
     end
 
   end
