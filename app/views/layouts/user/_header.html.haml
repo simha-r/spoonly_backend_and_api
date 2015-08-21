@@ -8,4 +8,7 @@
           = image_tag 'spoonly_text.png'
       .col-xs-4.login
         %ul
-          %li= link_to "My Account", "#"
+          - if user_signed_in?
+            %li= link_to "My Account",customer_account_path
+          - else
+            %li= link_to 'Sign in'

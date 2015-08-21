@@ -6,6 +6,10 @@ before_action :authenticate_user!,except: [:recharge]
     render json: current_user.wallet.balance
   end
 
+  def add_money
+    
+  end
+
   def recharge
     #TODO This url can be refreshed to...so customer may add same money multiple times...store payment_id in wallet
     # record and then check if already present

@@ -42,11 +42,13 @@ Rails.application.routes.draw do
       post :finish
     end
 
+    resource :account,only:[:show]
+
     resources :addresses
 
     resource :wallet,only:[:show] do
       get :recharge
-      post :recharge
+      get :add_money
       get :successful_recharge
       get :failed_recharge
     end
