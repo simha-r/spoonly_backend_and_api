@@ -25,7 +25,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
   end
 
   def custom_line_item_params(par = {})
-    par.permit(:menu_product_id)
+    par.permit(:menu_product_id,:quantity)
   end
 
   def line_item_params #this is the default one, without parameters
