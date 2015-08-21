@@ -17,8 +17,9 @@
 
 class Product < ActiveRecord::Base
 
-  has_attached_file :photo, :styles => { :medium => "300x300>", :thumb => "100x100>" },
-                    :default_url => "/images/:style/missing.png"
+  has_attached_file :photo,:convert_options => { :mobile => "-strip -quality 10" },
+                    :styles => { :medium => "300x300>", :mobile => "4386*2529>" },
+                    :default_url => "/images/:style/missing.png",processors: [:thumbnail, :paperclip_optimizer]
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
 
@@ -37,6 +38,6 @@ class Product < ActiveRecord::Base
   end
 
   def photo_url
-    photo.url
+    photo.url :mobile
   end
 end
