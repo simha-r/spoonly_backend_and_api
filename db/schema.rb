@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150819141619) do
+ActiveRecord::Schema.define(version: 20150822122836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -40,11 +40,20 @@ ActiveRecord::Schema.define(version: 20150819141619) do
     t.datetime "updated_at"
   end
 
+  create_table "card_transactions", force: true do |t|
+    t.string   "transaction_id"
+    t.string   "amount"
+    t.string   "payment_gateway"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "carts", force: true do |t|
     t.string   "category"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "menu_id"
+    t.datetime "expiry_time"
   end
 
   create_table "company_users", force: true do |t|
@@ -71,6 +80,31 @@ ActiveRecord::Schema.define(version: 20150819141619) do
   end
 
   add_index "company_users_roles", ["company_user_id", "role_id"], name: "index_company_users_roles_on_company_user_id_and_role_id", using: :btree
+
+  create_table "credits", force: true do |t|
+    t.integer  "wallet_id"
+    t.float    "amount"
+    t.string   "latest_wallet_balance"
+    t.string   "credit_type"
+    t.integer  "payment_mechanism_id"
+    t.string   "payment_mechanism_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "credits", ["wallet_id"], name: "index_credits_on_wallet_id", using: :btree
+
+  create_table "debits", force: true do |t|
+    t.integer  "wallet_id"
+    t.float    "amount"
+    t.string   "latest_wallet_balance"
+    t.integer  "order_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "debits", ["order_id"], name: "index_debits_on_order_id", using: :btree
+  add_index "debits", ["wallet_id"], name: "index_debits_on_wallet_id", using: :btree
 
   create_table "delivery_executives", force: true do |t|
     t.string   "name"

@@ -107,9 +107,9 @@ class User < ActiveRecord::Base
     profile.update_attributes(phone_number: phone_number)
   end
 
-  def add_to_wallet amount
+  def add_to_wallet amount,payment_id,payment_gateway
     create_wallet if !wallet
-    wallet.add_amount amount
+    wallet.add_card_amount amount,payment_id,payment_gateway
   end
 
   private

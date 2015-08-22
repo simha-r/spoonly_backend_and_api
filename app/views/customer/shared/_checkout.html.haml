@@ -7,4 +7,4 @@
   = image_tag "cart.png"
   %span.count= @cart.distinct_cart_count
   %span.fa.fa-inr= @cart.total_price
-  = link_to 'Proceed >',new_customer_order_path(menu_date: @menu_date), class: "btn btn-warning"
+  = link_to 'Proceed >',new_customer_order_path, class: "btn btn-warning"

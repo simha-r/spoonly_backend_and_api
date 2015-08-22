@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     end
 
     resources :orders,only:[:new,:create] do
-        collection do
+        member do
           get :success
         end
     end

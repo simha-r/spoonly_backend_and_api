@@ -22,6 +22,7 @@ class Order < ActiveRecord::Base
   belongs_to :address
   belongs_to :user
   belongs_to :delivery_executive
+  has_one :wallet_item
 
   validates_presence_of :address_id, :user_id, :delivery_time, :category
   validates_presence_of :category, in: MenuProduct::CATEGORIES

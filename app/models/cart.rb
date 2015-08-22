@@ -17,7 +17,7 @@ class Cart < ActiveRecord::Base
 
   def add_menu_product(menu_product_id)
     current_item = line_items.find_by(menu_product_id: menu_product_id)
-    set_category MenuProduct.find(menu_product_id).category
+    set_category MenuProduct.find(menu_product_id)
     if current_item
       current_item.quantity += 1
     else
@@ -53,15 +53,28 @@ class Cart < ActiveRecord::Base
     line_items.where(menu_product_id: menu_product.id).first
   end
 
-  def set_category line_item_category
+  def set_category menu_product
+    menu = menu_product.menu
+    line_item_category = menu_product.category
     if category!=line_item_category
-      update_attributes(category: line_item_category)
-      line_items.destroy_all
+      set_menu_and_category menu,line_item_category
     end
   end
 
-  def set_menu menu
-    update_attributes(menu_id: menu.id)
+  def set_menu_and_category menu,category
+    if category=='lunch'
+      expiry_time = menu.lunch_order_end_time
+    elsif category=='dinner'
+      expiry_time = menu.dinner_order_end_time
+    end
+    if self.category!=category
+      clear_line_items
+    end
+    update_attributes(menu_id: menu.id,expiry_time: expiry_time,category: category)
+  end
+
+  def expired?
+    Time.now > expiry_time
   end
 
   def total_price
@@ -70,6 +83,10 @@ class Cart < ActiveRecord::Base
       total = total + li.price*li.quantity
     end
     total
+  end
+
+  def clear_line_items
+    line_items.destroy_all
   end
 
 end

@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: credits
+#
+#  id                    :integer          not null, primary key
+#  wallet_id             :integer
+#  amount                :float
+#  latest_wallet_balance :string(255)
+#  card_transaction_id   :integer
+#  credit_type           :string(255)
+#  created_at            :datetime
+#  updated_at            :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  wallet_id: 
+  amount: 1.5
+  latest_wallet_balance: MyString
+  card_transaction_id: 
+  credit_type: MyString
+
+two:
+  wallet_id: 
+  amount: 1.5
+  latest_wallet_balance: MyString
+  card_transaction_id: 
+  credit_type: MyString

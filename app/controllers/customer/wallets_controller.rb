@@ -29,7 +29,7 @@ before_action :authenticate_user!,except: [:recharge]
         user_id = response['payment']['custom_fields']['Field_35054']['value']
         HealthyLunchUtils.log_info "User Id  is #{user_id}"
         @user = User.find user_id
-        if @user.add_to_wallet amount
+        if @user.add_to_wallet amount,payment_id,'instamojo'
          return redirect_to successful_recharge_customer_wallet_path
         else
           return redirect_to failed_recharge_customer_wallet_path

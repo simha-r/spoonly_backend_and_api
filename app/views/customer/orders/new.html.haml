@@ -46,9 +46,8 @@
               = form_tag finish_customer_number_verifications_path, class: "form-horizontal" do
                 .form-group
                   = number_field_tag 'verification_code', nil, class: "form-control"
-                  = hidden_field_tag "menu_date", params[:menu_date]
                   = submit_tag 'Verify', class: "btn btn-warning"
-                %p.text-danger Please enter the codeceived
+                %p.text-danger Please enter the code received
             .row.errors#wrong_code{style: 'display: none'}
           -##final_order{style: 'display: none'}
             -#- can_order = true

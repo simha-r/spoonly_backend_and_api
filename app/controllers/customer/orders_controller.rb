@@ -32,7 +32,7 @@ class Customer::OrdersController < ApplicationController
       session[:cart_id] = nil
       @order.start_process!
       # OrderNotifier.received(@order).deliver
-      redirect_to success_customer_orders_path,notice: 'Your order has been created !'
+      redirect_to success_customer_order_path @order,notice: 'Your order has been created !'
     else
        render action: 'new'
     end
