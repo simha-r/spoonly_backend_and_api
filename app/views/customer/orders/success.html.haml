@@ -3,5 +3,8 @@
 
 Your order has been successfully placed . Sit back and relax while we prepare your meal !
 
-
-
+= "Total Price #{@order.total_price}"
+- if @order.cash_to_pay==0
+  = "Rs #{@order.prepaid_amount} will be deducted from your account"
+- else
+  = "Please pay Rs #{@order.cash_to_pay} at the time of delivery"

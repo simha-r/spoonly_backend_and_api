@@ -27,10 +27,6 @@ class Cart < ActiveRecord::Base
     current_item
   end
 
-  def total_price
-    line_items.to_a.sum { |item| item.total_price }
-  end
-
   def quantity_of_menu_product menu_product
     line_item  = line_items.where(menu_product_id: menu_product.id).first
     if line_item

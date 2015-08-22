@@ -5,7 +5,7 @@ class Customer::OrdersController < ApplicationController
   before_action :authenticate_user!,except: [:new]
 
   before_action :set_cart, only: [:new, :create]
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy,:success]
   helper_method :resource_name, :resource_class, :resource, :devise_mapping
 
 

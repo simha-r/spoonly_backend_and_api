@@ -24,5 +24,12 @@ class Wallet < ActiveRecord::Base
     end
   end
 
+  def debit_amount_for_order amount,order
+    new_balance = self.balance.to_f - amount.to_f
+    if debits.create(amount: amount,order_id: order.id,latest_wallet_balance: new_balance)
+      update_attributes!(balance: new_balance)
+    end
+  end
+
 
 end

@@ -22,7 +22,7 @@ class Order < ActiveRecord::Base
   belongs_to :address
   belongs_to :user
   belongs_to :delivery_executive
-  has_one :wallet_item
+  has_one :debit
 
   validates_presence_of :address_id, :user_id, :delivery_time, :category
   validates_presence_of :category, in: MenuProduct::CATEGORIES
@@ -37,7 +37,7 @@ class Order < ActiveRecord::Base
     state :delivered
     state :cancelled
 
-    event :start_process,after: [:notify_kitchen,:notify_user] do
+    event :start_process,after: [:notify_kitchen,:notify_user],before:[:calculate_amount_to_pay] do
       transitions from: :new, to: :pending
     end
 
@@ -54,6 +54,23 @@ class Order < ActiveRecord::Base
     end
 
 
+  end
+
+  def calculate_amount_to_pay
+    if total_price >= user.wallet.balance
+      debit_amount = user.wallet.balance
+    else
+      debit_amount = total_price
+    end
+    user.wallet.debit_amount_for_order debit_amount,self
+  end
+
+  def cash_to_pay
+    debit ?  (total_price - prepaid_amount) : total_price
+  end
+
+  def prepaid_amount
+    debit.amount
   end
 
   def notify_kitchen
@@ -77,6 +94,14 @@ class Order < ActiveRecord::Base
       line_items << item
     end
     category = cart.category
+  end
+
+  def total_price
+    total = 0
+    line_items.each do |li|
+      total = total + li.price*li.quantity
+    end
+    total
   end
 
 
