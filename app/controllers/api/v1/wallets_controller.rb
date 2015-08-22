@@ -8,7 +8,6 @@ class Api::V1::WalletsController < Api::V1::BaseController
 
   def recharge
     payment_id = params[:payment_id]
-    byebug
   end
 
 

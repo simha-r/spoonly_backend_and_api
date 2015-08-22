@@ -104,5 +104,12 @@ class Order < ActiveRecord::Base
     total
   end
 
+  def serializable_hash(options={})
+    options ||={}
+    options[:except] ||= [:created_at,:updated_at,:delivery_executive_id,:address_id]
+    options[:methods] = [:cash_to_pay,:prepaid_amount]
+    super
+  end
+
 
 end

@@ -9,7 +9,11 @@ class Api::V1::OrdersController < Api::V1::BaseController
   # POST /api/orders.json
   def create
     @order = current_user.orders.create! order_params
-    params[:line_item].each { |li| @order.line_items.create!(custom_line_item_params(li)) }
+    params[:line_item].each do |li|
+      menu_product = MenuProduct.find custom_line_item_params(li)['menu_product_id']
+      new_params = custom_line_item_params(li).merge({price: menu_product.product.price})
+      @order.line_items.create!(new_params)
+    end
     @order.start_process!
     render json: @order
   rescue Exception=>e

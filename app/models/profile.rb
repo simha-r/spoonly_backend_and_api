@@ -16,4 +16,11 @@
 
 class Profile < ActiveRecord::Base
   belongs_to :user
+
+  def serializable_hash(options={})
+    options||={}
+    options[:except]=[:created_at,:updated_at,:user_id]
+    super
+  end
+
 end

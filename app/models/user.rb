@@ -112,6 +112,12 @@ class User < ActiveRecord::Base
     wallet.add_card_amount amount,payment_id,payment_gateway
   end
 
+  def serializable_hash(options={})
+    options||={}
+    options[:except]=[:created_at,:updated_at]
+    super
+  end
+
   private
 
   def generate_authentication_token
