@@ -41,5 +41,6 @@ gem 'typhoeus'
 gem 'uglifier', '>= 1.3.0'
 gem 'will_paginate', '~> 3.0.6'
 gem "image_optim_bin", group: :production
+gem 'image_optim'
 gem 'image_optim_pack'
 gem 'paperclip-optimizer'

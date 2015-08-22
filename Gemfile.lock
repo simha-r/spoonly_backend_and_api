@@ -300,6 +300,7 @@ DEPENDENCIES
   heroku-deflater
   html2haml
   httparty
+  image_optim
   image_optim_bin
   image_optim_pack
   jbuilder (~> 2.0)
