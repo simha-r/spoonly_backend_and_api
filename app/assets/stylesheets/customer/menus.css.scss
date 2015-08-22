@@ -53,6 +53,35 @@
     span.fa.fa-inr {
       margin-left: 20px;
       font-size: 16px;
+
+    }
+
+    a.btn.btn-warning {
+      height: 36px;
+      width: 96px;
+      padding: 0;
+      padding-top: 0px;
+      border-top-width: 0px;
+      border-radius: 2px;
+      background-color: #f38f31;
+
+      span {
+        padding-left: 8px;
+        font-size: 12px;
+        font-weight: 700;
+      }
+
+      .fa.fa-angle-right {
+        height: 36px;
+        width: 25px;
+        font-size: 24px;
+        top: 3px;
+        position: relative;
+      }
+    }
+
+    a.btn:hover {
+      background-color: #e2660a;
     }
   }
 }
