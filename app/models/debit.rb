@@ -15,6 +15,6 @@ class Debit < ActiveRecord::Base
   belongs_to :wallet
   belongs_to :order
 
-  validates_presence_of :amount,:latest_wallet_balance,:order_id
+  validates_presence_of :amount,:latest_wallet_balance,:order_id,:wallet
 
 end

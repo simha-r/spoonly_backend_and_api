@@ -18,6 +18,7 @@ class Credit < ActiveRecord::Base
 
   CREDIT_TYPES = ['card','promotion']
 
+  validates_presence_of :wallet,:payment_mechanism,:amount
   validates_presence_of :latest_wallet_balance,:credit_type
   validates :credit_type, inclusion: {in: CREDIT_TYPES}
   validates :payment_mechanism,presence: true
