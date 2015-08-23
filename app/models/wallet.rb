@@ -21,7 +21,8 @@ class Wallet < ActiveRecord::Base
     amount = amount.to_f
     new_balance = self.balance.to_f + amount
     card_transaction = CardTransaction.create(amount: amount,transaction_id: payment_id,payment_gateway: payment_gateway)
-    if card_transaction.create(amount: amount,credit_type: 'card',latest_wallet_balance: new_balance,wallet: self)
+    if card_transaction.create_credit(amount: amount,credit_type: 'card',latest_wallet_balance: new_balance,
+                                      wallet: self)
       update_attributes!(balance: new_balance)
     end
   end
