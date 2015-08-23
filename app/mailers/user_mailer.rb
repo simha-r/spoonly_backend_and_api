@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "orders@spoonly.in"
 
   def order_success order
     @order = order

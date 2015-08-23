@@ -60,6 +60,11 @@ GEM
     coffee-script-source (1.9.1.1)
     columnize (0.8.9)
     debugger-linecache (1.2.0)
+    delayed_job (4.0.1)
+      activesupport (>= 3.0, < 4.2)
+    delayed_job_active_record (4.0.1)
+      activerecord (>= 3.0, < 4.2)
+      delayed_job (>= 3.0, < 4.1)
     devise (3.5.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -290,6 +295,7 @@ DEPENDENCIES
   bootstrap-sass
   byebug
   coffee-rails (~> 4.0.0)
+  delayed_job_active_record
   devise
   dotenv-rails
   font-awesome-sass

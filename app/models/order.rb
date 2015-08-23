@@ -80,11 +80,14 @@ class Order < ActiveRecord::Base
   rescue Exception => e
     HealthyLunchUtils.log_error e.message,e
   end
+  # Lower numbers have higher priority
+  handle_asynchronously :notify_kitchen,queue: 'kitchen_notifications',priority: 5
 
   def notify_user
     UserMailer.order_success(self).deliver
     #TODO Send sms confirmation
   end
+  handle_asynchronously :notify_user,queue: 'user_notifications'
 
   def add_line_items_from_cart(cart)
     cart.line_items.each do |item|
