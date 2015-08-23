@@ -44,3 +44,4 @@ gem 'image_optim'
 gem 'image_optim_pack'
 gem 'paperclip-optimizer'
 gem 'delayed_job_active_record'
+gem "rack-timeout"
