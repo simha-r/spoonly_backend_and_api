@@ -2,11 +2,12 @@
 #
 # Table name: carts
 #
-#  id         :integer          not null, primary key
-#  category   :string(255)
-#  created_at :datetime
-#  updated_at :datetime
-#  menu_id    :integer
+#  id          :integer          not null, primary key
+#  category    :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  menu_id     :integer
+#  expiry_time :datetime
 #
 
 class Cart < ActiveRecord::Base

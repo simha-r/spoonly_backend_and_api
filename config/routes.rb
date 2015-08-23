@@ -80,6 +80,7 @@ Rails.application.routes.draw do
       end
       resources :addresses,only:[:index,:create,:update,:destroy]
       resources :feedbacks,only:[:create]
+      resources :referrals,only: [:create]
     end
 
   end

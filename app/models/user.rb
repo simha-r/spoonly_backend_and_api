@@ -20,6 +20,7 @@
 #  confirmation_sent_at   :datetime
 #  unconfirmed_email      :string(255)
 #  authentication_token   :string(255)
+#  referral_code          :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -37,15 +38,16 @@ class User < ActiveRecord::Base
   has_one :wallet, dependent: :destroy
   has_many :feedbacks
 
+  has_many :referrals,foreign_key: :referrer_id
+  has_one :referred,foreign_key: :referred_id,class_name: 'Referral'
+  has_many :referred_users,through: :referrals,foreign_key: :referrer_id,source: :referred
+  has_one :referrer_user,through: :referred,foreign_key: :referred_id,source: :referrer
 
+
+
+  before_create :generate_authentication_token
+  after_create :create_wallet
   before_save :ensure_authentication_token
-
-  def ensure_authentication_token
-    if authentication_token.blank?
-      self.authentication_token = generate_authentication_token
-    end
-  end
-
 
   def self.new_with_session(params,session)
     if session["devise.user_attributes"]
@@ -92,13 +94,6 @@ class User < ActiveRecord::Base
     user
   end
 
-
-  def serializable_hash(options={})
-    options ||={}
-    options[:include] = :profile
-    super
-  end
-
   def mark_number_verified
     profile.update_attributes(phone_number_verified: true)
   end
@@ -112,11 +107,22 @@ class User < ActiveRecord::Base
     wallet.add_card_amount amount,payment_id,payment_gateway
   end
 
+  def apply_wallet_promotion wallet_promotion
+    wallet.apply_promotion wallet_promotion
+  end
+
+  def refer_user user
+    referral = referrals.create!(referred_id: user.id)
+    #TODO Write reward logic here or in before/after hooks of referral
+  end
+
   def serializable_hash(options={})
     options||={}
     options[:except]=[:created_at,:updated_at]
+    options[:include] = :profile
     super
   end
+
 
   private
 
@@ -124,6 +130,19 @@ class User < ActiveRecord::Base
     loop do
       token = Devise.friendly_token
       break token unless User.where(authentication_token: token).first
+    end
+  end
+
+  def generate_referral_code
+    self.referral_code = loop do
+      random_token = rand(36**5).to_s(36).upcase
+      break random_token unless self.class.exists?(referral_code: random_token)
+    end
+  end
+
+  def ensure_authentication_token
+    if authentication_token.blank?
+      self.authentication_token = generate_authentication_token
     end
   end
 

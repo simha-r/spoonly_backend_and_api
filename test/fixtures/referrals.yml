@@ -1,0 +1,20 @@
+# == Schema Information
+#
+# Table name: referrals
+#
+#  id          :integer          not null, primary key
+#  referrer_id :integer
+#  referred_id :integer
+#  created_at  :datetime
+#  updated_at  :datetime
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  referrer_id: 1
+  referred_id: 1
+
+two:
+  referrer_id: 1
+  referred_id: 1

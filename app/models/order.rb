@@ -49,12 +49,14 @@ class Order < ActiveRecord::Base
       transitions from: :acknowledged, to: :dispatched
     end
 
-    event :deliver do
+    event :deliver,after: [:apply_cashback_promotions] do
       transitions from: :dispatched,to: :delivered
     end
 
 
   end
+
+  scope :delivered,-> {where(state: 'delivered')}
 
   def calculate_amount_to_pay
     if total_price >= user.wallet.balance
@@ -106,6 +108,20 @@ class Order < ActiveRecord::Base
     end
     total
   end
+
+  def is_first?
+    user.orders.delivered.order('created_at DESC').first==self
+  end
+
+  def apply_cashback_promotions
+    if is_first?
+      referral = user.referred
+      referral.apply_referrer_promotions
+    end
+  end
+
+  handle_asynchronously :apply_cashback_promotions #,:run_at => Proc.new { 24.hours.from_now }
+
 
   def serializable_hash(options={})
     options ||={}
