@@ -72,6 +72,8 @@ GEM
       responders
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
+    domain_name (0.5.24)
+      unf (>= 0.0.5, < 1.0.0)
     dotenv (0.11.1)
       dotenv-deployment (~> 0.0.2)
     dotenv-deployment (0.0.2)
@@ -102,6 +104,9 @@ GEM
       multi_json (~> 1.10)
       retriable (~> 1.4)
       signet (~> 0.6)
+    google_plus (0.2.4)
+      json
+      rest-client (~> 1.6)
     haml (4.0.6)
       tilt
     haml-rails (0.9.0)
@@ -119,6 +124,8 @@ GEM
       haml (~> 4.0.0)
       nokogiri (~> 1.6.0)
       ruby_parser (~> 3.5)
+    http-cookie (1.0.2)
+      domain_name (~> 0.5)
     httparty (0.11.0)
       multi_json (~> 1.0)
       multi_xml (>= 0.5.2)
@@ -161,6 +168,7 @@ GEM
     multi_json (1.11.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
+    netrc (0.10.3)
     newrelic_rpm (3.10.0.279)
     nexmo (3.0.0)
     nokogiri (1.6.6.2)
@@ -236,6 +244,10 @@ GEM
       json (~> 1.4)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    rest-client (1.8.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 3.0)
+      netrc (~> 0.7)
     retriable (1.4.1)
     rolify (3.4.1)
     ruby_parser (3.6.6)
@@ -282,6 +294,9 @@ GEM
     uglifier (2.7.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.1)
     warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.7)
@@ -302,6 +317,7 @@ DEPENDENCIES
   font-awesome-sass
   geocoder
   google-api-client
+  google_plus
   haml-rails
   heroku-deflater
   html2haml
