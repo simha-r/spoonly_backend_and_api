@@ -46,4 +46,3 @@ gem 'paperclip-optimizer'
 gem 'delayed_job_active_record'
 gem "rack-timeout"
 gem 'google_plus'
-gem 'google_api_client'
