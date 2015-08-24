@@ -87,8 +87,7 @@ class Order < ActiveRecord::Base
 
   def notify_user
     UserMailer.order_success(self).deliver
-
-    #TODO Send sms confirmation
+    UserMessenger.order_success(self)
   end
   handle_asynchronously :notify_user,queue: 'user_notifications'
 
@@ -129,6 +128,11 @@ class Order < ActiveRecord::Base
     options[:except] ||= [:created_at,:updated_at,:delivery_executive_id,:address_id]
     options[:methods] = [:cash_to_pay,:prepaid_amount]
     super
+  end
+
+  def delivery_time_range
+    ranges = MenuProduct::LUNCH_TIMES.merge MenuProduct::DINNER_TIMES
+    ranges[delivery_time.strftime('%H%M')]
   end
 
 

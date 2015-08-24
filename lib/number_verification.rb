@@ -7,9 +7,7 @@ module NumberVerification
     code = Random.rand(10000..99999).to_s
     user.profile.update_attributes(phone_number_verification_code: code)
     text = "Spoonly code: #{user.profile.phone_number_verification_code}. Valid for 5 minutes."
-
-    nexmo = Nexmo::Client.new(key: ENV['NEXMO_API_KEY'], secret: ENV['NEXMO_API_SECRET'])
-    nexmo.send_message(from: 'SPOONL', to: "91#{number}", text: text)
+    SmsProvider.send_message user.profile.phone_number,text
   end
 
   def self.finish user,code
