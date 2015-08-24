@@ -19,7 +19,7 @@ class Profile < ActiveRecord::Base
 
   def serializable_hash(options={})
     options||={}
-    options[:except]=[:created_at,:updated_at,:user_id]
+    options[:except]=[:created_at,:updated_at,:user_id,:id]
     super
   end
 

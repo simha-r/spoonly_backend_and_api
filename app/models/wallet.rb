@@ -51,5 +51,11 @@ class Wallet < ActiveRecord::Base
     end
   end
 
+  def serializable_hash(options={})
+    options||={}
+    options[:except]=[:created_at,:updated_at,:id,:user_id]
+    super
+  end
+
 
 end

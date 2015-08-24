@@ -87,6 +87,7 @@ class Order < ActiveRecord::Base
 
   def notify_user
     UserMailer.order_success(self).deliver
+
     #TODO Send sms confirmation
   end
   handle_asynchronously :notify_user,queue: 'user_notifications'
