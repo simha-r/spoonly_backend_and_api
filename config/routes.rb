@@ -56,6 +56,11 @@ Rails.application.routes.draw do
   end
 
   namespace :api, defaults: {format: 'json'} do
+    namespace :v1 do
+      resource :wallet do
+        get :recharge
+      end
+    end
     scope module: :v1, constraints: ApiConstraints.new(version: 1) do
       resources :products do
         collection do
@@ -82,6 +87,9 @@ Rails.application.routes.draw do
       resources :feedbacks,only:[:create]
       resources :referrals,only: [:create]
     end
+    #TODO Moved it out of the first namespace because of instamojo redirect..has no headers
+
+
 
   end
 

@@ -9,7 +9,6 @@ class Api::V1::ReferralsController < Api::V1::BaseController
       if referrer.refer_user current_user
         render json: {text: 'Promotion has been applied'}
       end
-
     end
   end
 
