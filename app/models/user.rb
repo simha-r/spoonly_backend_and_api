@@ -44,7 +44,7 @@ class User < ActiveRecord::Base
   has_one :referrer_user,through: :referred,foreign_key: :referred_id,source: :referrer
 
 
-
+  before_create :generate_referral_code
   before_create :generate_authentication_token
   after_create :create_wallet
   before_save :ensure_authentication_token
