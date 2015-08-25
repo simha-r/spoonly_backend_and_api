@@ -20,7 +20,7 @@ module Api::V1::SessionsHelper
         @email = response['emails'][0]['value']
         @uid = response['id']
         @name = response['name']['givenName'] + response['name']['familyName']
-        @picture = response['image']['url']+"&sz=150"
+        @picture = response['image']['url']+"&sz=480"
       end
     end
     if !@email.present?
