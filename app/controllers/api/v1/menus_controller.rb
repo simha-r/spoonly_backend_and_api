@@ -13,7 +13,7 @@ class Api::V1::MenusController < Api::V1::BaseController
   #curl -v -H "Accept: application/vnd.healthy_lunch" -H "Content-type: application/application/x-www-form-urlencoded" -H
   # "Authorization:authentication_token"  http://localhost:3000/api/products/lunch
   def lunch
-    if todays_menu = Menu.where(menu_date: Date.today).first
+    if todays_menu = Menu.where(menu_date: Date.current).first
       if Time.now< todays_menu.lunch_order_end_time
         @menu = todays_menu
       else
@@ -26,7 +26,7 @@ class Api::V1::MenusController < Api::V1::BaseController
   end
 
   def dinner
-    if todays_menu = Menu.where(menu_date: Date.today).first
+    if todays_menu = Menu.where(menu_date: Date.current).first
       if Time.now< todays_menu.dinner_order_end_time
         @menu = todays_menu
       else

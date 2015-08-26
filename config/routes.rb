@@ -112,6 +112,12 @@ Rails.application.routes.draw do
         post :sms_update
       end
     end
+    resources :users do
+      member do
+        put :enable_otp
+        put :disable_otp
+      end
+    end
   end
 
 end

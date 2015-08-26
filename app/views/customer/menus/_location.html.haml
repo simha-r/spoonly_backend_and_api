@@ -2,7 +2,7 @@
   .col-xs-4
     - if @menu
       - date = @menu.menu_date
-      - if date==Date.today
+      - if date==Date.current
         %p= "TODAY'S #{category.upcase} MENU"
       - elsif date==Date.tomorrow
         %p= "TOMORROW'S #{category.upcase} MENU"

@@ -13,5 +13,6 @@
 class CardTransaction < ActiveRecord::Base
 
   has_one :credit,as: :payment_mechanism
+  validates_uniqueness_of :transaction_id
 
 end

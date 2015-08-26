@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
   layout :layout_by_resource
   after_filter :store_location
 
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+
   def store_location
     # store last url - this is needed for post-login redirect to whatever the user last visited.
     return unless request.get?
@@ -35,6 +38,12 @@ class ApplicationController < ActionController::Base
 
   def layout_by_resource
     'user/application'
+  end
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.for(:sign_in) << :otp_attempt
   end
 
 

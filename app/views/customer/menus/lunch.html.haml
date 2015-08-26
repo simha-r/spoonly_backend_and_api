@@ -1,7 +1,7 @@
 = title 'Lunch Menu'
 #menu_lunch
   = render 'location',category: 'lunch'
-  - if @menu.menu_date != Date.today
+  - if @menu.menu_date != Date.current
     = render 'customer/menus/menu_unavailable'
 
   .menu-row

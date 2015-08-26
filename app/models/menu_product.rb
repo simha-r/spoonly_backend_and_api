@@ -31,7 +31,7 @@ class MenuProduct < ActiveRecord::Base
   end
 
   def self.show_lunch_times
-    todays_menu = Menu.where(menu_date: Date.today).first
+    todays_menu = Menu.where(menu_date: Date.current).first
     if Time.now< todays_menu.lunch_order_end_time
       t = Time.now
 
@@ -48,7 +48,7 @@ class MenuProduct < ActiveRecord::Base
   end
 
   def self.show_dinner_times
-    todays_menu = Menu.where(menu_date: Date.today).first
+    todays_menu = Menu.where(menu_date: Date.current).first
     if Time.now< todays_menu.dinner_order_end_time
       t = Time.now
 

@@ -46,3 +46,6 @@ gem 'paperclip-optimizer'
 gem 'delayed_job_active_record'
 gem "rack-timeout"
 gem 'google_plus'
+gem 'devise-two-factor'
+gem 'rotp'
+gem 'rqrcode_png'
