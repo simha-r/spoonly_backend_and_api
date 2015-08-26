@@ -22,6 +22,11 @@ class Api::V1::OrdersController < Api::V1::BaseController
     render status: :error
   end
 
+  def index
+    @orders = current_user.orders
+    render json: @orders
+  end
+
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params

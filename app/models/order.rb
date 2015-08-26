@@ -135,5 +135,4 @@ class Order < ActiveRecord::Base
     ranges[delivery_time.strftime('%H%M')]
   end
 
-
 end
