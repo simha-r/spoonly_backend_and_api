@@ -122,11 +122,14 @@ class Order < ActiveRecord::Base
 
   handle_asynchronously :apply_cashback_promotions #,:run_at => Proc.new { 24.hours.from_now }
 
-
   def serializable_hash(options={})
     options ||={}
-    options[:except] ||= [:created_at,:updated_at,:delivery_executive_id,:address_id]
-    options[:methods] = [:cash_to_pay,:prepaid_amount]
+    options[:except] ||= [:user_id,:created_at,:updated_at,:delivery_executive_id,:address_id]
+    options[:methods] = [:cash_to_pay,:prepaid_amount,:total_price,:delivery_time_range]
+    if options[:details]
+      options[:include] = [:line_items]
+    end
+
     super
   end
 

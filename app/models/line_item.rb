@@ -30,4 +30,16 @@ class LineItem < ActiveRecord::Base
     end
   end
 
+  def serializable_hash(options={})
+    options ||={}
+    options[:except] ||= [:id,:created_at,:updated_at,:cart_id,:order_id,:menu_product_id]
+    options[:methods] ||= [:product_name]
+    super
+  end
+
+  def product_name
+    product.name
+  end
+
+
 end

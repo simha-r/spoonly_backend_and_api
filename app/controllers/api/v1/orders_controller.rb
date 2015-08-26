@@ -27,6 +27,10 @@ class Api::V1::OrdersController < Api::V1::BaseController
     render json: @orders
   end
 
+  def show
+    render json: @order.to_json(details: true)
+  end
+
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params
@@ -39,6 +43,10 @@ class Api::V1::OrdersController < Api::V1::BaseController
 
   def line_item_params #this is the default one, without parameters
     custom_line_item_params(params.require(:line_item))
+  end
+
+  def set_order
+    @order = current_user.orders.find params[:id]
   end
 
 end
