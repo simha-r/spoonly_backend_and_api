@@ -54,6 +54,14 @@ Rails.application.routes.draw do
       get :failed_recharge
     end
 
+    namespace :app do
+      resource :wallet do
+        get :recharge
+        get :successful_recharge
+        get :failed_recharge
+      end
+    end
+
   end
 
   namespace :api, defaults: {format: 'json'} do
