@@ -26,6 +26,8 @@ class MenuProduct < ActiveRecord::Base
   DINNER_START_TIME=19
   MAX_QUANTITIES=[20,30,40,50,60,70,80]
 
+  validates :product_id, :uniqueness => {:scope => [:menu_id,:category]}
+
 
   def as_json
   end
