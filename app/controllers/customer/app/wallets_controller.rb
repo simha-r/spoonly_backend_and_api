@@ -1,4 +1,4 @@
-class Customer::App::WalletsController < App::BaseController
+class Customer::App::WalletsController < Customer::App::BaseController
 
   require 'typhoeus'
 
