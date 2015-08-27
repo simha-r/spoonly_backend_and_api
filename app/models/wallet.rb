@@ -48,7 +48,7 @@ class Wallet < ActiveRecord::Base
   end
 
   def refund_cancelled_order order
-    if order.prepaid_amount
+    if order.prepaid_amount > 0
       credit_amount = order.prepaid_amount
       new_balance = self.balance.to_f + credit_amount
       cancellation_refund = Refund.first_or_create(name: 'cancellation')

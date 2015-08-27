@@ -77,11 +77,11 @@ class Order < ActiveRecord::Base
   end
 
   def cash_to_pay
-    prepaid_amount ?  (total_price - prepaid_amount) : total_price
+    prepaid_amount > 0 ?  (total_price - prepaid_amount) : total_price
   end
 
   def prepaid_amount
-    debit.try :amount
+    debit.try(:amount).to_f
   end
 
   def notify_success
