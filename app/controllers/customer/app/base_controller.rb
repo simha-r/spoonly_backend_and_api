@@ -1,3 +1,3 @@
-class App::BaseController < ApplicationController
+class Customer::App::BaseController < ApplicationController
 
 end
