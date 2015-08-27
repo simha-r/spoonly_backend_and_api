@@ -33,7 +33,7 @@ class LineItem < ActiveRecord::Base
   def serializable_hash(options={})
     options ||={}
     options[:except] ||= [:id,:created_at,:updated_at,:cart_id,:order_id,:menu_product_id]
-    options[:methods] ||= [:product_name]
+    options[:methods] ||= [:product_name,:vegetarian]
     super
   end
 
@@ -41,5 +41,8 @@ class LineItem < ActiveRecord::Base
     product.name
   end
 
+  def vegetarian
+    product.vegetarian
+  end
 
 end
