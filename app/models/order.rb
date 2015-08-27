@@ -154,8 +154,8 @@ class Order < ActiveRecord::Base
 
   def serializable_hash(options={})
     options ||={}
-    options[:except] ||= [:user_id,:created_at,:updated_at,:delivery_executive_id,:address_id]
-    options[:methods] = [:cash_to_pay,:prepaid_amount,:total_price,:delivery_time_range]
+    options[:except] ||= [:user_id,:updated_at,:delivery_executive_id,:address_id]
+    options[:methods] = [:cash_to_pay,:prepaid_amount,:total_price,:delivery_time_range,:items_count]
     if options[:details]
       options[:include] = [:line_items]
     end
@@ -166,6 +166,10 @@ class Order < ActiveRecord::Base
   def delivery_time_range
     ranges = MenuProduct::LUNCH_TIMES.merge MenuProduct::DINNER_TIMES
     ranges[delivery_time.strftime('%H%M')]
+  end
+
+  def items_count
+    line_items.count
   end
 
 end

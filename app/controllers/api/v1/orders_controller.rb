@@ -24,7 +24,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
 
   def index
     @orders = current_user.orders
-    render json: @orders
+    render json: {orders: @orders}
   end
 
   def show
