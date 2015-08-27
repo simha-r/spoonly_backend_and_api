@@ -157,7 +157,7 @@ class Order < ActiveRecord::Base
     options[:except] ||= [:user_id,:updated_at,:delivery_executive_id,:address_id]
     options[:methods] = [:cash_to_pay,:prepaid_amount,:total_price,:delivery_time_range,:items_count]
     if options[:details]
-      options[:include] = [:line_items]
+      options[:include] = [:line_items,:address]
     end
 
     super

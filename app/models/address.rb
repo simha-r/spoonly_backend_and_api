@@ -77,5 +77,11 @@ class Address < ActiveRecord::Base
     end
   end
 
+  def serializable_hash(options={})
+    options ||={}
+    options[:except] ||= [:user_id,:updated_at,:created_at,]
+    super
+  end
+
 
 end
