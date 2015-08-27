@@ -5,8 +5,12 @@ class Api::V1::MenusController < Api::V1::BaseController
 
 
   def show
-    render json: {'lunch'=> {time: '12:15-3:30pm',url: 'menu/lunch'}, 'dinner'=> {'time'=>'7-10pm',
+    if LocationCheck.in_range? params['lat'],params['long']
+      render json: {'lunch'=> {time: '12:15-3:30pm',url: 'menu/lunch'}, 'dinner'=> {'time'=>'7-10pm',
                                                                                    url: 'menu/dinner'}}
+    else
+      head 200
+    end
   end
 
 

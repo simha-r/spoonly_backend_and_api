@@ -37,7 +37,7 @@ class Order < ActiveRecord::Base
     state :delivered
     state :cancelled
 
-    event :start_process,after: [:notify_success],before:[:auto_debit_amount] do
+    event :start_process,after: [:notify_success,:update_stock],before:[:auto_debit_amount] do
       transitions from: :new, to: :pending
     end
 
@@ -92,6 +92,10 @@ class Order < ActiveRecord::Base
   def notify_cancel
     notify_kitchen 'cancel'
     notify_user 'cancel'
+  end
+
+  def update_stock
+    line_items.each{|li| }
   end
 
   def notify_kitchen event

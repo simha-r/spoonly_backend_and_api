@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://www.opengis.net/kml/2.2'>
+	<Document>
+		<name>gach</name>
+		<description><![CDATA[]]></description>
+		<Folder>
+			<name>finance</name>
+			<Placemark>
+				<name>gachibowli</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.317585,17.434182999999997,0.0 78.3205032,17.4212443,0.0 78.3483124,17.4132185,0.0 78.3797264,17.4207529,0.0 78.3689117,17.4422897,0.0 78.3592987,17.4563732,0.0 78.3345795,17.456537,0.0 78.317585,17.434182999999997,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>hitec_city</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3889103,17.4326271,0.0 78.3908844,17.4576833,0.0 78.3803272,17.4659527,0.0 78.3514881,17.467917599999996,0.0 78.375349,17.430743699999997,0.0 78.3889103,17.4326271,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>banjara hills</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.427003,17.413960700000004,0.0 78.4259838,17.4127834,0.0 78.42768430000001,17.4119798,0.0 78.4293044,17.413745700000003,0.0 78.4270728,17.414646599999998,0.0 78.427003,17.413960700000004,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>banjara hills 1</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.4259838,17.4127834,0.0 78.427003,17.413960700000004,0.0 78.4270728,17.414646599999998,0.0 78.4250826,17.4148053,0.0 78.4259838,17.4127834,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Dilsukhnagar</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.5410345,17.3588512,0.0 78.5415494,17.355256900000004,0.0 78.5479975,17.3550111,0.0 78.5490596,17.3592198,0.0 78.5453689,17.3608992,0.0 78.5409272,17.3601927,0.0 78.5410345,17.3588512,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+		</Folder>
+		<Style id='poly-000000-1-76-nodesc-normal'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>1</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4C000000</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<Style id='poly-000000-1-76-nodesc-highlight'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>2.0</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4C000000</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<StyleMap id='poly-000000-1-76-nodesc'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#poly-000000-1-76-nodesc-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#poly-000000-1-76-nodesc-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+	</Document>
+</kml>
