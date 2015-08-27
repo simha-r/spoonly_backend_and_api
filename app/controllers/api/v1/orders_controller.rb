@@ -1,7 +1,7 @@
 class Api::V1::OrdersController < Api::V1::BaseController
 
   before_action :authenticate_user!
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :cancel]
 
   respond_to :json
 
@@ -29,6 +29,10 @@ class Api::V1::OrdersController < Api::V1::BaseController
 
   def show
     render json: @order.to_json(details: true)
+  end
+
+  def cancel
+
   end
 
   private

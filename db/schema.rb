@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150825173907) do
+ActiveRecord::Schema.define(version: 20150826140338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -221,6 +221,13 @@ ActiveRecord::Schema.define(version: 20150825173907) do
   end
 
   add_index "referrals", ["referrer_id", "referred_id"], name: "index_referrals_on_referrer_id_and_referred_id", unique: true, using: :btree
+
+  create_table "refunds", force: true do |t|
+    t.string   "description"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", force: true do |t|
     t.string   "name"

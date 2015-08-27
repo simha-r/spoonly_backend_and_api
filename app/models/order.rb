@@ -37,7 +37,7 @@ class Order < ActiveRecord::Base
     state :delivered
     state :cancelled
 
-    event :start_process,after: [:notify_kitchen,:notify_user],before:[:calculate_amount_to_pay] do
+    event :start_process,after: [:notify_success],before:[:auto_debit_amount] do
       transitions from: :new, to: :pending
     end
 
@@ -53,41 +53,71 @@ class Order < ActiveRecord::Base
       transitions from: :dispatched,to: :delivered
     end
 
+    event :cancel,after: [:notify_cancel,:refund_prepaid_amount] do
+      transitions from: [:pending,:acknowledged,:dispatched], to: :cancelled
+    end
 
   end
+
+  alias_method :start_process, :start_process!
+  alias_method :acknowledge, :acknowledge!
+  alias_method :dispatch, :dispatch!
+  alias_method :deliver, :deliver!
+  alias_method :cancel, :cancel!
+
 
   scope :delivered,-> {where(state: 'delivered')}
 
-  def calculate_amount_to_pay
-    if total_price >= user.wallet.balance
-      debit_amount = user.wallet.balance
-    else
-      debit_amount = total_price
-    end
-    user.wallet.debit_amount_for_order debit_amount,self
+  def auto_debit_amount
+    user.wallet.debit_amount_for_order self
+  end
+
+  def refund_prepaid_amount
+    user.wallet.refund_cancelled_order self
   end
 
   def cash_to_pay
-    debit ?  (total_price - prepaid_amount) : total_price
+    prepaid_amount ?  (total_price - prepaid_amount) : total_price
   end
 
   def prepaid_amount
-    debit.amount
+    debit.try :amount
   end
 
-  def notify_kitchen
-    Pusher['orders'].trigger('purchased', {
-      message: 'New Order Created..Refresh your browser to see it'
-    })
+  def notify_success
+    notify_kitchen 'success'
+    notify_user 'success'
+  end
+
+  def notify_cancel
+    notify_kitchen 'cancel'
+    notify_user 'cancel'
+  end
+
+  def notify_kitchen event
+    if event=='success'
+      Pusher['orders'].trigger('purchased', {
+        message: 'New Order Created..Refresh your browser to see it'
+      })
+    elsif event=='cancel'
+      #TODO notify kitchen of order cancel
+      Pusher['orders'].trigger('cancelled', {
+        message: "Order no. #{self.id} has been cancelled. Please notify the Chef. "
+      })
+    end
   rescue Exception => e
     HealthyLunchUtils.log_error e.message,e
   end
   # Lower numbers have higher priority
   handle_asynchronously :notify_kitchen,queue: 'kitchen_notifications',priority: 5
 
-  def notify_user
-    UserMailer.order_success(self).deliver
-    UserMessenger.order_success(self)
+  def notify_user event
+    if event=='success'
+      UserMailer.order_success(self).deliver
+      UserMessenger.order_success(self)
+    elsif event=='cancel'
+      #TODO Notify user of order cancel
+    end
   end
   handle_asynchronously :notify_user,queue: 'user_notifications'
 

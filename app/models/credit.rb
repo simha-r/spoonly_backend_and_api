@@ -17,7 +17,7 @@ class Credit < ActiveRecord::Base
   belongs_to :wallet
   belongs_to :payment_mechanism,polymorphic: true
 
-  CREDIT_TYPES = ['card','promotion']
+  CREDIT_TYPES = ['card','promotion','refund']
 
   validates_presence_of :wallet,:payment_mechanism,:amount
   validates_presence_of :latest_wallet_balance,:credit_type

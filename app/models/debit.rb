@@ -16,5 +16,5 @@ class Debit < ActiveRecord::Base
   belongs_to :order
 
   validates_presence_of :amount,:latest_wallet_balance,:order_id,:wallet
-
+  validates :amount, :numericality => {:greater_than => 0}
 end

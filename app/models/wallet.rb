@@ -28,10 +28,13 @@ class Wallet < ActiveRecord::Base
     end
   end
 
-  def debit_amount_for_order amount,order
-    new_balance = self.balance.to_f - amount.to_f
-    if debits.create(amount: amount,order_id: order.id,latest_wallet_balance: new_balance)
-      update_attributes!(balance: new_balance)
+  def debit_amount_for_order order
+    debit_amount = (order.total_price >= balance ? balance : order.total_price )
+    if debit_amount > 0
+      new_balance = self.balance.to_f - debit_amount.to_f
+      if debits.create(amount: debit_amount,order_id: order.id,latest_wallet_balance: new_balance)
+        update_attributes!(balance: new_balance)
+      end
     end
   end
 
@@ -41,6 +44,17 @@ class Wallet < ActiveRecord::Base
     if wallet_promotion.credits.create(amount: amount,credit_type: wallet_promotion.name,
                                        latest_wallet_balance: new_balance,wallet: self)
       update_attributes!(balance: new_balance)
+    end
+  end
+
+  def refund_cancelled_order order
+    if order.prepaid_amount
+      credit_amount = order.prepaid_amount
+      new_balance = self.balance.to_f + credit_amount
+      cancellation_refund = Refund.first_or_create(name: 'cancellation')
+      cancellation_refund.credits.create(amount: credit_amount,credit_type: 'refund',wallet: self,
+                                         latest_wallet_balance: new_balance)
+      update_attributes(balance: new_balance)
     end
   end
 
