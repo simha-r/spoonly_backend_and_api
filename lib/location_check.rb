@@ -22,5 +22,19 @@ module LocationCheck
     serving_region.contains_point? long.to_f,lat.to_f
   end
 
+  def proceed_to_main_if_old_user
+    cookies.delete(:customer) if params[:change_location]
+    proceed = false
+    if cookies[:customer]
+      values = JSON.parse(cookies[:customer] || {}.to_json).with_indifferent_access
+      if values[:location]
+        if LocationCheck.in_range? values[:location][:latitude],values[:location][:longitude]
+          # if values[:location][:distance].to_f < 10
+          proceed = true
+        end
+      end
+    end
+    redirect_to home_customer_menus_path if proceed
+  end
 
 end

@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   devise_for :company_users
   devise_for :users, controllers: { omniauth_callbacks: "customer/omniauth_callbacks",sessions: 'customer/sessions',
                                     passwords: 'customer/passwords' }
-  root to: 'customer/menus#home'
+  root to: 'customer/homes#main'
 
 
   namespace :customer do

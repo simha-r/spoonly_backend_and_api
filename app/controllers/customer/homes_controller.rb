@@ -1,5 +1,8 @@
 class Customer::HomesController < Customer::BaseController
 
+  include LocationCheck
+
+  before_action :proceed_to_main_if_old_user
 
   def main
 
