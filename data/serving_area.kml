@@ -75,6 +75,20 @@
 					</outerBoundaryIs>
 				</Polygon>
 			</Placemark>
+			<Placemark>
+				<name>Riktam</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.4434611,17.4313937,0.0 78.443622,17.4292287,0.0 78.4469211,17.4292031,0.0 78.4467602,17.431925999999997,0.0 78.4434611,17.4313937,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
 		</Folder>
 		<Style id='poly-000000-1-76-nodesc-normal'>
 			<LineStyle>
