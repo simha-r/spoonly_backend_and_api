@@ -1,5 +1,5 @@
 module GeneralHelper
   def title(page_title)
-    content_for :title, page_title.to_s+"| Spoonly"
+    content_for :title, page_title.to_s+" | Spoonly.in"
   end
 end
