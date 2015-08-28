@@ -129,4 +129,7 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :sitemaps, :only => :show
+  get "sitemap" => "sitemaps#show"
+
 end
