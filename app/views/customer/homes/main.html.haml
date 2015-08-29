@@ -44,37 +44,15 @@
      var dest_lat = place.geometry.location.lat()
      var dest_long = place.geometry.location.lng()
      dest = new google.maps.LatLng(dest_lat,dest_long);
+     //Analytics code for place
+     analytics.track('Entered location', {
+       place: place.formatted_address
+     });
+
      $('#locationForm').find('#latitude').val(dest_lat);
      $('#locationForm').find('#longitude').val(dest_long);
+     $('#locationForm').submit();
 
-
-     var source_lat = 17.447181
-     var source_long =  78.358624
-     var source = new google.maps.LatLng(source_lat,source_long)
-     var service = new google.maps.DistanceMatrixService();
-
-      service.getDistanceMatrix({
-              origins: [source],
-              destinations: [dest],
-              travelMode: google.maps.TravelMode.DRIVING,
-              unitSystem: google.maps.UnitSystem.METRIC,
-              avoidHighways: false,
-              avoidTolls: false
-          }, function (response, status) {
-              if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
-                  var distance = response.rows[0].elements[0].distance.text;
-                  var duration = response.rows[0].elements[0].duration.text;
-                  var dvDistance = document.getElementById("dvDistance");
-                console.log("Distance: " + distance )
-                console.log("Duration: " + duration )
-                $('#locationForm').find('#distance').val(distance);
-                $('#locationForm').submit();
-                return false;
-
-              } else {
-                  alert("Unable to find the distance via road.");
-              }
-          });
   });
   }
 
