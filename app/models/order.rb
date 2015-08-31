@@ -172,6 +172,16 @@ class Order < ActiveRecord::Base
     ranges[delivery_time.strftime('%H%M')]
   end
 
+  def formatted_delivery_time
+    ranges = MenuProduct::LUNCH_TIMES.merge MenuProduct::DINNER_TIMES
+    show = ranges[delivery_time.strftime('%H%M')]
+    if delivery_time.to_date == Date.today
+      show + " Today"
+    else
+      show +"  "+ delivery_time.strftime("%a %d,%b")
+    end
+  end
+
   def items_count
     line_items.count
   end
