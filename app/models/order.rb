@@ -150,7 +150,7 @@ class Order < ActiveRecord::Base
   def apply_cashback_promotions
     if is_first?
       referral = user.referred
-      referral.apply_referrer_promotions
+      referral.apply_referrer_promotions if referral
     end
   end
 
