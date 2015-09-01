@@ -5,7 +5,7 @@ class Company::OrdersController < Company::BaseController
   before_filter :authenticate_sms_sender!,only: [:sms_update]
 
   def index
-    @orders = Order.paginate page: params[:page]
+    @orders = Order.order(delivery_time: :desc).includes(:user).paginate page: params[:page]
   end
 
   def show
