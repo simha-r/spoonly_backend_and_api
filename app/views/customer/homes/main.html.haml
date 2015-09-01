@@ -15,10 +15,12 @@
           .col-xs-1
           = form_tag inside_customer_homes_path, id: 'locationForm', class: "form-horizontal" do
             .form-group
-              = text_field_tag 'locality','',id: 'searchTextField',size: '40',placeholder: 'Enter Location eg. Hitec City '
-              = hidden_field_tag 'latitude'
-              = hidden_field_tag 'longitude'
-              = hidden_field_tag 'distance'
+              .city-location
+                %span HYDERABAD
+                = text_field_tag 'locality','',id: 'searchTextField',size: '40',placeholder: 'Enter Location eg. Hitec City '
+                = hidden_field_tag 'latitude'
+                = hidden_field_tag 'longitude'
+                = hidden_field_tag 'distance'
               = submit_tag 'See Menu', class: "btn btn-default"
   = render 'how_it_works'
 

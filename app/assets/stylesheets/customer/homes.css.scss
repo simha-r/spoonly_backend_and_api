@@ -23,6 +23,26 @@
         background-color: #f27242;
         color: #fff;
       }
+      .city-location {
+        display: inline-block;
+        background-color: #fff;
+
+        span {
+          border-right: 1px solid #ddd;
+          padding: 15px;
+          color: #333333;
+        }
+
+        input {
+          border: none;
+
+          &:focus {
+            outline: none;
+            border: none !important;
+            box-shadow: none !important;
+          }
+        }
+      }
     }
 
     .col-xs-12 {
