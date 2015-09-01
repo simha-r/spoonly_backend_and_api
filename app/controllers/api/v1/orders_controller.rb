@@ -23,7 +23,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
   end
 
   def index
-    @orders = current_user.orders
+    @orders = current_user.orders.includes(:debit).includes(:line_items)
     render json: {orders: @orders}
   end
 

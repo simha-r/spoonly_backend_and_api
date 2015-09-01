@@ -52,6 +52,9 @@ GEM
     border_patrol (0.2.1)
       nokogiri (>= 1.4.3.1)
     builder (3.2.2)
+    bullet (4.14.4)
+      activesupport (>= 3.0.0)
+      uniform_notifier (>= 1.6.0)
     byebug (3.1.2)
       columnize (~> 0.8)
       debugger-linecache (~> 1.2)
@@ -398,6 +401,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.7.1)
+    uniform_notifier (1.6.2)
     warden (1.2.3)
       rack (>= 1.0)
     will_paginate (3.0.7)
@@ -412,6 +416,7 @@ DEPENDENCIES
   aws-sdk
   bootstrap-sass
   border_patrol
+  bullet
   byebug
   coffee-rails (~> 4.0.0)
   delayed_job_active_record

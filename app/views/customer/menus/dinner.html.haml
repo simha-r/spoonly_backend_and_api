@@ -5,7 +5,7 @@
 Date:
 = @menu.menu_date.strftime("%a %d,%b ")
 
-- @menu.menu_dinner_products.each do |menu_product|
+- @menu.menu_dinner_products.includes(:product).each do |menu_product|
   = render 'customer/menus/menu_product_preview',menu_product: menu_product
 
 .row-fluid

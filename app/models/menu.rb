@@ -30,15 +30,14 @@ class Menu < ActiveRecord::Base
     hash[:lunch] = {start_time: lunch_start_time, end_time: lunch_end_time,end_order_time: lunch_order_end_time,
                     # products: lunch_products}
 
-    products: menu_lunch_products.collect{|menu_product| menu_product.product.as_json.merge(menu_product_id:
-                                                                                              menu_product.id)}}
+    products: menu_lunch_products.includes(:product).collect{|menu_product| menu_product.product.as_json.merge(menu_product_id: menu_product.id)}}
   end
 
   def show_dinner
     hash = {}
     hash[:dinner] = {start_time: dinner_start_time, end_time: dinner_end_time,end_order_time: dinner_order_end_time,
                      # products: dinner_products}
-                     products: menu_dinner_products.collect{|menu_product| menu_product.product.as_json.merge(menu_product_id: menu_product.id)}}
+                     products: menu_dinner_products.includes(:product).collect{|menu_product| menu_product.product.as_json.merge(menu_product_id: menu_product.id)}}
 
   end
 

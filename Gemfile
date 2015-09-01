@@ -53,3 +53,4 @@ gem 'sitemap_generator'
 gem 'fog-aws'
 gem 'fog'
 gem 'airbrake'
+gem "bullet", :group => "development"
