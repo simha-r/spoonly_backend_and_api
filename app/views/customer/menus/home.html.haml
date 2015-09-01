@@ -4,17 +4,21 @@
   .section-one
     .col-xs-12
       .col-md-offset-4.col-md-6.menu-container
-        .col-xs-12.col-md-6
+        .col-xs-12.col-md-6{'data-link' => lunch_customer_menus_path}
           .lunch{'style'=>"border: 2px solid rgba(256,256,256,.6)"}
             = link_to "Lunch", lunch_customer_menus_path
             .separator
             %p.time 12pm | 3pm
 
-        .col-xs-12.col-md-6
+        .col-xs-12.col-md-6{'data-link' => "#"}
           .dinner{'style'=>"border: 2px solid rgba(256,256,256,.6)"}
             = link_to "Dinner", '' #dinner_customer_menus_path
             .separator
             %p.coming-soon Coming Soon
   = render 'customer/homes/how_it_works'
-  :javascript
-    analytics.page('Menus Home');
+:javascript
+  analytics.page('Menus Home');
+
+  $('.menu-container').delegate('.col-xs-12.col-md-6','click', function() {
+      window.location = $(this).attr('data-link');
+    });
