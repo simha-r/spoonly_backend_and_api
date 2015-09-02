@@ -15,4 +15,8 @@ class Company::UsersController < ApplicationController
 
   end
 
+  def show_otp
+    render :qrcode => current_user.otp_sercet
+  end
+
 end

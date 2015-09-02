@@ -95,6 +95,9 @@ Rails.application.routes.draw do
       resources :addresses,only:[:index,:create,:update,:destroy]
       resources :feedbacks,only:[:create]
       resources :referrals,only: [:create]
+      resource :promotions,only:[] do
+        get :referral
+      end
     end
     #TODO Moved it out of the first namespace because of instamojo redirect..has no headers
 

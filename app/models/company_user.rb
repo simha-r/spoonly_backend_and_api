@@ -24,7 +24,7 @@
 
 class CompanyUser < ActiveRecord::Base
   devise :two_factor_authenticatable,:two_factor_backupable,
-         :otp_secret_encryption_key=>ENV['DEVISE_ENCRYPTION_KEY'], otp_secret_length: 4
+         :otp_secret_encryption_key=>ENV['DEVISE_ENCRYPTION_KEY'], otp_secret_length: 16
 
   devise :recoverable, :rememberable, :trackable, :validatable
 
