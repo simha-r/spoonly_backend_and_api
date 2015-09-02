@@ -43,8 +43,7 @@ class CompanyUser < ActiveRecord::Base
   end
 
   def disable_otp
-    self.otp_secret = CompanyUser.generate_otp_secret
-    self.otp_required_for_login = true
+    self.otp_required_for_login = false
     save!
   end
 
