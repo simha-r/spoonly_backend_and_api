@@ -1,0 +1,36 @@
+%br
+  %br
+.row.header
+  .col-xs-2
+    %h3 ID
+  .col-xs-2
+    %h3 Email
+  .col-xs-2
+    %h3 Phone
+  .col-xs-2
+    %h3 Roles
+  .col-xs-2
+    %h3 OTP
+%br
+  %br
+
+
+- @company_users.each do |user|
+  .row
+    .col-xs-2
+      = user.id
+    .col-xs-2
+      = user.email
+    .col-xs-2
+      = user.phone_number || 'NA'
+    .col-xs-2
+      = user.roles.collect &:name
+    .col-xs-2
+      = user.otp_required_for_login? ? 'OTP Enabled' : 'OTP Disabled'
+      - if user.otp_required_for_login?
+        = link_to 'Disable OTP',disable_otp_company_company_user_path(user),method: :put
+        = link_to 'View OTP',show_otp_company_company_user_path(user)
+      - else
+        =link_to 'Enable OTP',enable_otp_company_company_user_path(user),method: :put
+
+

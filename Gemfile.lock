@@ -454,6 +454,7 @@ DEPENDENCIES
   rails_12factor
   rolify
   rotp
+  rqrcode
   rqrcode_png
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
