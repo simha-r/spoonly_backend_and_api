@@ -250,6 +250,7 @@ GEM
     mimemagic (0.3.0)
     mini_portile (0.6.2)
     minitest (5.7.0)
+    mixpanel-ruby (2.2.0)
     multi_json (1.11.1)
     multi_xml (0.5.5)
     multipart-post (2.0.0)
@@ -439,6 +440,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   koala (~> 2.0)
+  mixpanel-ruby
   newrelic_rpm
   nexmo
   omniauth-facebook

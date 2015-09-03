@@ -56,3 +56,4 @@ gem 'airbrake'
 gem "bullet", :group => "development"
 gem 'rqrcode'
 gem 'rqrcode_png'
+gem 'mixpanel-ruby'
