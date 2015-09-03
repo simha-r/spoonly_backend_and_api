@@ -98,6 +98,7 @@
       }
 
       &.address {
+
         .new_address {
           text-align: left;
 
@@ -114,6 +115,34 @@
 
           .submit {
             padding-left: 15px;
+          }
+        }
+
+        .addresses {
+          padding: 20px 100px;
+        }
+
+        .select-address-container {
+          width: 300px;
+          height: 130px;
+          float: left;
+          padding: 24px 0;
+          border: 1px solid #ddd;
+          border-radius: 2px;
+          margin: 0 20px 20px;
+          cursor: pointer;
+
+          .selected{
+            height: 16px;
+            width: 16px;
+            line-height: 16px;
+            border-radius: 50%;
+            color: #fff;
+            background: #f38f30;
+            font-size: 12px;
+            position: absolute;
+            bottom: 25px;
+            left: 40px;
           }
         }
       }
