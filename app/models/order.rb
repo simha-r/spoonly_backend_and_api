@@ -67,6 +67,8 @@ class Order < ActiveRecord::Base
 
 
   scope :delivered,-> {where(state: 'delivered')}
+  scope :today, -> {where("delivery_time >= ? and delivery_time <= ?",Time.now.beginning_of_day,
+                          Time.now.end_of_day)}
 
   def auto_debit_amount
     user.wallet.debit_amount_for_order self

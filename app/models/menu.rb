@@ -25,6 +25,38 @@ class Menu < ActiveRecord::Base
            :through => :menu_products, source: :product
 
 
+  def self.today
+    where(menu_date: Date.current).first
+  end
+
+  def self.tomorrow
+    where(menu_date: Date.tomorrow).first
+  end
+
+  def self.current_lunch
+    if today
+      if Time.now < today.lunch_order_end_time
+        today
+      else
+        tomorrow
+      end
+    else
+      tomorrow
+    end
+  end
+
+  def self.current_dinner
+    if today
+      if Time.now < today.dinner_order_end_time
+        today
+      else
+        tomorrow
+      end
+    else
+      tomorrow
+    end
+  end
+
   def show_lunch
     hash = {}
     hash[:lunch] = {start_time: lunch_start_time, end_time: lunch_end_time,end_order_time: lunch_order_end_time,

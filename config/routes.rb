@@ -124,6 +124,7 @@ Rails.application.routes.draw do
         post :sms_update
       end
     end
+    resources :current_orders
     resources :company_users do
       member do
         put :enable_otp
