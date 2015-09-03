@@ -1,7 +1,7 @@
 @import 'customer_common';
 
 #orders_new {
-  @include make-xs-column(12,90px);
+  @include make-xs-column(12,12%);
   padding-top: 30px;
   padding-bottom: 30px;
   background-color: #F4F7F8;
@@ -17,13 +17,13 @@
     li {
       border: 1px solid #ddd;
       box-shadow: 0 5px 15px #888;
+      background: #fff;
 
       .title {
         margin: 0px;
         padding: 10px;
         background: #fff;
         text-align: left;
-        font-weight: 700;
         text-transform: uppercase;
 
         span.details {
@@ -36,7 +36,7 @@
       .active {
         background: #666;
         color: #fff;
-        font-weight: 300;
+        font-weight: 700;
       }
 
       .content {
@@ -102,6 +102,10 @@
         .new_address {
           text-align: left;
 
+          form {
+            background-color: #fff;
+          }
+
           .address_type {
             label {
               text-align: left;
@@ -124,9 +128,9 @@
 
         .select-address-container {
           width: 300px;
-          height: 130px;
+          height: 100px;
           float: left;
-          padding: 24px 0;
+          padding: 10px 0;
           border: 1px solid #ddd;
           border-radius: 2px;
           margin: 0 20px 20px;
