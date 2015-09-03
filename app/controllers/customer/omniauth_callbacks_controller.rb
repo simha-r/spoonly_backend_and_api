@@ -5,6 +5,7 @@ class Customer::OmniauthCallbacksController < Devise::OmniauthCallbacksControlle
   def all
     p env["omniauth.auth"]
     user = User.from_omniauth(env["omniauth.auth"], current_user)
+    session[:login_type]=user.login_type
     if user.persisted?
       user.confirm!
       flash[:notice] = "You are in..!!! Go to edit profile to see the status for the accounts"

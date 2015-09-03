@@ -1,11 +1,24 @@
 .col-xs-12.footer
   %p &copy; Spoonly 2015
-- if user_signed_in?
+
+- if session[:login_type]=='new_user'
   :javascript
-    var title = document.getElementsByTagName("title")[0].innerHTML;
+    analytics.alias("#{current_user.id}");
+    analytics.identify("#{current_user.id}",{name: "#{current_user.name}",
+                                            email: "#{current_user.email}"
+                                            });
+    analytics.track('Signed Up');
+- elsif session[:login_type]=='old_user'
+  :javascript
     analytics.identify("#{current_user.id}", {
       name: "#{current_user.name}",
       email: "#{current_user.email}"
     });
+    analytics.track('Logged in');
+
+- if user_signed_in?
+  :javascript
+    var title = document.getElementsByTagName("title")[0].innerHTML;
+
 %a{:href => "https://mixpanel.com/f/partner"}
   %img{:alt => "Mobile Analytics", :src => "//cdn.mxpnl.com/site_media/images/partner/badge_light.png"}/

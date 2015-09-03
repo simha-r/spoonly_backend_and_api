@@ -43,6 +43,7 @@ class User < ActiveRecord::Base
   has_many :referred_users,through: :referrals,foreign_key: :referrer_id,source: :referred
   has_one :referrer_user,through: :referred,foreign_key: :referred_id,source: :referrer
 
+  attr_accessor :login_type
 
   before_create :generate_referral_code
   before_create :generate_authentication_token
@@ -86,10 +87,12 @@ class User < ActiveRecord::Base
         user.email = email
         user.skip_confirmation!
         user.confirm! if user.save
+        user.login_type='new_user'
       end
       authorization.save if authorization.user_id = user.id
     else
       user = authorization.user
+      user.login_type='old_user'
     end
     user
   end
