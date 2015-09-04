@@ -83,7 +83,9 @@ Rails.application.routes.draw do
         get :recharge
         post :recharge
       end
-      resource :accounts,only:[:show]
+      resource :accounts,only:[:show] do
+        put :update
+      end
       resource :menu do
         get :lunch
         get :dinner

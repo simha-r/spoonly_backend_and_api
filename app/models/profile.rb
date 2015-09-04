@@ -17,10 +17,16 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
 
+  before_save :check_phone_number_changed
+
   def serializable_hash(options={})
     options||={}
     options[:except]=[:created_at,:updated_at,:user_id,:id]
     super
+  end
+
+  def check_phone_number_changed
+    user.mark_number_unverified if phone_number_changed?
   end
 
 end

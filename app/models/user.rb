@@ -101,6 +101,10 @@ class User < ActiveRecord::Base
     profile.update_attributes(phone_number_verified: true)
   end
 
+  def mark_number_unverified
+    profile.update_attributes(phone_number_verified: false)
+  end
+
   def update_number phone_number
     profile.update_attributes(phone_number: phone_number)
   end
