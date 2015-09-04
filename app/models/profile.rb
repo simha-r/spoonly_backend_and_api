@@ -26,7 +26,13 @@ class Profile < ActiveRecord::Base
   end
 
   def check_phone_number_changed
-    user.mark_number_unverified if phone_number_changed?
+    if phone_number_changed?
+      if phone_number_verified==false
+        return
+      end
+      puts "Phone number has changed"
+      user.mark_number_unverified
+    end
   end
 
 end
