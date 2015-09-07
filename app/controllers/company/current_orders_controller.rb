@@ -8,7 +8,6 @@ class Company::CurrentOrdersController < Company::BaseController
   end
 
   def multi_assign
-    byebug
     @orders = Order.find params[:order_ids]
     if @orders.present?
       @orders.each {|o| o.dispatch_with params[:delivery_executive_id]}
