@@ -58,8 +58,7 @@ class Menu < ActiveRecord::Base
   end
 
   def show_lunch
-    hash = {}
-    hash[:lunch] = {start_time: lunch_start_time, end_time: lunch_end_time,end_order_time: lunch_order_end_time,
+    hash = {start_time: lunch_start_time, end_time: lunch_end_time,end_order_time: lunch_order_end_time,
 
     products: menu_lunch_products.includes(:product).collect{|menu_product| menu_product.product.as_json.merge(menu_product_id: menu_product.id,sold_out: menu_product.sold_out)}}
     hash = {notice: 'No Products available today'} if !menu_lunch_products.present?
@@ -67,8 +66,7 @@ class Menu < ActiveRecord::Base
   end
 
   def show_dinner
-    hash = {}
-    hash[:dinner] = {start_time: dinner_start_time, end_time: dinner_end_time,end_order_time: dinner_order_end_time,
+    hash = {start_time: dinner_start_time, end_time: dinner_end_time,end_order_time: dinner_order_end_time,
                      products: menu_dinner_products.includes(:product).collect{|menu_product| menu_product.product.as_json.merge(menu_product_id: menu_product.id,sold_out: menu_product.sold_out)}}
     hash = {notice: 'No Products available today'} if !menu_dinner_products.present?
     hash
