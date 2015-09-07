@@ -22,7 +22,7 @@ class Api::V1::MenusController < Api::V1::BaseController
       render json: @menu.show_lunch
     else
       #TODO Send a notice key value that will be displayed in the app
-      render json:  {}
+      render json: {notice: 'We are closed today. Please check again tomorrow !'}
     end
   end
 
@@ -32,7 +32,7 @@ class Api::V1::MenusController < Api::V1::BaseController
       render json: @menu.show_dinner
     else
       #TODO Send a notice key value that will be displayed in the app
-      render json:  {}
+      render json: {notice: 'We are closed today. Please check again tomorrow !'}
     end
   end
 
