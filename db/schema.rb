@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150827070645) do
+ActiveRecord::Schema.define(version: 20150907100245) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,7 @@ ActiveRecord::Schema.define(version: 20150827070645) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "max_quantity"
+    t.boolean  "sold_out",     default: false
   end
 
   add_index "menu_products", ["menu_id"], name: "index_menu_products_on_menu_id", using: :btree
@@ -185,6 +186,8 @@ ActiveRecord::Schema.define(version: 20150827070645) do
     t.datetime "updated_at"
     t.string   "category"
     t.integer  "delivery_executive_id"
+    t.datetime "dispatched_at"
+    t.datetime "delivered_at"
   end
 
   create_table "products", force: true do |t|

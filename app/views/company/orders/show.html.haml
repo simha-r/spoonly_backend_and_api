@@ -2,22 +2,27 @@
   %thead
     %tr
       %th
-        User
-      %th
-        Address Id
+        User Details:
       %th
         Delivery Time
+      %th
+        Dispatched At
+      %th
+        Delivered At
       %th
         State
   %tr
     %td
       = @order.user.name
-    %td
-      = @order.address_id
+      = @order.address.formatted
     %td
       = @order.formatted_delivery_time
     %td
-      = @order.state
+      = @order.formatted_delivery_time
+    %td
+      = @order.formatted_delivery_time
+    %td
+      = @order.state.upcase
 
 
 %h3 Items
@@ -25,20 +30,16 @@
   %thead
     %tr
       %th
-        MenuProduct #
-      %th
         Item
       %th
         Quantity
       %th
         Photo
 
-  - @order.line_items.each do |li|
+  - @order.line_items.includes(:menu_product).includes(:product).each do |li|
     %tr
       %td
-        = li.menu_product.id
-      %td
-        = li.menu_product.product.name
+        = li.product.name
       %td
         = li.quantity
 
@@ -51,11 +52,14 @@
     = f.submit 'Dispatch'
 - if @order.dispatched?
   Dispatched through:
-  = @order.delivery_executive.name
+  = @order.delivery_executive.try &:name
 %br
   %br
     %br
 
+= link_to 'Back to Current Orders',[:company,:current_orders],class: 'btn btn-primary'
+%br
+  %br
 = link_to 'Back to All Orders',[:company,:orders]
 
 

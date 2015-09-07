@@ -83,5 +83,15 @@ class Address < ActiveRecord::Base
     super
   end
 
+  def formatted
+    if address_type=='home'
+      "#{flat}, #{building},#{address_details},#{landmark}"
+    else
+      "#{company} #{floor}, #{building},#{address_details},#{landmark}"
+    end
+
+
+  end
+
 
 end

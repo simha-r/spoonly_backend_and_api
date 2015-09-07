@@ -126,7 +126,16 @@ Rails.application.routes.draw do
         post :sms_update
       end
     end
-    resources :current_orders
+    resources :current_orders do
+      collection do
+        get :pending
+        get :acknowledged
+        get :dispatched
+        get :delivered
+        get :cancelled
+        post :multi_assign
+      end
+    end
     resources :company_users do
       member do
         put :enable_otp
@@ -135,8 +144,6 @@ Rails.application.routes.draw do
       end
     end
   end
-
   resources :sitemaps, :only => :show
   get "sitemap" => "sitemaps#show"
-
 end

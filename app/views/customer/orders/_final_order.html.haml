@@ -13,14 +13,14 @@
           %th Price
           %th Quantity
       %tbody
-        - @cart.line_items.each do |item|
-          - product = item.menu_product.product
+        - @cart.line_items.includes(:menu_product).includes(:product).each do |item|
+
           %tr
             %td
-              %p= product.name
-              %p= product.desc
+              %p= item.product.name
+              %p= item.product.desc
 
-            %td= product.price
+            %td= item.product.price
 
             %td= item.quantity
 

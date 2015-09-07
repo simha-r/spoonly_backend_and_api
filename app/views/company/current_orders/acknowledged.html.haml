@@ -1,0 +1,70 @@
+= render 'company/current_orders/header',state: 'acknowledged'
+
+%table.table
+  %thead
+    %tr.row
+      %th
+      %th
+        Order #
+      %th
+        Delivery Time
+      %th
+        User
+      %th
+        Address
+      %th
+        State
+  = form_tag multi_assign_company_current_orders_path do
+    - @orders.each do |order|
+      %tr.row
+        %td
+          = check_box_tag 'order_ids[]',order.id
+        %td
+          = link_to order.id,[:company,order]
+        %td
+          = order.user.name
+          %br
+          %i Address:
+          = order.address.formatted
+        %td
+          = order.delivery_time_range
+        %td
+          = order.state
+    =select_tag :delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.all,:id,:name)
+    =submit_tag 'Dispatch'
+
+
+
+
+.row
+  :javascript
+    var initialize = function(){
+
+    console.log('initializing');
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) {
+        window.console.log(message);
+      }
+    };
+
+    var pusher = new Pusher("#{Pusher.key}", {
+      encrypted: true
+    });
+    var channel = pusher.subscribe('orders');
+    channel.bind('purchased', function(data) {
+    var sound = new Howl({
+      urls: ['new_order.mp3'],
+      loop: true
+    }).play();
+
+    $('#new_order_alert').show()
+      //sound.stop();
+    });
+
+    }
+    initialize();
+    //$(function(){ initialize(); })
+    //$(document).on('page:load',initialize)
+
+

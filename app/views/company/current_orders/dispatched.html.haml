@@ -1,0 +1,71 @@
+= render 'company/current_orders/header',state: 'dispatched'
+
+%table.table
+  %thead
+    %tr.row
+      %th
+        Order #
+      %th
+        User-Address
+      %th
+        Delivery Time
+      %th
+        Dispatched At
+      %th
+        Delivery Executive
+      %th
+        State
+  - @orders.each do |order|
+    %tr.row
+      %td
+        = link_to order.id,[:company,order]
+      %td
+        = order.user.name
+        %br
+        %i Address:
+        = order.address.formatted
+      %td
+        = order.delivery_time_range
+      %td
+        = order.dispatched_at
+      %td
+        = "#{order.delivery_executive.name} , #{order.delivery_executive.phone_number}"
+      %td
+        = order.state
+
+
+
+
+
+.row
+  :javascript
+    var initialize = function(){
+
+    console.log('initializing');
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) {
+        window.console.log(message);
+      }
+    };
+
+    var pusher = new Pusher("#{Pusher.key}", {
+      encrypted: true
+    });
+    var channel = pusher.subscribe('orders');
+    channel.bind('purchased', function(data) {
+    var sound = new Howl({
+      urls: ['new_order.mp3'],
+      loop: true
+    }).play();
+
+    $('#new_order_alert').show()
+      //sound.stop();
+    });
+
+    }
+    initialize();
+    //$(function(){ initialize(); })
+    //$(document).on('page:load',initialize)
+
+

@@ -1,0 +1,20 @@
+
+.alert.alert-danger#new_order_alert{'style'=> "display: none"}
+  New order has been received..Reload page to see it !
+
+%table.table
+  %thead
+    %tr
+      %td{class: "#{state=='all' ? 'active' : ''}"}
+        = link_to 'All',[:company,:current_orders]
+      %td{class: "#{state=='pending' ? 'active' : ''}"}
+        = link_to 'Pending',[:pending,:company,:current_orders]
+      %td{class: "#{state=='acknowledged' ? 'active' : ''}"}
+        = link_to 'Acknowledged',[:acknowledged,:company,:current_orders]
+      %td{class: "#{state=='dispatched' ? 'active' : ''}"}
+        = link_to 'Dispatched',[:dispatched,:company,:current_orders]
+      %td{class: "#{state=='delivered' ? 'active' : ''}"}
+        = link_to 'Delivered',[:delivered,:company,:current_orders]
+
+%h3 #{state.upcase}
+%h3 #{@category}   Today- #{Date.today.strftime("%a,%-d %b")}

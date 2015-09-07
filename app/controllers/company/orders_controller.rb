@@ -25,6 +25,10 @@ class Company::OrdersController < Company::BaseController
     end
   end
 
+  def multi_assign
+
+  end
+
   def sms_update
     if DeliveryExecutive.allowed_numbers.include? params['from_number']
       message = params['content'].strip

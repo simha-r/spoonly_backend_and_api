@@ -18,6 +18,7 @@ class LineItem < ActiveRecord::Base
   belongs_to :order
   belongs_to :cart
   belongs_to :menu_product
+  has_one :product,through: :menu_product
 
   delegate :product, to: :menu_product
 

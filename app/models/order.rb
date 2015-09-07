@@ -45,7 +45,7 @@ class Order < ActiveRecord::Base
       transitions from: :pending, to: :acknowledged
     end
 
-    event :dispatch do
+    event :dispatch,before: [:record_dispatch_time] do
       transitions from: :acknowledged, to: :dispatched
     end
 
@@ -65,10 +65,12 @@ class Order < ActiveRecord::Base
   alias_method :deliver, :deliver!
   alias_method :cancel, :cancel!
 
-
+  scope :pending,-> {where(state: 'pending')}
   scope :delivered,-> {where(state: 'delivered')}
   scope :today, -> {where("delivery_time >= ? and delivery_time <= ?",Time.now.beginning_of_day,
                           Time.now.end_of_day)}
+  scope :lunch, -> {where(category: 'lunch')}
+  scope :dinner, -> {where(category: 'dinner')}
 
   def auto_debit_amount
     user.wallet.debit_amount_for_order self
@@ -186,6 +188,34 @@ class Order < ActiveRecord::Base
 
   def items_count
     line_items.count
+  end
+
+  def self.show_upcoming_session_orders
+    @orders = Order.today.includes(:user).includes(:address)
+    menu = Menu.today
+    if (Time.now < (menu.lunch_end_time + 1.hours))
+      @orders = @orders.lunch
+      @category='Lunch'
+    elsif (Time.now > (menu.lunch_end_time + 1.hours)) && (Time.now < menu.dinner_end_time)
+      @orders = @orders.dinner
+      @category='Dinner'
+    end
+    @orders = @orders.order(delivery_time: :asc)
+    {orders: @orders,category: @category}
+  end
+
+  def dispatch_with delivery_executive_id
+    delivery_executive = DeliveryExecutive.find delivery_executive_id
+    self.delivery_executive = delivery_executive
+    dispatch!
+  end
+
+
+
+  private
+
+  def record_dispatch_time
+    self.dispatched_at=Time.now
   end
 
 end
