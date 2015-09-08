@@ -13,7 +13,7 @@
     .col-xs-2
       = executive.phone_number
     .col-xs-2
-      = executive.state.humanize
+      = executive.state.try :humanize
     .col-xs-2
       - if executive.not_available?
         = link_to "I'm back!",mark_available_company_delivery_executive_path(executive,state: 'available'),method: :put
