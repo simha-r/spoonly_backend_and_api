@@ -21,6 +21,7 @@ class Order < ActiveRecord::Base
   has_many :line_items
   belongs_to :address
   belongs_to :user
+  has_one :profile,through: :user
   belongs_to :delivery_executive
   has_one :debit
 
@@ -206,8 +207,15 @@ class Order < ActiveRecord::Base
 
   def dispatch_with delivery_executive_id
     delivery_executive = DeliveryExecutive.find delivery_executive_id
+    delivery_executive.mark_out_for_delivery
     self.delivery_executive = delivery_executive
     dispatch!
+  end
+
+  def self.search query
+    @orders = where(id: query).includes(:address).includes(:user) + joins(:user).joins(:profile).where("profiles.phone_number = ?",
+                                                                    query).includes(:address).includes(:user) + joins(:user).where("users.email = ?",query).includes(:address).includes(:user)
+
   end
 
 

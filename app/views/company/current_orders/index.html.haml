@@ -1,5 +1,41 @@
 = render 'company/current_orders/header',state: 'all'
 
+= form_tag company_current_orders_path,method: :get do
+  = text_field_tag :search,params[:search]
+  = submit_tag 'Search Orders'
+
+- if params[:search].present?
+  - if @search_results.present?
+    %h4 Search Results:
+    %table.table
+      %thead
+        %tr.row
+          %th
+            Order #
+          %th
+            User-Address
+          %th
+            Delivery Time
+          %th
+            State
+      - @search_results.each do |order|
+        %tr.row
+          %td
+            = link_to order.id,[:company,order]
+          %td
+            = order.user.name
+            %br
+            %i Address:
+            = order.address.formatted
+          %td
+            = order.delivery_time_range
+
+          %td
+            = order.state
+  - else
+    %h4= "No Results found for #{params[:search]}"
+
+
 %table.table
   %thead
     %tr.row
@@ -48,7 +84,7 @@
     var channel = pusher.subscribe('orders');
     channel.bind('purchased', function(data) {
     var sound = new Howl({
-      urls: ['new_order.mp3'],
+      urls: [#{asset_path('new_order.mp3')}],
       loop: true
     }).play();
 

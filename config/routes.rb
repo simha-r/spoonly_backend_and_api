@@ -121,6 +121,7 @@ Rails.application.routes.draw do
       member do
         put :acknowledge
         put :assign
+        put :cancel
       end
       collection do
         post :sms_update
@@ -141,6 +142,11 @@ Rails.application.routes.draw do
         put :enable_otp
         put :disable_otp
         get :show_otp
+      end
+    end
+    resources :delivery_executives do
+      member do
+        put :mark_available
       end
     end
   end

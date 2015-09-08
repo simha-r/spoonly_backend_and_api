@@ -1,0 +1,21 @@
+.row
+  .col-xs-2
+    %h4 Name
+  .col-xs-2
+    %h4 Phone Number
+  .col-xs-2
+    %h4 State
+
+- @delivery_executives.each do |executive|
+  .row
+    .col-xs-2
+      = executive.name
+    .col-xs-2
+      = executive.phone_number
+    .col-xs-2
+      = executive.state.humanize
+    .col-xs-2
+      - if executive.not_available?
+        = link_to "I'm back!",mark_available_company_delivery_executive_path(executive,state: 'available'),method: :put
+
+  %br

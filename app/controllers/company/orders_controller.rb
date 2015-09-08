@@ -25,8 +25,10 @@ class Company::OrdersController < Company::BaseController
     end
   end
 
-  def multi_assign
-
+  def cancel
+    if @order.cancel!
+      redirect_to [:company,@order]
+    end
   end
 
   def sms_update

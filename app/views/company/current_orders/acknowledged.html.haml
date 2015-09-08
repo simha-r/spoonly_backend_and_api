@@ -1,38 +1,38 @@
 = render 'company/current_orders/header',state: 'acknowledged'
 
-%table.table
-  %thead
-    %tr.row
-      %th
-      %th
-        Order #
-      %th
-        Delivery Time
-      %th
-        User
-      %th
-        Address
-      %th
-        State
+.row
+  .col-xs-2
+    Order #
+  .col-xs-2
+    Delivery Time
+  .col-xs-2
+    User
+  .col-xs-2
+    Address
+  .col-xs-2
+    State
+.row
+  %br
+    %br
+- if @orders.present?
   = form_tag multi_assign_company_current_orders_path do
     - @orders.each do |order|
-      %tr.row
-        %td
+      .row
+        .col-xs-2
           = check_box_tag 'order_ids[]',order.id
-        %td
+        .col-xs-2
           = link_to order.id,[:company,order]
-        %td
+        .col-xs-2
           = order.user.name
           %br
           %i Address:
           = order.address.formatted
-        %td
+        .col-xs-2
           = order.delivery_time_range
-        %td
+        .col-xs-2
           = order.state
-    =select_tag :delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.all,:id,:name)
-    =submit_tag 'Dispatch'
-
+    = select_tag :delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.available,:id,:name)
+    = submit_tag 'Dispatch'
 
 
 
@@ -53,8 +53,9 @@
     });
     var channel = pusher.subscribe('orders');
     channel.bind('purchased', function(data) {
+
     var sound = new Howl({
-      urls: ['new_order.mp3'],
+      urls: [#{asset_path('new_order.mp3')}],
       loop: true
     }).play();
 

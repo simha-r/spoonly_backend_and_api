@@ -48,11 +48,14 @@
 
 - if @order.acknowledged?
   = form_for [:assign,:company,@order],method: :put do |f|
-    = f.collection_select :delivery_executive_id,DeliveryExecutive.all,:id,:name
+    = f.collection_select :delivery_executive_id,DeliveryExecutive.available,:id,:name
     = f.submit 'Dispatch'
 - if @order.dispatched?
   Dispatched through:
   = @order.delivery_executive.try &:name
+%br
+- if !@order.cancelled?
+  = link_to 'Cancel Order',[:cancel,:company,@order],method: :put, data: {confirm: "Are you sure?"}
 %br
   %br
     %br
