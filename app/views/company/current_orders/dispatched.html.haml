@@ -55,7 +55,7 @@
     var channel = pusher.subscribe('orders');
     channel.bind('purchased', function(data) {
     var sound = new Howl({
-      urls: [#{asset_path('new_order.mp3')}],
+      urls: ["#{asset_path('new_order.mp3')}"],
       loop: true
     }).play();
 
