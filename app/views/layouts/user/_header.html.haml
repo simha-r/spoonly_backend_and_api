@@ -22,14 +22,17 @@
                     .col-xs-6
                       %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
                   .modal-body
-                    .col-xs-6
-                      .social-auth-button.fb-button
-                        %i.fa.fa-facebook
-                        %span Facebook
-                    .col-xs-6
-                      .social-auth-button.google-button
-                        %i.fa.fa-google
-                        %span Google
+                    - User.omniauth_providers.each do |provider|
+                      .col-xs-6
+                        = link_to omniauth_authorize_path(User, provider) do
+                          - if provider == :facebook
+                            .social-auth-button.fb-button
+                              %i.fa.fa-facebook
+                              %span Facebook
+                          - elsif provider == :google
+                            .social-auth-button.google-button
+                              %i.fa.fa-google
+                              %span Google
 
                     .col-xs-12.text-center.msg
                       %p We do not post anything on your wall.

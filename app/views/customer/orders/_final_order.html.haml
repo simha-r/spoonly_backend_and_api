@@ -23,7 +23,6 @@
             %td= item.product.price
 
             %td= item.quantity
-
     = form_tag customer_orders_path, class: "form-horizontal" do
       - delivery_times = MenuProduct.send("show_#{@cart.category}_times")
       .form-group
