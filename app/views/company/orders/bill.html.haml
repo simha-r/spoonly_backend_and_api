@@ -1,0 +1,56 @@
+= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+
+%h3= "Order ##{@order.id}"
+%table.table
+  %thead
+    %tr
+      %th
+        User Details:
+      %th
+        Delivery Time
+
+  %tr
+    %td
+      = @order.user.name
+      %br
+      Ph:
+      = @order.user.profile.phone_number
+      %br
+      = @order.address.formatted
+    %td
+      = @order.formatted_delivery_time
+
+%h3 Items
+%table.table
+  %thead
+    %tr
+      %th
+        Item
+      %th
+        Quantity
+
+  - @order.line_items.includes(:menu_product).includes(:product).each do |li|
+    %tr
+      %td
+        = li.product.name
+      %td
+        = li.quantity
+%br
+.row
+  .col-xs-1
+  .col-xs-1
+    Total Amount
+    %br
+    %b= "#{@order.total_price} "
+  .col-xs-1
+    = "-"
+  .col-xs-1
+    Prepaid Amount
+    %br
+    %b="#{@order.prepaid_amount}"
+  .col-xs-1
+    = "="
+  .col-xs-1
+    Due
+    %br Amount
+    %b="#{@order.cash_to_pay}"

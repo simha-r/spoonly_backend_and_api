@@ -1,14 +1,25 @@
 class Company::OrdersController < Company::BaseController
 
   before_filter :authenticate_dispatcher!,except: [:sms_update]
-  before_filter :set_order,except: [:index,:sms_update]
+  before_filter :set_order,except: [:index,:sms_update,:by_date]
   before_filter :authenticate_sms_sender!,only: [:sms_update]
 
   def index
-    @orders = Order.order(delivery_time: :desc).includes(:user).paginate page: params[:page]
+    @orders = Order.order(delivery_time: :desc).includes(:user).includes(:address).paginate page: params[:page]
+  end
+
+  def by_date
+    if params[:date]
+      @delivery_date = DateTime.new params[:date][:year].to_i,params[:date][:month].to_i,params[:date][:day].to_i
+      @orders = Order.find_by_date @delivery_date
+    end
   end
 
   def show
+  end
+
+  def bill
+    render layout: false
   end
 
   def acknowledge

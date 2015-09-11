@@ -1,47 +1,7 @@
 .alert.alert-danger#new_order_alert{'style'=> "display: none"}
   New order has been received..Reload page to see it !
 
-
-
-
-
-
-
-
-
-%table.table
-  %thead
-    %tr
-      %th
-        Order #
-      %th
-        User
-      %th
-        Address Id
-      %th
-        Delivery Time
-      %th
-        State
-  - @orders.each do |order|
-    %tr
-      %td
-        = link_to order.id,[:company,order]
-      %td
-        = order.user.name
-      %td
-        = order.address_id
-      %td
-        = order.formatted_delivery_time
-      %td
-        = order.state
-
-
-.row
-  = will_paginate @orders
-
-
-
-
+= render 'list_orders'
 
 .row
   :javascript

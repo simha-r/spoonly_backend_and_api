@@ -1,0 +1,9 @@
+= form_tag by_date_company_orders_path,method: :get do
+  %b Delivery Date:
+  - if params[:date]
+    = select_date(Date.new(params[:date][:year].to_i,params[:date][:month].to_i,params[:date][:day].to_i))
+  - else
+    = select_date
+  = submit_tag "Search"
+- if @orders
+  = render 'list_orders'

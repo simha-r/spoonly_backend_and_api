@@ -1,0 +1,39 @@
+- if @orders.present?
+
+  %table.table
+    %thead
+      %tr
+        %th
+          Order #
+        %th
+          User
+        %th
+          Category
+        %th
+          Address
+        %th
+          Delivery Time
+        %th
+          State
+    - @orders.each do |order|
+      %tr
+        %td
+          = link_to order.id,[:company,order]
+        %td
+          = order.user.name
+        %td
+          = order.category.upcase
+        %td
+          = order.address.formatted
+        %td
+          = order.formatted_delivery_time
+        %td
+          = order.state
+
+
+  .row
+    -#= will_paginate @orders
+- else
+  %h3 No Orders present
+
+

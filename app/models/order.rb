@@ -218,6 +218,9 @@ class Order < ActiveRecord::Base
 
   end
 
+  def self.find_by_date date
+    Order.where("date(delivery_time) = ?",date)
+  end
 
 
   private

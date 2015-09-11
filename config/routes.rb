@@ -122,9 +122,11 @@ Rails.application.routes.draw do
         put :acknowledge
         put :assign
         put :cancel
+        get :bill
       end
       collection do
         post :sms_update
+        get :by_date
       end
     end
     resources :current_orders do
