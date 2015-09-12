@@ -1,5 +1,8 @@
-= title 'Awesome Fresh Food Delivered To Your Desk in Hyderabad. Order Lunch and Dinner from our ever changing daily menu'
-= content_for :description, 'Freshly prepared wholesome meals. Delivered to your Desk. Order lunch and dinner online'
+= title 'Order Fresh, Tasty Food Online in Hyderabad. Order Lunch and Dinner from our ever changing daily menu'
+= content_for :description, 'Freshly prepared tasty,wholesome meals. Delivered to your Desk. Order lunch and dinner online'
+= content_for :keywords, 'Home Delivery, Lunch ,Office Lunch, Dinner, Healthy Food,Wholesome Meals, Order Food Online,
+ Online Food delivery'
+
 #customer_home
   .section-one
     .col-xs-12
@@ -16,7 +19,7 @@
           = form_tag inside_customer_homes_path, id: 'locationForm', class: "form-horizontal" do
             .form-group
               .city-location
-                %span HYDERABAD
+                %span Hyderabad
                 = text_field_tag 'locality','',id: 'searchTextField',size: '40',placeholder: 'Enter Location eg. Hitec City '
                 = hidden_field_tag 'latitude'
                 = hidden_field_tag 'longitude'
