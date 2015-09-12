@@ -57,3 +57,4 @@ gem "bullet", :group => "development"
 gem 'rqrcode'
 gem 'mixpanel-ruby'
 gem "figaro"
+gem 'metamagic'
