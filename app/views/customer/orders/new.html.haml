@@ -25,6 +25,7 @@
     - else
       %li.sign-in
         %p.title
+          %i.fa.fa-check
           Please login before continuing
           %span.details= current_user.name
 
@@ -55,6 +56,7 @@
     - else
       %li.phone_number_verification
         %p.title
+          %i.fa.fa-check
           Please Verify mobile number
           %span.details= current_user.profile.phone_number
 
@@ -135,6 +137,7 @@
 
   $('#confirm_address').click(function(){
    $('.address .title').removeClass('active')
+   $('.address .title').prepend('<i class="fa fa-check"></i>')
 
     $('.addresses').hide();
 

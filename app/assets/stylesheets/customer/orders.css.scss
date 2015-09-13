@@ -20,11 +20,23 @@
       background: #fff;
 
       .title {
+        color: #808080;
         margin: 0px;
         padding: 10px;
         background: #fff;
         text-align: left;
         text-transform: uppercase;
+
+        .fa {
+          height: 13px;
+          width: 13px;
+          border-radius: 50%;
+          background-color: grey;
+          color: #fff;
+          line-height: 13px;
+          text-align: center;
+          font-size: 10px;
+        }
 
         span.details {
           text-transform: none;
