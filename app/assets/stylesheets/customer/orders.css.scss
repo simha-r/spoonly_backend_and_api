@@ -134,4 +134,23 @@
       }
     }
   }
+
+
+  .orders-process-list {
+
+    .sign-in,
+    .phone_number_verification,
+    .address,
+    .order_confirmation {
+      @include make-xs-column(12,0);
+
+      .col-xs-4 {
+        padding: 0;
+      }
+    }
+
+    .saved-info {
+      top: 9px;
+    }
+  }
 }
