@@ -16,6 +16,9 @@ class Customer::OrdersController < ApplicationController
       return
     end
     @order = Order.new
+    sum_of_items = 0
+    @cart.line_items.each { |item| sum_of_items += (item.quantity * item.price) }
+    @cart_total = sum_of_items
   end
 
   # POST /orders
