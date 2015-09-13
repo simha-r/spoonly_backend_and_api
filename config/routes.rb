@@ -127,6 +127,7 @@ Rails.application.routes.draw do
       collection do
         post :sms_update
         get :by_date
+        get :collections_summary
       end
     end
     resources :current_orders do

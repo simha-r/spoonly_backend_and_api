@@ -17,4 +17,4 @@
         = link_to 'Delivered',[:delivered,:company,:current_orders]
 
 %h3 #{state.upcase}
-%h3 #{@category}   Today- #{Date.today.strftime("%a,%-d %b")}
+%h4 #{@category.upcase} -  Today, #{Date.today.strftime("%a  %-d %b")}

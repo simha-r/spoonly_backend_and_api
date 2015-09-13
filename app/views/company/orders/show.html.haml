@@ -6,10 +6,12 @@
         User Details:
       %th
         Delivery Time
-      %th
-        Dispatched At
-      %th
-        Delivered At
+      - if @order.dispatched?
+        %th
+          Dispatched At
+      - if @order.delivered?
+        %th
+          Delivered At
       %th
         State
   %tr
@@ -82,7 +84,7 @@
   = @order.delivery_executive.try &:name
 %br
   %br
-- if !@order.cancelled?
+- if !@order.cancelled? && !@order.delivered?
   = link_to 'Cancel Order',[:cancel,:company,@order],method: :put, data: {confirm: "Are you sure?"}
 %br
   %br

@@ -1,0 +1,42 @@
+%h3 Bill Collections
+%br
+
+= form_tag collections_summary_company_orders_path,method: :get do
+  %b Date
+  - if params[:date]
+    = select_date(Date.new(params[:date][:year].to_i,params[:date][:month].to_i,params[:date][:day].to_i))
+  - else
+    = select_date
+  Category
+  = select_tag :category,options_from_collection_for_select(['lunch','dinner'],:to_s,:upcase)
+  = submit_tag "Search"
+
+%br
+  %br
+
+- results = @delivered_orders.to_a.group_by{|order| order.delivery_executive}
+- results.each do |delivery_executive,orders|
+  .row
+    .col-xs-2
+      = delivery_executive.try(:name).try :upcase
+    .col-xs-4
+      %h5  ORDERS
+      .row
+        .col-xs-3
+          ID
+        .col-xs-3
+          CASH
+        .col-xs-3
+          USER
+      - orders.each do |order|
+        .row
+          .col-xs-3
+            = order.id
+          .col-xs-3
+            =order.cash_to_pay
+          .col-xs-3
+            =order.user.name
+      .row
+        %b Total Due:
+        = Order.total_cash_to_pay orders
+  %br

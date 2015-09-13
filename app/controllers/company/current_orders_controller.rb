@@ -2,10 +2,9 @@ class Company::CurrentOrdersController < Company::BaseController
 
 
   def index
+    @category = params[:category] || 'lunch'
     @search_results = Order.search(params[:search]) if params[:search]
-    results = Order.show_upcoming_session_orders
-    @orders = results[:orders]
-    @category = results[:category]
+    @orders = Order.show_todays_orders @category
   end
 
   def multi_assign
@@ -19,34 +18,34 @@ class Company::CurrentOrdersController < Company::BaseController
   end
 
   def pending
-    results = Order.show_upcoming_session_orders
-    @orders = results[:orders].pending
-    @category = results[:category]
+    @category = params[:category] || 'lunch'
+    @orders = Order.show_todays_orders @category
+    @orders = @orders.pending
   end
 
   def acknowledged
-    results = Order.show_upcoming_session_orders
-    @orders = results[:orders].acknowledged
-    @category = results[:category]
+    @category = params[:category] || 'lunch'
+    @orders = Order.show_todays_orders @category
+    @orders = @orders.acknowledged
   end
 
   def dispatched
-    results = Order.show_upcoming_session_orders
-    @orders = results[:orders].dispatched.includes :delivery_executive
-    @category = results[:category]
+    @category = params[:category] || 'lunch'
+    @orders = Order.show_todays_orders @category
+    @orders = @orders.dispatched.includes :delivery_executive
   end
 
   def delivered
+    @category = params[:category] || 'lunch'
     @order = Order.find params[:order_id] if params[:order_id]
-    results = Order.show_upcoming_session_orders
-    @orders = results[:orders].delivered
-    @category = results[:category]
+    @orders = Order.show_todays_orders @category
+    @orders = @orders.delivered
   end
 
   def cancelled
-    results = Order.show_upcoming_session_orders
-    @orders = results[:orders].cancelled
-    @category = results[:category]
+    @category = params[:category] || 'lunch'
+    results = Order.show_todays_orders @category
+    @orders = @orders.cancelled
   end
 
 

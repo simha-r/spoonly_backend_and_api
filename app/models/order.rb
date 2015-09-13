@@ -85,6 +85,10 @@ class Order < ActiveRecord::Base
     prepaid_amount > 0 ?  (total_price - prepaid_amount) : total_price
   end
 
+  def self.total_cash_to_pay orders
+    orders.sum &:cash_to_pay
+  end
+
   def prepaid_amount
     debit.try(:amount).to_f
   end
@@ -191,6 +195,7 @@ class Order < ActiveRecord::Base
     line_items.count
   end
 
+  #NOT using anywhere
   def self.show_upcoming_session_orders
     @orders = Order.today.includes(:user).includes(:address)
     menu = Menu.today
@@ -203,6 +208,17 @@ class Order < ActiveRecord::Base
     end
     @orders = @orders.order(delivery_time: :asc)
     {orders: @orders,category: @category}
+  end
+
+  def self.show_todays_orders category
+    category = 'lunch' if !category
+    @orders = Order.today.includes(:user).includes(:address)
+    if category=='lunch'
+      @orders = @orders.lunch
+    elsif category=='dinner'
+      @orders = @orders.dinner
+    end
+    @orders = @orders.order(delivery_time: :asc)
   end
 
   def dispatch_with delivery_executive_id
