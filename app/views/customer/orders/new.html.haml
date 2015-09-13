@@ -6,7 +6,7 @@
     - if !user_signed_in?
       %li.sign-in
         %p.title{class:(user_signed_in? ? '' : 'active')}
-          Please login before continuing
+          Please Sign in
           .content
             .col-xs-12.col-sm-offset-5.col-sm-6.col-md-offset-5.col-md-6
               - if devise_mapping.omniauthable?
@@ -16,7 +16,7 @@
                       - if provider == :facebook
                         .social-auth-button.fb-button
                           %i.fa.fa-facebook
-                          %span Facebook
+                          %span   Facebook
                       - elsif provider == :google
                         .social-auth-button.google-button
                           %i.fa.fa-google
@@ -27,7 +27,7 @@
         .col-xs-4
           %p.title
             %i.fa.fa-check
-            Please login before continuing
+            Please Sign in
         .col-xs-4.saved-info
           %span.details= current_user.name
 
@@ -41,6 +41,7 @@
           #phone_number_verification.content
             = form_tag start_customer_number_verifications_path,class: '',remote: true, class: "form-horizontal" do
               .form-group
+                Phone Number
                 = number_field_tag 'phone_number', nil, class: "form-control"
                 = submit_tag 'Continue', class: "btn btn-warning"
               %p.text-danger Please verify mobile number to continue.
@@ -48,6 +49,7 @@
             .row#enter_code{style: 'display: none'}
               = form_tag finish_customer_number_verifications_path, class: "form-horizontal" do
                 .form-group
+                  OTP
                   = number_field_tag 'verification_code', nil, class: "form-control"
                   = submit_tag 'Verify', class: "btn btn-warning"
                 %p.text-danger Please enter the code received
