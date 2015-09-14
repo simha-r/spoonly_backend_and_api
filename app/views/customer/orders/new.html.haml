@@ -93,9 +93,8 @@
       - can_order = user_signed_in? && current_user.phone_number_verified
       #final_order
         = render 'customer/orders/final_order', :can_order => can_order
+#order_success
 
-#order_success.hidden
-  Order has been successfully placed
 :javascript
   $('#phone_number').keypress(function(){
     $('#enter_code').hide();

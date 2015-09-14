@@ -1,0 +1,11 @@
+-#TODO Style success screen like spoonjoy
+- if @order.persisted?
+  .row= "User: #{@order.user.name}"
+  .row= "Delivery Address: #{@order.address.formatted}"
+  .row= "Total Amount: #{@order.total_price}"
+  .row Order has been successfully placed
+  .row = "Delivery Date #{@order.formatted_delivery_time} "
+  - if @order.prepaid_amount
+    .row = "Amount Paid  #{@order.prepaid_amount}"
+  - if @order.cash_to_pay > 0
+    .row = "Amount to be paid  #{@order.cash_to_pay}"
