@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150907164108) do
+ActiveRecord::Schema.define(version: 20150914100001) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -202,6 +202,7 @@ ActiveRecord::Schema.define(version: 20150907164108) do
     t.integer  "photo_file_size"
     t.datetime "photo_updated_at"
     t.boolean  "vegetarian",         default: false
+    t.string   "long_description"
   end
 
   create_table "profiles", force: true do |t|

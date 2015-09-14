@@ -13,6 +13,7 @@
 #  photo_file_size    :integer
 #  photo_updated_at   :datetime
 #  vegetarian         :boolean          default(FALSE)
+#  long_description   :string(255)
 #
 
 class Product < ActiveRecord::Base

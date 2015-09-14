@@ -12,6 +12,8 @@
 #  updated_at            :datetime
 #  category              :string(255)
 #  delivery_executive_id :integer
+#  dispatched_at         :datetime
+#  delivered_at          :datetime
 #
 
 class Order < ActiveRecord::Base

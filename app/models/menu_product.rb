@@ -9,6 +9,7 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  max_quantity :integer
+#  sold_out     :boolean          default(FALSE)
 #
 
 class MenuProduct < ActiveRecord::Base

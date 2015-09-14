@@ -20,6 +20,7 @@
 #  encrypted_otp_secret_salt :string(255)
 #  otp_required_for_login    :boolean
 #  phone_number              :string(255)
+#  otp_backup_codes          :string(255)      is an Array
 #
 
 class CompanyUser < ActiveRecord::Base
