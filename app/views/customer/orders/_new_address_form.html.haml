@@ -3,10 +3,10 @@
   .form-group
     = label_tag "Address Type", nil, class: "control-label col-xs-6 col-md-4"
     .col-xs-6.col-md-4.address_type
-      %label{for: :address_type_office, class: "control-label col-xs-6 pull-left"}
+      %label{for: :address_type_office, class: "control-label col-xs-4 pull-left"}
         = radio_button_tag 'address_type','office',default: true,checked: true
         Office
-      %label{for: :address_type_home, class: "control-label col-xs-6 pull-left"}
+      %label{for: :address_type_home, class: "control-label col-xs-4 pull-left"}
         = radio_button_tag 'address_type','home', checked: false, class: "control-label"
         Home
 
@@ -17,12 +17,12 @@
 
   .form-group
     = label_tag :flat, nil, class: "control-label col-xs-6 col-md-4"
-    .col-xs-4.col-md-2
+    .col-xs-6.col-md-4
       = text_field_tag :flat, nil, class: "form-control"
 
   .form-group
     = label_tag :floor, nil, class: "control-label col-xs-6 col-md-4"
-    .col-xs-4.col-md-2
+    .col-xs-6.col-md-2
       = text_field_tag :floor, nil, class: "form-control"
 
   .form-group
@@ -43,5 +43,16 @@
   .form-group
     = hidden_field_tag :is_default,true
   .form-group
-    .col-xs-offset-6.col-md-offset-4.submit
-      = submit_tag 'Deliver to this address', class: "btn btn-warning"
+    .col-xs-offset-6.col-md-offset-4.col-xs-2.cancel
+      = button_tag(type: 'button', class: 'btn btn-default') do
+        = content_tag(:span, 'Cancel')
+    .col-xs-4
+      .submit
+        = submit_tag 'Deliver to this address', class: "btn btn-action"
+
+
+:javascript
+  $('.cancel button').click(function() {
+    $('.new_address').hide();
+    $('.addresses').show();
+  })

@@ -10,8 +10,23 @@ body {
   font-family: 'Open Sans', sans-serif;
 }
 
+$action_color:#f38f31;
+
 .text-warning {
-  color: #f38f30;
+  color: $action_color;
+}
+
+.btn-action {
+  background-color: $action_color;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.btn-action:hover {
+  background-color: #e2660a;
+  color: #fff;
 }
 
 .navbar.navbar-default {

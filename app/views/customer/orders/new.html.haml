@@ -43,7 +43,7 @@
               .form-group
                 Phone Number
                 = number_field_tag 'phone_number', nil, class: "form-control"
-                = submit_tag 'Continue', class: "btn btn-warning"
+                = submit_tag 'Continue', class: "btn btn-action"
               %p.text-danger Please verify mobile number to continue.
 
             .row#enter_code{style: 'display: none'}
@@ -51,7 +51,7 @@
                 .form-group
                   OTP
                   = number_field_tag 'verification_code', nil, class: "form-control"
-                  = submit_tag 'Verify', class: "btn btn-warning"
+                  = submit_tag 'Verify', class: "btn btn-action"
                 %p.text-danger Please enter the code received
             .row.errors#wrong_code{style: 'display: none'}
           -##final_order{style: 'display: none'}
@@ -81,7 +81,7 @@
               = hidden_field_tag :address_id
               -#= link_to 'Add Home Address','',class: 'add_home'
               -#= link_to 'Add Office Address','',class: 'add_office'
-              #confirm_address= link_to 'Proceed','', class: "btn btn-warning"
+              #confirm_address= link_to 'Proceed','', class: "btn btn-action"
           #selected_address
           - if !current_user.addresses.present?
             - show_new_address = true
@@ -115,17 +115,13 @@
   })
 
     $('#address_type_home').click(function(){
-      $('#company').hide()
-      $('label[for="company"]').hide()
-      $('#flat').show()
-      $('label[for="flat"]').show()
+      $('#company').closest('.form-group').addClass('hidden')
+      $('#flat').closest('.form-group').removeClass('hidden')
     })
 
     $('#address_type_office').click(function(){
-      $('#flat').hide()
-      $('label[for="flat"]').hide()
-      $('#company').show()
-      $('label[for="company"]').show()
+      $('#flat').closest('.form-group').addClass('hidden')
+      $('#company').closest('.form-group').removeClass('hidden')
     })
 
   $('.select-address-container').click(function(e){
