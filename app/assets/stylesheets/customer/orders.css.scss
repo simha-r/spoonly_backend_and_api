@@ -74,6 +74,9 @@
       }
 
       &.address {
+        p {
+          margin-bottom: 0;
+        }
 
         .new_address {
           padding-top: 30px;
@@ -115,12 +118,33 @@
         }
 
         .addresses {
-          padding: 20px 100px;
+          @include make-xs-column(12,0);
+          padding-top: 20px;
+          padding-bottom: 20px;
+          padding-left: 160px;
+
+          .new_address_btn {
+            padding-right: 110px;
+          }
+
+          .add_office {
+            font-size: 11px;
+            font-weight: 700;
+          }
+
+          #confirm_address {
+            padding-right: 92px;
+
+            .btn-action {
+              float: right;
+              width: 200px;
+            }
+          }
         }
 
         .select-address-container {
           width: 300px;
-          height: 100px;
+          height: 130px;
           float: left;
           padding: 10px 0;
           border: 1px solid #ddd;
@@ -165,8 +189,11 @@
       }
     }
 
-    .saved-info {
+    .col-xs-4.saved-info {
+      text-align: left;
       top: 9px;
+      padding-left: 50px;
+      color: #808080;
     }
   }
 }

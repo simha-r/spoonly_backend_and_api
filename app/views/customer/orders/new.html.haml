@@ -72,8 +72,8 @@
         - if user_signed_in? && current_user.phone_number_verified
           - if current_user.addresses.present?
             .addresses
-              .col-xs-12.text-right
-                = link_to 'ADD NEW ADDRESS', '', class: 'add_office text-warning'
+              .col-xs-12.new_address_btn
+                = link_to 'ADD NEW ADDRESS', '', class: 'add_office text-warning pull-right'
               .col-xs-12
                 - current_user.addresses.each do |address|
                   .select-address-container
@@ -81,7 +81,8 @@
               = hidden_field_tag :address_id
               -#= link_to 'Add Home Address','',class: 'add_home'
               -#= link_to 'Add Office Address','',class: 'add_office'
-              #confirm_address= link_to 'Proceed','', class: "btn btn-action"
+              .col-xs-12
+                #confirm_address= link_to 'Proceed','', class: "btn btn-action"
           #selected_address
           - if !current_user.addresses.present?
             - show_new_address = true
@@ -129,7 +130,7 @@
     var $select_address = $(this);
 
     $('.select-address-container').css('border','1px solid #ddd');
-    $('.select-address-container .selected').addClass('hidden');
+    //$('.select-address-container .selected').addClass('hidden');
     $(".select-address",this).children().removeClass('hidden');
 
     $(this).css('border','1px solid #f38f30');
