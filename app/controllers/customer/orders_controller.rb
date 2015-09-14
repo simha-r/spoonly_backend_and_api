@@ -29,15 +29,29 @@ class Customer::OrdersController < ApplicationController
     @order.delivery_time = "#{menu_date.year}-#{menu_date.month}-#{menu_date.day}-"+order_params[:delivery_time]
     @order.add_line_items_from_cart(@cart)
     @order.category = @cart.category
-    if @order.save
-      #TODO Why not @cart.destroy
-      Cart.destroy(session[:cart_id])
-      session[:cart_id] = nil
-      @order.start_process!
-      # OrderNotifier.received(@order).deliver
-      redirect_to success_customer_order_path @order,notice: 'Your order has been created !'
+    if order_params[:delivery_time].present?
+      if @order.save
+        #TODO Why not @cart.destroy
+        Cart.destroy(session[:cart_id])
+        session[:cart_id] = nil
+        @order.start_process!
+        # OrderNotifier.received(@order).deliver
+        respond_to do |format|
+          format.html {        redirect_to success_customer_order_path @order,notice: 'Your order has been created !'     }
+          format.js {render 'customer/orders/create_success'}
+        end
+
+      else
+        respond_to do |format|
+          format.html { render action: 'new'}
+          format.js {render 'customer/orders/create_failure'}
+        end
+      end
     else
-       render action: 'new'
+      respond_to do |format|
+        format.html { render action: 'new'}
+        format.js {render 'customer/orders/create_failure'}
+      end
     end
   end
 

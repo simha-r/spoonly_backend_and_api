@@ -94,6 +94,8 @@
       #final_order
         = render 'customer/orders/final_order', :can_order => can_order
 
+#order_success.hidden
+  Order has been successfully placed
 :javascript
   $('#phone_number').keypress(function(){
     $('#enter_code').hide();
@@ -164,6 +166,18 @@
    return false;
 
   })
+
+
+  $('#order_delivery_time').change(function(){
+      var delivery_time = $(this).val();
+      if(delivery_time != ""){
+        $('#place_order_button').removeClass('hidden')
+      }
+      else{
+        $('#place_order_button').addClass('hidden')
+      }
+  })
+
 
 
 

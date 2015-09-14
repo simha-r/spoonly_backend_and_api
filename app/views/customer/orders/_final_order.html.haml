@@ -26,8 +26,8 @@
             %span TOTAL
             %span.amount= "Rs. #{@cart_total}"
 
-    = form_tag customer_orders_path, class: "form-horizontal" do
-      - delivery_times = MenuProduct.send("show_#{@cart.category}_times")
+    = form_tag customer_orders_path, class: "form-horizontal",id:"place_order_form",remote: true do
+      - delivery_times = [[nil,"Select Time"]]+MenuProduct.send("show_#{@cart.category}_times")
       .form-group
         .col-xs-8
           %span.msg
@@ -38,4 +38,4 @@
         = hidden_field_tag 'order[pay_type]','cash_on_delivery'
         = hidden_field_tag 'order[address_id]'
         .col-xs-4.pull-right
-        = submit_tag 'Confirm Order', class: "btn btn-warning"
+        #place_order_button.hidden= submit_tag 'Confirm Order', class: "btn btn-warning"
