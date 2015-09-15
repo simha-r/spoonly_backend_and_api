@@ -2,7 +2,6 @@ module Api::V1::SessionsHelper
 
 
   def get_user_info access_token,provider
-
     if provider=='facebook'
       graph = Koala::Facebook::API.new(access_token)
       profile = graph.get_object("me")
@@ -12,6 +11,7 @@ module Api::V1::SessionsHelper
       @name = profile['name']
     elsif provider=='google'
       #TODO get email and uid
+
       response = HTTParty.get("https://www.googleapis.com/plus/v1/people/me",
                               headers: {"Access_token"  => access_token,
                                         "Authorization" => "OAuth #{access_token}"})
@@ -19,7 +19,7 @@ module Api::V1::SessionsHelper
         response = JSON.parse(response.body)
         @email = response['emails'][0]['value']
         @uid = response['id']
-        @name = response['name']['givenName'] + response['name']['familyName']
+        @name = response['name']['givenName'] + " "+response['name']['familyName']
         @picture = response['image']['url']+"&sz=480"
       end
     end

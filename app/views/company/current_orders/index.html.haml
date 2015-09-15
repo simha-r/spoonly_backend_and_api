@@ -3,7 +3,7 @@
 = form_tag company_current_orders_path,method: :get do
   = text_field_tag :search,params[:search]
   = submit_tag 'Search Orders'
-
+%br
 - if params[:search].present?
   - if @search_results.present?
     %h4 Search Results:
@@ -13,7 +13,7 @@
           %th
             Order #
           %th
-            User-Address
+            User Details
           %th
             Delivery Time
           %th
@@ -42,7 +42,7 @@
       %th
         Order #
       %th
-        User-Address
+        User Details
       %th
         Delivery Time
       %th

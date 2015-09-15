@@ -1,20 +1,26 @@
 
 .alert.alert-danger#new_order_alert{'style'=> "display: none"}
   New order has been received..Reload page to see it !
-
+.row
+  .col-xs-8
+    %h4 #{@category.upcase} -  Today, #{Date.today.strftime("%a  %-d %b")}
+  .col-xs-4
+    - if @category=='lunch'
+      .pull-right= link_to "See Dinner Instead",[:dinner,:company,:current_orders]
+    -else
+      .pull-right= link_to "See Lunch Instead",[:lunch,:company,:current_orders]
+%br
+%br
 %table.table
   %thead
     %tr
       %td{class: "#{state=='all' ? 'active' : ''}"}
-        = link_to 'All',[:company,:current_orders]
+        = link_to 'All',[:lunch,:company,:current_orders]
       %td{class: "#{state=='pending' ? 'active' : ''}"}
-        = link_to 'Pending',[:pending,:company,:current_orders]
+        = link_to 'Pending',[:pending,:company,:current_orders,category: @category]
       %td{class: "#{state=='acknowledged' ? 'active' : ''}"}
-        = link_to 'Acknowledged',[:acknowledged,:company,:current_orders]
+        = link_to 'Acknowledged',[:acknowledged,:company,:current_orders,category: @category]
       %td{class: "#{state=='dispatched' ? 'active' : ''}"}
-        = link_to 'Dispatched',[:dispatched,:company,:current_orders]
+        = link_to 'Dispatched',[:dispatched,:company,:current_orders,category: @category]
       %td{class: "#{state=='delivered' ? 'active' : ''}"}
-        = link_to 'Delivered',[:delivered,:company,:current_orders]
-
-%h3 #{state.upcase}
-%h4 #{@category.upcase} -  Today, #{Date.today.strftime("%a  %-d %b")}
+        = link_to 'Delivered',[:delivered,:company,:current_orders,category: @category]
