@@ -12,15 +12,15 @@ module Api::V1::SessionsHelper
     elsif provider=='google'
       #TODO get email and uid
 
-      response = HTTParty.get("https://www.googleapis.com/plus/v1/people/me",
+      response = HTTParty.get("https://www.googleapis.com/oauth2/v2/userinfo",
                               headers: {"Access_token"  => access_token,
                                         "Authorization" => "OAuth #{access_token}"})
       if response.code == 200
         response = JSON.parse(response.body)
-        @email = response['emails'][0]['value']
+        @email = response['email']
         @uid = response['id']
-        @name = response['name']['givenName'] + " "+response['name']['familyName']
-        @picture = response['image']['url']+"&sz=480"
+        @name = response['name']
+        @picture = response['picture']
       end
     end
     if !@email.present?
