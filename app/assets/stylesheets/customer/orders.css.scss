@@ -4,7 +4,6 @@
   @include make-xs-column(12,12%);
   padding-top: 30px;
   padding-bottom: 30px;
-  background-color: #F4F7F8;
 
   .orders-process-list {
     padding: 0;
@@ -16,7 +15,6 @@
 
     li {
       border: 1px solid #ddd;
-      box-shadow: 0 5px 15px #888;
       background: #fff;
 
       .title {

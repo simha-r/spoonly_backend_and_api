@@ -5,6 +5,7 @@
   border-bottom: 1px solid #ddd;
   padding-top: 16px;
   height: 55px;
+  background-color: #fff;
 
   .location {
     text-align: center;
@@ -87,6 +88,7 @@
 }
 
 #customer_menu {
+  @include make-xs-column(12,0);
 
   .section-one {
     @include make-xs-column(12,0);
@@ -228,6 +230,11 @@
   }
 
   #menu_unavailable_modal {
+    margin-top: 180px;
+
+    .modal-content {
+      height: 180px;
+    }
 
     .modal-header {
       border: none;
@@ -235,6 +242,7 @@
 
     .modal-body {
       text-align: center;
+      padding: 30px;
     }
 
     p.msg-big {

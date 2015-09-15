@@ -1,6 +1,7 @@
 @import 'customer_common';
 
 #customer_home {
+  @include make-xs-column(12,0);
 
   .section-one,
   .section-two {

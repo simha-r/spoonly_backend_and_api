@@ -8,6 +8,7 @@ html,
 body {
   height: 100%;
   font-family: 'Open Sans', sans-serif;
+  background-color: #f7f5f9;
 }
 
 $action_color:#f38f31;
@@ -79,6 +80,7 @@ $action_color:#f38f31;
 
 
 .container-fluid.main-content {
+  height: 100%;
   padding-left: 0;
   padding-right: 0;
 }
@@ -90,6 +92,7 @@ $action_color:#f38f31;
   text-align: center;
   border-top: 1px solid #ddd;
   bottom: 0;
+  background-color: #fff;
 }
 
 
