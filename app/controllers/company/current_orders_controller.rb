@@ -1,5 +1,9 @@
 class Company::CurrentOrdersController < Company::BaseController
 
+  def index
+    redirect_to [:lunch,:company,:current_orders]
+  end
+
 
   def lunch
     @category = 'lunch'

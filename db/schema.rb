@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150914100001) do
+ActiveRecord::Schema.define(version: 20150916140758) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,6 +153,15 @@ ActiveRecord::Schema.define(version: 20150914100001) do
     t.integer  "cart_id"
     t.float    "price"
     t.integer  "quantity",        default: 1
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "locations", force: true do |t|
+    t.decimal  "latitude",              precision: 10, scale: 6
+    t.decimal  "longitude",             precision: 10, scale: 6
+    t.datetime "last_seen"
+    t.integer  "delivery_executive_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

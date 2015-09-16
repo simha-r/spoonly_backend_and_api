@@ -1,0 +1,54 @@
+<div id="map_canvas"></div>
+<script>
+  var map;
+  var global_markers = [];
+
+  var markers = <%= raw @delivery_hash.to_json %>;
+//  var markers = [[17.463409, 78.370650,'trialhead1'], [17.477327, 78.397043, 'trialhead2']];
+
+
+  var infowindow = new google.maps.InfoWindow({});
+
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(17.450963, 78.372538);
+    var myOptions = {
+      zoom: 14,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    addMarker();
+  }
+
+  function addMarker() {
+    for (var i = 0; i < markers.length; i++) {
+      // obtain the attribues of each marker
+      var lat = parseFloat(markers[i][0]);
+      var lng = parseFloat(markers[i][1]);
+      var person_name = markers[i][2];
+      var person_last_seen = markers[i][3];
+      var myLatlng = new google.maps.LatLng(lat, lng);
+
+      var contentString = "<html><body><div><p><h2>" + person_name + "</h2></p><p>Last Seen: " +
+          ""+person_last_seen+"</div></body></html>";
+
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: "Coordinates: " + lat + " , " + lng + " | Trailhead name: " + person_name
+      });
+
+      marker['infowindow'] = contentString;
+
+      global_markers[i] = marker;
+
+      google.maps.event.addListener(global_markers[i], 'click', function() {
+        infowindow.setContent(this['infowindow']);
+        infowindow.open(map, this);
+      });
+    }
+  }
+
+  $(function(){initialize();})
+</script>

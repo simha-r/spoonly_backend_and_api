@@ -13,6 +13,7 @@
 class DeliveryExecutive < ActiveRecord::Base
 
   has_many :orders
+  has_many :locations
 
   scope :available,->{where(state: 'available')}
   scope :out_for_delivery, ->{where(state: 'available')}
@@ -35,6 +36,19 @@ class DeliveryExecutive < ActiveRecord::Base
 
   def not_available?
     state != 'available'
+  end
+
+  def last_seen_location
+    locations.order(last_seen: :asc).last
+  end
+
+  def log_location lat,long,timestamp
+    last_seen = Time.at(timestamp.to_f).to_datetime
+    locations.create!(latitude: lat.to_f,longitude: long.to_f,last_seen: last_seen)
+  end
+
+  def self.find_from_tracecar id
+    where(phone_number: id).first
   end
 
 end

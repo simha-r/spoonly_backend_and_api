@@ -107,6 +107,9 @@ Rails.application.routes.draw do
 
   end
 
+  # Have to manually specify mapping because traccars sends a port number
+  get "/company/delivery_executives/update_location:80" => "company/delivery_executives#update_location"
+
   namespace :company do
     root 'homes#home'
     resources :homes
@@ -152,9 +155,12 @@ Rails.application.routes.draw do
     resources :delivery_executives do
       member do
         put :mark_available
+        get :show_location
       end
+      get :live_view,on: :collection
     end
   end
   resources :sitemaps, :only => :show
   get "sitemap" => "sitemaps#show"
+
 end

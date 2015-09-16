@@ -17,5 +17,8 @@
     .col-xs-2
       - if executive.not_available?
         = link_to "I'm back!",mark_available_company_delivery_executive_path(executive,state: 'available'),method: :put
+    .col-xs-2
+      - if executive.last_seen_location
+        = link_to "View Location",show_location_company_delivery_executive_path(executive),:target => "_blank"
 
   %br
