@@ -200,6 +200,17 @@
   .content {
     padding-left: 120px;
     padding-right: 120px;
+
+    form select {
+      background-color: #f58f1e;
+      color: #fff;
+      text-transform: uppercase;
+      font-weight: 700;
+
+      &:focus {
+        border: none;
+      }
+    }
   }
   .order-headers span {
     text-transform: uppercase;
@@ -271,4 +282,26 @@
   margin-right: 12%;
   margin-top: 50px;
   text-align: center;
+  padding-top: 20px;
+
+  .order-success-msg {
+    p:first-of-type {
+      font-size: 20px;
+    }
+  }
+
+  .order-details {
+    padding-top: 20px;
+
+    .label-text {
+      color: #9b979a;
+    }
+
+    .value {
+      text-align: left;
+      font-size: 16px;
+      font-weight: 600;
+
+    }
+  }
 }

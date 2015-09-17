@@ -1,40 +1,45 @@
 - if @order.persisted?
-  .col-xs-12
+  .col-xs-12.order-success-msg
     %p Thank you for placing order with us
     %p Your Order has been confirmed.
-  .col-xs-12
-    .col-xs-2
-      %p User
-    .col-xs-4
-      %p= @order.user.name
-  .col-xs-12
-    .col-xs-2
-      %p Delivery Address
-    .col-xs-4
-      %p= @order.address.formatted
 
-  .col-xs-12
-    .col-xs-2
-      %p Total Amount
-    .col-xs-4
-      %p= @order.total_price
+  .col-xs-offset-2.col-xs-8.order-details
+    .col-xs-12
+      .col-xs-4.label-text
+        %p User
+      .col-xs-8.value
+        %p= @order.user.name
+    .col-xs-12
+      .col-xs-4.label-text
+        %p Delivery Address
+      .col-xs-8.value
+        %p= @order.address.formatted
 
-  .col-xs-12
-    .col-xs-2
-      %p Delivery Date
-    .col-xs-4
-      %p= @order.formatted_delivery_time
+    .col-xs-12
+      .col-xs-4.label-text
+        %p Total Amount
+      .col-xs-8.value
+        %p= @order.total_price
 
-  .col-xs-12
-    - if @order.prepaid_amount
-      .col-xs-2
-        %p Amount Paid
-      .col-xs-4
-        %p= @order.prepaid_amount
+    .col-xs-12
+      .col-xs-4.label-text
+        %p Delivery Date
+      .col-xs-8.value
+        %p= @order.formatted_delivery_time
 
-  .col-xs-12
-    - if @order.cash_to_pay > 0
-      .col-xs-2
-        %p Amount to be paid
-      .col-xs-4
-        %p= @order.cash_to_pay
+    .col-xs-12
+      - if @order.prepaid_amount
+        .col-xs-4.label-text
+          %p Amount Paid
+        .col-xs-8.value
+          %p= @order.prepaid_amount
+
+    .col-xs-12
+      - if @order.cash_to_pay > 0
+        .col-xs-4.label-text
+          %p Amount to be paid
+        .col-xs-8.value
+          %p= @order.cash_to_pay
+
+    .col-xs-12
+      = link_to "Okay!", "/", class: "btn btn-action"
