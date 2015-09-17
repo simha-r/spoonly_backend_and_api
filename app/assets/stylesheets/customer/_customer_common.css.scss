@@ -98,7 +98,6 @@ $action_color:#f38f31;
 
 .section-two#about {
   @include make-xs-column(12,0);
-  padding-bottom: 40px;
 
   h3.title {
     padding: 48px 0;
@@ -110,6 +109,7 @@ $action_color:#f38f31;
   .location-form-container {
     @include make-xs-column(12,0);
     padding-top: 30px;
+    padding-bottom: 30px;
 
     .title,
     .desc {
@@ -241,6 +241,70 @@ $action_color:#f38f31;
       position: absolute;
       line-height: 32px;
       padding-top: 32px;
+    }
+  }
+
+  .about-section-testimonals {
+    @include make-xs-column(12,0);
+    padding-top: 40px;
+    background-color: #fff;
+    text-align: center;
+    min-height: 150px;
+
+    .testimonals-heart {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background-color: #f38f31;
+      font-size: 50px;
+      line-height: 100px;
+      color: #fff;
+      position: absolute;
+      left: calc(50% - 50px);
+    }
+
+    h2 {
+      margin: 0;
+      padding-top: 120px;
+    }
+
+    .testimonals-holder {
+      padding: 72px 60px;
+      overflow: hidden;
+      text-align: left;
+
+      .testimony {
+        @include make-xs-column(4,0);
+        padding: 0 10px 0 60px;
+        border-right: 1px solid #E6E6E6;
+
+        .name,
+        .city {
+          font-size: 24px;
+        }
+
+        .name {
+          font-weight: 600;
+        }
+
+        .city {
+          font-weight: 100;
+        }
+
+        .comment {
+          padding: 36px 0;
+          font-size: 24px;
+          font-family: "Times New Roman",Times,serif;
+          color: gray;
+          line-height: 40px;
+        }
+
+        .fa-quote-left,
+        .fa-quote-right {
+          color: #f38f31;
+        }
+      }
+
     }
   }
 }
