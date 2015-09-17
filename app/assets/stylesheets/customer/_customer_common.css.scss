@@ -362,7 +362,10 @@ $action_color:#f38f31;
       button {
         margin: 0;
       }
+    }
 
+    .modal-body .provider-url:hover {
+      text-decoration: none;
     }
   }
 

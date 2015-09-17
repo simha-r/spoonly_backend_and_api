@@ -8,10 +8,11 @@
         %p.title{class:(user_signed_in? ? '' : 'active')}
           Please Sign in
           .content
-            .col-xs-12.col-sm-offset-5.col-sm-6.col-md-offset-5.col-md-6
+            .col-xs-12.col-sm-offset-4.col-sm-6.col-md-offset-4.col-md-6
               - if devise_mapping.omniauthable?
+                %h3.provider-msg We donot post anything on your wall
                 - resource_class.omniauth_providers.each do |provider|
-                  .col-xs-12
+                  .col-xs-12.provider
                     = link_to omniauth_authorize_path(resource_name, provider) do
                       - if provider == :facebook
                         .social-auth-button.fb-button
