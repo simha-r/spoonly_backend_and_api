@@ -1,7 +1,7 @@
 @import 'customer_common';
 
 #orders_new {
-  @include make-xs-column(12,12%);
+  @include make-xs-column(12,135px);
   padding-top: 30px;
   padding-bottom: 30px;
 

@@ -1,7 +1,7 @@
 @import 'customer_common';
 
 .location-checkout-header {
-  @include make-xs-column(12,90px);
+  @include make-xs-column(12,120px);
   border-bottom: 1px solid #ddd;
   padding-top: 16px;
   height: 55px;
@@ -39,7 +39,7 @@
 
     span.count {
       position: absolute;
-      left: 115px;
+      left: 90px;
       top: -4px;
       height: 20px;
       width: 20px;
@@ -165,7 +165,7 @@
 #menu_lunch {
 
   .menu-row {
-    @include make-xs-column(12,90px);
+    @include make-xs-column(12,120px);
     padding-top: 30px;
     background-color: #F4F7F8;
   }
