@@ -1,11 +1,27 @@
 module NumberVerification
 
-  require 'nexmo'
-
   def self.start user,number
     user.update_number number
     code = Random.rand(10000..99999).to_s
-    user.profile.update_attributes(phone_number_verification_code: code)
+    user.profile.update_attributes(phone_number_verification_code: code,number_verification_code_generated_at: Time.now)
+    send_code user
+  end
+
+  def self.resend user
+    last_generated_time = user.profile.number_verification_code_generated_at
+    elapsed_time =  last_generated ? (Time.now - user.profile
+    .number_verification_code_generated_at) : nil
+    if(elapsed_time && (elapsed_time > 10.minutes))
+      code = Random.rand(10000..99999).to_s
+      user.profile.update_attributes(phone_number_verification_code: code,number_verification_code_generated_at: Time.now)
+    end
+    if !last_generated_time
+      user.profile.update_attributes(number_verification_code_generated_at: Time.now)
+    end
+    send_code user
+  end
+
+  def self.send_code user
     text = "Spoonly code: #{user.profile.phone_number_verification_code}. Valid for 5 minutes."
     SmsProvider.send_message user.profile.phone_number,text
   end

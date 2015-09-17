@@ -92,6 +92,7 @@ Rails.application.routes.draw do
       end
       resource :number_verifications,only:[] do
         post :start
+        get :resend
         post :finish
       end
       resources :addresses,only:[:index,:create,:update,:destroy]

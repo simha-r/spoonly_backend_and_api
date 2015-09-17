@@ -14,6 +14,16 @@ class Api::V1::NumberVerificationsController < Api::V1::BaseController
     end
   end
 
+  # GET /api/number_verifications/resend
+  def resend
+    response = NumberVerification.resend current_user
+    if response
+      render json: {},status: :ok
+    else
+      head 422,content_type: 'application/json'
+    end
+  end
+
   # POST /api/number_verifications params {verification_code: 4567}
   def finish
     if NumberVerification.finish current_user,params[:verification_code]
