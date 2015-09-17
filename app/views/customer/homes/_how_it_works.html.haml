@@ -1,27 +1,50 @@
 .section-two#about
-  %h4.title "What's for lunch?"
-  %h1.title
-    Finally has an
-    %br
-    easy answer
+  %h3.title How it Works?
 
-  .col-xs-12
-    .col-xs-12.col-sm-4.content.chef
-      %h4 Chef-Made Meals
-      %p
-        Our chefs use fresh, seasonal ingredients
-        to make tasty,wholesome meals.
+  .about-section
+    .col1.pic
+      = image_tag "food-dome.png"
+    .col2.text.text-1
+      %p.about-section-text-title Daily Menus
+      %p.about-section-text-desc
+        Life can get boring, but your food won’t. Treat yourself with a different meal everyday, thanks to our daily changing menus.
 
-    .col-xs-12.col-sm-4.content.menu
-      %h4 Fresh Menu Daily
-      %p
-        We love whipping up new meal choices everyday.
-        Order from a daily rotating menu of Indian
-        and International cuisine.
+      %p.about-section-text-title.sep Locally Sourced Ingredients
+      %p.about-section-text-desc
+        A building is only as strong as its foundation, food is no different. Only the best ingredients go into making your meal.
 
-    .col-xs-12.col-sm-4.content.bag
-      %h4 Tap to Eat
-      %p
-        Use the website to order on-demand or
-        schedule delivery in advance. Our mobile
-        app is being built as we speak !
+      %p.about-section-text-title.sep Experienced Chefs
+      %p.about-section-text-desc
+        Experience is the best teacher and our chefs are good students. Your meals are powered by the lessons taught in the school of time. We have got your meal covered.
+    .about-section-title
+      Fresh & Homely
+
+  .about-section
+    .col1.text.text-2
+      %p.about-section-text-title Web and Mobile app
+      %p.about-section-text-desc
+        The size of your screen won’t get in between you and your meal. Order via web or mobile as per your convenience.
+    .col2.pic
+      = image_tag "responsive-web-icon.png"
+    .about-section-title
+      Ease of ordering
+
+  .about-section
+    .col1.pic
+      = image_tag "time-management.png"
+    .col2.text.text-3
+      %p.about-section-text-title Express Delivery
+      %p.about-section-text-desc
+        You hate to wait and we know that. We won’t keep you away from your food for long. Our riders deliver your meals in a jiffy.
+    .about-section-title
+      Delivery in less than 30 mins
+
+  .about-section.location-form-container
+    %h1.title We are just next-door!
+    %h3.desc One doesn't keep their food waiting, place your order!
+    - if cookies[:customer]
+      %p WIP
+    -else
+      .location-form
+        = render "customer/homes/location_form"
+
