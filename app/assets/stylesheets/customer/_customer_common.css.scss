@@ -98,12 +98,16 @@ $action_color:#f38f31;
 
 .section-two#about {
   @include make-xs-column(12,0);
+  padding-top: 48px;
 
-  h3.title {
-    padding: 48px 0;
+  .title {
     margin: 0;
     text-align: center;
     color: #42413e;
+  }
+
+  .sep {
+    padding-bottom: 48px;
   }
 
   .location-form-container {

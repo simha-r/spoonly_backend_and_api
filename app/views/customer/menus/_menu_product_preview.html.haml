@@ -1,6 +1,7 @@
 - product = menu_product.product
 .menu-img
-  = image_tag "menu-1.jpg", class: "img-responsive"
+  -#= image_tag "menu-1.jpg", class: "img-responsive"
+  = image_tag product.photo_url, class: "img-responsive"
 .menu-details
   -# veg or non-veg
   - product_type = product.vegetarian ? 'Veg' : 'Non Veg'
