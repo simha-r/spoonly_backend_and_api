@@ -101,7 +101,7 @@
   }
 
   .section-one {
-    background-image: url(image-path('main_bg.jpg'));
+    background-image: cloudinary-url('main_bg.jpg');
     height: 380px;
     min-height: 380px;
     background-repeat: no-repeat;
