@@ -18,8 +18,8 @@
 
 class Product < ActiveRecord::Base
 
-  has_attached_file :photo,:convert_options => { :mobile => "-strip -quality 20" },
-                    :styles => { :medium => "300x300", :mobile => "1440*960",:thumb=>"100*100" },
+  has_attached_file :photo,:convert_options => { :mobile => "-strip -quality 35" },
+                    :styles => { :medium => "300x300", :mobile => "800*520",:thumb=>"100*100" },
                     :default_url => "/images/:style/missing.png",processors: [:thumbnail, :paperclip_optimizer]
   validates_attachment_content_type :photo, :content_type => /\Aimage\/.*\Z/
 
