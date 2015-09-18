@@ -44,11 +44,12 @@
       On time delivery
 
   .about-section.location-form-container
-    %h1.title We are just next-door!
-    %h3.desc One doesn't keep their food waiting, place your order!
-    - if !cookies[:customer]
-      .location-form
-        = render "customer/homes/location_form"
+    %h2.title Start eating better now!
+    -#%h3.desc Start eating better now!
+    -#Add the below input later
+    -#- if controller_name=='homes'
+    -#  .location-form
+    -#    = render "customer/homes/location_form"
 
   .about-section-testimonals
     .testimonals-heart

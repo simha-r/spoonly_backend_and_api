@@ -1,6 +1,6 @@
 - if @order.persisted?
   .col-xs-12.order-success-msg
-    %p Thank you for placing order with us
+    %p Thank you for placing your order with us.
     %p Your Order has been confirmed.
 
   .col-xs-offset-2.col-xs-8.order-details
@@ -42,4 +42,4 @@
           %p= @order.cash_to_pay
 
     .col-xs-12
-      = link_to "Okay!", "/", class: "btn btn-action"
+      = link_to "OK", "/", class: "btn btn-action"

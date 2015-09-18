@@ -10,7 +10,7 @@
           .content
             .col-xs-12.col-sm-offset-4.col-sm-6.col-md-offset-4.col-md-6
               - if devise_mapping.omniauthable?
-                %h3.provider-msg We donot post anything on your wall
+                %h4.provider-msg &emsp; &emsp; We do not post anything on your wall
                 - resource_class.omniauth_providers.each do |provider|
                   .col-xs-12.provider
                     = link_to omniauth_authorize_path(resource_name, provider) do
