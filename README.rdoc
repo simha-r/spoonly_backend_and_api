@@ -9,7 +9,9 @@
 - When you update a static image with the same name, beware of cloudinary. It might not recognize the new image.
 
 
+- On updating a static image, always run this command locally:(NOT ON HEROKU I THINK)
 
+   rake cloudinary:sync_static
 
 
 
