@@ -1,5 +1,25 @@
 == README
 
+
+
+- To deploy the environment variables from config/application.yml to heroku, use this command:
+
+   figaro heroku:set -e production -a shrouded-savannah-3845
+
+- When you update a static image with the same name, beware of cloudinary. It might not recognize the new image.
+
+
+
+
+
+
+
+
+
+
+
+
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
@@ -26,3 +46,6 @@ Things you may want to cover:
 
 Please feel free to use a different markup language if you do not plan to run
 <tt>rake doc:app</tt>.
+
+
+
