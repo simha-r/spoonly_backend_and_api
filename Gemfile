@@ -58,3 +58,4 @@ gem 'rqrcode'
 gem 'mixpanel-ruby'
 gem "figaro"
 gem 'metamagic'
+gem 'cloudinary'
