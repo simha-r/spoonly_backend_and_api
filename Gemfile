@@ -9,6 +9,7 @@ gem 'aws-sdk'
 gem 'bootstrap-sass'
 gem 'byebug'
 gem 'coffee-rails', '~> 4.0.0'
+gem 'daemons'
 gem 'devise'
 gem 'dotenv-rails', :groups => [:development, :test]
 gem 'geocoder'

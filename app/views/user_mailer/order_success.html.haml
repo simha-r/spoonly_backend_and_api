@@ -1,21 +1,48 @@
-Order Details:
-%br
-- @order.line_items.each do |li|
-  = li.product.name
-  = li.quantity
-  = li.price
-%br
-
-Total Price:
-= @order.total_price
-
 - user =@order.user
-- delivery_date = @order.delivery_time.to_date
-- if delivery_date != Date.current
-  - message = "Dear #{user.name}, Thank you for using Spoonly. Your order ##{@order.id} will be delivered on #{@order.delivery_time.to_date.strftime("%a,%-d %b")} by #{@order.delivery_time_range}."
-- else
-  - message = "Dear #{user.name}, Thank you for using Spoonly. Your order ##{@order.id} will be delivered by #{@order.delivery_time_range}."
 
-- if @order.cash_to_pay>0
-  - message = message+"Please pay Rs #{@order.cash_to_pay} to the delivery executive."
-= message
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=utf-8", "http-equiv" => "Content-Type"}
+    %title Spoonly
+    = stylesheet_link_tag "order_success"
+
+  %body
+    #order_success_mail
+      .header
+        .logo
+        .header-msg-container
+          %p.header-msg-top Download Android App
+          %p.separator
+          %p.header-msg-bottom Order Confirmation
+      .mail-body
+        .user
+          %p= "Hi #{user.name}"
+        .msg
+          %p Thanks for your order. This email confirms that we have received your order.
+
+        .order-details
+          %p Order Details:
+          - @order.line_items.each do |li|
+            .order
+              .item-img
+                = image_tag li.product.photo.url(:mobile), alt: "#{li.product.name} image"
+              .item-name
+                %p= li.product.name
+              .item-qty-price
+                %p= "#{li.quantity} x #{li.price}
+            .total
+              %p Grand Total
+              %p= "#{Rs. @order.total_price}"
+
+
+
+      - delivery_date = @order.delivery_time.to_date
+      - if delivery_date != Date.current
+        - message = "Dear #{user.name}, Thank you for using Spoonly. Your order ##{@order.id} will be delivered on #{@order.delivery_time.to_date.strftime("%a,%-d %b")} by #{@order.delivery_time_range}."
+      - else
+        - message = "Dear #{user.name}, Thank you for using Spoonly. Your order ##{@order.id} will be delivered by #{@order.delivery_time_range}."
+
+      - if @order.cash_to_pay>0
+        - message = message+"Please pay Rs #{@order.cash_to_pay} to the delivery executive."
+      = message

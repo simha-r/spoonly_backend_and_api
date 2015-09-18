@@ -1,0 +1,32 @@
+body {
+  width: 100%;
+}
+
+#order_success_mail {
+  width: 100%;
+
+  .header {
+
+    .logo {
+      width: 20%;
+      background-image: cloudinary-url('spoonly_text.png');
+    }
+
+    .header-msg-container {
+      width: 80%;
+
+      .header-msg-top {
+        font-size: 12px;
+      }
+
+      .separator {
+        border-bottom: 1px solid #ddd;
+      }
+
+      .header-msg-bottom {
+        font-size: 18px;
+      }
+    }
+  }
+
+}

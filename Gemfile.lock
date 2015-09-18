@@ -75,6 +75,7 @@ GEM
       execjs
     coffee-script-source (1.9.1.1)
     columnize (0.8.9)
+    daemons (1.1.9)
     debugger-linecache (1.2.0)
     delayed_job (4.0.1)
       activesupport (>= 3.0, < 4.2)
@@ -429,6 +430,7 @@ DEPENDENCIES
   byebug
   cloudinary
   coffee-rails (~> 4.0.0)
+  daemons
   delayed_job_active_record
   devise
   devise-two-factor
