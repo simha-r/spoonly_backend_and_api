@@ -36,4 +36,11 @@ class Profile < ActiveRecord::Base
     end
   end
 
+
+  def first_name
+    if name
+      name.split(" ")[0]
+    end
+  end
+
 end

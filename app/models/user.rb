@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable,
          :recoverable, :rememberable, :trackable, :validatable,:confirmable,:omniauthable
 
-  delegate :name,:phone_number,:phone_number_verified, to: :profile
+  delegate :name,:first_name,:phone_number,:phone_number_verified, to: :profile
 
   has_many :authorizations, dependent: :destroy
   has_many :addresses, dependent: :destroy
@@ -129,7 +129,6 @@ class User < ActiveRecord::Base
     options[:include] = :profile
     super
   end
-
 
   private
 

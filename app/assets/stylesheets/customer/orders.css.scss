@@ -14,7 +14,7 @@
   .orders-process-list {
 
     li {
-      border: 1px solid #ddd;
+      border: 1px solid #eee;
       background: #fff;
 
       .title {
@@ -158,7 +158,7 @@
           height: 130px;
           float: left;
           padding: 10px 0;
-          border: 1px solid #ddd;
+          border: 1px solid #eee;
           border-radius: 2px;
           margin: 0 20px 20px;
           cursor: pointer;
@@ -232,7 +232,7 @@
   }
 
   .order-headers {
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #eee;
     padding-bottom: 10px;
     text-align: left;
   }
@@ -260,8 +260,8 @@
     }
 
     .total {
-      border-bottom: 1px solid #ddd;
-      border-top: 1px solid #ddd;
+      border-bottom: 1px solid #eee;
+      border-top: 1px solid #eee;
 
       p {
         margin: 0;

@@ -8,7 +8,7 @@ html,
 body {
   height: 100%;
   font-family: 'Open Sans', sans-serif;
-  background-color: #f7f5f9;
+  background-color: #F4F7F8;
 }
 
 $action_color:#f38f31;
@@ -90,7 +90,7 @@ $action_color:#f38f31;
   padding-right: 0;
   padding-left: 0;
   text-align: center;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #eee;
   bottom: 0;
   background-color: #fff;
 }
@@ -142,7 +142,7 @@ $action_color:#f38f31;
         background-color: #fff;
 
         span {
-          border-right: 1px solid #ddd;
+          border-right: 1px solid #eee;
           padding: 15px;
           color: #333333;
         }

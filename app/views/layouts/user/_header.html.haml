@@ -11,7 +11,7 @@
           - if user_signed_in?
             %li.dropdown
               =link_to "#", {"href" => "#", "data-toggle" => "dropdown", "role" => "button", "aria-haspopup" => "true", "aria-expanded" => "false", class: "dropdown-toggle"} do
-                My Account
+                = current_user.first_name
                 %i.fa.fa-caret-down
               %ul.dropdown-menu
                 %li
