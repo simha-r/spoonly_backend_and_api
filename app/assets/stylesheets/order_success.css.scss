@@ -1,0 +1,119 @@
+@import 'mixins';
+
+body {
+  width: 640px;
+  margin: 0 auto;
+}
+
+#order_success_mail {
+  @include make-xs-column(12,0);
+  .header {
+
+    .logo {
+      @include make-xs-column(2,0);
+      background-image: cloudinary-url('spoonly_text.png');
+    }
+
+    .header-msg-container {
+      @include make-xs-column(8,0);
+
+      .header-msg-top {
+        font-size: 12px;
+        text-align: right;
+        margin: 0;
+        padding-bottom: 3px;
+      }
+
+      .separator {
+        border-bottom: 1px solid #ddd;
+        margin: 0;
+      }
+
+      .header-msg-bottom {
+        font-size: 18px;
+        text-align: right;
+        margin: 0;
+        padding-top: 5px;
+      }
+    }
+  }
+
+  .mail-body {
+    clear: both;
+    width: 100%;
+    padding-top: 20px;
+
+    .user p {
+      color: #f38f31;
+      font-weight: 700;
+    }
+
+    .order-details {
+      table {
+        border-bottom: 1px solid #efefef;
+        padding-bottom: 10px;
+      }
+
+      table tbody .order {
+        .item-name {
+          padding: 0 10px;
+          width: 150px;
+
+          p {
+            font-size: 16px;
+            color: #333;
+            text-align: center;
+          }
+        }
+
+        .item-qty-price {
+          p {
+            font-weight: 600;
+          }
+        }
+      }
+
+      .total {
+        clear: both;
+        text-align: right;
+
+        p {
+          font-weight: 600;
+          font-size: 17px;
+        }
+      }
+    }
+
+    .delivery-details {
+      border-top: 2px solid #8a8a8a;
+      background-color: #efefef;
+      padding: 20px;
+
+      table tbody tr {
+        td.label-text {
+          font-size: 13px;
+          color: #8a8a8a;
+        }
+
+        td.value {
+          font-weight: 600;
+          font-size: 14px;
+          padding-right: 20px;
+        }
+      }
+    }
+
+    .footer-msg {
+      clear: both;
+
+      .regards {
+        p {
+          margin: 0;
+        }
+      }
+    }
+
+
+  }
+
+}

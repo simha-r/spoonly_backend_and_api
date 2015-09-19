@@ -1,4 +1,5 @@
 class UserMailer < ActionMailer::Base
+  include Roadie::Rails::Automatic
   default from: "orders@spoonly.in"
 
   def order_success order
