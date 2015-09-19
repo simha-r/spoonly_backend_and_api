@@ -3,4 +3,5 @@
 *= require customer/homes
 *= require customer/menus
 *= require customer/orders
+*= require customer/wallets
 */

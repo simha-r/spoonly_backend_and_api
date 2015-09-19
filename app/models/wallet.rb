@@ -74,3 +74,16 @@ class Wallet < ActiveRecord::Base
 
 
 end
+
+
+
+
+#https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-40e3a/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=simhaece@gmail.com&data_name=Narasimha%20Reddy&data_phone=8179422804&intent=buy&data_Field_35054=15
+#https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-rs-200/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=simhaece@gmail.com&data_name=Narasimha%20Reddy&data_phone=8179422804&intent=buy&data_Field_35054=15
+#https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-400/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=simhaece@gmail.com&data_name=Narasimha%20Reddy&data_phone=8179422804&intent=buy&data_Field_35054=15
+
+#https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-rs-200/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=simhaece@gmail.com&data_name=Narasimha%20Reddy&data_phone=8179422804&intent=buy&data_Field_35054=15
+
+
+#For android..use the below link for Rs 200
+#https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-04b9d/?embed=form&data_hidden=data_Field_96618&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=simhaece@gmail.com&data_name=Narasimha%20Reddy&data_phone=8179422804&intent=buy&data_Field_96618=15&data_amount=200

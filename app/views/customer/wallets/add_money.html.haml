@@ -1,15 +1,38 @@
 
+.btn.btn-primary.amount-button{"data-amount"=>100}
+  100
+.btn.btn-primary.amount-button{"data-amount"=>200}
+  200
+.btn.btn-primary.amount-button{"data-amount"=>300}
+  300
 
-%a{"data-behavior" => "link", "data-style" => "light", "data-text" => "Add 200",
-"data-token" => "1de0bcd6325cee2bd15a1beb86d224f8", :href => "https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-40e3a/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=#{current_user.email}&data_name=#{current_user.name}&data_phone=#{current_user.phone_number}&intent=buy&data_Field_35054=#{current_user.id}",:rel => "im-checkout"}
-%script{:src => "https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"}
+= form_tag '' do
+  = number_field_tag 'amount','',placeholder: 'Enter amount'
+  = link_to 'Proceed To Pay','',id: 'pay',class: 'btn btn-primary'
+:javascript
 
--#https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-40e3a/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=simhaece@gmail.com&data_name=Narasimha%20Reddy&data_phone=8179422804&intent=buy&data_Field_35054=15
--#https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-rs-200/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=simhaece@gmail.com&data_name=Narasimha%20Reddy&data_phone=8179422804&intent=buy&data_Field_35054=15
--#https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-400/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=simhaece@gmail.com&data_name=Narasimha%20Reddy&data_phone=8179422804&intent=buy&data_Field_35054=15
+  $('.amount-button').click(function(){
+    $('.amount-button').removeClass('active');
+    $(this).addClass('active');
+    var amount = $(this).data('amount')
+    $('#amount').val(amount);
+  })
 
--#https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-rs-200/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=simhaece@gmail.com&data_name=Narasimha%20Reddy&data_phone=8179422804&intent=buy&data_Field_35054=15
+
+  $('#pay').click(function(e){
+      e.preventDefault();
+      var amount_to_pay = $('#amount').val();
+      if(amount_to_pay !=""){
+        url = "https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-40e3a/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_amount="+amount_to_pay+"&data_email=#{current_user.email}&data_name=#{current_user.name}&data_phone=#{current_user.phone_number}&intent=buy&data_Field_35054=#{current_user.id}"
+        window.open(url, '_blank');
+        }
+      else{
+        alert("Please enter an amount")
+      }
+  });
 
 
--#For android..use the below link for Rs 200
--#https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-04b9d/?embed=form&data_hidden=data_Field_96618&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=simhaece@gmail.com&data_name=Narasimha%20Reddy&data_phone=8179422804&intent=buy&data_Field_96618=15&data_amount=200
+
+
+%a#payment_info_link{"data-behavior" => "link", "data-style" => "light", "data-text" => "Add 200",
+"data-token" => "1de0bcd6325cee2bd15a1beb86d224f8", :href => "https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-40e3a/?embed=form&data_hidden=data_Field_35054&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_amount=10&data_email=#{current_user.email}&data_name=#{current_user.name}&data_phone=#{current_user.phone_number}&intent=buy&data_Field_35054=#{current_user.id}",:rel => "im-checkout"}
