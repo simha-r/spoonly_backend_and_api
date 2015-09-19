@@ -20,8 +20,3 @@
   = render 'customer/homes/how_it_works'
 :javascript
   analytics.page('Menus Home');
-  $(function(){
-    $('.menu-container').delegate('.col-xs-12.col-md-6','click', function() {
-          window.location = $(this).attr('data-link');
-        });
-  })

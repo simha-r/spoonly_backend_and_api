@@ -11,4 +11,11 @@ $(document).ready(function(){
     }
   }
 
+
+  $('.menu-container').delegate('.col-xs-12.col-md-6','click', function() {
+    window.location = $(this).attr('data-link');
+  });
+
+
+
 });
