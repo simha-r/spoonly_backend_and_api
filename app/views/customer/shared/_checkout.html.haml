@@ -5,7 +5,7 @@
   = image_tag "cart.png"
 - else
   = image_tag "cart.png"
-  %span.count= @cart.distinct_cart_count
+  %span.count= @cart.total_cart_count
   %span.fa.fa-inr= @cart.total_price
   = link_to new_customer_order_path, class: "btn btn-action" do
     %span PROCEED

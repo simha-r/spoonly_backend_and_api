@@ -46,6 +46,10 @@ class Cart < ActiveRecord::Base
     line_items.count
   end
 
+  def total_cart_count
+    line_items.to_a.sum &:quantity
+  end
+
   def contains_menu_product? menu_product
     line_items.where(menu_product_id: menu_product.id).first
   end
