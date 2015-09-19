@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class Cart - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">ActiveRecord::Base
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-add_menu_product">#add_menu_product</a>
+    
+    <li ><a href="#method-i-clear_line_items">#clear_line_items</a>
+    
+    <li ><a href="#method-i-contains_menu_product-3F">#contains_menu_product?</a>
+    
+    <li ><a href="#method-i-distinct_cart_count">#distinct_cart_count</a>
+    
+    <li ><a href="#method-i-expired-3F">#expired?</a>
+    
+    <li ><a href="#method-i-line_item_of">#line_item_of</a>
+    
+    <li ><a href="#method-i-quantity_of_menu_product">#quantity_of_menu_product</a>
+    
+    <li ><a href="#method-i-set_category">#set_category</a>
+    
+    <li ><a href="#method-i-set_menu_and_category">#set_menu_and_category</a>
+    
+    <li ><a href="#method-i-total_price">#total_price</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Cart">
+  <h1 id="class-Cart" class="class">
+    class Cart
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-Cart-label-Schema+Information">Schema Information<span><a href="#class-Cart-label-Schema+Information">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Table name: carts</p>
+
+<pre>id          :integer          not null, primary key
+category    :string(255)
+created_at  :datetime
+updated_at  :datetime
+menu_id     :integer
+expiry_time :datetime</pre>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-add_menu_product" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">add_menu_product</span><span
+            class="method-args">(menu_product_id)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="add_menu_product-source">
+            <pre><span class="ruby-comment"># File app/models/cart.rb, line 19</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">add_menu_product</span>(<span class="ruby-identifier">menu_product_id</span>)
+  <span class="ruby-identifier">current_item</span> = <span class="ruby-identifier">line_items</span>.<span class="ruby-identifier">find_by</span>(<span class="ruby-identifier">menu_product_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">menu_product_id</span>)
+  <span class="ruby-identifier">set_category</span> <span class="ruby-constant">MenuProduct</span>.<span class="ruby-identifier">find</span>(<span class="ruby-identifier">menu_product_id</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">current_item</span>
+    <span class="ruby-identifier">current_item</span>.<span class="ruby-identifier">quantity</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">current_item</span> = <span class="ruby-identifier">line_items</span>.<span class="ruby-identifier">build</span>(<span class="ruby-identifier">menu_product_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">menu_product_id</span>)
+    <span class="ruby-identifier">current_item</span>.<span class="ruby-identifier">price</span> = <span class="ruby-identifier">current_item</span>.<span class="ruby-identifier">menu_product</span>.<span class="ruby-identifier">product</span>.<span class="ruby-identifier">price</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">current_item</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-clear_line_items" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">clear_line_items</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="clear_line_items-source">
+            <pre><span class="ruby-comment"># File app/models/cart.rb, line 85</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">clear_line_items</span>
+  <span class="ruby-identifier">line_items</span>.<span class="ruby-identifier">destroy_all</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-contains_menu_product-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">contains_menu_product?</span><span
+            class="method-args">(menu_product)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="contains_menu_product-3F-source">
+            <pre><span class="ruby-comment"># File app/models/cart.rb, line 49</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">contains_menu_product?</span> <span class="ruby-identifier">menu_product</span>
+  <span class="ruby-identifier">line_items</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">menu_product_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">menu_product</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-distinct_cart_count" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">distinct_cart_count</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="distinct_cart_count-source">
+            <pre><span class="ruby-comment"># File app/models/cart.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">distinct_cart_count</span>
+  <span class="ruby-identifier">line_items</span>.<span class="ruby-identifier">count</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-expired-3F" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">expired?</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="expired-3F-source">
+            <pre><span class="ruby-comment"># File app/models/cart.rb, line 73</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">expired?</span>
+  <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span> <span class="ruby-operator">&gt;</span> <span class="ruby-identifier">expiry_time</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-line_item_of" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">line_item_of</span><span
+            class="method-args">(menu_product)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="line_item_of-source">
+            <pre><span class="ruby-comment"># File app/models/cart.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">line_item_of</span> <span class="ruby-identifier">menu_product</span>
+  <span class="ruby-identifier">line_items</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">menu_product_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">menu_product</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-quantity_of_menu_product" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">quantity_of_menu_product</span><span
+            class="method-args">(menu_product)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="quantity_of_menu_product-source">
+            <pre><span class="ruby-comment"># File app/models/cart.rb, line 31</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">quantity_of_menu_product</span> <span class="ruby-identifier">menu_product</span>
+  <span class="ruby-identifier">line_item</span>  = <span class="ruby-identifier">line_items</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">menu_product_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">menu_product</span>.<span class="ruby-identifier">id</span>).<span class="ruby-identifier">first</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">line_item</span>
+   <span class="ruby-identifier">line_item</span>.<span class="ruby-identifier">quantity</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-value">0</span>
+  <span class="ruby-keyword">end</span>
+
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_category" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_category</span><span
+            class="method-args">(menu_product)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="set_category-source">
+            <pre><span class="ruby-comment"># File app/models/cart.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_category</span> <span class="ruby-identifier">menu_product</span>
+  <span class="ruby-identifier">menu</span> = <span class="ruby-identifier">menu_product</span>.<span class="ruby-identifier">menu</span>
+  <span class="ruby-identifier">line_item_category</span> = <span class="ruby-identifier">menu_product</span>.<span class="ruby-identifier">category</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">category!</span>=<span class="ruby-identifier">line_item_category</span>
+    <span class="ruby-identifier">set_menu_and_category</span> <span class="ruby-identifier">menu</span>,<span class="ruby-identifier">line_item_category</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-set_menu_and_category" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">set_menu_and_category</span><span
+            class="method-args">(menu,category)</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="set_menu_and_category-source">
+            <pre><span class="ruby-comment"># File app/models/cart.rb, line 61</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">set_menu_and_category</span> <span class="ruby-identifier">menu</span>,<span class="ruby-identifier">category</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">category</span><span class="ruby-operator">==</span><span class="ruby-string">&#39;lunch&#39;</span>
+    <span class="ruby-identifier">expiry_time</span> = <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">lunch_order_end_time</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">category</span><span class="ruby-operator">==</span><span class="ruby-string">&#39;dinner&#39;</span>
+    <span class="ruby-identifier">expiry_time</span> = <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">dinner_order_end_time</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">category!</span>=<span class="ruby-identifier">category</span>
+    <span class="ruby-identifier">clear_line_items</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">menu_id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">menu</span>.<span class="ruby-identifier">id</span>,<span class="ruby-identifier">expiry_time</span><span class="ruby-operator">:</span> <span class="ruby-identifier">expiry_time</span>,<span class="ruby-identifier">category</span><span class="ruby-operator">:</span> <span class="ruby-identifier">category</span>)
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-total_price" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">total_price</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="total_price-source">
+            <pre><span class="ruby-comment"># File app/models/cart.rb, line 77</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">total_price</span>
+  <span class="ruby-identifier">total</span> = <span class="ruby-value">0</span>
+  <span class="ruby-identifier">line_items</span>.<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">li</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">total</span> = <span class="ruby-identifier">total</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">li</span>.<span class="ruby-identifier">price</span><span class="ruby-operator">*</span><span class="ruby-identifier">li</span>.<span class="ruby-identifier">quantity</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">total</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

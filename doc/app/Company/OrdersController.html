@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class Company::OrdersController - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "../";
+</script>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/darkfish.js"></script>
+
+<link href="../css/fonts.css" rel="stylesheet">
+<link href="../css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="../index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="../table_of_contents.html#pages">Pages</a>
+    <a href="../table_of_contents.html#classes">Classes</a>
+    <a href="../table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link"><a href="BaseController.html">Company::BaseController</a>
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-acknowledge">#acknowledge</a>
+    
+    <li ><a href="#method-i-assign">#assign</a>
+    
+    <li ><a href="#method-i-bill">#bill</a>
+    
+    <li ><a href="#method-i-by_date">#by_date</a>
+    
+    <li ><a href="#method-i-cancel">#cancel</a>
+    
+    <li ><a href="#method-i-collections_summary">#collections_summary</a>
+    
+    <li ><a href="#method-i-index">#index</a>
+    
+    <li ><a href="#method-i-show">#show</a>
+    
+    <li ><a href="#method-i-sms_update">#sms_update</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-Company::OrdersController">
+  <h1 id="class-Company::OrdersController" class="class">
+    class Company::OrdersController
+  </h1>
+
+  <section class="description">
+    
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-acknowledge" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">acknowledge</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="acknowledge-source">
+            <pre><span class="ruby-comment"># File app/controllers/company/orders_controller.rb, line 25</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">acknowledge</span>
+  <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">acknowledge!</span>
+  <span class="ruby-identifier">redirect_to</span> [<span class="ruby-value">:company</span>,<span class="ruby-ivar">@order</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-assign" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">assign</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="assign-source">
+            <pre><span class="ruby-comment"># File app/controllers/company/orders_controller.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">assign</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">update_attributes</span>(<span class="ruby-identifier">order_params</span>)
+    <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">dispatch_with</span> <span class="ruby-identifier">order_params</span>[<span class="ruby-value">:delivery_executive_id</span>]
+    <span class="ruby-identifier">redirect_to</span> [<span class="ruby-value">:company</span>,<span class="ruby-ivar">@order</span>], <span class="ruby-identifier">notice</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Successfully assigned to delivery executive&#39;</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">redirect_to</span> [<span class="ruby-value">:company</span>,<span class="ruby-ivar">@order</span>],<span class="ruby-identifier">alert</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;Unable to assign&#39;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-bill" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">bill</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="bill-source">
+            <pre><span class="ruby-comment"># File app/controllers/company/orders_controller.rb, line 21</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">bill</span>
+  <span class="ruby-identifier">render</span> <span class="ruby-identifier">layout</span><span class="ruby-operator">:</span> <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-by_date" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">by_date</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="by_date-source">
+            <pre><span class="ruby-comment"># File app/controllers/company/orders_controller.rb, line 11</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">by_date</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>]
+    <span class="ruby-ivar">@delivery_date</span> = <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>][<span class="ruby-value">:year</span>].<span class="ruby-identifier">to_i</span>,<span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>][<span class="ruby-value">:month</span>].<span class="ruby-identifier">to_i</span>,<span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>][<span class="ruby-value">:day</span>].<span class="ruby-identifier">to_i</span>
+    <span class="ruby-ivar">@orders</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">find_by_date</span> <span class="ruby-ivar">@delivery_date</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-cancel" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">cancel</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="cancel-source">
+            <pre><span class="ruby-comment"># File app/controllers/company/orders_controller.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">cancel</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@order</span>.<span class="ruby-identifier">cancel!</span>
+    <span class="ruby-identifier">redirect_to</span> [<span class="ruby-value">:company</span>,<span class="ruby-ivar">@order</span>]
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-collections_summary" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">collections_summary</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="collections_summary-source">
+            <pre><span class="ruby-comment"># File app/controllers/company/orders_controller.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">collections_summary</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>]
+    <span class="ruby-ivar">@delivery_date</span> = <span class="ruby-constant">DateTime</span>.<span class="ruby-identifier">new</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>][<span class="ruby-value">:year</span>].<span class="ruby-identifier">to_i</span>,<span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>][<span class="ruby-value">:month</span>].<span class="ruby-identifier">to_i</span>,<span class="ruby-identifier">params</span>[<span class="ruby-value">:date</span>][<span class="ruby-value">:day</span>].<span class="ruby-identifier">to_i</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@delivery_date</span> = <span class="ruby-constant">Date</span>.<span class="ruby-identifier">today</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@category</span> = <span class="ruby-identifier">params</span>[<span class="ruby-value">:category</span>] <span class="ruby-operator">||</span> <span class="ruby-string">&#39;lunch&#39;</span>
+  <span class="ruby-ivar">@delivered_orders</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">find_by_date</span>(<span class="ruby-ivar">@delivery_date</span>).<span class="ruby-identifier">includes</span>(<span class="ruby-value">:delivery_executive</span>).<span class="ruby-identifier">includes</span>(<span class="ruby-value">:debit</span>).<span class="ruby-identifier">includes</span>(<span class="ruby-value">:line_items</span>).<span class="ruby-identifier">includes</span>(<span class="ruby-value">:user</span>).<span class="ruby-identifier">delivered</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-index" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">index</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="index-source">
+            <pre><span class="ruby-comment"># File app/controllers/company/orders_controller.rb, line 7</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">index</span>
+  <span class="ruby-ivar">@orders</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">order</span>(<span class="ruby-identifier">delivery_time</span><span class="ruby-operator">:</span> <span class="ruby-value">:desc</span>).<span class="ruby-identifier">includes</span>(<span class="ruby-value">:user</span>).<span class="ruby-identifier">includes</span>(<span class="ruby-value">:address</span>).<span class="ruby-identifier">paginate</span> <span class="ruby-identifier">page</span><span class="ruby-operator">:</span> <span class="ruby-identifier">params</span>[<span class="ruby-value">:page</span>]
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-show" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">show</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="show-source">
+            <pre><span class="ruby-comment"># File app/controllers/company/orders_controller.rb, line 18</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">show</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-sms_update" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">sms_update</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="sms_update-source">
+            <pre><span class="ruby-comment"># File app/controllers/company/orders_controller.rb, line 45</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">sms_update</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-constant">DeliveryExecutive</span>.<span class="ruby-identifier">allowed_numbers</span>.<span class="ruby-identifier">include?</span> <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;from_number&#39;</span>]
+    <span class="ruby-identifier">message</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">&#39;content&#39;</span>].<span class="ruby-identifier">strip</span>
+    <span class="ruby-identifier">message</span> = <span class="ruby-identifier">message</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&#39; &#39;</span>)
+    <span class="ruby-identifier">order_ids</span> = <span class="ruby-identifier">message</span>[<span class="ruby-value">1</span>]
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">message</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">order_ids</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">message</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">downcase</span><span class="ruby-operator">==</span><span class="ruby-string">&#39;sp&#39;</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;going to find orders and mark delivered&#39;</span>
+      <span class="ruby-ivar">@orders</span> = <span class="ruby-constant">Order</span>.<span class="ruby-identifier">where</span> <span class="ruby-identifier">id</span><span class="ruby-operator">:</span> <span class="ruby-identifier">order_ids</span>
+      <span class="ruby-ivar">@orders</span>.<span class="ruby-identifier">where</span>(<span class="ruby-identifier">state</span><span class="ruby-operator">:</span> <span class="ruby-string">&#39;dispatched&#39;</span>).<span class="ruby-identifier">each</span>(<span class="ruby-operator">&amp;</span><span class="ruby-value">:deliver!</span>)
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">puts</span> <span class="ruby-string">&#39;format is wrong&#39;</span>
+      <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">puts</span> <span class="ruby-identifier">params</span>
+    <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">rescue</span> <span class="ruby-constant">Exception</span>=<span class="ruby-operator">&gt;</span><span class="ruby-identifier">e</span>
+  <span class="ruby-constant">HealthyLunchUtils</span>.<span class="ruby-identifier">log_error</span> <span class="ruby-string">&#39;SMS not in format&#39;</span>,<span class="ruby-identifier">e</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">render</span> <span class="ruby-identifier">nothing</span><span class="ruby-operator">:</span> <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+

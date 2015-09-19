@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8">
+
+<title>class CompanyUser - Rails Application Documentation</title>
+
+<script type="text/javascript">
+  var rdoc_rel_prefix = "./";
+</script>
+
+<script src="./js/jquery.js"></script>
+<script src="./js/darkfish.js"></script>
+
+<link href="./css/fonts.css" rel="stylesheet">
+<link href="./css/rdoc.css" rel="stylesheet">
+
+
+
+<body id="top" role="document" class="class">
+<nav role="navigation">
+  <div id="project-navigation">
+    <div id="home-section" role="region" title="Quick navigation" class="nav-section">
+  <h2>
+    <a href="./index.html" rel="home">Home</a>
+  </h2>
+
+  <div id="table-of-contents-navigation">
+    <a href="./table_of_contents.html#pages">Pages</a>
+    <a href="./table_of_contents.html#classes">Classes</a>
+    <a href="./table_of_contents.html#methods">Methods</a>
+  </div>
+</div>
+
+    <div id="search-section" role="search" class="project-section initially-hidden">
+  <form action="#" method="get" accept-charset="utf-8">
+    <div id="search-field-wrapper">
+      <input id="search-field" role="combobox" aria-label="Search"
+             aria-autocomplete="list" aria-controls="search-results"
+             type="text" name="search" placeholder="Search" spellcheck="false"
+             title="Type to search, Up and Down to navigate, Enter to load">
+    </div>
+
+    <ul id="search-results" aria-label="Search Results"
+        aria-busy="false" aria-expanded="false"
+        aria-atomic="false" class="initially-hidden"></ul>
+  </form>
+</div>
+
+  </div>
+
+  
+
+  <div id="class-metadata">
+    
+    <div id="parent-class-section" class="nav-section">
+  <h3>Parent</h3>
+
+  
+  <p class="link">ActiveRecord::Base
+  
+</div>
+
+    
+    
+    <!-- Method Quickref -->
+<div id="method-list-section" class="nav-section">
+  <h3>Methods</h3>
+
+  <ul class="link-list" role="directory">
+    
+    <li ><a href="#method-i-disable_otp">#disable_otp</a>
+    
+    <li ><a href="#method-i-enable_otp">#enable_otp</a>
+    
+    <li ><a href="#method-i-refresh_backup_codes">#refresh_backup_codes</a>
+    
+  </ul>
+</div>
+
+  </div>
+</nav>
+
+<main role="main" aria-labelledby="class-CompanyUser">
+  <h1 id="class-CompanyUser" class="class">
+    class CompanyUser
+  </h1>
+
+  <section class="description">
+    
+<h2 id="class-CompanyUser-label-Schema+Information">Schema Information<span><a href="#class-CompanyUser-label-Schema+Information">&para;</a> <a href="#top">&uarr;</a></span></h2>
+
+<p>Table name: company_users</p>
+
+<pre>id                        :integer          not null, primary key
+created_at                :datetime
+updated_at                :datetime
+email                     :string(255)      default(&quot;&quot;), not null
+encrypted_password        :string(255)      default(&quot;&quot;), not null
+reset_password_token      :string(255)
+reset_password_sent_at    :datetime
+remember_created_at       :datetime
+sign_in_count             :integer          default(0), not null
+current_sign_in_at        :datetime
+last_sign_in_at           :datetime
+current_sign_in_ip        :string(255)
+last_sign_in_ip           :string(255)
+encrypted_otp_secret      :string(255)
+encrypted_otp_secret_iv   :string(255)
+encrypted_otp_secret_salt :string(255)
+otp_required_for_login    :boolean
+phone_number              :string(255)
+otp_backup_codes          :string(255)      is an Array</pre>
+
+  </section>
+
+  
+  
+  
+  <section id="5Buntitled-5D" class="documentation-section">
+    
+
+    
+
+    
+
+    
+
+    
+     <section id="public-instance-5Buntitled-5D-method-details" class="method-section">
+       <header>
+         <h3>Public Instance Methods</h3>
+       </header>
+
+    
+      <div id="method-i-disable_otp" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">disable_otp</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="disable_otp-source">
+            <pre><span class="ruby-comment"># File app/models/company_user.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">disable_otp</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">otp_required_for_login</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-identifier">save!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-enable_otp" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">enable_otp</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          <p>Send the current_otp to the users sim</p>
+          
+          
+
+          
+          <div class="method-source-code" id="enable_otp-source">
+            <pre><span class="ruby-comment"># File app/models/company_user.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">enable_otp</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">otp_secret</span> = <span class="ruby-constant">CompanyUser</span>.<span class="ruby-identifier">generate_otp_secret</span>
+  <span class="ruby-keyword">self</span>.<span class="ruby-identifier">otp_required_for_login</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-identifier">otp_secret</span>
+  <span class="ruby-identifier">save!</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+      <div id="method-i-refresh_backup_codes" class="method-detail ">
+        
+        <div class="method-heading">
+          <span class="method-name">refresh_backup_codes</span><span
+            class="method-args">()</span>
+          
+          <span class="method-click-advice">click to toggle source</span>
+          
+        </div>
+        
+
+        <div class="method-description">
+          
+          
+          
+          
+
+          
+          <div class="method-source-code" id="refresh_backup_codes-source">
+            <pre><span class="ruby-comment"># File app/models/company_user.rb, line 51</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">refresh_backup_codes</span>
+  <span class="ruby-identifier">codes</span> = <span class="ruby-identifier">generate_otp_backup_codes!</span>
+  <span class="ruby-identifier">puts</span> <span class="ruby-string">&quot;Codes are &quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">codes</span>.<span class="ruby-identifier">inspect</span>
+  <span class="ruby-identifier">save!</span>
+  <span class="ruby-identifier">codes</span>
+<span class="ruby-keyword">end</span></pre>
+          </div>
+          
+        </div>
+
+        
+
+        
+      </div>
+
+    
+    </section>
+  
+  </section>
+</main>
+
+
+<footer id="validator-badges" role="contentinfo">
+  <p><a href="http://validator.w3.org/check/referer">Validate</a>
+  <p>Generated by <a href="http://docs.seattlerb.org/rdoc/">RDoc</a> 4.2.0.
+  <p>Based on <a href="http://deveiate.org/projects/Darkfish-RDoc/">Darkfish</a> by <a href="http://deveiate.org">Michael Granger</a>.
+</footer>
+
