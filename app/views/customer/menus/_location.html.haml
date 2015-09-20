@@ -4,9 +4,9 @@
     - if @menu
       - date = @menu.menu_date
       - if date == Date.current
-        %p= "TODAY'S, #{category.upcase} MENU"
+        %p= "TODAY'S #{category.upcase} MENU"
       - elsif date == Date.tomorrow
-        %p= "TOMORROW, #{category.upcase} MENU"
+        %p= "TOMORROW'S #{category.upcase} MENU"
       - else
         %p= date.strftime("%a %d,%b ")
 
