@@ -8,6 +8,10 @@ class Customer::HomesController < Customer::BaseController
 
   end
 
+  def android
+  
+  end
+
   def inside
     locality,latitude,longitude,distance = params[:locality],params[:latitude],params[:longitude],params[:distance]
 

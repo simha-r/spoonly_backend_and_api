@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       collection do
         get :main
         post :inside
+        get :android
       end
     end
 
