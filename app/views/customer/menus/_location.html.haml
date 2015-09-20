@@ -1,18 +1,19 @@
 .location-checkout-header
-  .col-xs-4.day
-    - if @menu
-      - date = @menu.menu_date
-      - if date==Date.current
-        %p= "TODAY'S #{category.upcase} MENU"
-      - elsif date==Date.tomorrow
-        %p= "TOMORROW'S #{category.upcase} MENU"
-      - else
-        %p= date.strftime("%a %d,%b ")
   .col-xs-4.location
     - if @locality.present?
       %i.fa.fa-map-marker
       %p= @locality
       = link_to "Change", main_customer_homes_path(change_location: true),data: { no_turbolink: true }
+
+  .col-xs-4.day
+    - if @menu
+      - date = @menu.menu_date
+      - if date == Date.current
+        %p= "TODAY, #{date.strftime('%b %d')}"
+      - elsif date == Date.tomorrow
+        %p= "TOMORROW, #{date.strftime('%b %d')}"
+      - else
+        %p= date.strftime("%a %d,%b ")
 
   - if params[:controller] == "customer/menus" && params[:action] == "lunch"
     .col-xs-4.checkout

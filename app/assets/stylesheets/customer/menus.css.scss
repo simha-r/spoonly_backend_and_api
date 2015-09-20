@@ -7,14 +7,19 @@
   height: 55px;
   background-color: #fff;
 
-  .day p {
-    color: #333;
-    font-size: 12px;
-    font-weight: 600;
+  .day {
+    text-align: center;
+    color: #f19140;
+
+    p {
+      font-size: 16px;
+      font-weight: 100;
+      letter-spacing: 1px;
+    }
   }
 
   .location {
-    text-align: center;
+    text-align: left;
 
     .fa-map-marker {
       font-size: 16px;

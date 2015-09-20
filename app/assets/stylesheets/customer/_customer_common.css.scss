@@ -324,8 +324,9 @@ $action_color:#f38f31;
 
       .testimony {
         @include make-xs-column(4,0);
-        padding: 0 10px 0 60px;
+        padding: 0 20px 0 60px;
         border-right: 1px solid #E6E6E6;
+        height: 266px;
 
         .name,
         .city {
