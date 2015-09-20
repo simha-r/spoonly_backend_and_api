@@ -86,13 +86,58 @@ $action_color:#f38f31;
 }
 
 .footer {
+  @include make-xs-column(12,0);
   padding-top: 20px;
+  padding-bottom: 10px;
   padding-right: 0;
-  padding-left: 0;
+  padding-left: 120px;
   text-align: center;
   border-top: 1px solid #eee;
   bottom: 0;
   background-color: #fff;
+
+  .mixpanel {
+    @include make-xs-column(4,0);
+    text-align: left;
+  }
+
+  .social-media-icons {
+    @include make-xs-column(4,0);
+    text-align: center;
+
+    .fa {
+      height: 25px;
+      width: 25px;
+      border-radius: 50%;
+      background-color: grey;
+      line-height: 25px;
+      margin-right: 7px;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .fa-facebook {
+      border: none;
+    }
+  }
+
+  .apps {
+    @include make-xs-column(4,0);
+
+    .android-app {
+      color: #808080;
+
+      .fa {
+        font-size: 18px;
+        padding-right: 10px;
+      }
+
+      span {
+        font-size: 14px;
+      }
+    }
+
+  }
 }
 
 
