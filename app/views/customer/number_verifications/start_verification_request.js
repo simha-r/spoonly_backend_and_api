@@ -1,1 +1,0 @@
-$('#enter_code').show();
