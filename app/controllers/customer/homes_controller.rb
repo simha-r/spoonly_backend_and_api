@@ -1,6 +1,7 @@
 class Customer::HomesController < Customer::BaseController
 
   include LocationCheck
+  skip_before_filter :detect_android_and_redirect,only: [:android]
 
   before_action :proceed_to_main_if_old_user
 
