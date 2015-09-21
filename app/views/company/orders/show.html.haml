@@ -24,10 +24,12 @@
       = @order.address.formatted
     %td
       = @order.formatted_delivery_time
-    %td
-      = @order.formatted_delivery_time
-    %td
-      = @order.formatted_delivery_time
+    - if @order.dispatched?
+      %td
+        = @order.dispatched_at
+    - if @order.delivered?
+      %td
+        = @order.formatted_delivery_time
     %td
       = @order.state.upcase
 
