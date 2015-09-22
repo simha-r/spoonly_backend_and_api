@@ -23,9 +23,9 @@ class Company::CurrentOrdersController < Company::BaseController
     @orders = Order.where(id: params[:order_ids])
     if @orders.present?
       @orders.each {|o| o.dispatch_with params[:delivery_executive_id]}
-      redirect_to [:acknowledged,:company,:current_orders], notice: 'Successfully assigned to delivery executive'
+      redirect_to request.referrer, notice: 'Successfully assigned to delivery executive'
     else
-      redirect_to [:acknowledged,:company,:current_orders], alert: 'Please select an order to dispatch !'
+      redirect_to request.referrer, alert: 'Please select an order to dispatch !'
     end
   end
 

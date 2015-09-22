@@ -11,7 +11,7 @@ body {
 
     .logo {
       @include make-xs-column(2,0);
-      background-image: cloudinary-url('spoonly_text.png');
+      background-image: cloudinary-url('spoonly_logo.png');
     }
 
     .header-msg-container {
