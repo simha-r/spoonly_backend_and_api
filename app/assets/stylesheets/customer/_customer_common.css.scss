@@ -260,7 +260,7 @@ $action_color:#f38f31;
       padding: 0 40px 0 140px;
       padding-top: 45px;
 
-      .sep {
+      .spacer {
         margin-top: 25px;
       }
     }
@@ -290,6 +290,12 @@ $action_color:#f38f31;
       position: absolute;
       line-height: 32px;
       padding-top: 32px;
+
+      &.tap-to-order {
+        p {
+          margin: 0;
+        }
+      }
     }
   }
 
