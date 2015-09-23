@@ -37,5 +37,4 @@
           :last), class: "form-control"
         = hidden_field_tag 'order[pay_type]','cash_on_delivery'
         = hidden_field_tag 'order[address_id]'
-        .col-xs-4.pull-right
-        #place_order_button.hidden= submit_tag 'Confirm Order', class: "btn btn-action"
+        #place_order_button.col-xs-offset-1.col-xs-2.hidden= submit_tag 'Confirm Order', class: "btn btn-action"
