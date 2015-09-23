@@ -21,6 +21,12 @@
         padding: 13px;
       }
       input.btn.btn-default {
+        height: 46px;
+        top: -1px;
+        position: relative;
+        left: -4px;
+        border-radius: 0;
+        border: none;
         background-color: #f27242;
         color: #fff;
       }

@@ -37,9 +37,12 @@
   .checkout {
     top: -7px;
     text-align: right;
+    position: relative;
 
     img {
       width: 32px;
+      position: absolute;
+      left: 70px;
     }
 
     a {
@@ -49,7 +52,7 @@
 
     span.count {
       position: absolute;
-      left: 90px;
+      left: 82px;
       top: -4px;
       height: 20px;
       width: 20px;
