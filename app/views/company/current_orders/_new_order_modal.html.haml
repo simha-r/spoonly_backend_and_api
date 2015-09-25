@@ -1,0 +1,11 @@
+#menu_unavailable_modal.modal{:title => "My modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role=> "dialog"}
+
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      .modal-body
+        - link = pending_company_current_orders_path(category: params[:category])
+        %p.msg-big New order received !
+        %a{"aria-hidden" => "true", "data-dismiss" => "modal"}
+          %p.msg= link_to "Go to Pending orders to view it",link

@@ -1,5 +1,5 @@
 %ul
-  - if(current_company_user.has_role?(:dispatcher) || current_company_user.has_role?(:dispatcher))
+  - if(current_company_user.has_role?(:dispatcher) || current_company_user.has_role?(:admin))
     %li= link_to 'View Orders',[:company,:orders]
     %li= link_to 'View Todays Orders',[:company,:current_orders]
     %li= link_to 'View Orders by Day',[:company,:current_orders]
@@ -7,4 +7,6 @@
     %li= link_to 'Live Map View Delivery Executives',[:live_view,:company,:delivery_executives,data: { no_turbolink: true }]
     %li= link_to 'View Daily Bill Summary',[:collections_summary,:company,:orders]
   - if current_company_user.has_role? :admin
+    %h3 Admin Stuff
+
     %li= link_to 'View Menus',[:company,:menus]

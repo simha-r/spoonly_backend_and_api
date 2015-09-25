@@ -1,5 +1,6 @@
 = render 'company/current_orders/header',state: 'acknowledged'
 
+
 .row
   .col-xs-2
     Order #
@@ -34,38 +35,4 @@
     = select_tag :delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.available,:id,:name)
     = submit_tag 'Dispatch'
 
-
-
-.row
-  :javascript
-    var initialize = function(){
-
-    console.log('initializing');
-    // Enable pusher logging - don't include this in production
-    Pusher.log = function(message) {
-      if (window.console && window.console.log) {
-        window.console.log(message);
-      }
-    };
-
-    var pusher = new Pusher("#{Pusher.key}", {
-      encrypted: true
-    });
-    var channel = pusher.subscribe('orders');
-    channel.bind('purchased', function(data) {
-
-    var sound = new Howl({
-      urls: [#{asset_path('new_order.mp3')}],
-      loop: true
-    }).play();
-
-    $('#new_order_alert').show()
-      //sound.stop();
-    });
-
-    }
-    initialize();
-    //$(function(){ initialize(); })
-    //$(document).on('page:load',initialize)
-
-
+= render 'company/current_orders/new_order_handling'

@@ -1,23 +1,11 @@
 class Company::CurrentOrdersController < Company::BaseController
 
   def index
-    redirect_to [:lunch,:company,:current_orders]
-  end
-
-
-  def lunch
-    @category = 'lunch'
+    @category = params[:category] || 'lunch'
     @search_results = Order.search(params[:search]) if params[:search]
     @orders = Order.show_todays_orders @category
-    render 'index'
   end
 
-  def dinner
-    @category = 'dinner'
-    @search_results = Order.search(params[:search]) if params[:search]
-    @orders = Order.show_todays_orders @category
-    render 'index'
-  end
 
   def multi_assign
     @orders = Order.where(id: params[:order_ids])

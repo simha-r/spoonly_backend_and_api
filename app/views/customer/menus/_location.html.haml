@@ -14,7 +14,7 @@
     - if @locality.present?
       %i.fa.fa-map-marker
       %p= @locality
-      = link_to "Change", main_customer_homes_path(change_location: true),data: { no_turbolink: true }
+      = link_to "(Change)", main_customer_homes_path(change_location: true),data: { no_turbolink: true }
 
   - if params[:controller] == "customer/menus" && params[:action] == "lunch"
     .col-xs-4.checkout

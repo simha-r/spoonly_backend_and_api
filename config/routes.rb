@@ -143,8 +143,6 @@ Rails.application.routes.draw do
         get :delivered
         get :cancelled
         post :multi_assign
-        get :lunch
-        get :dinner
       end
     end
     resources :company_users do
