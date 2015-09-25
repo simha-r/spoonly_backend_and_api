@@ -23,38 +23,39 @@ class Address < ActiveRecord::Base
   def self.office
     where(address_type: 'office')
   end
+
   def self.home
     where(address_type: 'home')
   end
+
   def self.normal_office
-    where(address_type: 'office',is_default: false)
+    where(address_type: 'office', is_default: false)
   end
+
   def self.normal_home
-   where(address_type: 'home',is_default: false)
+    where(address_type: 'home', is_default: false)
   end
 
   def self.default_office
-    where(address_type: 'office',is_default: true).first
+    where(address_type: 'office', is_default: true).first
   end
 
   def self.default_home
-    where(address_type: 'home',is_default: true).first
+    where(address_type: 'home', is_default: true).first
   end
 
-  validates :address_type,presence: true,inclusion: {in: ['home','office']}
+  validates :address_type, presence: true, inclusion: {in: ['home', 'office']}
 
 
   before_save :make_default_if_initial
-  before_save :undefault_other_addresses, :if => Proc.new {|address| address.is_default}
-
-
+  before_save :undefault_other_addresses, :if => Proc.new { |address| address.is_default }
 
 
   def make_default_if_initial
     if address_type=='home'
-     unless user.addresses.home.present?
-       make_default!
-     end
+      unless user.addresses.home.present?
+        make_default!
+      end
     else
       unless user.addresses.office.present?
         make_default!
@@ -79,18 +80,40 @@ class Address < ActiveRecord::Base
 
   def serializable_hash(options={})
     options ||={}
-    options[:except] ||= [:user_id,:updated_at,:created_at,]
+    options[:except] ||= [:user_id, :updated_at, :created_at,]
     super
   end
 
   def formatted
     if address_type=='home'
-      "#{flat}, #{building},#{address_details},#{landmark}"
+      address= ""
+      if flat.present?
+        address=address + "#{flat},"
+      end
+      if building.present?
+        address=address + "#{building},"
+      end
+
+      address = address + "#{address}"
+
+      if landmark.present?
+        address=address + ",#{landmark}"
+      end
     else
-      "#{company} #{floor}, #{building},#{address_details},#{landmark}"
+      address = "#{company},"
+      if floor.present?
+        address=address + "#{floor},"
+      end
+      if building.present?
+        address=address + "#{building},"
+      end
+      address = address + "#{address}"
+
+      if landmark.present?
+        address=address + ",#{landmark}"
+      end
     end
-
-
+    address
   end
 
 
