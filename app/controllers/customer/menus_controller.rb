@@ -15,12 +15,20 @@ class Customer::MenusController < ApplicationController
   # "Authorization:authentication_token"  http://localhost:3000/api/products/lunch
   def lunch
     @menu = Menu.current_lunch
-    @cart.set_menu_and_category @menu,'lunch'
+    if @menu
+      @cart.set_menu_and_category @menu,'lunch'
+    else
+      @unavailable = true
+    end
   end
 
   def dinner
     @menu = Menu.current_dinner
-    @cart.set_menu_and_category @menu,'dinner'
+    if @menu
+      @cart.set_menu_and_category @menu,'dinner'
+    else
+      @unavailable = true
+    end
   end
 
   private

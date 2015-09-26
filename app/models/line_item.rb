@@ -39,11 +39,11 @@ class LineItem < ActiveRecord::Base
   end
 
   def product_name
-    product.name
+    product.name if product
   end
 
   def vegetarian
-    product.vegetarian
+    product.vegetarian if product
   end
 
 end

@@ -1,6 +1,6 @@
 = title 'Dinner Menu'
 - if @menu.menu_date!=Date.current
-  -#= render 'customer/menus/menu_unavailable'
+  -#= render 'customer/menus/menu_tomorrow'
 
 Date:
 = @menu.menu_date.strftime("%a %d,%b ")
