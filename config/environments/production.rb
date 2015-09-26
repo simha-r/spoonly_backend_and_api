@@ -99,4 +99,6 @@ Rails.application.configure do
   # For speeding up requests pagespeed google etc
   config.middleware.use Rack::Deflater
 
+  config.action_mailer.default_url_options = { :host => "www.spoonly.in" }
+
 end
