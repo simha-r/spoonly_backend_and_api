@@ -41,7 +41,7 @@ class Wallet < ActiveRecord::Base
   def apply_promotion wallet_promotion
     amount = wallet_promotion.amount.to_f
     new_balance = self.balance.to_f + amount
-    if wallet_promotion.credits.create!(amount: amount,credit_type: wallet_promotion.name,
+    if wallet_promotion.credits.create!(amount: amount,credit_type: 'promotion',
                                        latest_wallet_balance: new_balance,wallet: self)
       update_attributes!(balance: new_balance)
     end
