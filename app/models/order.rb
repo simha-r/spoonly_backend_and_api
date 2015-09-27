@@ -155,7 +155,7 @@ class Order < ActiveRecord::Base
   end
 
   def is_first?
-    user.orders.delivered.order('created_at DESC').first==self
+    user.orders.delivered.order(:created_at).first == self 
   end
 
   def apply_cashback_promotions
