@@ -373,9 +373,6 @@ GEM
       multi_json (~> 1.10)
     sitemap_generator (5.0.5)
       builder
-    social-share-button (0.1.8)
-      coffee-rails
-      sass-rails
     spring (1.3.6)
     sprockets (2.12.4)
       hike (~> 1.2)
@@ -463,7 +460,6 @@ DEPENDENCIES
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
   sitemap_generator
-  social-share-button
   spring
   turbolinks
   typhoeus

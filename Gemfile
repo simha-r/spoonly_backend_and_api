@@ -36,7 +36,6 @@ gem 'rolify'
 gem 'roadie-rails'
 gem 'sass-rails', '~> 4.0.3'
 gem 'sdoc', '~> 0.4.0',          group: :doc
-gem 'social-share-button'
 gem 'spring',        group: :development
 gem 'turbolinks'
 gem 'typhoeus'
