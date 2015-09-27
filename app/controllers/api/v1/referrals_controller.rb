@@ -3,7 +3,7 @@ class Api::V1::ReferralsController < Api::V1::BaseController
   def create
     referral_code = params[:referral_code]
 
-    if referral_code[0..1].upcase=='RR'
+    if referral_code[0..1].upcase=='RC'
       #It is a referral code
       referrer = User.where(referral_code: params[:referral_code]).first
       if current_user.referred || !referrer || current_user.orders.delivered.present? || (current_user.referral_code==params[:referral_code])
