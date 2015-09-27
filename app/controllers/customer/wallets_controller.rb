@@ -24,13 +24,13 @@ before_action :authenticate_user!,except: [:recharge]
         user_id = response['payment']['custom_fields']['Field_35054']['value']
         @user = User.find user_id
         if @user.add_to_wallet amount,payment_id,'instamojo'
-         return redirect_to successful_recharge_customer_wallet_path
+         return redirect_to(add_money_customer_wallet_path,notice: "Your payment of #{amount} has been successfully completed.")
         else
-          return redirect_to failed_recharge_customer_wallet_path
+          return redirect_to(add_money_customer_wallet_path,alert: "Your payment of #{amount} has failed. Please contact our support for any issues.")
         end
       end
     end
-    redirect_to failed_recharge_customer_wallet_path
+    redirect_to(add_money_customer_wallet_path,alert: "Your payment of #{amount} has failed. Please contact our support for any issues.")
   end
 
 
