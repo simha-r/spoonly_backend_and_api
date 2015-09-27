@@ -29,7 +29,7 @@
     = form_tag customer_orders_path, class: "form-horizontal",id:"place_order_form",remote: true do
       - delivery_times = [[nil,"Select Time"]]+MenuProduct.send("show_#{@cart.category}_times")
       .form-group
-        .col-xs-8
+        .col-xs-9.col-lg-6
           %span.msg
             %i.fa.fa-clock-o
             Select a time of delivery
@@ -37,4 +37,4 @@
           :last), class: "form-control"
         = hidden_field_tag 'order[pay_type]','cash_on_delivery'
         = hidden_field_tag 'order[address_id]'
-        #place_order_button.col-xs-offset-1.col-xs-2.hidden= submit_tag 'Confirm Order', class: "btn btn-action"
+        #place_order_button.col-xs-2.hidden= submit_tag 'Confirm Order', class: "btn btn-action"

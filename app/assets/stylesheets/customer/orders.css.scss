@@ -79,13 +79,6 @@
         .form-group {
           margin-bottom: 5px;
         }
-
-        /*
-         *.form-control {
-         *  display: inline;
-         *  width: 200px;
-         *}
-         */
       }
 
       &.phone_number_verification {
@@ -205,6 +198,11 @@
       }
 
       &.order_confirmation {
+
+        form .form-control {
+          display: inline;
+          width: 140px;
+        }
         /*
          *min-height: 420px;
          */
