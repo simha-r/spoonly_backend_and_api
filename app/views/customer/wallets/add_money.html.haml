@@ -1,14 +1,28 @@
+.user-profile
+  = render '/customer/accounts/profile_sidebar'
+  .content
+    .col-xs-12
+      .wallet
+        .balance.text-center
+          %span.msg Available Balance
+          %p.inr
+            %i.fa.fa-inr
+            %span.amount= current_user.wallet.balance
+        .add-amount
+          .pre-defined-amount
+            %p.text-center Add amount to your wallet
+            .btn.btn-action.amount-button{"data-amount"=>100}
+              100
+            .btn.btn-action.amount-button{"data-amount"=>200}
+              200
+            .btn.btn-action.amount-button{"data-amount"=>300}
+              300
 
-.btn.btn-primary.amount-button{"data-amount"=>100}
-  100
-.btn.btn-primary.amount-button{"data-amount"=>200}
-  200
-.btn.btn-primary.amount-button{"data-amount"=>300}
-  300
+          = form_tag '' do
+            .form-group
+              = number_field_tag 'amount','',placeholder: 'Enter specific amount', class: "form-control"
+            = link_to 'Proceed To Pay','',id: 'pay',class: 'btn btn-action'
 
-= form_tag '' do
-  = number_field_tag 'amount','',placeholder: 'Enter amount'
-  = link_to 'Proceed To Pay','',id: 'pay',class: 'btn btn-primary'
 :javascript
 
   $('.amount-button').click(function(){

@@ -515,3 +515,89 @@ $action_color:#f38f31;
     }
   }
 }
+
+
+.user-profile {
+  @include make-xs-column(12,0);
+
+  .content {
+    left: 301px;
+    position: absolute;
+    height: 100%;
+    right: 0;
+    padding-top: 48px;
+    padding-left: 60px;
+    padding-right: 60px;
+
+    .wallet {
+      width: 308px;
+
+      .balance {
+        span.msg {
+          font-size: 14px;
+          color: grey;
+        }
+        .inr {
+          font-size: 24px;
+          color: #333;
+        }
+      }
+
+      .add-amount {
+        .pre-defined-amount .btn-action {
+          border-radius: 2px;
+          color: #333;
+          background-color: #fdfdfd;
+          border: 1px solid #e6e6e6;
+          padding: 13px;
+          width: 90px;
+          font-size: 16px;
+          margin-right: 10px;
+
+          &:hover {
+            background-color: #f38f30;
+            color: #fff;
+          }
+        }
+
+        form {
+          input {
+            width: 300px;
+            border-color: #e6e6e6;
+            margin-top: 25px;
+            margin-bottom: 25px;
+            box-shadow: none;
+            padding-left: 32px;
+            height: 48px;
+          }
+
+          .btn-action {
+            height: 48px;
+            line-height: 36px;
+            width: 300px;
+          }
+        }
+      }
+    }
+  }
+}
+
+#my_account .content {
+
+  .balance {
+    top: 7px;
+    font-size: 24px;
+    color: #333;
+
+    .msg {
+      font-weight: 200;
+      padding-right: 20px;
+    }
+  }
+
+  .btn-action {
+    border-radius: 2px;
+    height: 48px;
+    line-height: 34px;
+  }
+}
