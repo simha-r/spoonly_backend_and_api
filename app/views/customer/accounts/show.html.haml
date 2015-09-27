@@ -1,3 +1,22 @@
-%h3 My Account
-= current_user.email
-= link_to 'Add Money to Wallet',add_money_customer_wallet_path
+.profile-sidebar
+  .user-info-container
+    .profile-pic-container.text-center
+      = image_tag current_user.profile.pic_url
+    .username-container.text-center= current_user.profile.name
+    .user-info.email
+      %i.fa.fa-envelope
+      %span= current_user.email
+    .user-info.mobile
+      %i.fa.fa-phone
+      %span= current_user.profile.phone_number
+  .sidebar-menu
+    .menu-item
+      = link_to "SUMMARY", "#"
+    .menu-item.active
+      = link_to "WALLET", "#", class: ""
+    .menu-item
+      = link_to "ADDRESSES", "#"
+.content
+  %h3 My Account
+  = current_user.email
+  = link_to 'Add Money to Wallet',add_money_customer_wallet_path

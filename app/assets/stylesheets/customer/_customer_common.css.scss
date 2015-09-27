@@ -97,7 +97,7 @@ $action_color:#f38f31;
   background-color: #fff;
 
   .mixpanel {
-    @include make-xs-column(4,0);
+    @include make-xs-column(3,0);
     text-align: left;
   }
 
@@ -126,6 +126,10 @@ $action_color:#f38f31;
 
     .android-app {
       color: #808080;
+
+      a {
+        color: #808080;
+      }
 
       .fa {
         font-size: 18px;
@@ -433,5 +437,81 @@ $action_color:#f38f31;
     color: #c63d2d;
     font-size: 18px;
     margin-top: 15px;
+  }
+}
+
+
+
+.profile-sidebar {
+  border: 1px solid #e6e6e6;
+  float: left;
+  background-color: #fff;
+  width: 300px;
+  min-height: 700px;
+  z-index: 9;
+
+  .user-info-container {
+    padding-top: 48px;
+
+    .profile-pic-container img {
+      height:130px;
+      width: 130px;
+      border-radius: 50%;
+    }
+
+    .username-container {
+      font-size: 24px;
+      line-height: 1;
+      padding-top: 36px;
+      padding-bottom: 48px;
+    }
+
+    .user-info {
+      line-height: 48px;
+      margin: 0 20px;
+      border-top: 1px solid #e6e6e6;
+      white-space: nowrap;
+      max-width: 258px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      color: #33333;
+    }
+
+    .user-info {
+      .fa-envelope,
+      .fa-phone {
+        font-size: 20px;
+        color: #B3B3B3;
+        margin-left: 6px;
+        margin-right: 20px;
+      }
+    }
+  }
+
+  .sidebar-menu {
+    margin-top: 10px;
+
+    a {
+      color: #333;
+      font-size: 14px;
+      padding: 14px 0 14px 30px;
+      display: block;
+    }
+
+    .menu-item {
+      border-bottom: 1px solid #e6e6e6;
+
+      &:first-of-type {
+        border-top: 1px solid #e6e6e6;
+      }
+
+      &.active {
+        background-color: #f6f6f6;
+
+        a {
+          color: #f38f30;
+        }
+      }
+    }
   }
 }
