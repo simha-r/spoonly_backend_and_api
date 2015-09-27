@@ -1,38 +1,30 @@
 = render 'company/current_orders/header',state: 'acknowledged'
 
-
-.row
-  .col-xs-2
-    Order #
-  .col-xs-2
-    Delivery Time
-  .col-xs-2
-    User
-  .col-xs-2
-    Address
-  .col-xs-2
-    State
-.row
-  %br
-    %br
-- if @orders.present?
-  = form_tag multi_assign_company_current_orders_path do
-    - @orders.each do |order|
-      .row
-        .col-xs-2
-          = check_box_tag 'order_ids[]',order.id
-        .col-xs-2
-          = link_to order.id,[:company,order]
-        .col-xs-2
-          = order.user.name
-          %br
-          %i Address:
-          = order.address.formatted
-        .col-xs-2
-          = order.delivery_time_range
-        .col-xs-2
-          = order.state
-    = select_tag :delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.available,:id,:name)
-    = submit_tag 'Dispatch'
+.col-xs-12
+  %table.table
+    %thead
+      %tr
+        - ["Order #", "Delivery Time", "User", "Address", "State"].each do |h|
+          %th=h
+    %tbody
+    - if @orders.present?
+      = form_tag multi_assign_company_current_orders_path, class: "form-horizontal" do
+        - @orders.each do |order|
+          %tr
+            %td
+              = check_box_tag 'order_ids[]',order.id
+            %td
+              = link_to order.id,[:company,order]
+            %td
+              %p= order.user.name
+              %i Address:
+              %span= order.address.formatted
+            %td
+              = order.delivery_time_range
+            %td{class: "#{order.state}" }
+              = order.state
+        .col-xs-3
+          = select_tag :delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.available,:id,:name), class: "form-control"
+        = submit_tag 'Dispatch', class: "btn btn-primary"
 
 = render 'company/current_orders/new_order_handling'

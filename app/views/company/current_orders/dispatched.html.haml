@@ -30,7 +30,7 @@
         = order.dispatched_at
       %td
         = "#{order.delivery_executive.name} , #{order.delivery_executive.phone_number}"
-      %td
+      %td{class: "#{order.state}" }
         = order.state
 
 = render 'company/current_orders/new_order_handling'

@@ -1,62 +1,61 @@
 = render 'company/current_orders/header',state: 'all'
 
-%br
-- if params[:search].present?
-  - if @search_results.present?
-    %h4 Search Results:
-    %table.table
-      %thead
-        %tr.row
-          %th
-            Order #
-          %th
-            User Details
-          %th
-            Delivery Time
-          %th
-            State
-      - @search_results.each do |order|
-        %tr.row
-          %td
-            = link_to order.id,[:company,order]
-          %td
-            = order.user.name
-            %br
-            %i Address:
-            = order.address.formatted
-          %td
-            = order.delivery_time_range
+.current_orders_index
+  - if params[:search].present?
+    - if @search_results.present?
+      %h4 Search Results:
+      %table.table
+        %thead
+          %tr.row
+            %th
+              Order #
+            %th
+              User Details
+            %th
+              Delivery Time
+            %th
+              State
+        - @search_results.each do |order|
+          %tr.row
+            %td
+              = link_to order.id,[:company,order]
+            %td
+              = order.user.name
+              %br
+              %i Address:
+              = order.address.formatted
+            %td
+              = order.delivery_time_range
+            %td{class: "#{order.state}" }
+              = order.state
+    - else
+      %h4= "No Results found for #{params[:search]}"
 
-          %td
-            = order.state
-  - else
-    %h4= "No Results found for #{params[:search]}"
 
+  %table.table
+    %thead
+      %tr.row
+        %th
+          Order #
+        %th
+          User Details
+        %th
+          Delivery Time
+        %th
+          State
+    - @orders.each do |order|
+      %tr.row
+        %td
+          = link_to order.id,[:company,order]
+        %td
+          = order.user.name
+          %br
+          %i Address:
+          = order.address.formatted
+        %td
+          = order.delivery_time_range
 
-%table.table
-  %thead
-    %tr.row
-      %th
-        Order #
-      %th
-        User Details
-      %th
-        Delivery Time
-      %th
-        State
-  - @orders.each do |order|
-    %tr.row
-      %td
-        = link_to order.id,[:company,order]
-      %td
-        = order.user.name
-        %br
-        %i Address:
-        = order.address.formatted
-      %td
-        = order.delivery_time_range
-
-      %td
-        = order.state
+        %td{class: "#{order.state}" }
+          = order.state
 
 = render 'company/current_orders/new_order_handling'

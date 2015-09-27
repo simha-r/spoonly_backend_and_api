@@ -33,7 +33,7 @@
       %td
         = order.delivery_executive.name
       %td
-      %td
+      %td{class: "#{order.state}" }
         = order.state
 
 = render 'company/current_orders/new_order_handling'
