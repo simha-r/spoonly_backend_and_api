@@ -141,7 +141,7 @@ class User < ActiveRecord::Base
 
   def generate_referral_code
     self.referral_code = loop do
-      random_token = ("r"+rand(36**5).to_s(36)).upcase
+      random_token = ("rr"+rand(36**4).to_s(36)).upcase
       break random_token unless self.class.exists?(referral_code: random_token)
     end
   end
