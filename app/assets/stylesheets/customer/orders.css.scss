@@ -8,7 +8,9 @@
   .orders-process-list {
     padding: 0;
     list-style: none;
-    text-align: center;
+    /*
+     *text-align: center;
+     */
   }
 
   .orders-process-list {
@@ -78,9 +80,33 @@
           margin-bottom: 5px;
         }
 
-        .form-control {
-          display: inline;
-          width: 200px;
+        /*
+         *.form-control {
+         *  display: inline;
+         *  width: 200px;
+         *}
+         */
+      }
+
+      &.phone_number_verification {
+        form {
+          .control-label {
+            top: 5px;
+          }
+
+          #phone_number_warning {
+            padding-left: 10px;
+          }
+        }
+
+        #enter_code {
+          padding-top: 15px;
+
+          form {
+            .otp-container {
+              padding-left: 18px;
+            }
+          }
         }
       }
 

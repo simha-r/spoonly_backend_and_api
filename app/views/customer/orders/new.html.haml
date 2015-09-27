@@ -42,18 +42,22 @@
           #phone_number_verification.content
             = form_tag start_customer_number_verifications_path,class: '',remote: true, class: "form-horizontal" do
               .form-group
-                Phone Number
-                = number_field_tag 'phone_number', nil, class: "form-control"
-                = submit_tag 'Continue', class: "btn btn-action",id: 'submit_phone_number'
-              #phone_number_warning
+                = label_tag "phone_number",'Phone Number', class: "col-xs-4 text-right control-label"
+                .col-xs-5.col-md-4.col-lg-3
+                  = number_field_tag 'phone_number', nil, class: "form-control"
+                .col-xs-2
+                  = submit_tag 'Continue', class: "btn btn-action",id: 'submit_phone_number'
+              #phone_number_warning.col-xs-offset-4.col-xs-8
                 %p.text-danger Please verify mobile number to continue.
             .row#enter_code{style: 'display: none'}
               = form_tag finish_customer_number_verifications_path, class: "form-horizontal",remote: true do
                 .form-group
-                  OTP
-                  = number_field_tag 'verification_code', nil, class: "form-control",placeholder: 'Enter OTP'
-                  = submit_tag 'Verify', class: "btn btn-action"
-                #otp_warning.text-danger
+                  = label_tag "verification_code", "OTP", class: "col-xs-4 text-right control-label"
+                  .col-xs-3.col-md-2.col-lg-2.otp-container
+                    = number_field_tag 'verification_code', nil, class: "form-control",placeholder: 'Enter OTP'
+                  .col-xs-2
+                    = submit_tag 'Verify', class: "btn btn-action"
+                #otp_warning.text-danger.col-xs-offset-4.col-xs-8
                   %p
             .row.errors#wrong_code{style: 'display: none'}
           -##final_order{style: 'display: none'}
