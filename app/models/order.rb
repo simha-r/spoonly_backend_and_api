@@ -106,7 +106,7 @@ class Order < ActiveRecord::Base
   end
 
   def update_stock
-    line_items.each{|li| }
+    # line_items.each{|li| }
   end
 
   def notify_kitchen event
