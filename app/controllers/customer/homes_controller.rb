@@ -1,9 +1,9 @@
 class Customer::HomesController < Customer::BaseController
 
   include LocationCheck
-  skip_before_filter :detect_android_and_redirect,only: [:android]
+  skip_before_filter :detect_android_and_redirect,only: [:android,:app]
 
-  before_action :proceed_to_main_if_old_user
+  before_action :proceed_to_main_if_old_user, except: [:android,:app]
 
   def main
 
@@ -23,6 +23,10 @@ class Customer::HomesController < Customer::BaseController
     # values = JSON.parse(cookies[:customer]).with_indifferent_access
 
     redirect_to [:home,:customer,:menus]
+  end
+
+  def app
+    redirect_to "https://play.google.com/apps/testing/com.freshspoon.spoonly"
   end
 
 end
