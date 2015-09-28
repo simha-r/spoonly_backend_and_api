@@ -5,9 +5,9 @@ class Customer::OmniauthCallbacksController < Devise::OmniauthCallbacksControlle
   def all
     p env["omniauth.auth"]
     user = User.from_omniauth(env["omniauth.auth"], current_user)
-    session[:login_type]=user.login_type
     if user.persisted?
       user.confirm!
+      session[:login_type]=user.login_type
       sign_in_and_redirect(user)
     else
       session["devise.user_attributes"] = user.attributes
