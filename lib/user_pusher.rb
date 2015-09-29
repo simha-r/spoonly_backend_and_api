@@ -1,8 +1,13 @@
 module UserPusher
 
-  def ask_for_feedback message
-    message ||= "Dear #{name}, Would you like to rate your meal? We would love to hear of any suggestions that you have"
+  def ask_for_feedback message=nil
+    message ||= "Dear #{name.split(' ')}, Would you like to rate your meal? We would love to hear of any suggestions
+    that you have"
     PushProvider.push self,message,"FeedbackActivity"
+  end
+
+  def notify_menu message
+    PushProvider.push self,message,nil
   end
 
 end
