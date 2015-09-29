@@ -18,7 +18,10 @@
   .field
     = f.label :price
     = f.text_field :price
-
+  .field
+    = f.label :cost_description
+    = f.text_area :cost_description,cols: 60,rows: 10
+  .field
     = f.file_field :photo
 
 

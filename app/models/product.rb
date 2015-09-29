@@ -14,6 +14,7 @@
 #  photo_updated_at   :datetime
 #  vegetarian         :boolean          default(FALSE)
 #  long_description   :string(255)
+#  cost_description   :text
 #
 
 class Product < ActiveRecord::Base
@@ -35,6 +36,7 @@ class Product < ActiveRecord::Base
   def serializable_hash(options={})
     options ||={}
     options[:methods] = [:photo_url]
+    options[:except]=[:cost_description]
     super
   end
 
