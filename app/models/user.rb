@@ -24,6 +24,9 @@
 #
 
 class User < ActiveRecord::Base
+
+  include UserPusher
+
   # Include default devise modules. Others available are:
   #  :lockable, :timeoutable and :
   devise :database_authenticatable,
@@ -129,6 +132,7 @@ class User < ActiveRecord::Base
     options[:include] = :profile
     super
   end
+
 
   private
 
