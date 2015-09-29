@@ -127,6 +127,7 @@ Rails.application.routes.draw do
         put :acknowledge
         put :assign
         put :cancel
+        put :deliver
         get :bill
       end
       collection do

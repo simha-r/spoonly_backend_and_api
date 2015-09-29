@@ -67,6 +67,12 @@ class Company::OrdersController < Company::BaseController
     return render nothing: true
   end
 
+  def deliver
+    if @order.deliver!
+      redirect_to request.referrer,notice: 'Order has been marked delivered'
+    end
+  end
+
   def collections_summary
     if params[:date]
       @delivery_date = DateTime.new params[:date][:year].to_i,params[:date][:month].to_i,params[:date][:day].to_i

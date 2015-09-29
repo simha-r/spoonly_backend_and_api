@@ -15,6 +15,8 @@
         Delivery Executive
       %th
         State
+      %th
+        Actions
   - @orders.each do |order|
     %tr.row
       %td
@@ -32,5 +34,8 @@
         = "#{order.delivery_executive.name} , #{order.delivery_executive.phone_number}"
       %td{class: "#{order.state}" }
         = order.state
+      %td
+        - if !order.delivered?
+          =link_to "Mark Delivered",deliver_company_order_path(order),method: :put
 
 = render 'company/current_orders/new_order_handling'
