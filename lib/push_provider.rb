@@ -11,7 +11,7 @@ module PushProvider
     push.save
   end
 
-  def self.push user,message,activity,title
+  def self.push user,message,activity,title=nil 
     push_using_parse user,message,activity,title
   end
 
