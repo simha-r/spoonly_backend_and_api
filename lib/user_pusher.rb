@@ -5,8 +5,8 @@ module UserPusher
     PushProvider.push self,message,"FeedbackActivity"
   end
 
-  def notify_menu message
-    PushProvider.push self,message,nil
+  def notify_menu message,title
+    PushProvider.push self,message,nil,title
   end
 
 end
