@@ -18,7 +18,7 @@ class Api::V1::ReferralsController < Api::V1::BaseController
       #Not a referral code
       #TODO use this for applying general promo codes
       general_promotion = GeneralPromotion.where(promo_code: referral_code).active.first
-      if general_promotion.apply_for user
+      if general_promotion.apply_for current_user
         render json: {text: 'Promotion has been applied!'}
       else
         render json: {error: 'Invalid code'},status: 500
