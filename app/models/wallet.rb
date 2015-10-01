@@ -44,6 +44,8 @@ class Wallet < ActiveRecord::Base
     if wallet_promotion.credits.create!(amount: amount,credit_type: 'promotion',
                                        latest_wallet_balance: new_balance,wallet: self)
       update_attributes!(balance: new_balance)
+    else
+      return false
     end
   end
 

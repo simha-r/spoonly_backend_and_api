@@ -45,6 +45,8 @@ class User < ActiveRecord::Base
   has_one :referred,foreign_key: :referred_id,class_name: 'Referral'
   has_many :referred_users,through: :referrals,foreign_key: :referrer_id,source: :referred
   has_one :referrer_user,through: :referred,foreign_key: :referred_id,source: :referrer
+  has_many :user_general_promotions
+  has_many :general_promotions, through: :user_general_promotions
 
   attr_accessor :login_type
 

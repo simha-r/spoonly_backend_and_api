@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: general_promotions
+#
+#  id          :integer          not null, primary key
+#  promo_code  :string(255)
+#  name        :string(255)
+#  description :string(255)
+#  amount      :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  active      :boolean          default(FALSE)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  promo_code: MyString
+  name: MyString
+  description: MyString
+  amount: MyString
+
+two:
+  promo_code: MyString
+  name: MyString
+  description: MyString
+  amount: MyString
