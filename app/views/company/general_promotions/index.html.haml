@@ -1,0 +1,34 @@
+%h3 General Promotions
+.row
+  .col-xs-2
+    Name
+  .col-xs-2
+    Description
+  .col-xs-2
+    Amount
+  .col-xs-2
+    Description
+- @general_promotions.each do |promotion|
+
+  .row
+    .col-xs-2
+      = promotion.name
+    .col-xs-2
+      = promotion.description
+    .col-xs-2
+      = promotion.amount
+    .col-xs-2
+      = promotion.promo_code
+    .col-xs-2
+      = link_to 'Edit',[:edit,:company,promotion]
+    .col-xs-2
+      -if promotion.active?
+        Active
+        = link_to 'Disable',[:disable,:company,promotion],method: :put
+      - else
+        Inactive
+        = link_to 'Enable',[:enable,:company,promotion],method: :put
+%br
+.row
+  = link_to 'Add New Promotion',[:new,:company,:general_promotion]
+

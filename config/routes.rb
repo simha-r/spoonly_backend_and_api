@@ -160,6 +160,12 @@ Rails.application.routes.draw do
       end
       get :live_view,on: :collection
     end
+    resources :general_promotions do
+      member do
+        put :enable
+        put :disable
+      end
+    end
   end
   resources :sitemaps, :only => :show
   get "sitemap" => "sitemaps#show"

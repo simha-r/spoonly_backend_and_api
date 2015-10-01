@@ -33,4 +33,12 @@ class GeneralPromotion < ActiveRecord::Base
     end
   end
 
+  def enable
+    update_attributes(active: true)
+  end
+
+  def disable
+    update_attributes(active: false)
+  end
+
 end
