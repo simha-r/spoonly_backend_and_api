@@ -240,6 +240,16 @@ class Order < ActiveRecord::Base
     Order.where("date(delivery_time) = ?",date)
   end
 
+  def mark_feedback_asked
+    update_attributes(feedback_asked: true)
+  end
+
+  def ask_for_feedback
+    if(!feedback_asked and delivered?)
+      user.ask_for_feedback
+      mark_feedback_asked
+    end
+  end
 
   private
 

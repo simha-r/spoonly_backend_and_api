@@ -35,5 +35,9 @@
       %td
       %td{class: "#{order.state}" }
         = order.state
+        - if order.feedback_asked?
+          Feedback Asked
+        - else
+          = link_to 'Ask Feedback',ask_feedback_company_order_path(order),method: :put
 
 = render 'company/current_orders/new_order_handling'

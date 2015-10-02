@@ -129,6 +129,7 @@ Rails.application.routes.draw do
         put :cancel
         put :deliver
         get :bill
+        put :ask_feedback
       end
       collection do
         post :sms_update
@@ -166,6 +167,7 @@ Rails.application.routes.draw do
         put :disable
       end
     end
+    resources :users
   end
   resources :sitemaps, :only => :show
   get "sitemap" => "sitemaps#show"

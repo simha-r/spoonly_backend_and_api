@@ -1,0 +1,92 @@
+%h3= "##{@user.id} - #{@user.name}"
+%table.table
+  %thead
+    %tr
+      %th
+        User Details:
+
+  %tr
+    %td
+      = @user.name
+      ,
+      = @user.email
+      %br
+      = @user.profile.phone_number
+      %br
+        Addresses:
+        %br
+      - @user.addresses.each do |address|
+        = address.formatted
+        %br
+- @user.orders.each do |order|
+  %h4= "Order ##{order.id}"
+  %table.table
+    %thead
+      %tr
+        %th
+          Delivery Time
+        - if order.dispatched?
+          %th
+            Dispatched At
+        - if order.delivered?
+          %th
+            Delivered At
+        %th
+          State
+    %tr
+      %td
+        = order.formatted_delivery_time
+      - if order.dispatched?
+        %td
+          = order.dispatched_at
+      - if order.delivered?
+        %td
+          = order.formatted_delivery_time
+      %td
+        = order.state.upcase
+
+
+  %h4 Items
+  %table.table
+    %thead
+      %tr
+        %th
+          Item
+        %th
+          Quantity
+        %th
+          Photo
+
+    - order.line_items.includes(:menu_product).includes(:product).each do |li|
+      %tr
+        %td
+          = li.product.name
+        %td
+          = li.quantity
+  %h4
+    BILL:
+  .row
+    .col-xs-1
+    .col-xs-1
+      Total Amount
+      %br
+      %b= "#{order.total_price} "
+    .col-xs-1
+      = "-"
+    .col-xs-1
+      Prepaid Amount
+      %br
+      %b="#{order.prepaid_amount}"
+    .col-xs-1
+      = "="
+    .col-xs-1
+      Due
+      %br Amount
+      %b="#{order.cash_to_pay}"
+
+
+
+
+
+= link_to 'Back to All Users',[:company,:users],class: 'btn btn-primary'
+

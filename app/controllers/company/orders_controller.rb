@@ -83,6 +83,15 @@ class Company::OrdersController < Company::BaseController
     @delivered_orders = Order.find_by_date(@delivery_date).includes(:delivery_executive).includes(:debit).includes(:line_items).includes(:user).delivered
   end
 
+  def ask_feedback
+    if @order.delivered?
+      @order.ask_for_feedback
+      redirect_to request.referrer,notice: 'Asked for feedback'
+    else
+      redirect_to request.referrer,alert: 'Order hasnt been delivered yet'
+    end
+  end
+
   private
 
   def order_params

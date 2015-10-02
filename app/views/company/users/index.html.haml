@@ -1,0 +1,46 @@
+- if @users.present?
+
+  %table.table
+    %thead
+      %tr
+        %th
+          User #
+        %th
+          Name,Email
+        %th
+          Phone
+        %th
+          No. of Orders
+        %th
+          Wallet Money
+        %th
+          Feedbacks
+    - @users.each do |user|
+      %tr
+        %td
+          = link_to user.id,[:company,user]
+        %td
+          = user.name
+          %br
+          = user.email
+        %td
+          = user.phone_number
+        %td
+          - if user.orders.present?
+            = user.orders.count
+          - else
+            None
+        %td
+          = user.wallet.balance
+        %td
+          - if user.feedbacks.present?
+            = link_to 'View',''
+          - else
+            = link_to 'No Feedback',''
+
+  .row
+    = will_paginate @users
+- else
+  %h3 No Users present
+
+
