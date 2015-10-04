@@ -171,5 +171,7 @@ Rails.application.routes.draw do
   end
   resources :sitemaps, :only => :show
   get "sitemap" => "sitemaps#show"
+  resources :gifts,only: [:show] do
+  end
 
 end
