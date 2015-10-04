@@ -26,7 +26,7 @@ class Customer::HomesController < Customer::BaseController
   end
 
   def app
-    redirect_to "https://play.google.com/apps/testing/com.freshspoon.spoonly"
+    redirect_to "https://play.google.com/store/apps/details?id=com.freshspoon.spoonly"
   end
 
 end
