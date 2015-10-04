@@ -1,6 +1,6 @@
 #referral_code
   .logo-container
-    = image_tag 'spoonly_logo.png'
+    = image_tag 'spoonly_referral_logo.gif'
   .user-profile-pic
     = image_tag @referrer.profile.pic_url
 
@@ -12,7 +12,7 @@
 
   .code-container
     .col-xs-6.left
-      %p.code= @referrer.referral_code
+      %p.code="Code: #{@referrer.referral_code}"
     .col-xs-6.right
       %p.title How it works?
       %p.step
