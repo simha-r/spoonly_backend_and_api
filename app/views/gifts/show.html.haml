@@ -4,7 +4,11 @@
   .user-profile-pic
     = image_tag @referrer.profile.pic_url
 
-    %p= "#{@referrer.name} gifted you Rs 50"
+    %p.msg
+      = @referrer.name
+      gifted you
+      %i.fa.fa-inr
+      50
 
   .code-container
     .col-xs-6.left

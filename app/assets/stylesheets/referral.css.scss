@@ -1,5 +1,7 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
 @import 'mixins';
 
 html,
@@ -49,7 +51,6 @@ body {
     }
   }
 
-  
 
   .user-profile-pic {
     border-top: 1px solid #cacbcc;
@@ -64,6 +65,8 @@ body {
     }
 
     p {
+      font-size: 20px;
+      color: #3db5e8;
       padding-top: 20px;
       margin: 0;
     }
