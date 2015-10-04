@@ -1,4 +1,28 @@
-= "#{@referrer.name} gifted you Rs 50"
+#referral_code
+  .logo-container
+    = image_tag 'spoonly_logo.png'
+  .user-profile-pic
+    = image_tag current_user.profile.pic_url
 
-%a{:href => "https://play.google.com/store/apps/details?id=com.freshspoon.spoonly"}
-  %img{:alt => "Get it on Google Play", :src => "https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"}/
+    %p= "#{@referrer.name} gifted you Rs 50"
+
+  .code-container
+    .col-xs-6.left
+      %p.code= current_user.referral_code
+      %p.msg Rs. 100 Cashback on your first order.
+    .col-xs-6.right
+      %p.title How it works?
+      %p.step
+        %span 1
+        Download  APP
+      %p.step
+        %span 2
+        Go to promotions
+      %p.step
+        %span 3
+        = "Apply #{current_user.referral_code}"
+
+
+  %span.app-msg Get the app now
+  %a{:href => "https://play.google.com/store/apps/details?id=com.freshspoon.spoonly"}
+    %img{:alt => "Get it on Google Play", :src => "https://developer.android.com/images/brand/en_generic_rgb_wo_45.png"}/
