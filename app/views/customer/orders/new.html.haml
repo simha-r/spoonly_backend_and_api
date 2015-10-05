@@ -103,7 +103,7 @@
 #order_success
 
 
-- if !current_user.addresses.present?
+- if(!current_user || !current_user.addresses.present?)
   :javascript
     $(function(){$('.add_office').click();})
 
