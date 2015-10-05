@@ -94,7 +94,9 @@ class Address < ActiveRecord::Base
         address=address + "#{building},"
       end
 
-      address = address + "#{address}"
+      if address_details.present?
+        address=address + "#{address_details}"
+      end
 
       if landmark.present?
         address=address + ",#{landmark}"
@@ -107,8 +109,9 @@ class Address < ActiveRecord::Base
       if building.present?
         address=address + "#{building},"
       end
-      address = address + "#{address}"
-
+      if address_details.present?
+        address=address + "#{address_details}"
+      end
       if landmark.present?
         address=address + ",#{landmark}"
       end
