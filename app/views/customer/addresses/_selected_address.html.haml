@@ -1,12 +1,4 @@
-- if address.address_type=='office'
-  .row
-    = address.company
-    = address.building
-    = address.address_details
-    = address.landmark
-- else
-  .row
-    = address.flat
-    = address.building
-    = address.address_details
-    = address.landmark
+.row
+  .col-xs-3
+  .col-xs-3
+    = address.formatted

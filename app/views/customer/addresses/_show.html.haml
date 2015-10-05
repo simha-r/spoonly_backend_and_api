@@ -1,15 +1,5 @@
 .select-address{:data => {:address_id => "#{address.id}"}}
-  - if address.address_type=='company'
-    = address.company
-    = address.floor
-    = address.building
-    = address.address_details
-    = address.landmark
-  -else
-    = address.flat
-    = address.building
-    = address.address_details
-    = address.landmark
+  = address.formatted
 
   -#.selected.hidden
     -#%i.fa.fa-check

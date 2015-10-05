@@ -102,7 +102,14 @@
         = render 'customer/orders/final_order', :can_order => can_order
 #order_success
 
+
+- if !current_user.addresses.present?
+  :javascript
+    $(function(){$('.add_office').click();})
+
 :javascript
+
+
   $('#phone_number').keypress(function(){
     $('#enter_code').hide();
     $('#submit_phone_number').show();
@@ -180,6 +187,8 @@
         $('#place_order_button').addClass('hidden')
       }
   })
+
+
 
 
 
