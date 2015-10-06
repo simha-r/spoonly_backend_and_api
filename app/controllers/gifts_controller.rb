@@ -1,6 +1,7 @@
-class GiftsController < Customer::BaseController
+class GiftsController < ApplicationController
 
   layout :layout_by_resource
+
 
   def show
     referral_code = params[:id]
