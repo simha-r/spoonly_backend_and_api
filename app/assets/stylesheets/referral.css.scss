@@ -8,7 +8,7 @@ html,
 body {
   height: 100%;
   font-family: 'Open Sans', sans-serif;
-  background-color: #F4F7F8;
+  background-color: #f4f7f8;
 }
 
 #referral_code {
@@ -173,6 +173,59 @@ body {
           }
         }
       }
+    }
+  }
+}
+
+.download-app {
+  @include make-xs-column(12,0);
+  background-image: cloudinary-url('cover_1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  height: 100%;
+}
+
+#android {
+  max-width: 350px;
+  margin: 120px auto 25px auto;
+  background-color: #fff;
+  .top,
+  .app {
+    padding: 20px 30px 10px 20px;
+  }
+
+  .logo {
+    margin-bottom: 20px;
+
+    img {
+      height: 60px;
+    }
+  }
+
+  .features {
+    p {
+      color: #8e8e8e;
+    }
+  }
+
+  .sep {
+    border: 2px dotted #d6d6d6;
+  }
+
+  .app {
+    padding-bottom: 40px;
+
+    h2 {
+      margin: 0;
+      color: #f58f1e;
+    }
+
+    p {
+      margin-top: 15px;
+      margin-bottom: 30px;
+      color: #f48d0f;
+      font-size: 22px;
     }
   }
 }
