@@ -22,7 +22,7 @@ module NumberVerification
 
   def self.send_code user
     text = "Spoonly code: #{user.profile.phone_number_verification_code}. Valid for 5 minutes."
-    SmsProvider.send_message user.profile.phone_number,text
+    SmsProvider.delay.send_message user.profile.phone_number,text
   end
 
   def self.finish user,code
