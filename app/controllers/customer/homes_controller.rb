@@ -10,7 +10,7 @@ class Customer::HomesController < Customer::BaseController
   end
 
   def android
-  
+    render layout: 'gifts'
   end
 
   def inside
