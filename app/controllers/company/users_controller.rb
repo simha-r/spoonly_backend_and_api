@@ -1,5 +1,6 @@
-class Company::UsersController < ApplicationController
+class Company::UsersController < Company::BaseController
 
+  before_filter :authenticate_admin!
   before_filter :load_resource, except: [:index]
 
   def index
