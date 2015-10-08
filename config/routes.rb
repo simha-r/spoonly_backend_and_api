@@ -168,6 +168,7 @@ Rails.application.routes.draw do
       end
     end
     resources :users
+    resources :feedbacks
   end
   resources :sitemaps, :only => :show
   get "sitemap" => "sitemaps#show"

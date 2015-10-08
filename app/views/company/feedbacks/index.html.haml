@@ -1,0 +1,40 @@
+- if @feedbacks.present?
+
+  %table.table
+    %thead
+      %tr
+        %th
+          Name,Email
+        %th
+          Phone
+        %th
+          No. of Orders
+        %th
+          Rating
+        %th
+          Comment
+    - @feedbacks.each do |feedback|
+      - user = feedback.user
+      %tr
+        %td
+          = link_to user.name,[:company,user]
+          %br
+          = user.email
+        %td
+          = user.phone_number
+        %td
+          - if user.orders.present?
+            = user.orders.count
+          - else
+            None
+        %td
+          = feedback.overall_rating
+        %td
+          = feedback.comment
+
+  .row
+    = will_paginate @feedbacks
+- else
+  %h3 No Feedbacks present
+
+

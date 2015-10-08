@@ -1,6 +1,6 @@
 class Company::CompanyUsersController < Company::BaseController
 
-
+  before_filter :authenticate_admin!
   before_filter :set_company_user,except: [:index]
 
   def index
