@@ -24,7 +24,7 @@
           = user.phone_number
         %td
           - if user.orders.present?
-            = user.orders.count
+            = user.orders.delivered.count
           - else
             None
         %td
