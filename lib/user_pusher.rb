@@ -9,4 +9,8 @@ module UserPusher
     PushProvider.push self,message,nil,title
   end
 
+  def notify_wallet message,title
+    PushProvider.push self,message,"WalletActivity",title
+  end
+
 end
