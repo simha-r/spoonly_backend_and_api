@@ -22,8 +22,13 @@ class Api::V1::MenusController < Api::V1::BaseController
     if @menu
       render json: @menu.show_lunch
     else
+      if [5,6,7].include? Date.today.wday
+        notice = "Orders for today are closed. We'll be back on Monday!"
+      else
+        notice = "Orders for today are closed. Please check again tomorrow!"
+      end
       #TODO Send a notice key value that will be displayed in the app
-      render json: {notice: 'We are closed today. Please check again tomorrow !'}
+      render json: {notice: notice}
     end
   end
 
