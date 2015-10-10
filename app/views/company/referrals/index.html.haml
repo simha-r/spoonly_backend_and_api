@@ -14,9 +14,9 @@
     .col-xs-2
       = referral.created_at.strftime("%l:%M %p, %a  %-d %b")
     .col-xs-2
-      = link_to "#{referred_user.name},#{referred_user.email}",[:company,referred_user]
+      = link_to "#{referred_user.try :name},#{referred_user.try :email}",[:company,referred_user]
     .col-xs-2
-      = link_to "#{referring_user.name},#{referring_user.email}",[:company,referring_user]
+      = link_to "#{referring_user.try :name},#{referring_user.try :email}",[:company,referring_user]
 
 .row
   = will_paginate @referrals
