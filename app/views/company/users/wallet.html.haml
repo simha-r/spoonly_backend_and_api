@@ -6,10 +6,12 @@
 
 .row
   .col-xs-2
+  .col-xs-2
     Type
 
 - @user.transactions.each do |transaction|
   .row
+    .col-xs-2
     .col-s-2
       = transaction.class.name
     .col-xs-2
