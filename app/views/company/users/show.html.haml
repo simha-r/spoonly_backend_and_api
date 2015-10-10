@@ -16,8 +16,10 @@
         Addresses:
         %br
       - @user.addresses.each do |address|
-        = address.formatted
-        %br
+        .row
+          = address.formatted
+      .row
+        = link_to "View Wallet",[:wallet,:company,@user]
 - @user.orders.each do |order|
   %h4= "Order ##{order.id}"
   %table.table

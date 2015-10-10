@@ -1,0 +1,22 @@
+%h3 Referrals
+.row
+  .col-xs-2
+    Created At
+  .col-xs-2
+    New User
+  .col-xs-2
+    Referrer
+
+- @referrals.each do |referral|
+  - referred_user = referral.referred
+  - referring_user = referral.referrer
+  .row
+    .col-xs-2
+      = referral.created_at.strftime("%l:%M %p, %a  %-d %b")
+    .col-xs-2
+      = link_to "#{referred_user.name},#{referred_user.email}",[:company,referred_user]
+    .col-xs-2
+      = link_to "#{referring_user.name},#{referring_user.email}",[:company,referring_user]
+
+.row
+  = will_paginate @referrals

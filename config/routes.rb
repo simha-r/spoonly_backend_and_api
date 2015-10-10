@@ -167,7 +167,16 @@ Rails.application.routes.draw do
         put :disable
       end
     end
-    resources :users
+
+    resources :wallet_promotions do
+
+    end
+    resources :referrals
+    resources :users do
+      member do
+        get :wallet
+      end
+    end
     resources :feedbacks
   end
   resources :sitemaps, :only => :show

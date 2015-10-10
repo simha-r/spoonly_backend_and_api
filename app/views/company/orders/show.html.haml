@@ -86,6 +86,8 @@
   = @order.delivery_executive.try &:name
 %br
   %br
+
+
 - if !@order.cancelled? && !@order.delivered?
   = link_to 'Cancel Order',[:cancel,:company,@order],method: :put, data: {confirm: "Are you sure?"}
 %br

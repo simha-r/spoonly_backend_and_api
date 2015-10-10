@@ -1,0 +1,26 @@
+%h3 Wallet Promotions
+.row
+  .col-xs-2
+    Name
+  .col-xs-2
+    Description
+  .col-xs-2
+    Amount
+  .col-xs-2
+    Actions
+- @wallet_promotions.each do |promotion|
+
+  .row
+    .col-xs-2
+      = promotion.name
+    .col-xs-2
+      = promotion.description
+    .col-xs-2
+      = promotion.amount
+    .col-xs-2
+      = link_to 'Edit',[:edit,:company,promotion]
+
+%br
+.row
+  = link_to 'Add New Promotion',[:new,:company,:wallet_promotion]
+

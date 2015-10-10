@@ -135,6 +135,10 @@ class User < ActiveRecord::Base
     super
   end
 
+  def transactions
+    (wallet.debits + wallet.credits).sort &:created_at
+  end
+
 
   private
 

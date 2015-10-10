@@ -1,0 +1,29 @@
+%h4
+  Balance:
+  = @user.wallet.balance
+
+%h4 Transactions
+
+.row
+  .col-xs-2
+    Type
+
+- @user.transactions.each do |transaction|
+  .row
+    .col-s-2
+      = transaction.class.name
+    .col-xs-2
+      = transaction.created_at.strftime("%l:%M %p, %a  %-d %b")
+    .col-xs-2
+      = transaction.amount
+    .col-xs-2
+      - if transaction.class==Credit
+        = transaction.credit_type
+        ,
+        = transaction.payment_mechanism_type
+        = link_to 'View',[:company,transaction.payment_mechanism]
+      - else
+        NA
+
+
+

@@ -11,6 +11,10 @@ class Company::UsersController < Company::BaseController
 
   end
 
+  def wallet
+    
+  end
+
   private
 
   def load_resource

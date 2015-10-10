@@ -10,6 +10,10 @@ class Company::GeneralPromotionsController < Company::BaseController
     @general_promotion = GeneralPromotion.new
   end
 
+  def show
+    
+  end
+
   def create
     @general_promotion = GeneralPromotion.new(general_promotion_params)
     if @general_promotion.save

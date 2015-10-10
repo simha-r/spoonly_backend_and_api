@@ -1,0 +1,22 @@
+.row
+  .col-xs-2
+    Name
+  .col-xs-2
+    Description
+  .col-xs-2
+    Amount
+  .col-xs-2
+    Created At
+  .col-xs-2
+    Updated At
+.row
+  .col-xs-2
+    = @wallet_promotion.name
+  .col-xs-2
+    = @wallet_promotion.description
+  .col-xs-2
+    = @wallet_promotion.amount
+  .col-xs-2
+    = @wallet_promotion.created_at.strftime("%l:%M %p, %a  %-d %b")
+  .col-xs-2
+    = @wallet_promotion.updated_at.strftime("%l:%M %p, %a  %-d %b")
