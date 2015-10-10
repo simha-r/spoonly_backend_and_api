@@ -136,7 +136,7 @@ class User < ActiveRecord::Base
   end
 
   def transactions
-    (wallet.debits + wallet.credits).sort &:created_at
+    (wallet.debits + wallet.credits).sort_by &:created_at
   end
 
 
