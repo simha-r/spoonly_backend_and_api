@@ -32,14 +32,12 @@
         %td
           - if user.orders.present?
             = user.orders.count
-          - else
-            None
+        %td
+          = user.wallet.balance
         %td
           = user.referred_users.count
         %td
           = user.referrer_user.try :name
-        %td
-          = user.wallet.balance
         %td
           - if user.feedbacks.present?
             = link_to 'View',''
