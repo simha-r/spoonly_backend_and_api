@@ -172,6 +172,8 @@ Rails.application.routes.draw do
 
     end
     resources :referrals
+    resources :card_transactions,only: [:show,:index] do
+    end
     resources :users do
       member do
         get :wallet
