@@ -14,6 +14,10 @@
         %th
           Wallet Money
         %th
+          Has Referred
+        %th
+          Referrer
+        %th
           Feedbacks
     - @users.each do |user|
       %tr
@@ -30,6 +34,10 @@
             = user.orders.count
           - else
             None
+        %td
+          = user.referred_users.count
+        %td
+          = user.referrer_user.try :name
         %td
           = user.wallet.balance
         %td

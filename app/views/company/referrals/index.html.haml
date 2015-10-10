@@ -3,7 +3,7 @@
   .col-xs-2
   .col-xs-2
     Created At
-  .col-xs-2
+  .col-xs-3
     New User
   .col-xs-2
     Referrer
@@ -15,7 +15,7 @@
     .col-xs-2
     .col-xs-2
       = referral.created_at.strftime("%l:%M %p, %a  %-d %b")
-    .col-xs-2
+    .col-xs-3
       = link_to "#{referred_user.try :name},#{referred_user.try :email}",[:company,referred_user]
     .col-xs-2
       = link_to "#{referring_user.try :name},#{referring_user.try :email}",[:company,referring_user]
