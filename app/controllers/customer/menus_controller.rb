@@ -16,7 +16,9 @@ class Customer::MenusController < ApplicationController
   def lunch
     @menu = Menu.current_lunch
     if @menu
-      @cart.set_menu_and_category @menu,'lunch'
+      # @cart.set_menu_and_category @menu,'lunch'
+      @unavailable = true
+
     else
       @unavailable = true
     end
