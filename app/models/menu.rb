@@ -62,7 +62,7 @@ class Menu < ActiveRecord::Base
 
     products: menu_lunch_products.includes(:product).collect{|menu_product| menu_product.product.as_json.merge(menu_product_id: menu_product.id,sold_out: menu_product.sold_out)}}
     hash = {notice: 'No Products available today'} if !menu_lunch_products.present?
-    hash[:referral_text] = "Earn Free Meals \n Give Rs 50, Get Rs 50"
+    hash[:referral_text] = "<html><body>Earn Free Meals<br />Give Rs 50, Get Rs 50</body></html>"
     hash
   end
 
