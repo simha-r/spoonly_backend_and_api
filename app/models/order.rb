@@ -48,7 +48,7 @@ class Order < ActiveRecord::Base
       transitions from: :pending, to: :acknowledged
     end
 
-    event :dispatch,before: [:record_dispatch_time] do
+    event :dispatch,before: [:record_dispatch_time],after:[:notify_dispatch] do
       transitions from: :acknowledged, to: :dispatched
     end
 
@@ -135,6 +135,17 @@ class Order < ActiveRecord::Base
     end
   end
   handle_asynchronously :notify_user,queue: 'user_notifications'
+
+  def notify_delivery_executive event
+    if event=='dispatch'
+      DeliveryExecutiveMessenger.dispatch(self)
+    end
+  end
+
+  def notify_dispatch
+    notify_delivery_executive 'dispatch'
+  end
+  handle_asynchronously :notify_dispatch,queue: 'kitchen_notifications',priority: 5
 
   def add_line_items_from_cart(cart)
     cart.line_items.each do |item|
@@ -249,6 +260,14 @@ class Order < ActiveRecord::Base
       user.ask_for_feedback
       mark_feedback_asked
     end
+  end
+
+  def brief_line_items
+    line = ''
+    line_items.includes(:menu_product).includes(:product).each do |li|
+      line << "ITEM #{li.product.id}(#{li.product.category}) => #{li.quantity} ."
+    end
+    line
   end
 
   private

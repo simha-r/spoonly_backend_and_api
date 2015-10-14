@@ -43,4 +43,8 @@ class Product < ActiveRecord::Base
   def photo_url
     photo.url :mobile
   end
+
+  def category
+    vegetarian? ? 'VEG' : 'NONVEG'
+  end
 end
