@@ -12,6 +12,7 @@
 
 class DeliveryExecutive < ActiveRecord::Base
 
+
   has_many :orders
   has_many :locations
 
