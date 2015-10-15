@@ -128,7 +128,25 @@ class User < ActiveRecord::Base
     wallet.apply_promotion wallet_promotion
   end
 
+  def has_been_referred?
+    if device_id.present?
+      # Has this device id  been used to redeem a referral code before ?
+      users = User.where(device_id: device_id)
+      referral = Referral.where(referred_id: users).first
+      if referral
+        true
+      else
+        false
+      end
+    else
+      referred
+    end
+  end
+
   def refer_user user
+    if(user.has_been_referred? || user.orders.delivered.present? || (user.referral_code==referral_code))
+      return false
+    end
     referral = referrals.create!(referred_id: user.id)
     #TODO Write reward logic here or in before/after hooks of referral
   end

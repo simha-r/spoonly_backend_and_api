@@ -21,15 +21,27 @@ class GeneralPromotion < ActiveRecord::Base
 
 
   def apply_for user
-
     return false if !active
-
-    user_general_promotion = UserGeneralPromotion.where(general_promotion: self,user: user).first
-    if user_general_promotion
+    if applied_for? user
       return false
     else
       UserGeneralPromotion.create!(general_promotion: self,user: user)
       user.wallet.apply_promotion self
+    end
+  end
+
+  def applied_for? user
+    if user.device_id.present?
+      same_device_users = User.where(device_id: user.device_id)
+      general_promotion = UserGeneralPromotion.where(general_promotion: self,user: same_device_users).first
+    else
+      general_promotion= UserGeneralPromotion.where(general_promotion: self,user: user).first
+    end
+
+    if user.has_been_referred?
+      false
+    else
+      general_promotion
     end
   end
 

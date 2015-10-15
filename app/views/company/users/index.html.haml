@@ -18,6 +18,8 @@
         %th
           Referrer
         %th
+          Device Id
+        %th
           Feedbacks
     - @users.each do |user|
       %tr
@@ -38,6 +40,8 @@
           = user.referred_users.count
         %td
           = user.referrer_user.try :name
+        %td
+          = user.device_id
         %td
           - if user.feedbacks.present?
             = link_to 'View',''
