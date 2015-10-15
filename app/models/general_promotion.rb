@@ -22,6 +22,10 @@ class GeneralPromotion < ActiveRecord::Base
 
   def apply_for user
     return false if !active
+    #Dont give general promotion offers for users who have already used up referral rewards as referred
+    if user.has_been_referred?
+      return false
+    end
     if applied_for? user
       return false
     else
@@ -37,12 +41,7 @@ class GeneralPromotion < ActiveRecord::Base
     else
       general_promotion= UserGeneralPromotion.where(general_promotion: self,user: user).first
     end
-
-    if user.has_been_referred?
-      false
-    else
-      general_promotion
-    end
+    general_promotion
   end
 
   def enable
