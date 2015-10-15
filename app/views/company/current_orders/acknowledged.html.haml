@@ -7,10 +7,21 @@
         - ["Order #", "Delivery Time", "User", "Address", "State"].each do |h|
           %th=h
     %tbody
+    - previous_order = nil
+    - previous_color = nil
+    - colors = ['#ddd','#CDBCBC']
     - if @orders.present?
       = form_tag multi_assign_company_current_orders_path, class: "form-horizontal" do
         - @orders.each do |order|
-          %tr
+          - if order.delivery_time == previous_order.try(:delivery_time)
+            - color = previous_color || '#CDBCBC'
+            -#TODO Use same color as previous one
+          - else
+            -#TODO Use different color
+            - color = previous_color ? (colors - [previous_color])[0] : '#ddd'
+          - previous_order= order
+          - previous_color = color
+          %tr{:style => "background-color: #{color}"}
             %td
               = check_box_tag 'order_ids[]',order.id
             %td
