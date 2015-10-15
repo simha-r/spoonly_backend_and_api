@@ -46,14 +46,16 @@
         %th
           Color
     - previous_order = nil
+    - colors = ['white','black']
     - @orders.each do |order|
       - if order.delivery_time == previous_order.try(:delivery_time)
-        - abc = 'White'
+        - color = previous_color || 'white'
         -#TODO Use same color as previous one
       - else
         -#TODO Use different color
-        - abc = 'black'
+        - color = previous_color ? (colors - previous_color)[0] : 'black'
       - previous_order= order
+      - previous_color = color
       %tr.row
         %td
           = link_to order.id,[:company,order]
@@ -68,6 +70,6 @@
         %td{class: "#{order.state}" }
           = order.state
         %td
-          = abc
+          = color 
 
 = render 'company/current_orders/new_order_handling'
