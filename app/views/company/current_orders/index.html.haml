@@ -54,7 +54,7 @@
         -#TODO Use same color as previous one
       - else
         -#TODO Use different color
-        - color = previous_color ? (colors - previous_color)[0] : 'black'
+        - color = previous_color ? (colors - [previous_color])[0] : 'black'
       - previous_order= order
       - previous_color = color
       %tr.row
