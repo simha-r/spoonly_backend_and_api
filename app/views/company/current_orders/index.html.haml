@@ -46,6 +46,7 @@
         %th
           Color
     - previous_order = nil
+    - previous_color = nil
     - colors = ['white','black']
     - @orders.each do |order|
       - if order.delivery_time == previous_order.try(:delivery_time)
@@ -70,6 +71,6 @@
         %td{class: "#{order.state}" }
           = order.state
         %td
-          = color 
+          = color
 
 = render 'company/current_orders/new_order_handling'
