@@ -7,8 +7,9 @@ class Api::V1::SessionsController < Api::V1::BaseController
   def create
     #Find email for that provider,uid,access_token
     if get_user_info params['access_token'],params['provider']
-      auth = {provider: params['provider'],uid: @uid,token: params['access_token'],info: {email: @email,name: @name,
-                                                                                          pic_url: @picture},device_id: params[:device_id]}
+      device_id = params[:android_id].present? ? params[:android_id] : params[:telephony_manager_device_id]
+      auth = {provider: params['provider'],uid: @uid,token: params['access_token'],
+              info: {email: @email,name: @name,pic_url: @picture},device_id: device_id}
 
       user = User.from_omniauth(auth, current_user)
       if user.persisted?
