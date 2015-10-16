@@ -16,6 +16,7 @@ class Company::DeliveryExecutivesController < Company::BaseController
     lat,long,id,timestamp=params[:lat],params[:lon],params[:id],params[:timestamp]
     delivery_executive = DeliveryExecutive.find_from_tracecar(id)
     delivery_executive.log_location lat,long,timestamp
+    head 200
   end
 
   def live_view
