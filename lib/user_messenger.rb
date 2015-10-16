@@ -18,5 +18,8 @@ module UserMessenger
     SmsProvider.send_message user.profile.phone_number,message
   end
 
+  def self.apologise user,message
+    SmsProvider.send_message user.profile.phone_number,message
+  end
 
 end
