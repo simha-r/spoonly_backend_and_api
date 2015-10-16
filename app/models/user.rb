@@ -144,7 +144,8 @@ class User < ActiveRecord::Base
   end
 
   def refer_user user
-    if(user.has_been_referred? || user.orders.delivered.present? || (user.referral_code==referral_code))
+    spoonly50 = GeneralPromotion.where(promo_code: 'SPOONLY50').first
+    if(user.has_been_referred? || user.orders.delivered.present? || (user.referral_code==referral_code) || spoonly50.applied_for?(user))
       return false
     end
     referral = referrals.create!(referred_id: user.id)
