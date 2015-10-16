@@ -17,6 +17,10 @@ class Company::CurrentOrdersController < Company::BaseController
     end
   end
 
+  def chef_summary
+    @orders = Order.today.lunch
+  end
+
   def pending
     @category = params[:category] || 'lunch'
     @orders = Order.show_todays_orders @category

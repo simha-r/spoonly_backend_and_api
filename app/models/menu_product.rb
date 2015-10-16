@@ -50,6 +50,12 @@ class MenuProduct < ActiveRecord::Base
 
   end
 
+  def self.show_all_lunch_times
+    MenuProduct::LUNCH_TIMES.collect do |hour,range|
+      [Time.parse("#{hour[0..1]}:#{hour[2..3]}").strftime("%l:%M %P"),range]
+    end
+  end
+
   def self.show_dinner_times
     todays_menu = Menu.where(menu_date: Date.current).first
     if Time.now< todays_menu.dinner_order_end_time

@@ -144,6 +144,7 @@ Rails.application.routes.draw do
         get :dispatched
         get :delivered
         get :cancelled
+        get :chef_summary
         post :multi_assign
       end
     end
