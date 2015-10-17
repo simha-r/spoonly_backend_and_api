@@ -1,0 +1,3 @@
+-order.line_items.includes(:menu_product).includes(:product).each do |li|
+  = "#{li.product.name}(#{li.product.category}) => #{li.quantity}"
+  %br

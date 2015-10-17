@@ -14,6 +14,8 @@
             %th
               Delivery Time
             %th
+              Items
+            %th
               State
         - @search_results.each do |order|
           %tr.row
@@ -42,6 +44,8 @@
         %th
           Delivery Time
         %th
+          Items
+        %th
           State
     - previous_order = nil
     - previous_color = nil
@@ -65,7 +69,8 @@
           = order.address.formatted
         %td
           = order.delivery_time_range
-
+        %td
+          = render 'company/orders/line_summary',order: order
         %td{class: "#{order.state}" }
           = order.state
 

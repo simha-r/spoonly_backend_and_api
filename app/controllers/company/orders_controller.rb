@@ -1,8 +1,8 @@
 class Company::OrdersController < Company::BaseController
 
-  before_filter :authenticate_dispatcher!,except: [:sms_update]
-  before_filter :set_order,except: [:index,:sms_update,:by_date,:collections_summary]
-  before_filter :authenticate_sms_sender!,only: [:sms_update]
+  before_filter :authenticate_dispatcher!, except: [:sms_update]
+  before_filter :set_order, except: [:index, :sms_update, :by_date, :collections_summary]
+  before_filter :authenticate_sms_sender!, only: [:sms_update]
 
   def index
     @orders = Order.order(delivery_time: :desc).includes(:user).includes(:address).paginate page: params[:page]
@@ -10,7 +10,7 @@ class Company::OrdersController < Company::BaseController
 
   def by_date
     if params[:date]
-      @delivery_date = DateTime.new params[:date][:year].to_i,params[:date][:month].to_i,params[:date][:day].to_i
+      @delivery_date = DateTime.new params[:date][:year].to_i, params[:date][:month].to_i, params[:date][:day].to_i
       @orders = Order.find_by_date @delivery_date
     end
   end
@@ -24,58 +24,63 @@ class Company::OrdersController < Company::BaseController
 
   def acknowledge
     @order.acknowledge!
-    redirect_to [:company,@order]
+    redirect_to [:company, @order]
   end
 
   def assign
     if @order.update_attributes(order_params)
       @order.dispatch_with order_params[:delivery_executive_id]
-      redirect_to [:company,@order], notice: 'Successfully assigned to delivery executive'
+      redirect_to [:company, @order], notice: 'Successfully assigned to delivery executive'
     else
-      redirect_to [:company,@order],alert: 'Unable to assign'
+      redirect_to [:company, @order], alert: 'Unable to assign'
     end
   end
 
   def cancel
     if @order.cancel!
-      redirect_to [:company,@order]
+      redirect_to [:company, @order]
     end
   end
 
   def sms_update
-    if DeliveryExecutive.allowed_numbers.include? params['from_number']
-      message = params['content'].strip
-      message = message.split(' ')
-      order_ids = message[1]
-      puts message
-      puts order_ids
-      if message[0].downcase=='sp'
-        puts 'going to find orders and mark delivered'
-        @orders = Order.where id: order_ids
-        @orders.where(state: 'dispatched').each(&:deliver!)
-        return render nothing: true
+    if params[:secret]==ENV['TELERIVET_SECRET']
+      if DeliveryExecutive.allowed_numbers.include? params['from_number']
+        message = params['content'].strip
+        message = message.split(' ')
+        order_ids = message[1]
+        puts message
+        puts order_ids
+        if message[0].downcase=='sp'
+          puts 'going to find orders and mark delivered'
+          @orders = Order.where id: order_ids
+          @orders.where(state: 'dispatched').each(&:deliver!)
+          return render nothing: true
+        else
+          puts 'format is wrong'
+          return render nothing: true
+        end
       else
-        puts 'format is wrong'
+        # Got sms from unknown number
+        puts params
         return render nothing: true
       end
     else
-      puts params
-      return render nothing: true
+      head 404
     end
-  rescue Exception=>e
-    HealthyLunchUtils.log_error 'SMS not in format',e
+  rescue Exception => e
+    HealthyLunchUtils.log_error 'SMS not in format', e
     return render nothing: true
   end
 
   def deliver
     if @order.deliver!
-      redirect_to request.referrer,notice: 'Order has been marked delivered'
+      redirect_to request.referrer, notice: 'Order has been marked delivered'
     end
   end
 
   def collections_summary
     if params[:date]
-      @delivery_date = DateTime.new params[:date][:year].to_i,params[:date][:month].to_i,params[:date][:day].to_i
+      @delivery_date = DateTime.new params[:date][:year].to_i, params[:date][:month].to_i, params[:date][:day].to_i
     else
       @delivery_date = Date.today
     end
@@ -86,9 +91,9 @@ class Company::OrdersController < Company::BaseController
   def ask_feedback
     if @order.delivered?
       @order.ask_for_feedback
-      redirect_to request.referrer,notice: 'Asked for feedback'
+      redirect_to request.referrer, notice: 'Asked for feedback'
     else
-      redirect_to request.referrer,alert: 'Order hasnt been delivered yet'
+      redirect_to request.referrer, alert: 'Order hasnt been delivered yet'
     end
   end
 

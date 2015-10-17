@@ -12,9 +12,12 @@ class Company::CurrentOrdersController < Company::BaseController
     if @orders.present?
       @orders.each {|o| o.dispatch_with params[:delivery_executive_id]}
       redirect_to request.referrer, notice: 'Successfully assigned to delivery executive'
+
     else
       redirect_to request.referrer, alert: 'Please select an order to dispatch !'
     end
+
+
   end
 
   def chef_summary

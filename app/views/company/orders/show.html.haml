@@ -89,6 +89,8 @@
 
 
 - if !@order.cancelled? && !@order.delivered?
+  %br
+    %br
   = link_to 'Cancel Order',[:cancel,:company,@order],method: :put, data: {confirm: "Are you sure?"}
 %br
   %br

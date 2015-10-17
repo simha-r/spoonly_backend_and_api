@@ -270,6 +270,7 @@ class Order < ActiveRecord::Base
     line
   end
 
+
   def cashback_for_customer_satisfaction
     wallet_promotion=WalletPromotion.where(name: 'customer_satisfaction_100').first
     if user.wallet.apply_promotion wallet_promotion

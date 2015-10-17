@@ -6,13 +6,15 @@
       %th
         Order #
       %th
-        User-Address
+        User
       %th
         Delivery Time
       %th
         Dispatched At
       %th
         Delivery Executive
+      %th
+        Items
       %th
         State
       %th
@@ -21,17 +23,20 @@
     %tr.row
       %td
         = link_to order.id,[:company,order]
-      %td
-        = order.user.name
-        %br
+      %td{'width'=>'150px'}
+        %p= "#{order.user.name}, #{order.user.profile.phone_number}"
         %i Address:
-        = order.address.formatted
+        %span= order.address.formatted
       %td
         = order.delivery_time_range
       %td
-        = order.dispatched_at
-      %td
+        = order.dispatched_at.strftime("%l:%M %p, %a ")
+      %td{'width'=>'145px'}
         = "#{order.delivery_executive.name} , #{order.delivery_executive.phone_number}"
+      %td
+        -order.line_items.includes(:menu_product).includes(:product).each do |li|
+          = "#{li.product.name}(#{li.product.category}) => #{li.quantity}"
+          %br
       %td{class: "#{order.state}" }
         = order.state
       %td
