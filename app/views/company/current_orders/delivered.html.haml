@@ -14,6 +14,8 @@
       %th
         Delivery Executive
       %th
+        Items
+      %th
         Delivered At
       %th
         State
@@ -32,6 +34,8 @@
         = order.dispatched_at
       %td
         = order.delivery_executive.name
+      %td
+        = render 'company/orders/line_summary',order: order
       %td
       %td{class: "#{order.state}" }
         = order.state
