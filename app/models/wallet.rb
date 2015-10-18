@@ -68,9 +68,18 @@ class Wallet < ActiveRecord::Base
     end
   end
 
+  def recharge_link
+    if user.profile.phone_number.present?
+      "https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-04b9d/?embed=form&data_hidden=data_Field_96618&data_readonly=data_name&data_readonly=data_email&data_readonly=data_phone&data_readonly=data_amount&data_email=#{user.email}&data_name=#{user.name[0..18]}&data_phone=#{user.profile.phone_number}&intent=buy&data_Field_96618=#{user.id}&data_amount="
+    else
+      "https://www.instamojo.com/Spoonly/spoonly-wallet-recharge-04b9d/?embed=form&data_hidden=data_Field_96618&data_readonly=data_name&data_readonly=data_email&data_readonly=data_amount&data_email=#{user.email}&data_name=#{user.name[0..18]}&intent=buy&data_Field_96618=#{user.id}&data_amount="
+    end
+  end
+
   def serializable_hash(options={})
     options||={}
     options[:except]=[:created_at,:updated_at,:id,:user_id]
+    options[:methods]=[:recharge_link]
     super
   end
 
