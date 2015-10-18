@@ -10,8 +10,6 @@ module Api::V1::SessionsHelper
       @uid = profile['id']
       @name = profile['name']
     elsif provider=='google'
-      #TODO get email and uid
-
       response = HTTParty.get("https://www.googleapis.com/oauth2/v2/userinfo",
                               headers: {"Access_token"  => access_token,
                                         "Authorization" => "OAuth #{access_token}"})

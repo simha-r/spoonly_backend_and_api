@@ -7,7 +7,7 @@ class Api::V1::WalletsController < Api::V1::BaseController
   end
 
   def recharge
-    #TODO This url can be refreshed to...so customer may add same money multiple times...store payment_id in wallet
+    #This url can be refreshed to...so customer may add same money multiple times...store payment_id in wallet
     # record and then check if already present
     payment_id = params[:payment_id]
     HealthyLunchUtils.log_info "Payment Id is #{payment_id}"

@@ -20,7 +20,7 @@ class Company::BaseController < ApplicationController
   end
 
   def authenticate_sms_sender!
-    head(404) unless params["secret"]==ENV['TELERIVET_SECRET']
+    head(403) unless params["secret"]==ENV['TELERIVET_SECRET']
   end
 
 end

@@ -15,7 +15,7 @@
         - @orders.each do |order|
           - if order.delivery_time == previous_order.try(:delivery_time)
             - color = previous_color || '#CDBCBC'
-            -#TODO Use same color as previous one
+            -#Use same color as previous one
           - else
             -#TODO Use different color
             - color = previous_color ? (colors - [previous_color])[0] : '#ddd'

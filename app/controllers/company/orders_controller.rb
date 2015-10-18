@@ -65,7 +65,7 @@ class Company::OrdersController < Company::BaseController
         return render nothing: true
       end
     else
-      head 404
+      head 403
     end
   rescue Exception => e
     HealthyLunchUtils.log_error 'SMS not in format', e

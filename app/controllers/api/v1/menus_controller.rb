@@ -11,6 +11,8 @@ class Api::V1::MenusController < Api::V1::BaseController
       render json: {'lunch'=> {time: '12:15 - 3:30 PM',url: 'menu/lunch'}}
     else
       head 200
+    #TODO Send html to show on client...like We currently dont serve in your area. We serve in selected parts of
+    # Hitech City and gachibowli
     end
   end
 
@@ -27,7 +29,6 @@ class Api::V1::MenusController < Api::V1::BaseController
       else
         notice = "Orders for today are closed. Please check again tomorrow!"
       end
-      #TODO Send a notice key value that will be displayed in the app
       render json: {notice: notice}
     end
   end
@@ -37,7 +38,6 @@ class Api::V1::MenusController < Api::V1::BaseController
     if @menu
       render json: @menu.show_dinner
     else
-      #TODO Send a notice key value that will be displayed in the app
       render json: {notice: 'We are closed today. Please check again tomorrow !'}
     end
   end

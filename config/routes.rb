@@ -103,7 +103,7 @@ Rails.application.routes.draw do
         get :referral
       end
     end
-    #TODO Moved it out of the first namespace because of instamojo redirect..has no headers
+    # Moved it out of the first namespace because of instamojo redirect..has no headers
 
 
 

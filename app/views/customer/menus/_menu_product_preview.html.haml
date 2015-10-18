@@ -7,7 +7,6 @@
   - product_type = product.vegetarian ? 'Veg' : 'Non Veg'
   %span.menu-name= "#{product.name} (#{product_type})"
   %p.menu-desc= product.desc
-  -#TODO Add remote true to the below link and make the controller return javascript to update the view
   .price-quantity
     %span.menu-price
       %i.fa.fa-inr

@@ -3,7 +3,7 @@ class Customer::App::WalletsController < Customer::App::BaseController
   require 'typhoeus'
 
   def recharge
-    #TODO This url can be refreshed to...so customer may add same money multiple times...store payment_id in wallet
+    #This url can be refreshed to...so customer may add same money multiple times...store payment_id in wallet
     # record and then check if already present
     payment_id = params[:payment_id]
     url = "https://www.instamojo.com/api/1.1/payments/"+payment_id+"/"
