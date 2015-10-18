@@ -156,6 +156,7 @@ class User < ActiveRecord::Base
     options||={}
     options[:except]=[:created_at,:updated_at]
     options[:include] = :profile
+    options[:methods]=[:login_type]
     super
   end
 
