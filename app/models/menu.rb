@@ -63,6 +63,9 @@ class Menu < ActiveRecord::Base
     products: menu_lunch_products.includes(:product).collect{|menu_product| menu_product.product.as_json.merge(menu_product_id: menu_product.id,sold_out: menu_product.sold_out)}}
     hash = {notice: 'No Products available today'} if !menu_lunch_products.present?
     hash[:referral_text] = "<html><body>Earn Free Meals<br />Give &#8377 50, Get &#8377 50</body></html>"
+    hash[:timings]=["12:00 PM - 12:30 PM","12:30 PM - 01:00 PM","01:00 PM - 01:30 PM","01:30 PM - 02:00 PM",
+                    "02:00 PM - 02:30 PM","02:30 PM - 03:00 PM","03:00 PM - 03:30 PM"]
+    hash[:buffer_time]=5
     hash
   end
 
