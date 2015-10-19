@@ -24,13 +24,14 @@
     .col-xs-3
       %h2
         = range
-    - range_orders=@orders.where(delivery_time: Time.zone.parse("#{today.year}-#{today.month}-#{today.day} "+ hour))
+    - range_orders=@orders.where(delivery_time: Time.zone.parse("#{today.year}-#{today.month}-#{today.day} "+ hour)).where.not(state: 'cancelled')
     -line_items = LineItem.where(order: range_orders)
     .col-xs-3
       %h2
-        = line_items.select(&:vegetarian).count
+        = line_items.select(&:vegetarian).sum(&:quantity)
     .col-xs-3
       %h2
-        = line_items.reject(&:vegetarian).count
+        = line_items.reject(&:vegetarian).sum(&:quantity)
   .row
     %br
+= render 'company/current_orders/new_order_handling'
