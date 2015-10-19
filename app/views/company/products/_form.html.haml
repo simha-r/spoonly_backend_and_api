@@ -23,7 +23,8 @@
     = f.text_area :cost_description,cols: 60,rows: 10
   .field
     = f.file_field :photo
-
+  .field
+    = f.select("vegetarian",options_for_select([['VEG',true],['NON-VEG',false]],@product.vegetarian))
 
 
   .actions

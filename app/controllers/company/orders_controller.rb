@@ -19,7 +19,6 @@ class Company::OrdersController < Company::BaseController
   end
 
   def bill
-    render layout: false
   end
 
   def acknowledge
@@ -96,6 +95,7 @@ class Company::OrdersController < Company::BaseController
       redirect_to request.referrer, alert: 'Order hasnt been delivered yet'
     end
   end
+
 
   private
 

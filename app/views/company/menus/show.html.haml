@@ -1,5 +1,7 @@
+%h3= "MENU: #{@menu.menu_date.strftime('%a  %-d %b')}"
 %h3 Lunch
-- @menu.lunch_products.each do |product|
+- @menu.menu_lunch_products.each do |menu_product|
+  - product = menu_product.product
   .row
     .col-md-8
       = image_tag product.photo.url(:thumb)
@@ -7,13 +9,13 @@
       = product.price
       = product.desc
     .col-md-4
-      = link_to 'Edit', [:edit,:company,product], :class => 'btn btn-secondary'
-      = link_to 'Delete',[:company, product], :method => :delete, :data => { :confirm => 'Are you sure?' },
+      = link_to 'Remove From Menu',[:company, menu_product], :method => :delete, :data => { :confirm => 'Are you sure?' },
       :class => 'btn btn-secondary'
 
 
 %h3 Dinner
-- @menu.dinner_products.each do |product|
+- @menu.menu_dinner_products.each do |menu_product|
+  - product = menu_product.product
   .row
     .col-md-8
       = image_tag product.photo.url(:thumb)
@@ -21,8 +23,7 @@
       = product.price
       = product.desc
     .col-md-4
-      = link_to 'Edit', [:edit,:company,product], :class => 'btn btn-secondary'
-      = link_to 'Delete',[:company, product], :method => :delete, :data => { :confirm => 'Are you sure?' },
+      = link_to 'Remove from menu',[:company, menu_product], :method => :delete, :data => { :confirm => 'Are you sure?' },
       :class => 'btn btn-secondary'
 
 %h3  Add to Menu

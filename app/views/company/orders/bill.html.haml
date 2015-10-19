@@ -1,56 +1,87 @@
-= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+.row
+  .col-xs-4
+  .col-xs-2
+    %h3= "Order ##{@order.id}"
+    %h4= @order.formatted_delivery_time
 
-%h3= "Order ##{@order.id}"
-%table.table
-  %thead
-    %tr
-      %th
-        User Details:
-      %th
-        Delivery Time
-
-  %tr
-    %td
-      = @order.user.name
-      %br
-      Ph:
-      = @order.user.profile.phone_number
-      %br
-      = @order.address.formatted
-    %td
-      = @order.formatted_delivery_time
-
-%h3 Items
-%table.table
-  %thead
-    %tr
-      %th
-        Item
-      %th
-        Quantity
-
-  - @order.line_items.includes(:menu_product).includes(:product).each do |li|
-    %tr
-      %td
-        = li.product.name
-      %td
-        = li.quantity
 %br
 .row
-  .col-xs-1
-  .col-xs-1
-    Total Amount
+  .col-xs-4
+  .col-xs-4
+    .col-xs-3
+.row
+  .col-xs-4
+  .col-xs-4
+    = @order.user.name
     %br
-    %b= "#{@order.total_price} "
-  .col-xs-1
-    = "-"
-  .col-xs-1
-    Prepaid Amount
+    %b
+      Ph:
+      = @order.user.profile.phone_number
     %br
-    %b="#{@order.prepaid_amount}"
-  .col-xs-1
-    = "="
-  .col-xs-1
-    Due
-    %br Amount
-    %b="#{@order.cash_to_pay}"
+    = @order.address.formatted
+
+%br
+
+.row
+  .col-xs-4
+  .col-xs-2
+    %b Item
+  .col-xs-2
+    %b Quantity
+
+- @order.line_items.includes(:menu_product).includes(:product).each do |li|
+  .row
+    .col-xs-4
+    .col-xs-2
+      = li.product.name
+    .col-xs-2
+      = li.quantity
+  %br
+
+.row
+  .col-xs-4
+  .col-xs-4
+    .col-xs-10
+      Total Amount
+      = "(#{@order.total_price})"
+      ="-"
+      Prepaid Amount
+      ="(#{@order.prepaid_amount})"
+.row
+  .col-xs-4
+  .col-xs-4
+    .col-xs-10
+      %h4
+        Due Amount:
+        ="#{@order.cash_to_pay}"
+
+%br
+  %br
+- if @order.pending?
+  = link_to 'Acknowledge',[:acknowledge,:company,@order], method: :put,class: 'btn btn-primary'
+
+- if @order.acknowledged?
+  = form_for [:assign,:company,@order],method: :put do |f|
+    = f.collection_select :delivery_executive_id,DeliveryExecutive.available,:id,:name
+    = f.submit 'Dispatch'
+- if @order.dispatched?
+  Dispatched through:
+  = @order.delivery_executive.try &:name
+%br
+  %br
+
+
+- if !@order.cancelled? && !@order.delivered?
+  %br
+    %br
+  = link_to 'Cancel Order',[:cancel,:company,@order],method: :put, data: {confirm: "Are you sure?"}
+%br
+  %br
+    %br
+
+= link_to 'Back to Current Orders',[:company,:current_orders],class: 'btn btn-primary'
+%br
+  %br
+= link_to 'Back to All Orders',[:company,:orders]
+
+

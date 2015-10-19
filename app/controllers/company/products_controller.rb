@@ -50,7 +50,7 @@ class Company::ProductsController < Company::BaseController
   end
   
   def product_params
-    params.require(:product).permit(:name,:price,:desc,:state,:photo,:long_description)
+    params.require(:product).permit(:name,:price,:desc,:state,:photo,:long_description,:vegetarian)
   end
 
 
