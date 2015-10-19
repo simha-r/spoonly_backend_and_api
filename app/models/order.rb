@@ -69,6 +69,7 @@ class Order < ActiveRecord::Base
   alias_method :cancel, :cancel!
 
   scope :pending,-> {where(state: 'pending')}
+  scope :acknowledged,-> {where(state: 'acknowledged')}
   scope :delivered,-> {where(state: 'delivered')}
   scope :today, -> {where("delivery_time >= ? and delivery_time <= ?",Time.now.beginning_of_day,
                           Time.now.end_of_day)}
@@ -278,6 +279,10 @@ class Order < ActiveRecord::Base
       user.notify_wallet message,"Refunds@Spoonly"
       UserMessenger.apologise user,"Apologies for the delayed service.We've gone ahead and refunded Rs #{wallet_promotion.amount}  into your Spoonly wallet."
     end
+  end
+
+  def self.to_be_cooked
+    where("state = ? or state = ?",'acknowledged','pending').today
   end
 
   private

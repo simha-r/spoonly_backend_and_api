@@ -24,7 +24,7 @@
     .col-xs-3
       %h2
         = range
-    - range_orders=@orders.where(delivery_time: Time.zone.parse("#{today.year}-#{today.month}-#{today.day} "+ hour)).where.not(state: 'cancelled')
+    - range_orders=@orders.to_be_cooked.where(delivery_time: Time.zone.parse("#{today.year}-#{today.month}-#{today.day} "+ hour))
     -line_items = LineItem.where(order: range_orders)
     .col-xs-3
       %h2
