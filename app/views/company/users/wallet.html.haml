@@ -23,7 +23,10 @@
         = transaction.credit_type
         ,
         = transaction.payment_mechanism_type
-        = link_to 'View',[:company,transaction.payment_mechanism]
+        - if transaction.payment_mechanism_type == 'Refund'
+          Refund
+        -else
+          = link_to 'View',[:company,transaction.payment_mechanism]
       - else
         NA
 
