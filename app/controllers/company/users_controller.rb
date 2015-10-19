@@ -4,7 +4,7 @@ class Company::UsersController < Company::BaseController
   before_filter :load_resource, except: [:index]
 
   def index
-    @users = User.order(:created_at).paginate page: params[:page]
+    @users = User.order(created_at: :desc).paginate page: params[:page]
   end
 
   def show
