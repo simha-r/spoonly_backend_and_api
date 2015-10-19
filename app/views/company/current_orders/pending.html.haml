@@ -10,18 +10,22 @@
       %th
         Delivery Time
       %th
+        Items
+      %th
         State
   - @orders.each do |order|
     %tr.row
       %td
         = link_to order.id,[:company,order]
-      %td
+      %td{'width'=>'250px'}
         = order.user.name
         %br
         %i ADDRESS:
         = order.address.formatted
       %td
         = order.delivery_time_range
+      %td
+        = render 'company/orders/line_summary',order: order
 
       %td{class: "#{order.state}" }
         = order.state
