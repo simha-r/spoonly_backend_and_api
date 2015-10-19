@@ -16,7 +16,11 @@
         State
   %tr
     %td
-      = @order.user.name
+      - if current_company_user.has_role? :admin
+        = link_to @order.user.name,[:company,@order.user]
+      - else
+        = @order.user.name
+
       %br
       Ph:
       = @order.user.profile.phone_number
