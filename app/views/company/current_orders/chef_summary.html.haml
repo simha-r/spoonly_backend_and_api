@@ -34,4 +34,4 @@
         = line_items.reject(&:vegetarian).sum(&:quantity)
   .row
     %br
-= render 'company/current_orders/new_order_handling'
+= render 'company/current_orders/chef_notify_new_order'
