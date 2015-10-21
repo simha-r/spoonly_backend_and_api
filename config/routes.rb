@@ -126,6 +126,7 @@ Rails.application.routes.draw do
       member do
         put :acknowledge
         put :assign
+        put :inform_delivery_guy
         put :cancel
         put :deliver
         get :bill

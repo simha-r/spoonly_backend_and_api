@@ -35,6 +35,16 @@ class Company::OrdersController < Company::BaseController
     end
   end
 
+  def inform_delivery_guy
+    @order = Order.find params[:id]
+    @delivery_executive = DeliveryExecutive.find params[:delivery_executive_id]
+    if @order.inform_delivery_guy @delivery_executive
+      redirect_to request.referrer,notice: "Informed #{@delivery_executive.name}"
+    else
+      redirect_to request.referrer,alert: 'Some error occured. Please check again!'
+    end
+  end
+
   def cancel
     if @order.cancel!
       redirect_to [:company, @order]
@@ -49,13 +59,18 @@ class Company::OrdersController < Company::BaseController
         order_ids = message[1]
         puts message
         puts order_ids
-        if message[0].downcase=='sp'
+        if (message[1].downcase=='done') || (message[1].downcase=='d')
           puts 'going to find orders and mark delivered'
           @orders = Order.where id: order_ids
           @orders.where(state: 'dispatched').each(&:deliver!)
           return render nothing: true
+        elsif message[1].downcase=='ok'
+          puts 'Acknowledged by delivery boy'
+          @orders = Order.where id: order_ids
+          @orders.where(state: 'informed_delivery_guy').each(&:mark_dispatched!)
+          return render nothing: true
         else
-          puts 'format is wrong'
+          puts 'Wrong format'
           return render nothing: true
         end
       else

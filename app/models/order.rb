@@ -36,6 +36,7 @@ class Order < ActiveRecord::Base
     state :new, initial: true
     state :pending
     state :acknowledged
+    state :informed_delivery_guy
     state :dispatched
     state :delivered
     state :cancelled
@@ -45,7 +46,15 @@ class Order < ActiveRecord::Base
     end
 
     event :acknowledge do
-      transitions from: :pending, to: :acknowledged
+      transitions from: [:informed_delivery_guy,:pending], to: :acknowledged
+    end
+
+    event :mark_informed do
+      transitions from: [:informed_delivery_guy,:pending], to: :informed_delivery_guy
+    end
+
+    event :mark_dispatched,before: [:record_dispatch_time] do
+      transitions from: :informed_delivery_guy, to: :dispatched
     end
 
     event :dispatch,before: [:record_dispatch_time],after:[:notify_dispatch] do
@@ -75,6 +84,11 @@ class Order < ActiveRecord::Base
                           Time.now.end_of_day)}
   scope :lunch, -> {where(category: 'lunch')}
   scope :dinner, -> {where(category: 'dinner')}
+
+
+  def self.pending_or_informed_delivery_guy
+    where(state: ['pending','informed_delivery_guy'])
+  end
 
   def auto_debit_amount
     user.wallet.debit_amount_for_order self
@@ -240,6 +254,14 @@ class Order < ActiveRecord::Base
     delivery_executive.mark_out_for_delivery
     self.delivery_executive = delivery_executive
     dispatch!
+  end
+
+  def inform_delivery_guy delivery_executive
+    self.delivery_executive = delivery_executive
+    if DeliveryExecutiveMessenger.inform_on_field self
+      update_attributes(delivery_executive: delivery_executive)
+      mark_informed!
+    end
   end
 
   def self.search query

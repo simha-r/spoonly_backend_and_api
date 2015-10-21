@@ -6,18 +6,14 @@ class Company::CurrentOrdersController < Company::BaseController
     @orders = Order.show_todays_orders @category
   end
 
-
   def multi_assign
     @orders = Order.where(id: params[:order_ids])
     if @orders.present?
       @orders.each {|o| o.dispatch_with params[:delivery_executive_id]}
       redirect_to request.referrer, notice: 'Successfully assigned to delivery executive'
-
     else
       redirect_to request.referrer, alert: 'Please select an order to dispatch !'
     end
-
-
   end
 
   def chef_summary
@@ -27,7 +23,7 @@ class Company::CurrentOrdersController < Company::BaseController
   def pending
     @category = params[:category] || 'lunch'
     @orders = Order.show_todays_orders @category
-    @orders = @orders.pending
+    @orders = @orders.pending_or_informed_delivery_guy
   end
 
   def acknowledged

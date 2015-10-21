@@ -1,4 +1,6 @@
 require 'nexmo'
+require 'telerivet'
+
 
 module SmsProvider
 
@@ -17,6 +19,17 @@ module SmsProvider
     # http://URL/api/v3/index.php?method=sms&api_key=Ad9e5XXXXXXXXXXXXX&to=997XXXXXXX,997XXXXXXX&sender=INFXXX&message=testing&
     #   format=json&custom=1,2&flash=0
   end
+
+  def self.send_message_with_telerivet phone_number,message
+    tr = Telerivet::API.new(ENV['TELERIVET_API_KEY'])
+    project = tr.init_project_by_id(ENV['TELERIVET_PROJECT_ID'])
+    # Send a SMS message
+    project.send_message({
+                           to_number: "+91"+phone_number,
+                           content: message
+                         })
+  end
+
 
   def self.send_message phone_number,message
     self.send_message_with_infini phone_number,message

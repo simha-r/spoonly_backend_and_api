@@ -48,6 +48,7 @@ gem 'mixpanel-ruby'
 gem "figaro"
 gem 'metamagic'
 gem 'cloudinary'
+gem 'telerivet'
 
 group :development do
   gem "bullet"
