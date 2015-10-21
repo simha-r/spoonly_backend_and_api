@@ -4,6 +4,8 @@
     %thead
       %tr
         %th
+          Time
+        %th
           Name,Email
         %th
           Phone
@@ -16,6 +18,8 @@
     - @feedbacks.each do |feedback|
       - user = feedback.user
       %tr
+        %td
+          = feedback.created_at.strftime("%l:%M %p, %a  %-d %b")
         %td
           = link_to user.name,[:company,user]
           %br
