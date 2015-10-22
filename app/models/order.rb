@@ -14,6 +14,7 @@
 #  delivery_executive_id :integer
 #  dispatched_at         :datetime
 #  delivered_at          :datetime
+#  feedback_asked        :boolean          default(FALSE)
 #
 
 class Order < ActiveRecord::Base

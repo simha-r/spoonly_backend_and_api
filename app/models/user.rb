@@ -21,6 +21,7 @@
 #  unconfirmed_email      :string(255)
 #  authentication_token   :string(255)
 #  referral_code          :string(255)
+#  device_id              :string(255)
 #
 
 class User < ActiveRecord::Base

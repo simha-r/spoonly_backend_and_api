@@ -2,14 +2,19 @@
 #
 # Table name: menu_products
 #
-#  id           :integer          not null, primary key
-#  menu_id      :integer
-#  product_id   :integer
-#  category     :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
-#  max_quantity :integer
-#  sold_out     :boolean          default(FALSE)
+#  id               :integer          not null, primary key
+#  menu_id          :integer
+#  product_id       :integer
+#  category         :string(255)
+#  created_at       :datetime
+#  updated_at       :datetime
+#  max_quantity     :integer
+#  sold_out         :boolean          default(FALSE)
+#  name             :string(255)
+#  desc             :string(255)
+#  long_description :string(255)
+#  price            :float
+#  vegetarian       :boolean
 #
 
 class MenuProduct < ActiveRecord::Base
@@ -29,8 +34,13 @@ class MenuProduct < ActiveRecord::Base
 
   validates :product_id, :uniqueness => {:scope => [:menu_id,:category]}
 
+  before_create :copy_product_data
 
-  def as_json
+
+  def serializable_hash(options={})
+    options ||={}
+    options[:except] ||= [:updated_at, :created_at,:name,:desc,:long_description,:vegetarian,:price]
+    super
   end
 
   def self.show_lunch_times
@@ -69,6 +79,18 @@ class MenuProduct < ActiveRecord::Base
     end
     dinner_times.collect { |hour,range| [Time.parse("#{hour[0..1]}:#{hour[2..3]}").strftime("%l:%M %P"),
                                     range] }
+  end
+
+  private
+
+  def copy_product_data
+    self.name = product.name
+    self.desc = product.desc
+    self.long_description = product.long_description
+    self.price = product.price
+    self.vegetarian = product.vegetarian
+    #Return true, else it doesnt get saved
+    true
   end
 
 
