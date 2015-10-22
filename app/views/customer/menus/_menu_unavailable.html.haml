@@ -1,4 +1,5 @@
 .col-xs-12.closed
   %i.fa.fa-frown-o
 
-  %p Sorry, We are closed today
+  %p= ENV['NOT_SERVING_WEEKDAY']
+
