@@ -4,6 +4,8 @@
     %thead
       %tr
         %th
+          Joined on
+        %th
           User #
         %th
           Name,Email
@@ -23,6 +25,8 @@
           Feedbacks
     - @users.each do |user|
       %tr
+        %td
+          = user.created_at.strftime("%l:%M %p, %a  %-d %b")
         %td
           = link_to user.id,[:company,user]
         %td
