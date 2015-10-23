@@ -27,6 +27,7 @@ module Api::V1::SessionsHelper
     return true
   rescue Exception=>e
     HealthyLunchUtils.log_error e.message,e
+    HealthyLunchUtils.log_info "Response from #{provider} is: "+response.to_s
     return false
   end
 

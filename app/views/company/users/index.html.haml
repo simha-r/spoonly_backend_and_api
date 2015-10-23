@@ -43,7 +43,8 @@
         %td
           = user.referred_users.count
         %td
-          = user.referrer_user.try :name
+          - if user.referrer_user
+            = link_to user.referrer_user.name,[:company,user]
         %td
           = user.device_id
         %td
