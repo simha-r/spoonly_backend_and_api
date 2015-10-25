@@ -165,6 +165,11 @@ class User < ActiveRecord::Base
     (wallet.debits + wallet.credits).sort_by &:created_at
   end
 
+  def update_device_id android_id,telephony_manager_device_id
+    device_id = android_id.present? ? android_id : telephony_manager_device_id
+    update_attributes(device_id: device_id)
+  end
+
 
   private
 

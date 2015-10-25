@@ -2,6 +2,9 @@ class Api::V1::ReferralsController < Api::V1::BaseController
 
   def create
     referral_code = params[:referral_code]
+    if !current_user.device_id.present?
+      current_user.update_device_id params[:android_id],params[:telephony_manager_device_id]
+    end
 
     if referral_code[0..1].upcase=='RC'
       #It is a referral code
