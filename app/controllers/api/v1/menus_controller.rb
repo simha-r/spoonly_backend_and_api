@@ -10,7 +10,7 @@ class Api::V1::MenusController < Api::V1::BaseController
       #                                                                              url: 'menu/dinner'}}
       render json: {'lunch'=> {time: '12:15 - 3:30 PM',url: 'menu/lunch'}}
     else
-      render json: {service_unavailable: "<html><body>We currently do not serve in your area<br />We currently serve in parts of Hitech City & Gachibowli</body></html>"}
+      render json: {service_unavailable: "<html><body><p style='font-weight: bold'>We currently do not serve in your area</p><p style='font-weight: lighter'>We currently serve in parts of Hitech City & Gachibowli</body></html>"}
     #TODO Send html to show on client...like We currently dont serve in your area. We serve in selected parts of
     # Hitech City and gachibowli
     end
