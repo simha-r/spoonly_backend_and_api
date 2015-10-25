@@ -7,12 +7,12 @@ namespace :heroku do
     return if todays_date.saturday? || todays_date.sunday?
 
     heroku = Heroku::API.new
-    heroku.post_ps_scale(ENV["HEROKU_APP_NAME"], 'web', ENV['HEROKU_WEB_HIGH'])
+    heroku.post_ps_scale(ENV["HEROKU_APP_NAME"], 'web', ENV['HEROKU_WEB_MAX'])
   end
 
   task :scale_down => :environment do
     heroku = Heroku::API.new
-    heroku.post_ps_scale(ENV["HEROKU_APP_NAME"], 'web', ENV['HEROKU_WEB_LOW'])
+    heroku.post_ps_scale(ENV["HEROKU_APP_NAME"], 'web', ENV['HEROKU_WEB_MIN'])
   end
 
 
