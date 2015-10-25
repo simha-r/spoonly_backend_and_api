@@ -50,6 +50,7 @@ gem 'metamagic'
 gem 'cloudinary'
 gem 'telerivet'
 gem 'geokit-rails'
+gem 'heroku-api'
 
 
 group :development do
