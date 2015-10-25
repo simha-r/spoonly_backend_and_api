@@ -1,5 +1,3 @@
-require 'heroku-api'
-
 namespace :heroku do
 
   task :scale_up => :environment do
