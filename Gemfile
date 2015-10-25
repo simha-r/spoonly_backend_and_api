@@ -49,6 +49,8 @@ gem "figaro"
 gem 'metamagic'
 gem 'cloudinary'
 gem 'telerivet'
+gem 'geokit-rails'
+
 
 group :development do
   gem "bullet"

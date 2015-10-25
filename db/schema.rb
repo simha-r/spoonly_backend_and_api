@@ -11,10 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151022174111) do
+ActiveRecord::Schema.define(version: 20151025133043) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+  enable_extension "postgis"
 
   create_table "addresses", force: true do |t|
     t.string   "address_type"
@@ -130,6 +131,17 @@ ActiveRecord::Schema.define(version: 20151022174111) do
 
   add_index "delayed_jobs", ["priority", "run_at"], name: "delayed_jobs_priority", using: :btree
 
+  create_table "delivery_executive_locations", force: true do |t|
+    t.integer  "delivery_executive_id"
+    t.integer  "location_id"
+    t.datetime "last_seen"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "delivery_executive_locations", ["delivery_executive_id"], name: "index_delivery_executive_locations_on_delivery_executive_id", using: :btree
+  add_index "delivery_executive_locations", ["location_id"], name: "index_delivery_executive_locations_on_location_id", using: :btree
+
   create_table "delivery_executives", force: true do |t|
     t.string   "name"
     t.string   "phone_number"
@@ -168,10 +180,8 @@ ActiveRecord::Schema.define(version: 20151022174111) do
   end
 
   create_table "locations", force: true do |t|
-    t.decimal  "latitude",              precision: 10, scale: 6
-    t.decimal  "longitude",             precision: 10, scale: 6
-    t.datetime "last_seen"
-    t.integer  "delivery_executive_id"
+    t.decimal  "latitude",   precision: 10, scale: 6
+    t.decimal  "longitude",  precision: 10, scale: 6
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -272,6 +282,7 @@ ActiveRecord::Schema.define(version: 20151022174111) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
 
   create_table "user_general_promotions", force: true do |t|
     t.integer  "user_id"
