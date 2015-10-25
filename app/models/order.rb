@@ -149,6 +149,8 @@ class Order < ActiveRecord::Base
     elsif event=='cancel'
       #TODO Notify user of order cancel
     end
+  rescue Exception => e
+    HealthyLunchUtils.log_error e.message,e
   end
   handle_asynchronously :notify_user,queue: 'user_notifications'
 
@@ -160,6 +162,8 @@ class Order < ActiveRecord::Base
 
   def notify_dispatch
     notify_delivery_executive 'dispatch'
+  rescue Exception => e
+    HealthyLunchUtils.log_error e.message,e
   end
   handle_asynchronously :notify_dispatch,queue: 'kitchen_notifications',priority: 5
 
@@ -190,6 +194,8 @@ class Order < ActiveRecord::Base
       referral = user.referred
       referral.apply_referrer_promotions if referral
     end
+  rescue Exception => e
+    HealthyLunchUtils.log_error e.message,e
   end
 
   handle_asynchronously :apply_cashback_promotions #,:run_at => Proc.new { 24.hours.from_now }
