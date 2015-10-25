@@ -241,7 +241,7 @@ class Order < ActiveRecord::Base
 
   def self.show_todays_orders category
     category = 'lunch' if !category
-    @orders = Order.today.includes(:user).includes(:address)
+    @orders = Order.today.includes(:user,:address,:delivery_executive)
     if category=='lunch'
       @orders = @orders.lunch
     elsif category=='dinner'

@@ -23,26 +23,26 @@ class Company::CurrentOrdersController < Company::BaseController
   def pending
     @category = params[:category] || 'lunch'
     @orders = Order.show_todays_orders @category
-    @orders = @orders.pending_or_informed_delivery_guy
+    @orders = @orders.pending_or_informed_delivery_guy.includes(:user,:address,:delivery_executive)
   end
 
   def acknowledged
     @category = params[:category] || 'lunch'
     @orders = Order.show_todays_orders @category
-    @orders = @orders.acknowledged
+    @orders = @orders.acknowledged.includes(:user,:address,:delivery_executive)
   end
 
   def dispatched
     @category = params[:category] || 'lunch'
     @orders = Order.show_todays_orders @category
-    @orders = @orders.dispatched.includes :delivery_executive
+    @orders = @orders.dispatched.includes(:user,:address,:delivery_executive)
   end
 
   def delivered
     @category = params[:category] || 'lunch'
     @order = Order.find params[:order_id] if params[:order_id]
     @orders = Order.show_todays_orders @category
-    @orders = @orders.delivered
+    @orders = @orders.delivered.includes(:user,:address,:delivery_executive)
   end
 
   def cancelled
