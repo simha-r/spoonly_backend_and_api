@@ -226,6 +226,12 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def sms_formatted_delivery_time
+    ranges = MenuProduct::LUNCH_TIMES.merge MenuProduct::DINNER_TIMES
+    show = ranges[delivery_time.strftime('%H%M')]
+    show +" "+ delivery_time.strftime("%d,%b")
+  end
+
   def items_count
     line_items.count
   end
