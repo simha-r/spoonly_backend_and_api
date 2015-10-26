@@ -52,13 +52,13 @@ class Company::OrdersController < Company::BaseController
   end
 
   def sms_update
+    HealthyLunchUtils.log_info "Inside sms update before if loop"
     if params[:secret]==ENV['TELERIVET_SECRET']
       if DeliveryExecutive.allowed_numbers.include? params['from_number']
         message = params['content'].strip
         message = message.split(' ')
         order_ids = message[0]
-        puts message
-        puts order_ids
+        HealthyLunchUtils.log_info "Order ids are #{order_ids}"
         if (message[1].downcase=='done') || (message[1].downcase=='d')
           HealthyLunchUtils.log_info "going to find orders #{order_ids} and mark delivered"
           @orders = Order.where id: order_ids
@@ -75,10 +75,11 @@ class Company::OrdersController < Company::BaseController
         end
       else
         # Got sms from unknown number
-        puts params
+        HealthyLunchUtils.log_info "Got sms from unknown number"
         return render nothing: true
       end
     else
+      HealthyLunchUtils.log_info "Secret doesnt match telerivet"
       head 403
     end
   rescue Exception => e
