@@ -14,6 +14,9 @@
 class Location < ActiveRecord::Base
 
   has_many :delivery_executive_locations
+  has_many :user_locations
+  has_many :users,through: :user_locations
+
   acts_as_mappable :default_units => :kms,
                    :default_formula => :sphere,
                    :distance_field_name => :distance,

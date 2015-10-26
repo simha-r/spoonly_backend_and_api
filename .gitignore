@@ -44,3 +44,7 @@ public/system*
 tags
 # Ignore application configuration
 /config/application.yml
+
+
+test
+test/*

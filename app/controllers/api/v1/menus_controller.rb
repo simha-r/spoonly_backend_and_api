@@ -5,9 +5,9 @@ class Api::V1::MenusController < Api::V1::BaseController
 
 
   def show
+    current_user.log_location params['lat'],params['long']
+
     if LocationCheck.in_range? params['lat'],params['long']
-      # render json: {'lunch'=> {time: '12:15 - 3:30 PM',url: 'menu/lunch'}, 'dinner'=> {'time'=>'7:00 - 10:00 PM',
-      #                                                                              url: 'menu/dinner'}}
       render json: {'lunch'=> {time: '12:15 - 3:30 PM',url: 'menu/lunch'}}
     else
       render json: {service_unavailable: ENV['OUT_OF_COVERAGE']}

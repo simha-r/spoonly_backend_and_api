@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151025133043) do
+ActiveRecord::Schema.define(version: 20151025205718) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -293,6 +293,17 @@ ActiveRecord::Schema.define(version: 20151025133043) do
 
   add_index "user_general_promotions", ["general_promotion_id"], name: "index_user_general_promotions_on_general_promotion_id", using: :btree
   add_index "user_general_promotions", ["user_id"], name: "index_user_general_promotions_on_user_id", using: :btree
+
+  create_table "user_locations", force: true do |t|
+    t.datetime "last_seen"
+    t.integer  "user_id"
+    t.integer  "location_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_locations", ["location_id"], name: "index_user_locations_on_location_id", using: :btree
+  add_index "user_locations", ["user_id"], name: "index_user_locations_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.datetime "created_at"

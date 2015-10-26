@@ -49,6 +49,9 @@ class User < ActiveRecord::Base
   has_many :user_general_promotions
   has_many :general_promotions, through: :user_general_promotions
 
+  has_many :user_locations
+  has_many :locations,through: :user_locations
+
   attr_accessor :login_type
 
   before_create :generate_referral_code
@@ -169,6 +172,18 @@ class User < ActiveRecord::Base
     device_id = android_id.present? ? android_id : telephony_manager_device_id
     update_attributes(device_id: device_id)
   end
+
+  def log_location lat,long
+    last_seen = Time.now
+    location= Location.create(latitude: lat.to_f,longitude: long.to_f)
+    if location.persisted?
+      user_locations.create(last_seen: last_seen,location: location)
+    end
+  rescue Exception => e
+    HealthyLunchUtils.log_error e.message,e
+  end
+
+  handle_asynchronously :log_location,queue: 'log_locations',priority: '6'
 
 
   private
