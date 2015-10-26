@@ -9,10 +9,9 @@ module DeliveryExecutiveMessenger
     ORDER \##{order.id}: #{order.formatted_delivery_time}
     #{order.brief_line_items}
     DUE AMOUNT:Rs #{order.cash_to_pay}
-    NAME:#{user.name}
-    Visit this link to confirm order www.spoonly.in/company/xxxxx.
-    Or call 09515407092 to confirm"
-    SmsProvider.send_message_with_infini delivery_executive.phone_number,message
+    NAME:#{user.name}"
+    HealthyLunchUtils.log_info "Sending message to #{delivery_executive.name}"
+    SmsProvider.send_message_with_telerivet delivery_executive.phone_number,message
   end
 
   def self.inform_on_field order
@@ -25,6 +24,7 @@ module DeliveryExecutiveMessenger
     DUE AMOUNT:Rs #{order.cash_to_pay}
     NAME:#{user.name}
     Reply #{order.id} ok  to confirm"
+    HealthyLunchUtils.log_info "Sending message to #{delivery_executive.name}"
     SmsProvider.send_message_with_telerivet delivery_executive.phone_number,message
   end
 
