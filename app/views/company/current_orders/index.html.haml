@@ -63,7 +63,7 @@
         %td
           = link_to order.id,[:company,order]
         %td
-          = order.user.name
+          = order.user.try :name
           %br
           %i Address:
           = order.address.formatted
