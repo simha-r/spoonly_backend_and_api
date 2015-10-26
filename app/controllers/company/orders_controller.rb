@@ -56,21 +56,21 @@ class Company::OrdersController < Company::BaseController
       if DeliveryExecutive.allowed_numbers.include? params['from_number']
         message = params['content'].strip
         message = message.split(' ')
-        order_ids = message[1]
+        order_ids = message[0]
         puts message
         puts order_ids
         if (message[1].downcase=='done') || (message[1].downcase=='d')
-          puts 'going to find orders and mark delivered'
+          HealthyLunchUtils.log_info "going to find orders #{order_ids} and mark delivered"
           @orders = Order.where id: order_ids
           @orders.where(state: 'dispatched').each(&:deliver!)
           return render nothing: true
         elsif message[1].downcase=='ok'
-          puts 'Acknowledged by delivery boy'
+          HealthyLunchUtils.log_info 'Acknowledged by delivery boy'
           @orders = Order.where id: order_ids
           @orders.where(state: 'informed_delivery_guy').each(&:mark_dispatched!)
           return render nothing: true
         else
-          puts 'Wrong format'
+          HealthyLunchUtils.log_info 'Wrong format'
           return render nothing: true
         end
       else
