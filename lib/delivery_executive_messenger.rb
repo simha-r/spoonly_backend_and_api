@@ -4,12 +4,11 @@ module DeliveryExecutiveMessenger
   def self.dispatch order
     delivery_executive =order.delivery_executive
     user = order.user
-
     message = "#{user.name[0..10]},#{user.profile.phone_number}
-    #{order.address.formatted}.
-    ##{order.id}: #{order.sms_formatted_delivery_time}
-    #{order.brief_line_items}
-    Rs #{order.cash_to_pay.to_i}"
+#{order.address.formatted}.
+##{order.id}: #{order.sms_formatted_delivery_time}
+#{order.brief_line_items}
+Rs #{order.cash_to_pay.to_i}"
     HealthyLunchUtils.log_info "Sending message to #{delivery_executive.name}"
     SmsProvider.send_message_with_telerivet delivery_executive.phone_number,message
   end
@@ -18,11 +17,11 @@ module DeliveryExecutiveMessenger
     delivery_executive =order.delivery_executive
     user = order.user
     message = "#{user.name[0..10]},#{user.profile.phone_number}
-    #{order.address.formatted}.
-    ##{order.id}: #{order.sms_formatted_delivery_time}
-    #{order.brief_line_items}
-    Rs #{order.cash_to_pay.to_i}
-    Rply #{order.id} ok"
+#{order.address.formatted}.
+##{order.id}: #{order.sms_formatted_delivery_time}
+#{order.brief_line_items}
+Rs #{order.cash_to_pay.to_i}
+Rply #{order.id} ok"
     HealthyLunchUtils.log_info "Sending message to #{delivery_executive.name}"
     SmsProvider.send_message_with_telerivet delivery_executive.phone_number,message
   end
