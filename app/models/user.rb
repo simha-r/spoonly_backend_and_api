@@ -91,7 +91,7 @@ class User < ActiveRecord::Base
       name = auth.info.name
       first_name = auth.info.first_name
       last_name = auth.info.last_name
-      profile_url =auth.info.urls[provider.capitalize]
+      profile_url =auth.info.urls[provider.capitalize] if auth.info.urls
       pic_url = auth[:info][:image]
       device_id = nil
       gender = auth[:info][:gender]
