@@ -54,7 +54,8 @@ class Company::OrdersController < Company::BaseController
   def sms_update
     HealthyLunchUtils.log_info "Inside sms update before if loop"
     if params[:secret]==ENV['TELERIVET_SECRET']
-      if DeliveryExecutive.allowed_numbers.include? params['from_number']
+      from_number = params['from_number'][3..13]
+      if DeliveryExecutive.allowed_numbers.include? from_number
         message = params['content'].strip
         message = message.split(' ')
         order_ids = message[0].split(',')
