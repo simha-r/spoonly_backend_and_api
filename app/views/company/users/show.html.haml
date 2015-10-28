@@ -15,44 +15,49 @@
     - @user.addresses.each do |address|
       .row
         = address.formatted
-    Wallet:
+    %b Wallet:
     = "Rs #{@user.wallet.balance}"
     = link_to "View Wallet",[:wallet,:company,@user]
     %br
     - if @user.referrer_user
       %b Referred by:
       =link_to  @user.referrer_user.name,[:company,@user.referrer_user]
+    - else
+      %b
+        %i No referrer
     %br
     Profile links:
     - @user.authorizations.each do |a|
       = link_to a.provider, a.profile_url
+  .col-xs-5
+    .row
+      .col-xs-1
+      .col-xs-10
+        %h5
+          General Promotions Applied:
+        - if @user.user_general_promotions.present?
+          -@user.user_general_promotions.each do |ugp|
+            - gp = ugp.general_promotion
+            .row
+              .col-xs-3
+                = gp.name
+              .col-xs-3
+                = gp.promo_code
+              .col-xs-3
+                = "Applied on #{ugp.created_at.strftime("%l:%M %p, %a  %-d %b")}"
+        - else
+          None
 
+        %h5
+          Apply Promotions
+        - GeneralPromotion.active.each do |gp|
+          - if !gp.applied_for? @user
+            = link_to "Apply #{gp.name}",apply_company_general_promotion_path(gp,user_id: @user.id),method: :post
+%br
 .row
   .col-xs-1
   .col-xs-10
-    %h4
-      General Promotions Applied:
-    - if @user.user_general_promotions.present?
-      -@user.user_general_promotions.each do |ugp|
-        - gp = ugp.general_promotion
-        .row
-          .col-xs-3
-            = gp.name
-          .col-xs-3
-            = gp.promo_code
-          .col-xs-3
-            = "Applied on #{ugp.created_at.strftime("%l:%M %p, %a  %-d %b")}"
-    - else
-      None
-
-%h4
-  Apply Promotions
-
-- GeneralPromotion.active.each do |gp|
-  - if !gp.applied_for? @user
-    = link_to "Apply #{gp.name}",apply_company_general_promotion_path(gp,user_id: @user.id),method: :post
-
-
+    %h4 Orders Placed
 - @user.orders.each do |order|
   %h4= "Order ##{order.id}"
   %table.table
@@ -121,7 +126,9 @@
 
 
 
-
-
-= link_to 'Back to All Users',[:company,:users],class: 'btn btn-primary'
+%br
+.row
+  .col-xs-1
+  .col-xs-10
+    = link_to 'Back to All Users',[:company,:users],class: 'btn btn-primary'
 
