@@ -167,6 +167,7 @@ Rails.application.routes.draw do
       member do
         put :enable
         put :disable
+        post :apply
       end
     end
 

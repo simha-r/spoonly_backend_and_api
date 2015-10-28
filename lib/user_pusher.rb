@@ -13,4 +13,11 @@ module UserPusher
     PushProvider.push self,message,"WalletActivity",title
   end
 
+#   Non Essential methods
+  def notify_general_promotion general_promotion
+    title = "Rs #{general_promotion.amount} in your pocket!"
+    message = "Welcome #{name.split(' ')[0]}! Rs #{general_promotion.amount} has been credited to your Spoonly wallet. We hope you enjoy your meal!"
+    PushProvider.push self,message,"WalletActivity",title
+  end
+
 end

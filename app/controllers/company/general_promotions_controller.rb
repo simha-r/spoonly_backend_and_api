@@ -14,6 +14,17 @@ class Company::GeneralPromotionsController < Company::BaseController
     
   end
 
+  def apply
+    user = User.find params[:user_id]
+    general_promotion = GeneralPromotion.active.find params[:id]
+    if(general_promotion && general_promotion.apply_for(user))
+      user.notify_general_promotion general_promotion
+      redirect_to request.referrer, notice: 'Promotion has been applied'
+    else
+      redirect_to request.referrer, alert: 'Promotion has failed to apply'
+    end
+  end
+
   def create
     @general_promotion = GeneralPromotion.new(general_promotion_params)
     if @general_promotion.save

@@ -22,6 +22,26 @@
           = address.formatted
       .row
         = link_to "View Wallet",[:wallet,:company,@user]
+%h4
+  General Promotions Applied:
+- if @user.user_general_promotions.present?
+  -@user.user_general_promotions.each do |ugp|
+    - gp = ugp.general_promotion
+    .row
+      .col-xs-3
+        = gp.name
+      .col-xs-3
+        = gp.promo_code
+      .col-xs-3
+        = "Applied on #{ugp.created_at.strftime("%l:%M %p, %a  %-d %b")}"
+%h4
+  Apply Promotions
+
+- GeneralPromotion.active.each do |gp|
+  - if !gp.applied_for? @user
+    = link_to "Apply #{gp.name}",apply_company_general_promotion_path(gp,user_id: @user.id),method: :post
+
+
 - @user.orders.each do |order|
   %h4= "Order ##{order.id}"
   %table.table
