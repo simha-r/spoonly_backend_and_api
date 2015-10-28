@@ -2,13 +2,11 @@
 #
 # Table name: locations
 #
-#  id                    :integer          not null, primary key
-#  latitude              :decimal(10, 6)
-#  longitude             :decimal(10, 6)
-#  last_seen             :datetime
-#  delivery_executive_id :integer
-#  created_at            :datetime
-#  updated_at            :datetime
+#  id         :integer          not null, primary key
+#  latitude   :decimal(10, 6)
+#  longitude  :decimal(10, 6)
+#  created_at :datetime
+#  updated_at :datetime
 #
 
 class Location < ActiveRecord::Base

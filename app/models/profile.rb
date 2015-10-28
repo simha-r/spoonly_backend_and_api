@@ -13,6 +13,9 @@
 #  phone_number_verify_tries             :integer
 #  pic_url                               :string(255)
 #  number_verification_code_generated_at :datetime
+#  gender                                :string(255)
+#  first_name                            :string(255)
+#  last_name                             :string(255)
 #
 
 class Profile < ActiveRecord::Base

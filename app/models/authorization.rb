@@ -2,14 +2,15 @@
 #
 # Table name: authorizations
 #
-#  id         :integer          not null, primary key
-#  provider   :string(255)
-#  uid        :string(255)
-#  user_id    :integer
-#  token      :string(255)
-#  username   :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id          :integer          not null, primary key
+#  provider    :string(255)
+#  uid         :string(255)
+#  user_id     :integer
+#  token       :string(255)
+#  username    :string(255)
+#  created_at  :datetime
+#  updated_at  :datetime
+#  profile_url :string(255)
 #
 
 class Authorization < ActiveRecord::Base

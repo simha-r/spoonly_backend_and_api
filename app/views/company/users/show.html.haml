@@ -1,7 +1,8 @@
 .row
   .col-xs-1
   .col-xs-3
-    = image_tag "#{@user.profile.pic_url}&sz=250"
+    .div{"style"=>"width: 260px; height: 260px"}
+      = image_tag "#{@user.profile.pic_url}&sz=260"
   .col-xs-3
     %h4= "##{@user.id} - #{@user.name}"
     %br
@@ -18,6 +19,14 @@
     Wallet:
     = "Rs #{@user.wallet.balance}"
     = link_to "View Wallet",[:wallet,:company,@user]
+    %br
+    - if @user.referrer_user
+      %b Referred by:
+      =link_to  @user.referrer_user.name,[:company,@user.referrer_user]
+    %br
+    Profile links:
+    - @user.authorizations.each do |a|
+      = link_to a.provider, a.profile_url
 
 .row
   .col-xs-1
@@ -34,6 +43,8 @@
             = gp.promo_code
           .col-xs-3
             = "Applied on #{ugp.created_at.strftime("%l:%M %p, %a  %-d %b")}"
+    - else
+      None
 
 %h4
   Apply Promotions
