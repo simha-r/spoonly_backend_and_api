@@ -1,8 +1,7 @@
 .row
   .col-xs-1
   .col-xs-3
-    .div{"style"=>"width: 260px; height: 260px"}
-      = image_tag "#{@user.profile.pic_url}&sz=260"
+    = image_tag "#{@user.profile.pic_url}&sz=260",size: '250*250'
   .col-xs-3
     %h4= "##{@user.id} - #{@user.name}"
     %br
