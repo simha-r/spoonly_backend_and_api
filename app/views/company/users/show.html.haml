@@ -1,39 +1,40 @@
-%h3= "##{@user.id} - #{@user.name}"
-%table.table
-  %thead
-    %tr
-      %th
-      %th
-        User Details:
-
-  %tr
-    %td
-    %td
-      = @user.name
-      ,
-      = @user.email
-      %br
-      = @user.profile.phone_number
-      %br
-        Addresses:
-        %br
-      - @user.addresses.each do |address|
-        .row
-          = address.formatted
+.row
+  .col-xs-1
+  .col-xs-3
+    = image_tag "#{@user.profile.pic_url}&sz=250"
+  .col-xs-3
+    %h4= "##{@user.id} - #{@user.name}"
+    %br
+    %b Email:
+    = @user.email
+    %br
+    %b Phone:
+    = @user.profile.phone_number
+    %br
+      %b Addresses:
+    - @user.addresses.each do |address|
       .row
-        = link_to "View Wallet",[:wallet,:company,@user]
-%h4
-  General Promotions Applied:
-- if @user.user_general_promotions.present?
-  -@user.user_general_promotions.each do |ugp|
-    - gp = ugp.general_promotion
-    .row
-      .col-xs-3
-        = gp.name
-      .col-xs-3
-        = gp.promo_code
-      .col-xs-3
-        = "Applied on #{ugp.created_at.strftime("%l:%M %p, %a  %-d %b")}"
+        = address.formatted
+    Wallet:
+    = "Rs #{@user.wallet.balance}"
+    = link_to "View Wallet",[:wallet,:company,@user]
+
+.row
+  .col-xs-1
+  .col-xs-10
+    %h4
+      General Promotions Applied:
+    - if @user.user_general_promotions.present?
+      -@user.user_general_promotions.each do |ugp|
+        - gp = ugp.general_promotion
+        .row
+          .col-xs-3
+            = gp.name
+          .col-xs-3
+            = gp.promo_code
+          .col-xs-3
+            = "Applied on #{ugp.created_at.strftime("%l:%M %p, %a  %-d %b")}"
+
 %h4
   Apply Promotions
 
