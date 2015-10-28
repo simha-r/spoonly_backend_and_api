@@ -8,7 +8,11 @@ module Api::V1::SessionsHelper
       @picture = graph.get_picture("me")
       @email = profile['email']
       @uid = profile['id']
+      @first_name= profile['first_name']
+      @last_name=profile['last_name']
       @name = profile['name']
+      @gender = profile['gender']
+      @profile_link=profile['link']
     elsif provider=='google'
       response = HTTParty.get("https://www.googleapis.com/oauth2/v2/userinfo",
                               headers: {"Access_token"  => access_token,
@@ -18,7 +22,11 @@ module Api::V1::SessionsHelper
         @email = response['email']
         @uid = response['id']
         @name = response['name']
+        @first_name = response['given_name']
+        @last_name= response['family_name']
+        @profile_link= response['link']
         @picture = response['picture']
+        @gender = response['gender']
       end
     end
     if !@email.present?

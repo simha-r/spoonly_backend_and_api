@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151025205718) do
+ActiveRecord::Schema.define(version: 20151028182847) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20151025205718) do
     t.string   "username"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "profile_url"
   end
 
   create_table "card_transactions", force: true do |t|
@@ -252,6 +253,9 @@ ActiveRecord::Schema.define(version: 20151025205718) do
     t.integer  "phone_number_verify_tries"
     t.string   "pic_url"
     t.datetime "number_verification_code_generated_at"
+    t.string   "gender"
+    t.string   "first_name"
+    t.string   "last_name"
   end
 
   add_index "profiles", ["user_id"], name: "index_profiles_on_user_id", using: :btree
@@ -282,7 +286,6 @@ ActiveRecord::Schema.define(version: 20151025205718) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
-
 
   create_table "user_general_promotions", force: true do |t|
     t.integer  "user_id"

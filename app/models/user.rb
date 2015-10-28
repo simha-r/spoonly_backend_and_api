@@ -78,15 +78,23 @@ class User < ActiveRecord::Base
       device_id = auth[:device_id]
       email = auth[:info][:email]
       name = auth[:info][:name]
+      first_name = auth[:info][:first_name]
+      last_name = auth[:info][:last_name]
+      profile_url=auth[:info][:profile_link]
       pic_url = auth[:info][:pic_url]
+      gender = auth[:info][:gender]
     else
       provider = auth.provider
       uid = auth.uid
       token = auth.credentials.token
       email = auth[:info][:email]
       name = auth.info.name
+      first_name = auth.info.first_name
+      last_name = auth.info.last_name
+      profile_url =auth.info.urls[provider.capitalize]
       pic_url = auth[:info][:image]
       device_id = nil
+      gender = auth[:info][:gender]
     end
     authorization = Authorization.where(:provider => provider, :uid => uid).first_or_initialize
     if authorization.user.blank?
@@ -94,14 +102,18 @@ class User < ActiveRecord::Base
       if user.blank?
         user = User.new
         user.password = Devise.friendly_token[0,10]
-        user.create_profile(name: name,pic_url: pic_url)
+        user.create_profile(name: name,pic_url: pic_url,gender: gender,first_name: first_name,last_name: last_name)
         user.email = email
         user.device_id = device_id if device_id
         user.skip_confirmation!
         user.confirm! if user.save
         user.login_type='new_user'
       end
-      authorization.save if authorization.user_id = user.id
+      # If user has been saved, save authorization
+      if authorization.user_id = user.id
+        authorization.profile_url=profile_url
+        authorization.save
+      end
     else
       user = authorization.user
       # Dont update if device id is nil..it could mean he logged in from browser
