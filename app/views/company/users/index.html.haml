@@ -1,3 +1,7 @@
+= form_tag company_users_path,method: :get do
+  = text_field_tag 'search_term',@search_term
+  = submit_tag 'Search'
+
 - if @users.present?
 
   %table.table
