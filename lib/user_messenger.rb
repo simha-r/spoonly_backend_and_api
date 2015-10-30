@@ -22,4 +22,9 @@ module UserMessenger
     SmsProvider.send_message user.profile.phone_number,message
   end
 
+  def self.notify_promotion user,promotion
+    message = "Welcome to Spoonly. Rs #{promotion.amount} has been credited to your Spoonly wallet. We hope you have a nice meal!"
+    SmsProvider.send_message user.profile.phone_number,message
+  end
+
 end
