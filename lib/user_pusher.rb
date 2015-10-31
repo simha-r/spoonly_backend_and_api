@@ -20,4 +20,8 @@ module UserPusher
     PushProvider.push self,message,"WalletActivity",title
   end
 
+  def notify_share message,title
+    PushProvider.push self,message,"ShareActivity",title
+  end
+
 end
