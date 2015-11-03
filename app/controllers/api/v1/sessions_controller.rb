@@ -13,6 +13,7 @@ class Api::V1::SessionsController < Api::V1::BaseController
 
       user = User.from_omniauth(auth, current_user)
       if user.persisted?
+        user.delay(run_at: 4.seconds.from_now).notify_promotion_screen if user.login_type=='new_user'
         user.confirm!
         render json: user, status: 200
       else

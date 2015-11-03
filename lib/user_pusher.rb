@@ -24,4 +24,10 @@ module UserPusher
     PushProvider.push self,message,"ShareActivity",title
   end
 
+  def notify_promotion_screen
+    title = "Free Meals @ Spoonly"
+    message = "Welcome #{name.split(' ')[0]}! If you have a Spoonly promo code,Tap here to enter it and get free meals"
+    PushProvider.push self,message,"PromotionsActivity",title
+  end
+
 end
