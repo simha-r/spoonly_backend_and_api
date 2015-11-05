@@ -2,14 +2,15 @@
 #
 # Table name: general_promotions
 #
-#  id          :integer          not null, primary key
-#  promo_code  :string(255)
-#  name        :string(255)
-#  description :string(255)
-#  amount      :string(255)
-#  created_at  :datetime
-#  updated_at  :datetime
-#  active      :boolean          default(FALSE)
+#  id                :integer          not null, primary key
+#  promo_code        :string(255)
+#  name              :string(255)
+#  description       :string(255)
+#  amount            :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  active            :boolean          default(FALSE)
+#  growth_partner_id :integer
 #
 
 class GeneralPromotion < ActiveRecord::Base
@@ -40,6 +41,16 @@ class GeneralPromotion < ActiveRecord::Base
       general_promotion = UserGeneralPromotion.where(general_promotion: self,user: same_device_users).first
     else
       general_promotion= UserGeneralPromotion.where(general_promotion: self,user: user).first
+    end
+    general_promotion
+  end
+
+  def self.applied_for? user,general_promotions
+    if user.device_id.present?
+      same_device_users = User.where(device_id: user.device_id)
+      general_promotion = UserGeneralPromotion.where(general_promotion: general_promotions,user: same_device_users).first
+    else
+      general_promotion= UserGeneralPromotion.where(general_promotion: general_promotions,user: user).first
     end
     general_promotion
   end
