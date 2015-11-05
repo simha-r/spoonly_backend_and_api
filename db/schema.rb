@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151028182847) do
+ActiveRecord::Schema.define(version: 20151101115622) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -166,7 +166,17 @@ ActiveRecord::Schema.define(version: 20151028182847) do
     t.string   "amount"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",      default: false
+    t.boolean  "active",            default: false
+    t.integer  "growth_partner_id"
+  end
+
+  add_index "general_promotions", ["growth_partner_id"], name: "index_general_promotions_on_growth_partner_id", using: :btree
+
+  create_table "growth_partners", force: true do |t|
+    t.string   "name"
+    t.string   "phone_number"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "line_items", force: true do |t|

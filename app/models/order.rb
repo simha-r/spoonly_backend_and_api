@@ -307,12 +307,12 @@ class Order < ActiveRecord::Base
   end
 
 
-  def cashback_for_customer_satisfaction
-    wallet_promotion=WalletPromotion.where(name: 'customer_satisfaction_100').first
+  def cashback_for_customer_satisfaction wallet_promotion_name,custom_message
+    wallet_promotion=WalletPromotion.where(name: wallet_promotion_name).first
     if user.wallet.apply_promotion wallet_promotion
-      message = "Apologies for the delayed service.We've gone ahead and refunded Rs #{wallet_promotion.amount}  into your Spoonly wallet. We hope you give us another try"
+      message = custom_message || "Dear #{user.name.split(' ')[0]}, Apologies for the subpar service.We've gone ahead and refunded Rs #{wallet_promotion.amount}  into your Spoonly wallet."
       user.notify_wallet message,"Refunds@Spoonly"
-      UserMessenger.apologise user,"Apologies for the delayed service.We've gone ahead and refunded Rs #{wallet_promotion.amount}  into your Spoonly wallet."
+      UserMessenger.apologise user,message
     end
   end
 
