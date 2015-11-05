@@ -23,7 +23,7 @@ class Company::OrdersController < Company::BaseController
 
   def acknowledge
     @order.acknowledge!
-    redirect_to [:company, @order]
+    redirect_to request.referrer
   end
 
   def assign
