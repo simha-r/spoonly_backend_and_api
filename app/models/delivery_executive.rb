@@ -25,7 +25,7 @@ class DeliveryExecutive < ActiveRecord::Base
   end
 
   def self.allowed_numbers
-    DeliveryExecutive.all.collect(&:phone_number) + ['+918179422804','+919618347300']
+    DeliveryExecutive.all.collect(&:phone_number) + ['+918179422804','+919618347300'+'7207671322']
   end
 
   def mark_out_for_delivery
