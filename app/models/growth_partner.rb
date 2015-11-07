@@ -16,5 +16,7 @@ class GrowthPartner < ActiveRecord::Base
     SmsProvider.send_message_with_telerivet phone_number,message
   end
 
+  handle_asynchronously :notify_incentive
+
 
 end
