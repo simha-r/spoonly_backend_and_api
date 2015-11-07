@@ -62,7 +62,7 @@ class Order < ActiveRecord::Base
       transitions from: :acknowledged, to: :dispatched
     end
 
-    event :deliver,after: [:apply_cashback_promotions] do
+    event :deliver,before:[:record_delivered_time],after: [:apply_cashback_promotions] do
       transitions from: :dispatched,to: :delivered
     end
 
@@ -324,6 +324,10 @@ class Order < ActiveRecord::Base
 
   def record_dispatch_time
     self.dispatched_at=Time.now
+  end
+
+  def record_delivered_time
+    self.delivered_at=Time.now
   end
 
 end

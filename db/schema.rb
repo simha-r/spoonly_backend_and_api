@@ -297,6 +297,7 @@ ActiveRecord::Schema.define(version: 20151101115622) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
+
   create_table "user_general_promotions", force: true do |t|
     t.integer  "user_id"
     t.integer  "general_promotion_id"

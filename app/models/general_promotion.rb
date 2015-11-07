@@ -17,6 +17,7 @@ class GeneralPromotion < ActiveRecord::Base
   has_many :user_general_promotions
   has_many :users,through: :user_general_promotions
   has_many :credits , as: :payment_mechanism
+  belongs_to :growth_partner
 
   scope :active, -> {where(active: true)}
 
@@ -31,6 +32,7 @@ class GeneralPromotion < ActiveRecord::Base
       return false
     else
       UserGeneralPromotion.create!(general_promotion: self,user: user)
+      growth_partner.notify_incentive if growth_partner
       user.wallet.apply_promotion self
     end
   end
