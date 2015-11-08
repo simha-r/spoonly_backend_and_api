@@ -7,4 +7,5 @@
   = f.text_field :description
   = f.label :amount
   = f.text_field :amount
+  = f.collection_select(:growth_partner_id,GrowthPartner.all,:id,:name,prompt: true)
   = f.submit

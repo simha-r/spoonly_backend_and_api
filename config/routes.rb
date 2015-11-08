@@ -171,6 +171,7 @@ Rails.application.routes.draw do
         post :apply
       end
     end
+    resources :growth_partners
 
     resources :wallet_promotions do
 

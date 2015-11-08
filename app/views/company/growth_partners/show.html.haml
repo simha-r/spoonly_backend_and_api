@@ -1,0 +1,24 @@
+%h4 Growth Partner
+.row
+  .col-xs-2
+    Name
+  .col-xs-2
+    Phone number
+  .col-xs-2
+    Commission Amount
+  .col-xs-2
+    Created At
+  .col-xs-2
+    Updated At
+.row
+  .col-xs-2
+    = @growth_partner.name
+  .col-xs-2
+    = @growth_partner.phone_number
+  .col-xs-2
+    = @growth_partner.commission_amount
+  .col-xs-2
+    = @growth_partner.created_at.strftime("%l:%M %p, %a  %-d %b")
+  .col-xs-2
+    = @growth_partner.updated_at.strftime("%l:%M %p, %a  %-d %b")
+

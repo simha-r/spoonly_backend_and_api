@@ -1,0 +1,8 @@
+= form_for [:company,@growth_partner] do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.label :phone_number
+  = f.text_field :phone_number
+  = f.label :commission_amount
+  = f.text_field :commission_amount
+  = f.submit

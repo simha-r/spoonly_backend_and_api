@@ -57,7 +57,7 @@ class Company::GeneralPromotionsController < Company::BaseController
   private
 
   def general_promotion_params
-    params.require(:general_promotion).permit(:name,:amount,:description,:promo_code)
+    params.require(:general_promotion).permit(:name,:amount,:description,:promo_code,:growth_partner_id)
   end
 
   def load_resource
