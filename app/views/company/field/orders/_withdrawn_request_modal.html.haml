@@ -1,0 +1,12 @@
+#withdrawn_request_modal.modal{:title => "My modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role=> "dialog","style"=>"margin-top: 100px;"}
+
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      .modal-body
+        - link = company_field_orders_path
+        %p.msg-big ORDER WITHDRAWN !
+        %p#order_data
+        %a{"aria-hidden" => "true", "data-dismiss" => "modal"}
+          %p.msg= link_to "CLICK OK TO REFRESH",link,class: 'btn btn-primary'

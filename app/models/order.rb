@@ -47,15 +47,19 @@ class Order < ActiveRecord::Base
     end
 
     event :acknowledge do
-      transitions from: [:informed_delivery_guy,:pending], to: :acknowledged
+      transitions from: [:pending], to: :acknowledged
     end
 
     event :mark_informed do
-      transitions from: [:informed_delivery_guy,:pending], to: :informed_delivery_guy
+      transitions from: [:informed_delivery_guy,:acknowledged], to: :informed_delivery_guy
+    end
+
+    event :withdraw_delivery_request,after: [:notify_withdraw_request] do
+      transitions from: [:informed_delivery_guy], to: :acknowledged
     end
 
     event :mark_dispatched,before: [:record_dispatch_time] do
-      transitions from: :informed_delivery_guy, to: :dispatched
+      transitions from: [:informed_delivery_guy], to: :dispatched
     end
 
     event :dispatch,before: [:record_dispatch_time],after:[:notify_dispatch] do
@@ -67,7 +71,7 @@ class Order < ActiveRecord::Base
     end
 
     event :cancel,after: [:notify_cancel,:refund_prepaid_amount] do
-      transitions from: [:pending,:acknowledged,:dispatched], to: :cancelled
+      transitions from: [:pending,:acknowledged,:informed_delivery_guy,:dispatched], to: :cancelled
     end
 
   end
@@ -87,8 +91,8 @@ class Order < ActiveRecord::Base
   scope :dinner, -> {where(category: 'dinner')}
 
 
-  def self.pending_or_informed_delivery_guy
-    where(state: ['pending','informed_delivery_guy'])
+  def self.acknowledged_or_informed_delivery_guy
+    where(state: ['acknowledged','informed_delivery_guy'])
   end
 
   def auto_debit_amount
@@ -119,6 +123,7 @@ class Order < ActiveRecord::Base
   def notify_cancel
     notify_kitchen 'cancel'
     notify_user 'cancel'
+    notify_delivery_executive 'cancel'
   end
 
   def update_stock
@@ -157,6 +162,8 @@ class Order < ActiveRecord::Base
   def notify_delivery_executive event
     if event=='dispatch'
       DeliveryExecutiveMessenger.dispatch(self)
+    elsif( (event=='withdraw_delivery_request') || (event == 'cancel'))
+      DeliveryExecutiveMessenger.withdraw_delivery_request(self)
     end
   end
 
@@ -275,6 +282,10 @@ class Order < ActiveRecord::Base
       update_attributes(delivery_executive: delivery_executive)
       mark_informed!
     end
+  end
+
+  def notify_withdraw_request
+    notify_delivery_executive 'withdraw_delivery_request'
   end
 
   def self.search query

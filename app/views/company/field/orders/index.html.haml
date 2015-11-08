@@ -1,0 +1,31 @@
+.alert.alert-danger#new_order_alert{'style'=> "display: none"}
+  New order has been received! Refresh Page
+- @orders.each do |order|
+  .row-fluid
+  - user = order.user
+  .col-xs-8
+    ="##{order.id}"
+    %br
+    = "#{user.name[0..10]},#{user.profile.phone_number}"
+    %br
+    = "#{order.address.formatted}."
+    %br
+    = "#{order.sms_formatted_delivery_time}"
+    %br
+    = "#{order.brief_line_items}"
+    = "Rs #{order.cash_to_pay.to_i}"
+  .col-xs-4
+    %br
+      %br
+    - if order.informed_delivery_guy?
+      = link_to 'Accept',accept_company_field_order_path(order),method: :put,class: 'btn btn-danger'
+    - else
+      - if order.dispatched?
+        = link_to 'Mark Delivered!',mark_delivered_company_field_order_path(order),method: :put,class: 'btn btn-danger'
+      - elsif order.delivered?
+        -#TODO Style it to be green
+        = order.state.upcase
+      - else
+        = order.state.upcase
+
+= render 'company/field/orders/new_order_handling'

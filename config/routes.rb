@@ -127,6 +127,7 @@ Rails.application.routes.draw do
         put :acknowledge
         put :assign
         put :inform_delivery_guy
+        put :withdraw_delivery_request
         put :cancel
         put :deliver
         get :bill
@@ -183,6 +184,14 @@ Rails.application.routes.draw do
       end
     end
     resources :feedbacks
+    namespace :field do
+      resources :orders do
+        member do
+          put :accept
+          put :mark_delivered
+        end
+      end
+    end
   end
   resources :sitemaps, :only => :show
   get "sitemap" => "sitemaps#show"

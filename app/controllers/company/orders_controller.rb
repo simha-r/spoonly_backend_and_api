@@ -45,6 +45,15 @@ class Company::OrdersController < Company::BaseController
     end
   end
 
+  def withdraw_delivery_request
+    @order = Order.find params[:id]
+    if @order.withdraw_delivery_request!
+      redirect_to request.referrer
+    else
+      redirect_to request.referrer,alert: 'Some error occured. Please check again!'
+    end
+  end
+
   def cancel
     if @order.cancel!
       redirect_to [:company, @order]

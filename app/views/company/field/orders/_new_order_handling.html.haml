@@ -1,0 +1,56 @@
+= render 'company/field/orders/assigned_order_modal'
+= render 'company/field/orders/withdrawn_request_modal'
+
+.row
+  :javascript
+    var initialize = function(){
+
+    console.log('initializing');
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) {
+        window.console.log(message);
+      }
+    };
+
+    var pusher = new Pusher("#{Pusher.key}", {
+      encrypted: true
+    });
+    var channel = pusher.subscribe('orders');
+    channel.bind("assigned_to_#{@delivery_executive.id}", function(data) {
+
+    var sound = new Howl({
+      urls: ["#{asset_path('new_order.mp3')}"],
+      loop: true
+    }).play();
+
+    $('#new_order_alert').show()
+      //sound.stop();
+     $('#menu_unavailable_modal').show();
+
+    });
+
+
+    //Bind to cwithdraw_requests
+        channel.bind("withdraw_request_from_#{@delivery_executive.id}", function(data) {
+
+
+
+        var sound = new Howl({
+          urls: ["#{asset_path('new_order.mp3')}"],
+          loop: true
+        }).play();
+
+        $('#new_order_alert').show()
+          //sound.stop();
+         $('#withdrawn_request_modal').find('#order_data').html(data['info'])
+         $('#withdrawn_request_modal').show();
+
+        });
+
+    }
+    initialize();
+    //$(function(){ initialize(); })
+    //$(document).on('page:load',initialize)
+
+
