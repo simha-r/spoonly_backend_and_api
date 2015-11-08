@@ -23,7 +23,8 @@
           - previous_color = color
           %tr{:style => "background-color: #{color}"}
             %td
-              = check_box_tag 'order_ids[]',order.id
+              - if order.acknowledged?
+                = check_box_tag 'order_ids[]',order.id
             %td
               = link_to order.id,[:company,order]
             %td{'width'=>'250px'}
@@ -36,8 +37,8 @@
               - if order.informed_delivery_guy?
                 = "Informed #{order.delivery_executive.name}"
               - else
-                #inform_delivery_guy
-                  = select_tag :delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.available,:id,:name),include_blank: true, class: "form-control",style: "width: 90px;"
+                .inform_delivery_guy
+                  = select_tag :inform_delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.available,:id,:name),include_blank: true, class: "form-control inform_delivery_executive_id",style: "width: 90px;"
                   = submit_tag 'Inform',data: {order_id: order.id}
             %td
               = render 'company/orders/line_summary',order: order
@@ -55,15 +56,15 @@
 = render 'company/current_orders/new_order_handling'
 
 :javascript
-  $('#inform_delivery_guy').find('input[type=submit]').click(function(){
+  $('.inform_delivery_guy').find('input[type=submit]').click(function(){
 
-      var delivery_executive_id = $('#delivery_executive_id').val()
+      var delivery_executive_id = $(this).parent().find('.inform_delivery_executive_id').val()
       var order_id = $(this).data('order-id');
 
       $.ajax({
       url: "/company/orders/"+order_id+"/inform_delivery_guy",
       type: 'PUT',
-      data: 'delivery_executive_id='+delivery_executive_id,
+      data: 'inform_delivery_executive_id='+delivery_executive_id,
       success: function( data ) {
         location.reload();
       }

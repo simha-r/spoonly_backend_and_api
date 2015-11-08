@@ -37,9 +37,9 @@ class Company::OrdersController < Company::BaseController
 
   def inform_delivery_guy
     @order = Order.find params[:id]
-    @delivery_executive = DeliveryExecutive.find params[:delivery_executive_id]
+    @delivery_executive = DeliveryExecutive.find params[:inform_delivery_executive_id]
     if @order.inform_delivery_guy @delivery_executive
-      redirect_to request.referrer,notice: "Informed #{@delivery_executive.name}"
+      redirect_to [:acknowledged,:company,:current_orders],notice: "Informed #{@delivery_executive.name}"
     else
       redirect_to request.referrer,alert: 'Some error occured. Please check again!'
     end
@@ -48,7 +48,7 @@ class Company::OrdersController < Company::BaseController
   def withdraw_delivery_request
     @order = Order.find params[:id]
     if @order.withdraw_delivery_request!
-      redirect_to request.referrer
+      redirect_to [:acknowledged,:company,:current_orders],notice: "Withdrawn Delivery Request"
     else
       redirect_to request.referrer,alert: 'Some error occured. Please check again!'
     end
