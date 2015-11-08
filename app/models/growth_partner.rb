@@ -12,7 +12,7 @@
 class GrowthPartner < ActiveRecord::Base
 
   def notify_incentive
-    message = "Dear #{name},Incentive has been added to your account."
+    message = "Dear #{name},#{commission_amount} has been added to your account."
     SmsProvider.send_message_with_telerivet phone_number,message
   end
 
