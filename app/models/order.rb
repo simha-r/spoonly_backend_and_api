@@ -123,7 +123,7 @@ class Order < ActiveRecord::Base
   def notify_cancel
     notify_kitchen 'cancel'
     notify_user 'cancel'
-    notify_delivery_executive 'cancel'
+    notify_delivery_executive 'cancel' if delivery_executive 
   end
 
   def update_stock
