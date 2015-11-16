@@ -31,12 +31,13 @@
       %td
         = order.delivery_time_range
       %td
-        = order.dispatched_at
+        = order.dispatched_at.strftime("%l:%M %p, %a ")
       %td
         = order.delivery_executive.name
       %td
         = render 'company/orders/line_summary',order: order
       %td
+        = order.delivered_at.strftime("%l:%M %p, %a ")
       %td{class: "#{order.state}" }
         = order.state
         - if order.feedback_asked?
