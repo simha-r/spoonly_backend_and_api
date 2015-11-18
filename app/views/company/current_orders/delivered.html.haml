@@ -24,7 +24,7 @@
       %td
         = link_to order.id,[:company,order]
       %td
-        = order.user.name
+        = "#{order.user.name},#{order.user.profile.phone_number}"
         %br
         %i Address:
         = order.address.formatted
