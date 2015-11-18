@@ -38,7 +38,7 @@
                 = "Informed #{order.delivery_executive.name}"
               - else
                 .inform_delivery_guy
-                  = select_tag :inform_delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.available,:id,:name),include_blank: true, class: "form-control inform_delivery_executive_id",style: "width: 90px;"
+                  = select_tag :inform_delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.all,:id,:name),include_blank: true, class: "form-control inform_delivery_executive_id",style: "width: 90px;"
                   = submit_tag 'Inform',data: {order_id: order.id}
             %td
               = render 'company/orders/line_summary',order: order
@@ -50,7 +50,7 @@
               - elsif order.informed_delivery_guy?
                 = link_to 'Withdraw Request ?',[:withdraw_delivery_request,:company,order], method: :put,class: 'btn'
         .col-xs-3
-          = select_tag :delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.available,:id,:name), class: "form-control"
+          = select_tag :delivery_executive_id,options_from_collection_for_select(DeliveryExecutive.all,:id,:name), class: "form-control"
         = submit_tag 'Dispatch', class: "btn btn-primary"
 
 = render 'company/current_orders/new_order_handling'
