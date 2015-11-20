@@ -8,6 +8,7 @@
     = stylesheet_link_tag 'company/application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'company/application', 'data-turbolinks-track' => true
     = csrf_meta_tags
+    = yield :head
   %body{"data-no-turbolink"=>"true"}
 
     %script{:src => "https://js.pusher.com/2.2/pusher.min.js"}

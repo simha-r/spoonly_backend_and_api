@@ -1,3 +1,10 @@
+- content_for :head do
+  :javascript
+    history.pushState(null, null, 'orders');
+    window.addEventListener('popstate', function(event) {
+    history.pushState(null, null, 'orders');
+    });
+
 .alert.alert-danger#new_order_alert{'style'=> "display: none"}
   New order has been received! Refresh Page
 
