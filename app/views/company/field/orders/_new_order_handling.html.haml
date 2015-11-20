@@ -37,8 +37,9 @@
 
 
         var sound = new Howl({
-          urls: ["#{asset_path('new_order.mp3')}"],
-          loop: true
+          urls: ["#{asset_path('field_order.mp3')}"],
+          loop: true,
+          volume: 1.0
         }).play();
 
         $('#new_order_alert').show()

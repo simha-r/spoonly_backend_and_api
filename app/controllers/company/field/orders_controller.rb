@@ -1,7 +1,9 @@
 class Company::Field::OrdersController < Company::Field::BaseController
 
   def index
-    @orders = @delivery_executive.orders.where(state: ['informed_delivery_guy','dispatched','delivered']).today
+    @undelivered_orders = @delivery_executive.orders.where(state: ['informed_delivery_guy','dispatched']).today
+    @delivered_orders = @delivery_executive.orders.where(state: ['delivered']).today
+
   end
 
   def accept

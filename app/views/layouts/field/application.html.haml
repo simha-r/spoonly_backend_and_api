@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "width=device-width, initial-scale=1.0", :name => "viewport"}/
+    %title= content_for?(:title) ? yield(:title) : ""
+    %meta{:content => "#{content_for?(:description) ? yield(:description) : "Rails Bootstrap"}", :name => "description"}/
+    = stylesheet_link_tag 'company/application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'field/application'
+    = csrf_meta_tags
+  %body{"data-no-turbolink"=>"true"}
+
+    %script{:src => "https://js.pusher.com/2.2/pusher.min.js"}
+
+    %header
+      = render 'layouts/field/navigation'
+    %main{:role => "main"}
+      = render 'layouts/field/messages'
+      %br
+      %br
+        %br
+      = yield

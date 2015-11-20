@@ -1,5 +1,7 @@
 class Company::Field::BaseController < Company::BaseController
 
+  layout 'field/application'
+
   before_filter :authenticate_delivery_executive
 
   def authenticate_delivery_executive
