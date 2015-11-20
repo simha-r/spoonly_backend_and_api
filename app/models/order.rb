@@ -312,7 +312,7 @@ class Order < ActiveRecord::Base
   def brief_line_items
     line = ''
     line_items.includes(:menu_product).includes(:product).each do |li|
-      line << "P#{li.product.id}(#{li.product.category})=>#{li.quantity} ."
+      line << " #{li.product.category} =>#{li.quantity} ."
     end
     line
   end
