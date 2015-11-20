@@ -8,6 +8,8 @@
       %th
         User-Address
       %th
+        Created At
+      %th
         Delivery Time
       %th
         Dispatched At
@@ -28,6 +30,8 @@
         %br
         %i Address:
         = order.address.formatted
+      %td
+        = order.created_at.strftime("%l:%M %p, %a ")
       %td
         = order.delivery_time_range
       %td
