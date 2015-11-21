@@ -87,14 +87,13 @@
     = f.submit 'Dispatch'
 - if @order.dispatched?
   Dispatched through:
-  = @order.delivery_executive.try &:name
+  %b= @order.delivery_executive.try &:name
   %br
+    %br
   Reassign order ?
   = form_for [:assign,:company,@order],method: :put do |f|
     = f.collection_select :delivery_executive_id,DeliveryExecutive.all,:id,:name
     = f.submit 'Redispatch',data: {confirm: 'Are you sure ? Do you want to reassign this order ?'}
-
-
 
 %br
   %br

@@ -47,7 +47,7 @@ class DeliveryExecutive < ActiveRecord::Base
   def log_location lat,long,timestamp
     last_seen = Time.at(timestamp.to_f).to_datetime
     last_location = locations.last
-    if last_location.distance_from(lat.to_f,long.to_f) > 0.2
+    if(last_location and (last_location.distance_from(lat.to_f,long.to_f) > 0.2))
       location= Location.create(latitude: lat.to_f,longitude: long.to_f,location_type: 'delivery_guy')
     else
       location = last_location
