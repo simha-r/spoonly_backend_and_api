@@ -1,0 +1,10 @@
+.row-fluid
+  .span8.offset2
+    .widget
+      .widget-header
+        %i.icon-plus
+        %span Edit Delivery Executive
+      .widget-content
+        = render 'form'
+        = link_to 'Show', [:company,@delivery_executive]
+        = link_to 'Back', [:company,:delivery_executives]

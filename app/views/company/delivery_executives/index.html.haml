@@ -20,5 +20,14 @@
     .col-xs-2
       - if executive.last_seen_delivery_executive_location
         = link_to "View Location",show_location_company_delivery_executive_path(executive),:target => "_blank"
+    .col-xs-2
+      - if current_company_user.has_role?(:admin)
+        = link_to "Edit",edit_company_delivery_executive_path(executive),:target => "_blank"
 
   %br
+
+- if current_company_user.has_role?(:admin)
+  .row
+    .col-xs-1
+    .col-xs-3
+      = link_to 'Add Delivery Executive',[:new,:company,:delivery_executive]

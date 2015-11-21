@@ -1,9 +1,34 @@
 class Company::DeliveryExecutivesController < Company::BaseController
 
   skip_before_filter :authenticate_company_user!,only:[:update_location]
+  before_filter :set_delivery_executive,only: [:edit,:update]
+  before_filter :authenticate_admin!,except: [:index,:mark_available,:show_location,:live_view,:update_location]
 
   def index
     @delivery_executives = DeliveryExecutive.all
+  end
+
+  def new
+    @delivery_executive = DeliveryExecutive.new
+  end
+
+  def create
+    if @delivery_executive = DeliveryExecutive.create(delivery_executive_params)
+      redirect_to [:company,:delivery_executives], notice: 'Successfuly created'
+    else
+      render :new
+    end
+  end
+
+  def edit
+  end
+
+  def update
+    if @delivery_executive.update_attributes(delivery_executive_params)
+      redirect_to [:company,:delivery_executives], notice: 'Successfuly updated'
+    else
+      render :edit
+    end
   end
 
   def mark_available
@@ -42,6 +67,17 @@ class Company::DeliveryExecutivesController < Company::BaseController
       end
     end.select(&:present?)
     render 'company/delivery_executives/live_view'
+  end
+
+
+  private
+
+  def delivery_executive_params
+    params.require(:delivery_executive).permit(:name,:phone_number)
+  end
+
+  def set_delivery_executive
+   @delivery_executive =  DeliveryExecutive.find params[:id]
   end
 
 end
