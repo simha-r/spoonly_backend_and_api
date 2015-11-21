@@ -63,7 +63,7 @@ class Order < ActiveRecord::Base
     end
 
     event :dispatch,before: [:record_dispatch_time],after:[:notify_dispatch] do
-      transitions from: :acknowledged, to: :dispatched
+      transitions from: [:acknowledged,:dispatched], to: :dispatched
     end
 
     event :deliver,before:[:record_delivered_time],after: [:apply_cashback_promotions] do
@@ -225,11 +225,16 @@ class Order < ActiveRecord::Base
 
   def formatted_delivery_time
     ranges = MenuProduct::LUNCH_TIMES.merge MenuProduct::DINNER_TIMES
+
     show = ranges[delivery_time.strftime('%H%M')]
-    if delivery_time.to_date == Date.today
-      show + " Today"
+    if show
+      if delivery_time.to_date == Date.today
+        show + " Today"
+      else
+        show +"  "+ delivery_time.strftime("%a %d,%b")
+      end
     else
-      show +"  "+ delivery_time.strftime("%a %d,%b")
+      delivery_time
     end
   end
 
