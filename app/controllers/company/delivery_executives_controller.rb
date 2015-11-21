@@ -14,9 +14,13 @@ class Company::DeliveryExecutivesController < Company::BaseController
 
   def update_location
     lat,long,id,timestamp=params[:lat],params[:lon],params[:id],params[:timestamp]
-    delivery_executive = DeliveryExecutive.find_from_tracecar(id)
-    delivery_executive.log_location lat,long,timestamp
-    head 200
+    if  delivery_executive = DeliveryExecutive.find_from_tracecar(id)
+     delivery_executive.log_location lat,long,timestamp
+     head 200
+    else
+     HealthyLunchUtils.log_info "DeliveryExecutive with traccar id #{id} not found"
+     head 200
+    end
   end
 
   def live_view

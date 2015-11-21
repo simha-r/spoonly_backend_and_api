@@ -88,10 +88,10 @@ class Address < ActiveRecord::Base
     if address_type=='home'
       address= ""
       if flat.present?
-        address=address + "Flat: #{flat},"
+        address=address + " Flat: #{flat},"
       end
       if building.present?
-        address=address + "Building: #{building},"
+        address=address + " Bldg: #{building},"
       end
 
       if address_details.present?
@@ -104,16 +104,16 @@ class Address < ActiveRecord::Base
     else
       address = "#{company},"
       if floor.present?
-        address=address + "Fl: #{floor},"
+        address=address + " Fl: #{floor},"
       end
       if building.present?
-        address=address + "Bldg: #{building},"
+        address=address + " Bldg: #{building},"
       end
       if address_details.present?
         address=address + "#{address_details}"
       end
       if landmark.present?
-        address=address + ",#{landmark}"
+        address=address + ", Landmark: #{landmark}"
       end
     end
     address

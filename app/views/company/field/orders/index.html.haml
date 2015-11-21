@@ -9,6 +9,16 @@
   New order has been received! Refresh Page
 
 - if @undelivered_orders.present?
+
+  .row
+    - line_items = LineItem.where(order: @undelivered_orders)
+    .col-xs-4
+      %h2
+        ="VEG: #{line_items.select(&:vegetarian).sum(&:quantity)}"
+    .col-xs-4
+      %h2
+        = "NONVEG: #{line_items.reject(&:vegetarian).sum(&:quantity)}"
+
   - @undelivered_orders.each do |order|
     .row-fluid
       - user = order.user
@@ -22,7 +32,7 @@
         %b= "#{order.formatted_delivery_time.split(' ')[0]+" "+order.formatted_delivery_time.split(' ')[1]}"
         %br
         = "#{order.brief_line_items}"
-        = "Rs #{order.cash_to_pay.to_i}"
+        = "&#8377#{order.cash_to_pay.to_i}"
       .col-xs-4
         %br
           %br
@@ -34,7 +44,9 @@
           - else
             = order.state.upcase
 - else
-  %h4.center  No Orders To Be Delivered!
+  .col-xs-3
+  .col-xs-8
+    No Orders To Be Delivered!
 
 
 %br

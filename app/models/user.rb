@@ -187,7 +187,12 @@ class User < ActiveRecord::Base
 
   def log_location lat,long
     last_seen = Time.now
-    location= Location.create(latitude: lat.to_f,longitude: long.to_f)
+    last_location = locations.last
+    if last_location.distance_from(lat.to_f,long.to_f) > 0.1
+      location= Location.create(latitude: lat.to_f,longitude: long.to_f)
+    else
+      location = last_location
+    end
     if location.persisted?
       user_locations.create(last_seen: last_seen,location: location)
     end
