@@ -35,7 +35,7 @@ class Api::V1::MenusController < Api::V1::BaseController
 
   def dinner
     @menu = Menu.current_dinner
-    if @menu.menu_dinner_products.present?
+    if @menu && @menu.menu_dinner_products.present?
       render json: @menu.show_dinner
     else
       render json: {notice: 'Dinner is coming soon!'}
