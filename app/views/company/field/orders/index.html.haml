@@ -32,12 +32,17 @@
         %b= "#{order.formatted_delivery_time.split(' ')[0]+" "+order.formatted_delivery_time.split(' ')[1]}"
         %br
         = "#{order.brief_line_items}"
-        = "&#8377#{order.cash_to_pay.to_i}"
+        &#8377
+        ="#{order.cash_to_pay.to_i}"
       .col-xs-4
         %br
           %br
         - if order.informed_delivery_guy?
           = link_to 'Accept',accept_company_field_order_path(order),method: :put,class: 'btn btn-danger'
+          %br
+            %br
+          &emsp;
+          = link_to 'Reject',reject_company_field_order_path(order),method: :put,confirm: 'Do you want to REJECT this order ?'
         - else
           - if order.dispatched?
             = link_to 'Mark Delivered!',mark_delivered_company_field_order_path(order),method: :put,class: 'btn btn-primary'
@@ -67,7 +72,8 @@
         %b= "#{order.formatted_delivery_time.split(' ')[0]+" "+order.formatted_delivery_time.split(' ')[1]}"
         %br
         = "#{order.brief_line_items}"
-        = "Rs #{order.cash_to_pay.to_i}"
+        &#8377
+        = "#{order.cash_to_pay.to_i}"
       .col-xs-4
         %br
           %br

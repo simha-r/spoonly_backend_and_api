@@ -21,7 +21,7 @@
     channel.bind("assigned_to_#{@delivery_executive.id}", function(data) {
 
     var sound = new Howl({
-      urls: ["#{asset_path('field_order.mp3')}"],
+      urls: ["#{asset_path('company/field_order.mp3')}"],
       loop: true
     }).play();
 

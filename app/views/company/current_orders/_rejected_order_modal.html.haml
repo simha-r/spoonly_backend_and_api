@@ -1,0 +1,12 @@
+#rejected_order_modal.modal{:title => "My modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role=> "dialog"}
+
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      .modal-body
+        - link = acknowledged_company_current_orders_path(category: params[:category])
+        %p.msg-big Order Request Rejected
+        %p#order_data
+        %a{"aria-hidden" => "true", "data-dismiss" => "modal"}
+          %p.msg= link_to "OK",link,class: 'btn btn-primary'

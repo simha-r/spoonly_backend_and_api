@@ -58,6 +58,10 @@ class Order < ActiveRecord::Base
       transitions from: [:informed_delivery_guy], to: :acknowledged
     end
 
+    event :reject_delivery_request,after: [:notify_reject_delivery_request] do
+      transitions from: [:informed_delivery_guy], to: :acknowledged
+    end
+
     event :mark_dispatched,before: [:record_dispatch_time] do
       transitions from: [:informed_delivery_guy], to: :dispatched
     end
@@ -139,6 +143,13 @@ class Order < ActiveRecord::Base
       #TODO notify kitchen of order cancel
       Pusher['orders'].trigger('cancelled', {
         message: "Order no. #{self.id} has been cancelled. Please notify the Chef. "
+      })
+    elsif event=='reject_delivery_request'
+      #TODO notify kitchen of delivery request rejected
+      message = "#{delivery_executive.name} has rejected this order. #{user.name[0..10]},#{user.profile.phone_number}
+      #{address.formatted}. ##{id}: #{sms_formatted_delivery_time}"
+      Pusher['orders'].trigger('rejected_delivery_request', {
+        info: message
       })
     end
   rescue Exception => e
@@ -291,6 +302,10 @@ class Order < ActiveRecord::Base
 
   def notify_withdraw_request
     notify_delivery_executive 'withdraw_delivery_request'
+  end
+
+  def notify_reject_delivery_request
+    notify_kitchen 'reject_delivery_request'
   end
 
   def self.search query

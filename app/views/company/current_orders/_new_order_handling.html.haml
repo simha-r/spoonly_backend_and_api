@@ -1,4 +1,5 @@
 = render 'company/current_orders/new_order_modal'
+= render 'company/current_orders/rejected_order_modal'
 
 .row
   :javascript
@@ -28,6 +29,23 @@
      $('#menu_unavailable_modal').show();
 
     });
+
+    channel.bind('rejected_delivery_request', function(data) {
+
+    var sound = new Howl({
+      urls: ["#{asset_path('new_order.mp3')}"],
+      loop: true
+    }).play();
+
+    $('#new_order_alert').show()
+
+    $('#rejected_order_modal').find('#order_data').html(data['info'])
+    $('#rejected_order_modal').show();
+
+
+    });
+
+
 
     }
     initialize();
