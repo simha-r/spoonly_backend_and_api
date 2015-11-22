@@ -31,7 +31,11 @@ class ApplicationController < ActionController::Base
     if resource.class==User
       session[:previous_url] || root_path
     else
-      company_root_path
+      if resource.roles.collect(&:name) == ['delivery_executive']
+        company_field_orders_path
+      else
+        company_root_path
+      end
     end
   end
 
