@@ -1,0 +1,127 @@
+@import 'field_common';
+
+#current_orders_header {
+  @include make-xs-column(12,0);
+
+  .show-state {
+  }
+
+  .table.states {
+    thead tr td {
+      width: 150px;
+    }
+  }
+
+
+  .active {
+    background-color: #fff;
+
+    a {
+      border-radius: 10px;
+      font-size: 24px;
+      padding: 20px;
+    }
+
+    &.all {
+      a {
+        background-color: $all_bg_color;
+        color: $all_text_color;
+      }
+    }
+
+    &.pending {
+      a {
+        background-color: $pending_bg_color;
+        color: $pending_text_color;
+      }
+    }
+
+    &.acknowledged {
+      a {
+        background-color: $acknowledged_bg_color;
+        color: $acknowledged_text_color;
+      }
+    }
+
+    &.dispatched {
+      a {
+        background-color: $dispatched_bg_color;
+        color: $dispatched_text_color;
+      }
+    }
+
+    &.delivered {
+      a {
+        background-color: $delivered_bg_color;
+        color: $delivered_text_color;
+      }
+    }
+
+  }
+}
+
+.current_orders_index {
+  @include make-xs-column(12,20px);
+}
+
+  td.all {
+    color: $all_bg_color;
+    a {
+      color: $all_bg_color;
+      font-size: 16px;
+    }
+  }
+
+  td.pending {
+    color: $pending_bg_color;
+    a {
+      color: $pending_bg_color;
+      font-size: 16px;
+    }
+  }
+
+  td.acknowledged {
+    color: $acknowledged_bg_color;
+    a {
+      color: $acknowledged_bg_color;
+      font-size: 16px;
+    }
+  }
+
+  td.dispatched {
+    color: $dispatched_bg_color;
+    a {
+      color: $dispatched_bg_color;
+      font-size: 16px;
+    }
+  }
+
+  td.delivered {
+    color: $delivered_bg_color;
+    a {
+      color: $delivered_bg_color;
+      font-size: 16px;
+    }
+  }
+
+
+  .show-state.all {
+    color: $all_bg_color;
+  }
+
+  .show-state.pending {
+    color: $pending_bg_color;
+  }
+
+  .show-state.acknowledged {
+    color: $acknowledged_bg_color;
+  }
+
+  .show-state.dispatched {
+    color: $dispatched_bg_color;
+  }
+
+  .show-state.delivered {
+    color: $delivered_bg_color;
+  }
+
