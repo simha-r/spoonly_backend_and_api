@@ -161,8 +161,10 @@ Rails.application.routes.draw do
       member do
         put :mark_available
         get :show_location
+        get :test_device
       end
       get :live_view,on: :collection
+      get :dashboard,on: :collection
     end
     resources :general_promotions do
       member do

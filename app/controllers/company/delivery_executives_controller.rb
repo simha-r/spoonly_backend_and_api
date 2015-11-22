@@ -1,11 +1,21 @@
 class Company::DeliveryExecutivesController < Company::BaseController
 
   skip_before_filter :authenticate_company_user!,only:[:update_location]
-  before_filter :set_delivery_executive,only: [:edit,:update]
-  before_filter :authenticate_admin!,except: [:index,:mark_available,:show_location,:live_view,:update_location]
+  before_filter :set_delivery_executive,only: [:edit,:update,:test_device]
+  before_filter :authenticate_admin!,except: [:index,:mark_available,:show_location,:live_view,:update_location,:test_device]
 
   def index
     @delivery_executives = DeliveryExecutive.all
+  end
+
+  def dashboard
+    @delivery_executives = DeliveryExecutive.all
+  end
+
+  def test_device
+    if @delivery_executive.test_device
+      redirect_to request.referrer,notice: 'Sent alarm to device. Check if it rings'
+    end
   end
 
   def new

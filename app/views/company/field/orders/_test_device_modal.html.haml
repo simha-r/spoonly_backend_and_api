@@ -1,0 +1,11 @@
+#test_device_modal.modal{:title => "My modal", "aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role=> "dialog","style"=>"margin-top: 100px;"}
+
+  .modal-dialog
+    .modal-content
+      .modal-header
+        %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+      .modal-body
+        - link = company_field_orders_path
+        %p.msg-big Testing device..Is your alarm ringing ?
+        %a{"aria-hidden" => "true", "data-dismiss" => "modal"}
+          %p.msg= link_to "Tap here to stop alarm",link,class: 'btn btn-primary'

@@ -57,6 +57,13 @@ class DeliveryExecutive < ActiveRecord::Base
     end
   end
 
+  def test_device
+    Pusher['orders'].trigger("test_device_#{id}", {
+      message: 'Testing your device'
+    })
+  end
+  handle_asynchronously :test_device
+
   def self.find_from_tracecar id
     where(phone_number: id).first
   end

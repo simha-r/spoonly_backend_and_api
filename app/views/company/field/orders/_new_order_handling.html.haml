@@ -1,5 +1,6 @@
 = render 'company/field/orders/assigned_order_modal'
 = render 'company/field/orders/withdrawn_request_modal'
+= render 'company/field/orders/test_device_modal'
 
 .row
   :javascript
@@ -20,7 +21,7 @@
     channel.bind("assigned_to_#{@delivery_executive.id}", function(data) {
 
     var sound = new Howl({
-      urls: ["#{asset_path('new_order.mp3')}"],
+      urls: ["#{asset_path('field_order.mp3')}"],
       loop: true
     }).play();
 
@@ -37,7 +38,7 @@
 
 
         var sound = new Howl({
-          urls: ["#{asset_path('field_order.mp3')}"],
+          urls: ["#{asset_path('company/field_order.mp3')}"],
           loop: true,
           volume: 1.0
         }).play();
@@ -49,9 +50,20 @@
 
         });
 
+
+       //Bind to test field devices
+       channel.bind("test_device_#{@delivery_executive.id}", function(data) {
+
+       var sound = new Howl({
+         urls: ["#{asset_path('company/field_order.mp3')}"],
+         loop: true
+       }).play();
+        $('#test_device_modal').show();
+
+       });
+
     }
     initialize();
-    //$(function(){ initialize(); })
-    //$(document).on('page:load',initialize)
+
 
 
