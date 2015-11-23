@@ -51,5 +51,12 @@ class Company::CurrentOrdersController < Company::BaseController
     @orders = @orders.cancelled
   end
 
+  def heatmap
+    @user_locations = UserLocation.where("created_at >= ?", Time.zone.now.beginning_of_day)
+    @user_locations = @user_locations.collect do |ul|
+      [ul.location.latitude.to_f,ul.location.longitude.to_f]
+    end
+  end
+
 
 end

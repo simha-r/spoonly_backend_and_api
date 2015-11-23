@@ -148,6 +148,7 @@ Rails.application.routes.draw do
         get :cancelled
         get :chef_summary
         post :multi_assign
+        get :heatmap
       end
     end
     resources :company_users do

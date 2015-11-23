@@ -1,0 +1,25 @@
+#map_canvas
+
+
+:javascript
+  var center = new google.maps.LatLng(17.443498, 78.367545);
+  var options = {
+    'zoom': 14,
+    'center': center,
+    'mapTypeId': google.maps.MapTypeId.ROADMAP
+  };
+
+
+  var data = #{@user_locations.to_json};
+
+  var map = new google.maps.Map(document.getElementById("map_canvas"), options);
+
+  var markers = [];
+  for (var i = 0; i < data.length; i++) {
+    var latLng = new google.maps.LatLng(data[i][0],
+        data[i][1]);
+    var marker = new google.maps.Marker({'position': latLng});
+    markers.push(marker);
+  }
+  var mcOptions = {gridSize: 50, maxZoom: 15};
+  var markerCluster = new MarkerClusterer(map, markers,mcOptions);
