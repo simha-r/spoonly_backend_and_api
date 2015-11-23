@@ -5,18 +5,18 @@
       %b= exec.name
       = link_to " view location",show_location_company_delivery_executive_path(exec),:target => "_blank"
       = link_to 'Test Device',test_device_company_delivery_executive_path(exec)
+    UNDELIVERED
     .row-fluid
       - exec.orders.where(state: ['dispatched','informed_delivery_guy']).order(:delivery_time).each do |o|
         .row-fluid
-          .col-xs-10
-            = o.id
-            ,
-            = o.address.formatted
+          = o.id
+          ,
+          = o.address.formatted
     .row-fluid
+      DELIVERED:
       - exec.orders.where(state: 'delivered').order(:delivery_time).each do |o|
         -#TODO Make them green to show they are delivered
         .row-fluid
-          .col-xs-10
-            = o.id
-            ,
-            = o.address.formatted
+          = o.id
+          ,
+          = o.address.formatted
