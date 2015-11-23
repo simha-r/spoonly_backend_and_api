@@ -348,7 +348,7 @@ class Order < ActiveRecord::Base
   end
 
   def self.to_be_cooked
-    where("state = ? or state = ?",'acknowledged','pending').today
+    where(state: ['acknowledged','pending','informed_delivery_guy','dispatched']).today
   end
 
   private

@@ -4,7 +4,7 @@
     .row-fluid
       %b= exec.name
       = link_to " view location",show_location_company_delivery_executive_path(exec),:target => "_blank"
-      = link_to 'Test Device',test_device_company_delivery_executive_path(executive)
+      = link_to 'Test Device',test_device_company_delivery_executive_path(exec)
     .row-fluid
       - exec.orders.where(state: ['dispatched','informed_delivery_guy']).order(:delivery_time).each do |o|
         .row-fluid
