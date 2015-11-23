@@ -52,7 +52,7 @@ class Company::CurrentOrdersController < Company::BaseController
   end
 
   def heatmap
-    @user_locations = UserLocation.where("created_at >= ?", Time.zone.now.beginning_of_day).to_a.uniq { |ul| ul.user_id }.count
+    @user_locations = UserLocation.where("created_at >= ?", Time.zone.now.beginning_of_day).to_a.uniq { |ul| ul.user_id }
     @user_locations = @user_locations.collect do |ul|
       [ul.location.latitude.to_f,ul.location.longitude.to_f]
     end
