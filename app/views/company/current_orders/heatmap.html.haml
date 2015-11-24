@@ -1,6 +1,15 @@
 #map_canvas
 
 
+
+= form_tag heatmap_company_current_orders_path,method: :get do
+  = label_tag 'start_date'
+  = date_select :start_date,:start_date,start_year: 2015,end_year: 2016,default:@start_date_1
+  = label_tag 'end_date'
+  = date_select :end_date,:end_date,start_year: 2015,end_year: 2016,default:@end_date_1
+
+  = submit_tag 'Filter'
+
 :javascript
   var center = new google.maps.LatLng(17.443498, 78.367545);
   var options = {
