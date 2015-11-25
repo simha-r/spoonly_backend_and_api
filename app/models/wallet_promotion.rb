@@ -14,4 +14,6 @@ class WalletPromotion < ActiveRecord::Base
 
   has_many :credits , as: :payment_mechanism
 
+  scope :manual,->{where(promotion_type: 'manual')}
+
 end

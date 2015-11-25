@@ -46,7 +46,7 @@ class Company::WalletPromotionsController < Company::BaseController
   private
 
   def wallet_promotion_params
-    params.require(:wallet_promotion).permit(:name,:amount,:description)
+    params.require(:wallet_promotion).permit(:name,:amount,:description,:promotion_type)
   end
 
   def load_resource

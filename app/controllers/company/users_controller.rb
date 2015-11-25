@@ -26,6 +26,13 @@ class Company::UsersController < Company::BaseController
     render 'index'
   end
 
+  def give_money
+    wallet_promotion_name = params[:wallet_promotion_name]
+    custom_message=params[:message].strip.present? ? params[:message] : nil
+    @user.cashback_for_customer_satisfaction wallet_promotion_name,custom_message
+    redirect_to request.referrer, notice: 'success'
+  end
+
   private
 
   def load_resource

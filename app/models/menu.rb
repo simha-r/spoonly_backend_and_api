@@ -65,7 +65,7 @@ class Menu < ActiveRecord::Base
     hash[:referral_text] = "<html><body>Earn Free Meals<br />Give &#8377 50, Get &#8377 50</body></html>"
     hash[:timings]=["12:00 PM - 12:30 PM","12:30 PM - 01:00 PM","01:00 PM - 01:30 PM","01:30 PM - 02:00 PM",
                     "02:00 PM - 02:30 PM","02:30 PM - 03:00 PM","03:00 PM - 03:30 PM"]
-    hash[:buffer_time]=1
+    hash[:buffer_time]=ENV['BUFFER_TIME'].to_i
     hash
   end
 
@@ -76,7 +76,7 @@ class Menu < ActiveRecord::Base
     hash[:referral_text] = "<html><body>Earn Free Meals<br />Give &#8377 50, Get &#8377 50</body></html>"
     hash[:timings]=["07:00 PM - 07:30 PM","07:30 PM - 08:00 PM","08:00 PM - 08:30 PM","08:30 PM - 09:00 PM",
                     "09:00 PM - 09:30 PM","09:30 PM - 10:00 PM","10:00 PM - 10:30 PM"]
-    hash[:buffer_time]=1
+    hash[:buffer_time]=ENV['BUFFER_TIME'].to_i
     hash
   end
 

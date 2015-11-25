@@ -30,5 +30,13 @@
       - else
         NA
 
+%br
+  %br
 
-
+.row
+  .col-xs-4
+    = form_tag give_money_company_user_path(@user) do
+      = select_tag :wallet_promotion_name,options_from_collection_for_select(WalletPromotion.manual,:name,:name), class: "form-control"
+      = label_tag 'message'
+      = text_area_tag :message
+      = submit_tag 'Give Money'

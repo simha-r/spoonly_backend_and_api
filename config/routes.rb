@@ -185,6 +185,7 @@ Rails.application.routes.draw do
     resources :users do
       member do
         get :wallet
+        post :give_money
       end
     end
     resources :feedbacks
