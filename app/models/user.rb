@@ -170,7 +170,7 @@ class User < ActiveRecord::Base
 
   def serializable_hash(options={})
     options||={}
-    options[:except]=[:created_at,:updated_at]
+    options[:except]=[:created_at,:updated_at,:promo_code_shown]
     options[:include] = :profile
     options[:methods]=[:login_type]
     super
@@ -193,6 +193,7 @@ class User < ActiveRecord::Base
     else
       location = last_location
     end
+
     if location.persisted?
       user_locations.create(last_seen: last_seen,location: location)
     end
