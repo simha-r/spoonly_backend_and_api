@@ -18,6 +18,7 @@ class Company::CurrentOrdersController < Company::BaseController
 
   def chef_summary
     @orders = Order.today.lunch
+    render layout: 'chef/application'
   end
 
   def pending

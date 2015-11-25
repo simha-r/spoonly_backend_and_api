@@ -12,9 +12,13 @@
   .col-xs-3
     %h2 Time
   .col-xs-3
-    %h2 VEG
+    .col-xs-1
+    .col-xs-6
+      %h3 VEG
   .col-xs-3
-    %h2 NON-VEG
+    .col-xs-1
+    .col-xs-6
+      %h3 NON-VEG
 
 - today = Date.today
 - MenuProduct.show_all_lunch_times.each do |hour,range|
@@ -29,20 +33,20 @@
       - in_dispatch_orders=@orders.in_dispatch_process.where(delivery_time: Time.zone.parse("#{today.year}-#{today.month}-#{today.day} "+ hour))
       - in_dispatch_line_items = LineItem.where(order: in_dispatch_orders)
     .col-xs-3
-      .col-xs-6
-        Dispatched
-        %h3="#{uncooked_line_items.select(&:vegetarian).sum(&:quantity)}"
-      .col-xs-6
-        To Cook:
+      .col-xs-3
+        Disp
         %h3="#{in_dispatch_line_items.select(&:vegetarian).sum(&:quantity)}"
+      .col-xs-4
+        Not Disp
+        %h3="#{uncooked_line_items.select(&:vegetarian).sum(&:quantity)}"
     .col-xs-3
-      .col-xs-6
-        Dispatched
+      .col-xs-3
+        Disp
         %h3="#{uncooked_line_items.reject(&:vegetarian).sum(&:quantity)}"
-      .col-xs-6
-        To Cook:
+      .col-xs-4
+        Not Disp
         %h3=" #{in_dispatch_line_items.reject(&:vegetarian).sum(&:quantity)}"
-    .row
   .row
     %br
+      %br
 = render 'company/current_orders/chef_notify_new_order'
