@@ -24,14 +24,25 @@
     .col-xs-3
       %h2
         = range
-    - range_orders=@orders.to_be_cooked.where(delivery_time: Time.zone.parse("#{today.year}-#{today.month}-#{today.day} "+ hour))
-    -line_items = LineItem.where(order: range_orders)
+      - uncooked_orders=@orders.to_be_cooked.where(delivery_time: Time.zone.parse("#{today.year}-#{today.month}-#{today.day} "+ hour))
+      - uncooked_line_items = LineItem.where(order: uncooked_orders)
+      - in_dispatch_orders=@orders.in_dispatch_process.where(delivery_time: Time.zone.parse("#{today.year}-#{today.month}-#{today.day} "+ hour))
+      - in_dispatch_line_items = LineItem.where(order: in_dispatch_orders)
     .col-xs-3
-      %h2
-        = line_items.select(&:vegetarian).sum(&:quantity)
+      .col-xs-6
+        Dispatched
+        %h3="#{uncooked_line_items.select(&:vegetarian).sum(&:quantity)}"
+      .col-xs-6
+        To Cook:
+        %h3="#{in_dispatch_line_items.select(&:vegetarian).sum(&:quantity)}"
     .col-xs-3
-      %h2
-        = line_items.reject(&:vegetarian).sum(&:quantity)
+      .col-xs-6
+        Dispatched
+        %h3="#{uncooked_line_items.reject(&:vegetarian).sum(&:quantity)}"
+      .col-xs-6
+        To Cook:
+        %h3=" #{in_dispatch_line_items.reject(&:vegetarian).sum(&:quantity)}"
+    .row
   .row
     %br
 = render 'company/current_orders/chef_notify_new_order'

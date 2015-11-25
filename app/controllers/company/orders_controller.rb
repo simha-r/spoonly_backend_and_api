@@ -110,7 +110,7 @@ class Company::OrdersController < Company::BaseController
       @delivery_date = Date.today
     end
     @category = params[:category] || 'lunch'
-    @delivered_orders = Order.find_by_date(@delivery_date).includes(:delivery_executive).includes(:debit).includes(:line_items).includes(:user).delivered
+    @delivered_orders = Order.find_by_date(@delivery_date).includes(:delivery_executive).includes(:debit).includes(:line_items).includes(:user).where.not(state: ['pending','cancelled'])
   end
 
   def ask_feedback

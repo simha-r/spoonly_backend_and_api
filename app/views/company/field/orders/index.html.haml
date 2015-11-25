@@ -10,14 +10,14 @@
 
 - if @undelivered_orders.present?
 
-  .row
+  .row-fluid
     - line_items = LineItem.where(order: @undelivered_orders)
-    .col-xs-4
+    .col-xs-6
       %h2
-        ="VEG: #{line_items.select(&:vegetarian).sum(&:quantity)}"
-    .col-xs-4
+        ="VEG-#{line_items.select(&:vegetarian).sum(&:quantity)}"
+    .col-xs-6
       %h2
-        = "NONVEG: #{line_items.reject(&:vegetarian).sum(&:quantity)}"
+        = "NONVEG-#{line_items.reject(&:vegetarian).sum(&:quantity)}"
 
   - @undelivered_orders.each do |order|
     .row-fluid
@@ -58,7 +58,8 @@
   %br
 
 - if @delivered_orders.present?
-  %h4 DELIVERED ORDERS
+  .row-fluid
+    %h4 DELIVERED ORDERS
   - @delivered_orders.each do |order|
     .row-fluid
       - user = order.user
