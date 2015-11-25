@@ -207,7 +207,7 @@ class User < ActiveRecord::Base
   def cashback_for_customer_satisfaction wallet_promotion_name,custom_message
     wallet_promotion=WalletPromotion.manual.where(name: wallet_promotion_name).first
     if wallet.apply_promotion wallet_promotion
-      message = custom_message || "Dear #{user.name.split(' ')[0]}, Apologies for the subpar service.We've gone ahead and refunded Rs #{wallet_promotion.amount}  into your Spoonly wallet."
+      message = custom_message || "Dear #{name.split(' ')[0]}, Apologies for the subpar service.We've gone ahead and refunded Rs #{wallet_promotion.amount}  into your Spoonly wallet."
       notify_wallet message,"Refunds@Spoonly"
       UserMessenger.apologise self,message
     end
