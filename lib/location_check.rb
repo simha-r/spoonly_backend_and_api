@@ -15,7 +15,7 @@ module LocationCheck
         end
       end
     end
-    redirect_to main_customer_homes_path unless proceed
+    redirect_to main_customer_homes_path(out_of_service: true) unless proceed
   end
 
   def self.in_range? lat,long

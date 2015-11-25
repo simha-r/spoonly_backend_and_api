@@ -6,7 +6,7 @@ class Customer::HomesController < Customer::BaseController
   before_action :proceed_to_main_if_old_user, except: [:android,:app]
 
   def main
-
+    @out_of_service = params[:out_of_service]
   end
 
   def android

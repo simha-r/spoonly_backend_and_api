@@ -57,3 +57,7 @@
 
   google.maps.event.addDomListener(window, 'load', initialize);
   $(document).on('page:load',initialize)
+
+- if @out_of_service
+  :javascript
+    alert("We're sorry :(  Currently we do not serve in your area. We currently serve in Hitec City, Gachibowli and parts of Kondapur.");
