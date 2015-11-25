@@ -5,7 +5,7 @@ class Api::V1::MenusController < Api::V1::BaseController
 
 
   def show
-    if current_user.user_locations.present?
+    if current_user.promo_code_shown
       show_promo = false
     else
       show_promo = true
