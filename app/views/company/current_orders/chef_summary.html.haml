@@ -33,18 +33,18 @@
       - in_dispatch_orders=@orders.in_dispatch_process.where(delivery_time: Time.zone.parse("#{today.year}-#{today.month}-#{today.day} "+ hour))
       - in_dispatch_line_items = LineItem.where(order: in_dispatch_orders)
     .col-xs-3
-      .col-xs-3
-        Disp
-        %h3="#{in_dispatch_line_items.select(&:vegetarian).sum(&:quantity)}"
       .col-xs-4
         Not Disp
         %h3="#{uncooked_line_items.select(&:vegetarian).sum(&:quantity)}"
-    .col-xs-3
       .col-xs-3
         Disp
+        %h3="#{in_dispatch_line_items.select(&:vegetarian).sum(&:quantity)}"
+    .col-xs-4
+      .col-xs-3
+        Not Disp.
         %h3="#{uncooked_line_items.reject(&:vegetarian).sum(&:quantity)}"
       .col-xs-4
-        Not Disp
+        Disp:
         %h3=" #{in_dispatch_line_items.reject(&:vegetarian).sum(&:quantity)}"
   .row
     %br
