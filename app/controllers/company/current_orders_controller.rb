@@ -1,5 +1,7 @@
 class Company::CurrentOrdersController < Company::BaseController
 
+  before_filter :authenticate_admin!, only: [:heatmap]
+
   def index
     @category = params[:category] || 'lunch'
     @search_results = Order.search(params[:search]) if params[:search]

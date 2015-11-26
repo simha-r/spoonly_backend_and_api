@@ -9,7 +9,6 @@
   - if(current_company_user.has_role?(:dispatcher) || current_company_user.has_role?(:admin))
     %li= link_to 'View Orders',[:company,:orders]
     %li= link_to 'View Todays Orders',[:company,:current_orders],class: 'btn btn-primary btn-lg'
-    %li= link_to 'View Orders by Day',[:company,:current_orders]
     %li= link_to 'View Delivery Executives',[:company,:delivery_executives]
     %li= link_to 'Live Map View Delivery Executives',[:live_view,:company,:delivery_executives,data: { no_turbolink: true }]
     %li= link_to 'View Daily Bill Summary',[:collections_summary,:company,:orders]
@@ -25,6 +24,8 @@
     %li= link_to 'View Wallet Promotions',[:company,:wallet_promotions]
     %li= link_to 'View General Promotions',[:company,:general_promotions]
     %li= link_to 'View Referrals',[:company,:referrals]
+    %li= link_to 'View Heatmap',[:heatmap,:company,:current_orders],class: 'btn btn-primary btn-lg'
+
 
 - if(current_company_user.has_role?(:delivery_executive))
   .row
