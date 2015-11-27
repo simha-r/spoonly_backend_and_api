@@ -1,6 +1,9 @@
 = form_tag company_users_path,method: :get do
   = text_field_tag 'search_term',@search_term
   = submit_tag 'Search'
+= form_tag company_users_path,method: :get do
+  = select_tag ''
+
 
 - if @users.present?
 
@@ -61,5 +64,6 @@
     = will_paginate @users
 - else
   %h3 No Users present
+
 
 
