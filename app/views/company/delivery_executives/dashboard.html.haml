@@ -10,7 +10,7 @@
     .row-fluid
       - exec.orders.today.where(state: ['dispatched','informed_delivery_guy']).order(:delivery_time).each do |o|
         .row-fluid
-          = "# #{o.id}, #{o.delivery_time_range}"
+          = "##{o.id},#{o.user.name} - #{o.delivery_time_range}"
           %br
           %b Addr:
           = o.address.formatted
