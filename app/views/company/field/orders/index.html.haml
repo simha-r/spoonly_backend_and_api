@@ -7,7 +7,7 @@
 = title 'Todays Orders'
 
 .container-fluid
-  .alert.alert-danger#new_order_alert{'style'=> "display: none"}
+  .alert.alert-danger#new_order_alert{'style'=> "display: none"}s
     New order has been received! Refresh Page
 
   - if @undelivered_orders.present?
@@ -47,7 +47,7 @@
             = link_to 'Reject',reject_company_field_order_path(order),method: :put,confirm: 'Do you want to REJECT this order ?'
           - else
             - if order.dispatched?
-              = link_to 'Mark Delivered!',mark_delivered_company_field_order_path(order),method: :put,class: 'btn btn-primary'
+              = link_to 'Mark Delivered!',mark_delivered_company_field_order_path(order),method: :put,class: 'btn btn-primary',confirm: 'Mark order as delivered ?'
             - else
               = order.state.upcase
   - else
