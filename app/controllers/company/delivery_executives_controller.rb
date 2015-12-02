@@ -69,6 +69,7 @@ class Company::DeliveryExecutivesController < Company::BaseController
   end
 
   def show_location
+    @delivery_executive = DeliveryExecutive.find params[:id]
     @delivery_executives = DeliveryExecutive.where(id: params[:id])
     @delivery_hash = @delivery_executives.collect do |de|
       if  de.last_seen_delivery_executive_location

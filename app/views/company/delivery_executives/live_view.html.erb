@@ -1,4 +1,8 @@
-= title 'Live View-DeliveryExecutives'
+<% if @delivery_executive.present? %>
+  <%= title @delivery_executive.name.upcase %>
+<% else %>
+  <%= title 'Live View-DeliveryExecutives' %>
+<% end %>
 <div id="map_canvas"></div>
 <script>
   var map;
