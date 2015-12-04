@@ -48,7 +48,8 @@ class Api::V1::OrdersController < Api::V1::BaseController
       delivery_fee = (item_total < 150) ? 10 : 0
       bill_total = item_total + delivery_fee
       grand_total = bill_total
-      {delivery_fee: delivery_fee,grand_total: grand_total,item_total: item_total,item_quantity: item_quantity}
+      response = {delivery_fee: delivery_fee,grand_total: grand_total,item_total: item_total,item_quantity: item_quantity}
+      render json: response
     end
       # {delivery_fee: delivery_fee, promotion: {coupon_code: BACK50,discount: 50},wallet_cash_used: 40 }
   end
