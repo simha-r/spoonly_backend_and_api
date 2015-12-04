@@ -78,8 +78,8 @@ Rails.application.routes.draw do
         end
       end
       resources :line_items
-      resources :orders, do
-        member do
+      resources :orders do
+        collection do
           post :preview
         end
       end
