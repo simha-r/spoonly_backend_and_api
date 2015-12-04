@@ -35,6 +35,24 @@ class Api::V1::OrdersController < Api::V1::BaseController
 
   end
 
+  def preview
+    item_total = 0
+    item_quantity = 0
+    if params[:line_item].present?
+      params[:line_item].each do |li|
+        menu_product = MenuProduct.find custom_line_item_params(li)['menu_product_id']
+        quantity = custom_line_item_params(li)['quantity'].to_f
+        item_quantity = item_quantity + quantity
+        item_total = item_total + menu_product.price*quantity
+      end
+      delivery_fee = (item_total < 150) ? 10 : 0
+      bill_total = item_total + delivery_fee
+      grand_total = bill_total
+      {delivery_fee: delivery_fee,grand_total: grand_total,item_total: item_total,item_quantity: item_quantity}
+    end
+      # {delivery_fee: delivery_fee, promotion: {coupon_code: BACK50,discount: 50},wallet_cash_used: 40 }
+  end
+
   private
   # Never trust parameters from the scary internet, only allow the white list through.
   def order_params

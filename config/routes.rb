@@ -78,7 +78,11 @@ Rails.application.routes.draw do
         end
       end
       resources :line_items
-      resources :orders
+      resources :orders, do
+        member do
+          post :preview
+        end
+      end
       resources :sessions
       resource :wallet,only:[:show] do
         get :recharge

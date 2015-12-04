@@ -124,8 +124,11 @@
       Due
       %br Amount
       %b="#{order.cash_to_pay}"
-
-
+%br
+.row
+  - @user.feedbacks.each do |feedback|
+    .col-xs-1
+      
 
 %br
 .row
