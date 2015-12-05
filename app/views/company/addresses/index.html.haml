@@ -18,7 +18,8 @@
     - @addresses.each do |address|
       %tr{"id"=>"address_#{address.id}"}
         %td
-          = link_to address.user.name,[:company,address.user]
+          - if address.user
+            = link_to address.user.try(:name),[:company,address.user]
           = address.created_at.strftime("%l:%M %p, %a  %-d %b")
         %td
           = address.formatted
