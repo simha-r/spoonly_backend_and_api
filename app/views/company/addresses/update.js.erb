@@ -1,0 +1,8 @@
+//TODO Write js to close address form..show address and move on to next order step
+$('.address').removeClass('active')
+$('<%="#address_#{@address.id}"%>').append('<i class="fa fa-check-circle fa-green" style ="color: green"></i>')
+$('<%="#address_#{@address.id}"%>').find('.latlong').val('<%= "#{@address.latitude},#{@address.longitude}"%>')
+$('<%="#address_#{@address.id}"%>').addClass('active')
+var sound = new Howl({
+  urls: ['<%= "#{asset_path('company/new_order.mp3')}" %>']
+}).play();

@@ -125,6 +125,7 @@ Rails.application.routes.draw do
         get :add_items
       end
     end
+    resources :addresses
     resources :menu_products,only: [:create,:update,:destroy]
     resources :orders,only:[:index,:show] do
       member do

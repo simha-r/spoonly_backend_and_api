@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151129133836) do
+ActiveRecord::Schema.define(version: 20151205123128) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,8 @@ ActiveRecord::Schema.define(version: 20151129133836) do
     t.string   "landmark"
     t.string   "address_details"
     t.boolean  "is_default",      default: false
+    t.decimal  "latitude"
+    t.decimal  "longitude"
   end
 
   create_table "authorizations", force: true do |t|
@@ -300,6 +302,7 @@ ActiveRecord::Schema.define(version: 20151129133836) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
 
   create_table "user_general_promotions", force: true do |t|
     t.integer  "user_id"
