@@ -12,7 +12,7 @@
         %th
           Formatted
         %th
-          Company
+          Location
         %th
           Lat,Long
     - @addresses.each do |address|
@@ -22,8 +22,9 @@
           = address.created_at.strftime("%l:%M %p, %a  %-d %b")
         %td
           = address.formatted
-        %td
-          = address.company
+        %td.view_location
+          - if address.latitude and address.longitude
+            = link_to 'View',"http://maps.google.com/maps?q=loc:#{address.latitude},#{address.longitude}",target: '_blank'
         %td
           = form_tag company_address_path(address),method: :put,remote: true do
             - value =  address.latitude ? "#{address.latitude},#{address}.longitude" : ''
