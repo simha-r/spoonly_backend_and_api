@@ -28,8 +28,8 @@
             = link_to 'View',"http://maps.google.com/maps?q=loc:#{address.latitude},#{address.longitude}",target: '_blank'
         %td
           = form_tag company_address_path(address),method: :put,remote: true do
-            - value =  address.latitude ? "#{address.latitude},#{address}.longitude" : ''
-            = text_field_tag 'latlong',"#{address.latitude},#{address.longitude}",class: "latlong"
+            - value =  address.latitude ? "#{address.latitude},#{address.longitude}" : ''
+            = text_field_tag 'latlong',value,class: "latlong"
             = submit_tag 'Update'
 
   .row
