@@ -123,6 +123,31 @@ class Company::OrdersController < Company::BaseController
   end
 
 
+  def map_view
+    @address = @order.address
+    if @address.has_location?
+
+      @delivery_executives = DeliveryExecutive.all.select do |d|
+        if (d.last_seen_delivery_executive_location)
+          if(d.last_seen_delivery_executive_location.last_seen > Time.now - 5.years)
+            distance = d.last_seen_delivery_executive_location.location.distance_from @address.latitude,@address.longitude
+            distance < 5
+          end
+        end
+
+      end
+
+      @delivery_hash = @delivery_executives.collect do |de|
+        if  de.last_seen_delivery_executive_location
+          [de.last_seen_delivery_executive_location.location.try(:latitude).try(:to_f),de.last_seen_delivery_executive_location.location.try(:longitude).try(:to_f),de.name,
+           de.last_seen_delivery_executive_location.last_seen.strftime("%l:%M %p, %a  %-d %b")]
+        end
+      end.select(&:present?)
+      @order_hash = [[@address.latitude.try(:to_f),@address.longitude.try(:to_f),@order.delivery_time_range,@order.user.name,@address.formatted]]
+      end
+  end
+
+
   private
 
   def order_params

@@ -1,0 +1,102 @@
+<div id ='order_info'>
+  <%- order = @order %>
+  <%- user = @order.user %>
+<%= " Order ##{order.id}, #{user.name[0..10]},#{user.profile.phone_number},
+#{order.delivery_time_range}.
+#{order.brief_line_items}"   %>
+
+</div>
+
+<%= title 'Order-Map View' %>
+<div id="map_canvas"></div>
+
+<script>
+  var map;
+  var global_markers = [];
+  var global_order_markers=[];
+
+  var markers = <%= raw @delivery_hash.to_json %>;
+  //  var markers = [[17.463409, 78.370650,'trialhead1'], [17.477327, 78.397043, 'trialhead2']];
+  var order_markers = <%= raw @order_hash.to_json %>;
+
+  var infowindow = new google.maps.InfoWindow({});
+
+  function initialize() {
+    geocoder = new google.maps.Geocoder();
+    var latlng = new google.maps.LatLng(order_markers[0][0], order_markers[0][1]);
+    var myOptions = {
+      zoom: 14,
+      center: latlng,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+    addMarker();
+    addOrderMarker();
+  }
+
+  function addMarker() {
+    for (var i = 0; i < markers.length; i++) {
+      // obtain the attribues of each marker
+      var lat = parseFloat(markers[i][0]);
+      var lng = parseFloat(markers[i][1]);
+      var person_name = markers[i][2];
+      var person_last_seen = markers[i][3];
+      var myLatlng = new google.maps.LatLng(lat, lng);
+
+      var contentString = "<html><body><div><p><h2>" + person_name + "</h2></p><p>Last Seen: " +
+          ""+person_last_seen+"</div></body></html>";
+
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: "Name: " + person_name,
+        label: person_name
+      });
+
+      marker['infowindow'] = contentString;
+
+      global_markers[i] = marker;
+
+      google.maps.event.addListener(global_markers[i], 'click', function() {
+        infowindow.setContent(this['infowindow']);
+        infowindow.open(map, this);
+      });
+    }
+  }
+
+
+  function addOrderMarker() {
+    for (var i = 0; i < order_markers.length; i++) {
+      // obtain the attribues of each marker
+      var lat = parseFloat(order_markers[i][0]);
+      var lng = parseFloat(order_markers[i][1]);
+      var person_name = order_markers[i][3];
+      var delivery_time_range = order_markers[i][2];
+      var order_address = order_markers[i][4];
+      var myLatlng = new google.maps.LatLng(lat, lng);
+
+      var contentString = "<html><body><div><p><h4>" + person_name + "</h4></p><p>Delivery: " +
+          ""+delivery_time_range+"</p><p>Addr: "+order_address+"</p></div></body></html>";
+
+      var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: "ORDER Location",
+        icon: '/burger.png'
+
+      });
+
+      marker['infowindow'] = contentString;
+
+      global_order_markers[i] = marker;
+
+      google.maps.event.addListener(global_order_markers[i], 'click', function() {
+        infowindow.setContent(this['infowindow']);
+        infowindow.open(map, this);
+      });
+    }
+  }
+
+
+  $(function(){initialize();})
+</script>

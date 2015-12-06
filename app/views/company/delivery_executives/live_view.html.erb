@@ -41,7 +41,8 @@
       var marker = new google.maps.Marker({
         position: myLatlng,
         map: map,
-        title: "Coordinates: " + lat + " , " + lng + " | Trailhead name: " + person_name
+        title: "Coordinates: " + lat + " , " + lng + " | Trailhead name: " + person_name,
+        label: person_name
       });
 
       marker['infowindow'] = contentString;

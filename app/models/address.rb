@@ -119,5 +119,9 @@ class Address < ActiveRecord::Base
     address
   end
 
+  def has_location?
+    latitude.present? and longitude.present?
+  end
+
 
 end
