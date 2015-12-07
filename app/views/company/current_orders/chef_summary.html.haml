@@ -21,6 +21,18 @@
     .col-xs-1
     .col-xs-6
       %h3 NON-VEG
+  .col-xs-2
+    - total_orders=@orders.where.not(state: 'cancelled')
+    - total_line_items = LineItem.where(order: total_orders)
+
+    .col-xs-5
+      %h3
+        VEG
+        = total_line_items.select(&:vegetarian).sum(&:quantity)
+    .col-xs-5
+      %h3
+        NonVEG
+        = total_line_items.reject(&:vegetarian).sum(&:quantity)
 
 - today = Date.today
 - MenuProduct.show_all_lunch_times.each do |hour,range|
