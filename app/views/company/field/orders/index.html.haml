@@ -44,10 +44,10 @@
             %br
               %br
             &emsp;
-            = link_to 'Reject',reject_company_field_order_path(order),method: :put,confirm: 'Do you want to REJECT this order ?'
+            = link_to 'Reject',reject_company_field_order_path(order),method: :put,data: {confirm: 'Do you want to REJECT this order ?'}
           - else
             - if order.dispatched?
-              = link_to 'Mark Delivered!',mark_delivered_company_field_order_path(order),method: :put,class: 'btn btn-primary',confirm: 'Mark order as delivered ?'
+              = link_to 'Mark Delivered!',mark_delivered_company_field_order_path(order),method: :put,class: 'btn btn-primary',data:{confirm: "Mark order #{order.id},#{order.user.name} as delivered ?"}
             - else
               = order.state.upcase
   - else
