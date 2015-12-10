@@ -4,7 +4,7 @@
 #
 #  id             :integer          not null, primary key
 #  overall_rating :integer
-#  comment        :string(255)
+#  comment        :text
 #  user_id        :integer
 #  created_at     :datetime
 #  updated_at     :datetime

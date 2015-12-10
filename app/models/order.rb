@@ -15,6 +15,7 @@
 #  dispatched_at         :datetime
 #  delivered_at          :datetime
 #  feedback_asked        :boolean          default(FALSE)
+#  delivery_fee          :float
 #
 
 class Order < ActiveRecord::Base

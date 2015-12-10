@@ -14,6 +14,8 @@
 #  landmark        :string(255)
 #  address_details :string(255)
 #  is_default      :boolean          default(FALSE)
+#  latitude        :decimal(, )
+#  longitude       :decimal(, )
 #
 
 class Address < ActiveRecord::Base

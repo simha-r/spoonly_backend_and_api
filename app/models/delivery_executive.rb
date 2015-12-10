@@ -8,6 +8,7 @@
 #  created_at   :datetime
 #  updated_at   :datetime
 #  state        :string(255)
+#  email        :string(255)
 #
 
 class DeliveryExecutive < ActiveRecord::Base

@@ -2,11 +2,12 @@
 #
 # Table name: locations
 #
-#  id         :integer          not null, primary key
-#  latitude   :decimal(10, 6)
-#  longitude  :decimal(10, 6)
-#  created_at :datetime
-#  updated_at :datetime
+#  id            :integer          not null, primary key
+#  latitude      :decimal(10, 6)
+#  longitude     :decimal(10, 6)
+#  created_at    :datetime
+#  updated_at    :datetime
+#  location_type :string(255)
 #
 
 class Location < ActiveRecord::Base

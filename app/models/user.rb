@@ -22,6 +22,7 @@
 #  authentication_token   :string(255)
 #  referral_code          :string(255)
 #  device_id              :string(255)
+#  promo_code_shown       :boolean
 #
 
 class User < ActiveRecord::Base

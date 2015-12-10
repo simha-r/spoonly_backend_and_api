@@ -2,11 +2,12 @@
 #
 # Table name: growth_partners
 #
-#  id           :integer          not null, primary key
-#  name         :string(255)
-#  phone_number :string(255)
-#  created_at   :datetime
-#  updated_at   :datetime
+#  id                :integer          not null, primary key
+#  name              :string(255)
+#  phone_number      :string(255)
+#  created_at        :datetime
+#  updated_at        :datetime
+#  commission_amount :float
 #
 
 class GrowthPartner < ActiveRecord::Base
