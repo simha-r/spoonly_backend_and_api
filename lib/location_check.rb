@@ -4,6 +4,14 @@ module LocationCheck
     @@serving_region ||= Rails.application.config.serving_region
   end
 
+  def self.lunch_serving_region
+    @@lunch_serving_region ||= Rails.application.config.lunch_serving_region
+  end
+
+  def self.dinner_serving_region
+    @@dinner_serving_region ||= Rails.application.config.dinner_serving_region
+  end
+
   def check_location
     proceed = false
     if cookies[:customer]
@@ -20,6 +28,14 @@ module LocationCheck
 
   def self.in_range? lat,long
     serving_region.contains_point? long.to_f,lat.to_f
+  end
+
+  def self.in_lunch_range? lat,long
+    lunch_serving_region.contains_point? long.to_f,lat.to_f
+  end
+
+  def self.in_dinner_range? lat,long
+    dinner_serving_region.contains_point? long.to_f,lat.to_f
   end
 
   def proceed_to_main_if_old_user
