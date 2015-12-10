@@ -16,6 +16,8 @@
 #  is_default      :boolean          default(FALSE)
 #  latitude        :decimal(, )
 #  longitude       :decimal(, )
+#  serving_lunch   :boolean
+#  serving_dinner  :boolean
 #
 
 class Address < ActiveRecord::Base
@@ -48,7 +50,7 @@ class Address < ActiveRecord::Base
 
   validates :address_type, presence: true, inclusion: {in: ['home', 'office']}
 
-
+  before_save :set_serving_categories
   before_save :make_default_if_initial
   before_save :undefault_other_addresses, :if => Proc.new { |address| address.is_default }
 
@@ -82,7 +84,7 @@ class Address < ActiveRecord::Base
 
   def serializable_hash(options={})
     options ||={}
-    options[:except] ||= [:user_id, :updated_at, :created_at,]
+    options[:except] ||= [:user_id, :updated_at, :created_at]
     super
   end
 
@@ -123,6 +125,22 @@ class Address < ActiveRecord::Base
 
   def has_location?
     latitude.present? and longitude.present?
+  end
+
+  def set_serving_categories
+    if latitude.present? and longitude.present?
+      if LocationCheck.in_lunch_range? latitude,longitude
+        self.serving_lunch = true
+      end
+      if LocationCheck.in_dinner_range? latitude,longitude
+        self.serving_dinner = true
+      end
+    end
+  end
+
+  def set_serving_categories!
+    set_serving_categories
+    save
   end
 
 
