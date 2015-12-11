@@ -128,7 +128,7 @@ class Address < ActiveRecord::Base
   end
 
   def set_serving_categories
-    if latitude.present? and longitude.present?
+    if has_location?
       if LocationCheck.in_lunch_range? latitude,longitude
         self.serving_lunch = true
       end

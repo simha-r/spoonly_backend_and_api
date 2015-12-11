@@ -34,7 +34,9 @@ class Api::V1::AddressesController < Api::V1::BaseController
   private
 
   def address_params
-     params.permit(:company,:floor,:building,:address,:flat,:address_details,:landmark,:address_type,:is_default)
+     params[:latitude] = params[:lat] if params[:lat].present?
+     params[:longitude] = params[:long] if params[:long].present?
+     params.permit(:company,:floor,:building,:address,:flat,:address_details,:landmark,:address_type,:is_default,:latitude,:longitude)
   end
 
   def set_address
