@@ -30,6 +30,9 @@
           = link_to 'CALL',"tel:#{user.profile.phone_number}",class: 'btn-primary btn btn-sm'
           %br
           = "#{order.address.formatted}."
+          - if order.address.has_location?
+            %a{"href"=>"geo?q=#{order.address.latitude},#{order.address.longitude}"}
+              Map
           %br
           %b= "#{order.formatted_delivery_time.split(' ')[0]+" "+order.formatted_delivery_time.split(' ')[1]}"
           %br
