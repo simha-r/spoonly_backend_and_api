@@ -31,8 +31,7 @@
           %br
           = "#{order.address.formatted}."
           - if order.address.has_location?
-            %a{"href"=>"geo?q=#{order.address.latitude},#{order.address.longitude}"}
-              Map
+            = link_to "Map","geo:?q=#{order.address.latitude},#{order.address.longitude}"
           %br
           %b= "#{order.formatted_delivery_time.split(' ')[0]+" "+order.formatted_delivery_time.split(' ')[1]}"
           %br
