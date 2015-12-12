@@ -45,9 +45,11 @@ class MenuProduct < ActiveRecord::Base
 
   def self.show_lunch_times
     todays_menu = Menu.where(menu_date: Date.current).first
-    if Time.now< todays_menu.lunch_order_end_time
-      t = Time.now
 
+    if Time.now< todays_menu.lunch_start_time
+      lunch_times = LUNCH_TIMES
+    elsif Time.now< todays_menu.lunch_order_end_time
+      t = Time.now
       lunch_times = LUNCH_TIMES.reject do |lunch_time,lunch_range|
         t.strftime("%H%M") > lunch_time
       end
