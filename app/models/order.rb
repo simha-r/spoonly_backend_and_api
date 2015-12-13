@@ -25,6 +25,7 @@ class Order < ActiveRecord::Base
   has_many :line_items
   belongs_to :address
   belongs_to :user
+  counter_culture :user
   has_one :profile,through: :user
   belongs_to :delivery_executive
   has_one :debit

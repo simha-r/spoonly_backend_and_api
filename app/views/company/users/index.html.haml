@@ -19,7 +19,11 @@
         %th
           Phone
         %th
-          No. of Orders
+          - if (params['sort_by'] !='orders') || params['order'] !='asc'
+            = link_to 'No. of Orders-Asc',company_users_path(sort_by: 'orders',order: 'asc')
+          - else
+            = link_to 'No. of Orders-Desc',company_users_path(sort_by: 'orders',order: 'desc')
+
         %th
           Wallet Money
         %th
@@ -44,7 +48,7 @@
           = user.phone_number
         %td
           - if user.orders.present?
-            = user.orders.count
+            = user.orders_count
         %td
           = user.wallet.balance
         %td

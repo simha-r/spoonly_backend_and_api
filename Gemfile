@@ -51,6 +51,7 @@ gem 'cloudinary'
 gem 'telerivet'
 gem 'geokit-rails'
 gem 'heroku-api'
+gem 'counter_culture'
 
 
 group :development do
