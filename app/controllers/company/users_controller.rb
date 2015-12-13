@@ -16,6 +16,12 @@ class Company::UsersController < Company::BaseController
           else
             @users = User.order(orders_count: :desc)
           end
+        when 'referrals'
+          if params['referrals']=='asc'
+            @users = User.order(referrals_count: :asc)
+          else
+            @users = User.order(referrals_count: :desc)
+          end
         else
           @users = User.order(created_at: :desc)
       end

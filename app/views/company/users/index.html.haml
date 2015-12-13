@@ -13,35 +13,38 @@
         %th
           Joined on
         %th
-          User #
-        %th
           Name,Email
         %th
           Phone
         %th
           - if (params['sort_by'] !='orders') || params['order'] !='asc'
-            = link_to 'No. of Orders-Asc',company_users_path(sort_by: 'orders',order: 'asc')
+            = link_to 'No. of Orders-Desc',company_users_path(sort_by: 'orders',order: 'asc')
           - else
-            = link_to 'No. of Orders-Desc',company_users_path(sort_by: 'orders',order: 'desc')
+            = link_to 'No. of Orders-Asc',company_users_path(sort_by: 'orders',order: 'desc')
 
         %th
           Wallet Money
         %th
-          Has Referred
+          - if (params['sort_by'] !='referrals') || params['order'] !='asc'
+            = link_to 'Has Referred-Desc',company_users_path(sort_by: 'referrals',order: 'asc')
+          - else
+            = link_to 'Has Referred-Asc',company_users_path(sort_by: 'referrals',order: 'desc')
+
         %th
           Referrer
         %th
           Device Id
         %th
           Feedbacks
+        %th
+          Card Transactions
     - @users.each do |user|
       %tr
         %td
           = user.created_at.strftime("%l:%M %p, %a  %-d %b")
         %td
-          = link_to user.id,[:company,user]
-        %td
-          = user.name
+          = "##{user.id}"
+          = link_to user.name,[:company,user]
           %br
           = user.email
         %td
@@ -52,7 +55,7 @@
         %td
           = user.wallet.balance
         %td
-          = user.referred_users.count
+          = user.referrals_count
         %td
           - if user.referrer_user
             = link_to user.referrer_user.name,[:company,user.referrer_user]

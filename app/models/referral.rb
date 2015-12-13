@@ -14,6 +14,8 @@ class Referral < ActiveRecord::Base
   belongs_to :referrer,class_name: 'User'
   belongs_to :referred,class_name: 'User'
 
+  counter_culture :referrer
+
   after_create :apply_referred_promotion
 
 
