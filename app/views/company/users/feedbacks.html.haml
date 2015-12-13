@@ -1,0 +1,32 @@
+= title "#{@user.profile.name}- Feedbacks"
+= link_to @user.name,[:company,@user]
+%br
+= @user.email
+= @user.phone_number
+%br
+No. of Orders:
+= @user.orders_count
+- if @feedbacks.present?
+
+  %table.table
+    %thead
+      %tr
+        %th
+          Time
+        %th
+          Rating
+        %th
+          Comment
+    - @feedbacks.each do |feedback|
+      %tr
+        %td
+          = feedback.created_at.strftime("%l:%M %p, %a  %-d %b")
+        %td
+          = feedback.overall_rating
+        %td
+          = feedback.comment
+
+- else
+  %h3 No Feedbacks present
+
+

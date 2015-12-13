@@ -7,10 +7,24 @@ class Company::UsersController < Company::BaseController
     @search_term = params[:search_term]
     if @search_term.present?
       wildcard_search = "%#{@search_term}%"
-      @users = User.where("email iLIKE ?", wildcard_search).includes(:profile,:referrals,:wallet).paginate page: params[:page]
+      @users = User.where("email iLIKE ?", wildcard_search)
     else
-      @users = User.order(created_at: :desc).includes(:profile,:referrals,:wallet).paginate page: params[:page]
+      case params['sort_by']
+        when 'orders'
+          if params['order']=='asc'
+            @users = User.order(orders_count: :asc)
+          else
+            @users = User.order(orders_count: :desc)
+          end
+        else
+          @users = User.order(created_at: :desc)
+      end
     end
+    @users  = @users.includes(:profile,:referrals,:wallet).paginate page: params[:page]
+  end
+
+  def feedbacks
+    @feedbacks = @user.feedbacks
   end
 
   def show

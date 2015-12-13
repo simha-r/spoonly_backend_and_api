@@ -57,12 +57,12 @@
           - if user.referrer_user
             = link_to user.referrer_user.name,[:company,user.referrer_user]
         %td
-          = user.device_id
+          = user.device_id || "-"
         %td
           - if user.feedbacks.present?
-            = link_to 'View',''
+            = link_to "View #{user.feedbacks.count}",feedbacks_company_user_path(user)
           - else
-            = link_to 'No Feedback',''
+            \-
 
   .row
     = will_paginate @users
