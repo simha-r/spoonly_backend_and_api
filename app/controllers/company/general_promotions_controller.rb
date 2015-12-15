@@ -19,6 +19,7 @@ class Company::GeneralPromotionsController < Company::BaseController
     general_promotion = GeneralPromotion.active.find params[:id]
     if(general_promotion && general_promotion.apply_for(user))
       user.notify_general_promotion general_promotion
+      UserMessenger.delay.notify_promotion user, general_promotion
       redirect_to request.referrer, notice: 'Promotion has been applied'
     else
       redirect_to request.referrer, alert: 'Promotion has failed to apply'
