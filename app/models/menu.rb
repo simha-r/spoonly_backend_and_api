@@ -62,7 +62,7 @@ class Menu < ActiveRecord::Base
 
     products: menu_lunch_products.includes(:product).collect{|menu_product| menu_product.product.as_json.merge(menu_product_id: menu_product.id,sold_out: menu_product.sold_out)}}
     hash = {notice: 'No Products available today'} if !menu_lunch_products.present?
-    hash[:referral_text] = "<html><body>Earn Free Meals<br />Give &#8377 50, Get &#8377 50</body></html>"
+    hash[:referral_text] = "<html><body>Earn Free Meals<br />Give &#8377 40, Get &#8377 40</body></html>"
     hash[:timings]=["12:00 PM - 12:30 PM","12:30 PM - 01:00 PM","01:00 PM - 01:30 PM","01:30 PM - 02:00 PM",
                     "02:00 PM - 02:30 PM","02:30 PM - 03:00 PM","03:00 PM - 03:30 PM"]
     hash[:buffer_time]=ENV['BUFFER_TIME'].to_i
@@ -73,7 +73,7 @@ class Menu < ActiveRecord::Base
     hash = {start_time: dinner_start_time, end_time: dinner_end_time,end_order_time: dinner_order_end_time,
                      products: menu_dinner_products.includes(:product).collect{|menu_product| menu_product.product.as_json.merge(menu_product_id: menu_product.id,sold_out: menu_product.sold_out)}}
     hash = {notice: 'No Products available today'} if !menu_dinner_products.present?
-    hash[:referral_text] = "<html><body>Earn Free Meals<br />Give &#8377 50, Get &#8377 50</body></html>"
+    hash[:referral_text] = "<html><body>Earn Free Meals<br />Give &#8377 40, Get &#8377 40</body></html>"
     hash[:timings]=["07:00 PM - 07:30 PM","07:30 PM - 08:00 PM","08:00 PM - 08:30 PM","08:30 PM - 09:00 PM",
                     "09:00 PM - 09:30 PM","09:30 PM - 10:00 PM","10:00 PM - 10:30 PM"]
     hash[:buffer_time]=ENV['BUFFER_TIME'].to_i
