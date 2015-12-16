@@ -59,7 +59,7 @@ class Company::DeliveryExecutivesController < Company::BaseController
   end
 
   def live_view
-    @delivery_executives =DeliveryExecutive.all
+    @delivery_executives =DeliveryExecutive.active
     @delivery_hash = @delivery_executives.collect do |de|
       if  de.last_seen_delivery_executive_location
         [de.last_seen_delivery_executive_location.location.try(:latitude).try(:to_f),de.last_seen_delivery_executive_location.location.try(:longitude).try(:to_f),de.name,
