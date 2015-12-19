@@ -24,6 +24,7 @@
       urls: ["#{asset_path('company/field_order.mp3')}"],
       loop: true
     }).play();
+    window.navigator.vibrate([200,100,200])
 
     $('#new_order_alert').show()
       //sound.stop();
