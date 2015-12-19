@@ -24,7 +24,7 @@
       urls: ["#{asset_path('company/field_order.mp3')}"],
       loop: true
     }).play();
-    window.navigator.vibrate([200,100,200])
+    window.navigator.vibrate([200,300,300])
 
     $('#new_order_alert').show()
       //sound.stop();
@@ -48,7 +48,7 @@
           //sound.stop();
          $('#withdrawn_request_modal').find('#order_data').html(data['info'])
          $('#withdrawn_request_modal').show();
-         window.navigator.vibrate([200,100,200])
+         window.navigator.vibrate([200,300,300])
 
 
         });
@@ -61,7 +61,7 @@
          urls: ["#{asset_path('company/field_order.mp3')}"],
          loop: true
        }).play();
-       window.navigator.vibrate([200,100,200])
+       window.navigator.vibrate([200,300,300])
 
         $('#test_device_modal').show();
 
