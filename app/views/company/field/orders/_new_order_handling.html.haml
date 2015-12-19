@@ -33,7 +33,7 @@
     });
 
 
-    //Bind to cwithdraw_requests
+    //Bind to withdraw_requests
         channel.bind("withdraw_request_from_#{@delivery_executive.id}", function(data) {
 
 
@@ -48,6 +48,8 @@
           //sound.stop();
          $('#withdrawn_request_modal').find('#order_data').html(data['info'])
          $('#withdrawn_request_modal').show();
+         window.navigator.vibrate([200,100,200])
+
 
         });
 
@@ -59,6 +61,8 @@
          urls: ["#{asset_path('company/field_order.mp3')}"],
          loop: true
        }).play();
+       window.navigator.vibrate([200,100,200])
+
         $('#test_device_modal').show();
 
        });
