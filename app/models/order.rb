@@ -113,7 +113,7 @@ class Order < ActiveRecord::Base
   end
 
   def cash_to_pay
-    prepaid_amount > 0 ?  (total_price - prepaid_amount) : total_price
+    prepaid_amount > 0 ?  (grand_total - prepaid_amount) : grand_total
   end
 
   def self.total_cash_to_pay orders
@@ -208,6 +208,10 @@ class Order < ActiveRecord::Base
     total
   end
 
+  def grand_total
+    total_price + delivery_fee.to_i
+  end
+
   def is_first?
     user.orders.delivered.order(:created_at).first == self 
   end
@@ -226,7 +230,7 @@ class Order < ActiveRecord::Base
   def serializable_hash(options={})
     options ||={}
     options[:except] ||= [:user_id,:updated_at,:delivery_executive_id,:address_id]
-    options[:methods] = [:cash_to_pay,:prepaid_amount,:total_price,:delivery_time_range,:items_count]
+    options[:methods] = [:cash_to_pay,:prepaid_amount,:total_price,:delivery_time_range,:items_count,:grand_total]
     if options[:details]
       options[:include] = [:line_items,:address]
     end
