@@ -9,14 +9,14 @@ class Api::V1::OrdersController < Api::V1::BaseController
   # POST /api/orders.json
   def create
     @order = current_user.orders.create! order_params
-    if @order.needs_delivery_fee?
-      @order.update_attributes(delivery_fee: Order::DELIVERY_FEE)
-    end
     params[:line_item].each do |li|
       menu_product = MenuProduct.find custom_line_item_params(li)['menu_product_id']
       # Slowly change it to menu_product.price...as that is the price that gets recorded
       new_params = custom_line_item_params(li).merge({price: menu_product.product.price})
       @order.line_items.create!(new_params)
+    end
+    if @order.needs_delivery_fee?
+      @order.update_attributes(delivery_fee: Order::DELIVERY_FEE)
     end
     @order.start_process!
     render json: @order
