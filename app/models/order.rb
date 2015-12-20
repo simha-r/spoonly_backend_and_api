@@ -30,6 +30,9 @@ class Order < ActiveRecord::Base
   belongs_to :delivery_executive
   has_one :debit
 
+  DELIVERY_FEE = 10
+  MIN_TOTAL_FOR_FREE_DELIVERY = 80
+
   validates_presence_of :address_id, :user_id, :delivery_time, :category
   validates_presence_of :category, in: MenuProduct::CATEGORIES
 
@@ -355,6 +358,10 @@ class Order < ActiveRecord::Base
 
   def self.in_dispatch_process
     where(state: ['informed_delivery_guy','dispatched']).today
+  end
+
+  def needs_delivery_fee?
+    total_price < Order::MIN_TOTAL_FOR_FREE_DELIVERY
   end
 
   private

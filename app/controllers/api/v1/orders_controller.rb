@@ -9,6 +9,9 @@ class Api::V1::OrdersController < Api::V1::BaseController
   # POST /api/orders.json
   def create
     @order = current_user.orders.create! order_params
+    if @order.needs_delivery_fee?
+      @order.update_attribute(delivery_fee: Order::DELIVERY_FEE)
+    end
     params[:line_item].each do |li|
       menu_product = MenuProduct.find custom_line_item_params(li)['menu_product_id']
       # Slowly change it to menu_product.price...as that is the price that gets recorded
@@ -47,7 +50,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
         # When u add item to menu...and later change product price...it doesnt get reflected in menu_product price..and it shouldnt..so have a menu to edit the menu product price after a menu priduct has been created
         item_total = item_total + menu_product.product.price*quantity
       end
-      delivery_fee = (item_total < 150) ? 10 : 0
+      delivery_fee = (item_total < Order::MIN_TOTAL_FOR_FREE_DELIVERY) ? Order::DELIVERY_FEE : 0
       bill_total = item_total + delivery_fee
       grand_total = bill_total
 
