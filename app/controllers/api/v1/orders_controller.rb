@@ -10,7 +10,7 @@ class Api::V1::OrdersController < Api::V1::BaseController
   def create
     @order = current_user.orders.create! order_params
     if @order.needs_delivery_fee?
-      @order.update_attribute(delivery_fee: Order::DELIVERY_FEE)
+      @order.update_attributes(delivery_fee: Order::DELIVERY_FEE)
     end
     params[:line_item].each do |li|
       menu_product = MenuProduct.find custom_line_item_params(li)['menu_product_id']
