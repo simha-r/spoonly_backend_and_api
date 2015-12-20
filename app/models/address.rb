@@ -89,8 +89,8 @@ class Address < ActiveRecord::Base
   end
 
   def formatted
+    address= ""
     if address_type=='home'
-      address= ""
       if flat.present?
         address=address + " Flat: #{flat},"
       end
@@ -106,7 +106,9 @@ class Address < ActiveRecord::Base
         address=address + ",#{landmark}"
       end
     else
-      address = "#{company},"
+      if company.present?
+        address = address +"#{company},"
+      end
       if floor.present?
         address=address + " Fl: #{floor},"
       end

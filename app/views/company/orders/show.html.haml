@@ -1,80 +1,81 @@
 %h3= "Order ##{@order.id}"
-%table.table
-  %thead
-    %tr
-      %th
-        User Details:
-      %th
-        Delivery Time
-      - if @order.dispatched?
-        %th
-          Dispatched At
-      - if @order.delivered?
-        %th
-          Delivered At
-      %th
-        State
-  %tr
-    %td
+.row
+  .col-xs-9
+    .col-xs-4
+      %b User Details:
+    .col-xs-3
+      %b Delivery Time
+    - if @order.dispatched?
+      .col-xs-3
+        %b Dispatched At
+    - if @order.delivered?
+      .col-xs-3
+        %b Delivered At
+    .col-xs-2
+      %b State
+.row
+  .col-xs-9
+    .col-xs-4
       - if current_company_user.has_role? :admin
         = link_to @order.user.name,[:company,@order.user]
       - else
         = @order.user.name
-
       %br
       Ph:
       = @order.user.profile.phone_number
       %br
       = @order.address.formatted
-    %td
+    .col-xs-3
       = @order.formatted_delivery_time
     - if @order.dispatched?
-      %td
-        = @order.dispatched_at
+      .col-xs-3
+        = @order.dispatched_at.strftime("%l:%M %p")
     - if @order.delivered?
-      %td
+      .col-xs-3
         = @order.formatted_delivery_time
-    %td
+    .col-xs-2
       = @order.state.upcase
 
 
-%h3 Items
-%table.table
-  %thead
-    %tr
-      %th
-        Item
-      %th
-        Quantity
-      %th
-        Photo
+%h4 Items
+.row-fluid
+  .col-xs-8
+    .col-xs-3
+      %b Item
+    .col-xs-3
+      %b Quantity
+  .col-xs-4
 
-  - @order.line_items.includes(:menu_product).includes(:product).each do |li|
-    %tr
-      %td
+- @order.line_items.includes(:menu_product).includes(:product).each do |li|
+  .row-fluid
+    .col-xs-8
+      .col-xs-3
         = li.product.name
-      %td
+      .col-xs-3
         = li.quantity
+%br
+  %br
 %h4
   BILL:
 .row
   .col-xs-1
-  .col-xs-1
-    Total Amount
-    %br
-    %b= "#{@order.total_price} "
-  .col-xs-1
-    = "-"
-  .col-xs-1
-    Prepaid Amount
-    %br
-    %b="#{@order.prepaid_amount}"
-  .col-xs-1
-    = "="
-  .col-xs-1
-    Due
-    %br Amount
-    %b="#{@order.cash_to_pay}"
+  .col-xs-6
+    .col-xs-1
+      Total Amount
+      %br
+      %b= "#{@order.total_price} "
+    .col-xs-1
+      = "-"
+    .col-xs-1
+      Prepaid Amount
+      %br
+      %b="#{@order.prepaid_amount}"
+    .col-xs-1
+      = "="
+    .col-xs-1
+      Due
+      %br Amount
+      %b="#{@order.cash_to_pay}"
 
 %br
   %br
@@ -84,7 +85,7 @@
 - if @order.acknowledged?
   = form_for [:assign,:company,@order],method: :put do |f|
     = f.collection_select :delivery_executive_id,DeliveryExecutive.all,:id,:name
-    = f.submit 'Dispatch'
+    = f.submit 'Dispatch',class: 'btn btn-primary'
 - if @order.dispatched?
   Dispatched through:
   %b= @order.delivery_executive.try &:name
@@ -93,7 +94,7 @@
   Reassign order ?
   = form_for [:assign,:company,@order],method: :put do |f|
     = f.collection_select :delivery_executive_id,DeliveryExecutive.all,:id,:name
-    = f.submit 'Redispatch',data: {confirm: 'Are you sure ? Do you want to reassign this order ?'}
+    = f.submit 'Redispatch',class: 'btn btn-danger',data: {confirm: 'Are you sure ? Do you want to reassign this order ?'}
 
 %br
   %br
@@ -108,8 +109,5 @@
     %br
 
 = link_to 'Back to Current Orders',[:company,:current_orders],class: 'btn btn-primary'
-%br
-  %br
-= link_to 'Back to All Orders',[:company,:orders]
 
 
