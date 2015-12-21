@@ -137,6 +137,9 @@ class Address < ActiveRecord::Base
       if LocationCheck.in_dinner_range? latitude,longitude
         self.serving_dinner = true
       end
+    else
+      self.serving_lunch = true
+      self.serving_dinner = true
     end
   end
 
