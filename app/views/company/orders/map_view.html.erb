@@ -1,9 +1,26 @@
-<div id ='order_info'>
+<div id ='order_info' class='row'>
   <%- order = @order %>
-  <%- user = @order.user %>
-<%= " Order ##{order.id}, #{user.name[0..10]},#{user.profile.phone_number},
-#{order.delivery_time_range}.
-#{order.brief_line_items}"   %>
+  <div class="col-xs-4">
+    <%- user = @order.user %>
+    <%= " Order ##{order.id}, #{user.name[0..10]},#{user.profile.phone_number},
+    #{order.delivery_time_range}.
+    #{order.brief_line_items}"   %>
+  </div>
+  <%- if order.dispatched? || order.delivered? %>
+    <div class="'col-xs-2">
+      Dispatched through:
+      <b>
+        <%= order.delivery_executive.name %>
+      </b>
+
+    </div>
+  <%- else %>
+    <div class="'col-xs-2">
+      <b>
+        <%= order.state %>
+      </b>
+    </div>
+  <%- end %>
 
 </div>
 
@@ -41,21 +58,33 @@
       var lng = parseFloat(markers[i][1]);
       var person_name = markers[i][2];
       var person_last_seen = markers[i][3];
+      var is_selected_delivery_exec = markers[i][4];
       var myLatlng = new google.maps.LatLng(lat, lng);
 
       var contentString = "<html><body><div><p><h2>" + person_name + "</h2></p><p>Last Seen: " +
           ""+person_last_seen+"</div></body></html>";
 
-      var marker = new google.maps.Marker({
-        position: myLatlng,
-        map: map,
-        title: "Name: " + person_name,
-        label: person_name
-      });
+      if(is_selected_delivery_exec){
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: "Name: " + person_name,
+          label: person_name,
+          icon: '/waiter.png'
+        });
+      }else{
 
+        var marker = new google.maps.Marker({
+          position: myLatlng,
+          map: map,
+          title: "Name: " + person_name,
+          label: person_name
+        });
+
+      }
       marker['infowindow'] = contentString;
-
       global_markers[i] = marker;
+
 
       google.maps.event.addListener(global_markers[i], 'click', function() {
         infowindow.setContent(this['infowindow']);
