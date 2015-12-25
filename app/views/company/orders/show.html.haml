@@ -32,7 +32,7 @@
         = @order.dispatched_at.strftime("%l:%M %p")
     - if @order.delivered?
       .col-xs-3
-        = @order.formatted_delivery_time
+        = @order.delivered_at.strftime("%l:%M %p")
     .col-xs-2
       = @order.state.upcase
 

@@ -30,6 +30,11 @@
     Profile links:
     - @user.authorizations.each do |a|
       = link_to a.provider, a.profile_url
+    %br
+    - if @user.feedbacks.present?
+      = link_to "#{@user.feedbacks.count} feedbacks",feedbacks_company_user_path(@user)
+    - else
+      \-
   .col-xs-5
     .row
       .col-xs-1
