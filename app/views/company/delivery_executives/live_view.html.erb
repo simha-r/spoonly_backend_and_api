@@ -46,6 +46,8 @@
       var myLatlng = new google.maps.LatLng(lat, lng);
       var delivery_executive_id = markers[i][4];
 
+      console.log(person_name);
+
       var contentString = "<html><body><div><p><h2>" + person_name + "</h2></p><p>Last Seen: " +
           ""+person_last_seen+"</div></body></html>";
 
@@ -58,19 +60,18 @@
         labelContent: person_name,
         labelAnchor: new google.maps.Point(22, 30),
         labelClass: "labels", // the CSS class for the label
-        labelStyle: {opacity: 0.78}
+        labelStyle: {opacity: 0.78},
+        infowindow: contentString
       });
-
-      marker['infowindow'] = contentString;
 
       global_markers[delivery_executive_id] = marker;
 
       google.maps.event.addListener(global_markers[delivery_executive_id], 'mouseover', function() {
+
         infowindow.setContent(this['infowindow']);
         infowindow.open(map, this);
       });
       google.maps.event.addListener(global_markers[delivery_executive_id], 'mouseout', function() {
-        infowindow.setContent(this['infowindow']);
         infowindow.close(map, this);
       });
     }
