@@ -52,6 +52,12 @@ class DeliveryExecutive < ActiveRecord::Base
     last_location = locations.last
     if(!last_location || (last_location.distance_from(lat.to_f,long.to_f) > 0.2))
       location= Location.create(latitude: lat.to_f,longitude: long.to_f,location_type: 'delivery_guy')
+      Pusher['delivery_executive'].trigger('location_update', {
+        message: 'Location has been updated',
+        latitude: location.latitude.to_f,
+        longitude: location.longitude.to_f,
+        delivery_executive_id: self.id
+      })
     else
       location = last_location
     end

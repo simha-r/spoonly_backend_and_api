@@ -4,9 +4,18 @@
   <%= title 'Live View-DeliveryExecutives' %>
 <% end %>
 <div id="map_canvas"></div>
+<!-- SlidingMarker hides details from you - your markers are just animated automagically -->
+<script type="text/javascript" src="../../../../SlidingMarker.js"></script>
+<script>
+  SlidingMarker.initializeGlobally();
+</script>
+<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
+<!-- we use markerAnimate to actually animate marker -->
+<script src="../../../../markerAnimate.js"></script>
+
 <script>
   var map;
-  var global_markers = [];
+  var global_markers = {};
 
   var markers = <%= raw @delivery_hash.to_json %>;
 //  var markers = [[17.463409, 78.370650,'trialhead1'], [17.477327, 78.397043, 'trialhead2']];
@@ -24,6 +33,7 @@
     }
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     addMarker();
+    listenForUpdates();
   }
 
   function addMarker() {
@@ -34,27 +44,59 @@
       var person_name = markers[i][2];
       var person_last_seen = markers[i][3];
       var myLatlng = new google.maps.LatLng(lat, lng);
+      var delivery_executive_id = markers[i][4];
 
       var contentString = "<html><body><div><p><h2>" + person_name + "</h2></p><p>Last Seen: " +
           ""+person_last_seen+"</div></body></html>";
 
-      var marker = new google.maps.Marker({
+      var marker = new MarkerWithLabel({
         position: myLatlng,
         map: map,
+        duration: 1000,
+        easing: 'linear',
         title: "Coordinates: " + lat + " , " + lng + " | Trailhead name: " + person_name,
-        label: person_name
+        labelContent: person_name,
+        labelAnchor: new google.maps.Point(22, 30),
+        labelClass: "labels", // the CSS class for the label
+        labelStyle: {opacity: 0.78}
       });
 
       marker['infowindow'] = contentString;
 
-      global_markers[i] = marker;
+      global_markers[delivery_executive_id] = marker;
 
-      google.maps.event.addListener(global_markers[i], 'click', function() {
+      google.maps.event.addListener(global_markers[delivery_executive_id], 'mouseover', function() {
         infowindow.setContent(this['infowindow']);
         infowindow.open(map, this);
       });
+      google.maps.event.addListener(global_markers[delivery_executive_id], 'mouseout', function() {
+        infowindow.setContent(this['infowindow']);
+        infowindow.close(map, this);
+      });
     }
   }
+
+  function listenForUpdates(){
+    var pusher = new Pusher("<%= Pusher.key %>", {
+      encrypted: true
+    });
+    var channel = pusher.subscribe('delivery_executive');
+    channel.bind("location_update", function(data) {
+      data = data;
+      console.log(data);
+      lat = data['latitude'];
+      long= data['longitude'];
+      updateDeliveryExecutiveMarker(data['delivery_executive_id'],lat,long);
+
+    });
+  }
+
+  function updateDeliveryExecutiveMarker (id,lat,long){
+    marker = global_markers[id];
+    marker.setPosition(new google.maps.LatLng(lat,long)); //Will cause smooth animation
+  }
+
+
 
   $(function(){initialize();})
 </script>
