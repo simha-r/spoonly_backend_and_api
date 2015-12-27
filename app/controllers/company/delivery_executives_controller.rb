@@ -64,7 +64,7 @@ class Company::DeliveryExecutivesController < Company::BaseController
       if  de.last_seen_delivery_executive_location
         if de.last_seen_delivery_executive_location.last_seen.to_date == Date.today
           [de.last_seen_delivery_executive_location.location.try(:latitude).try(:to_f),de.last_seen_delivery_executive_location.location.try(:longitude).try(:to_f),de.name,
-           de.last_seen_delivery_executive_location.last_seen.strftime("%l:%M %p, %a  %-d %b"),de.id,de.last_seen_delivery_executive_location.location.speed.to_f]
+           de.last_seen_delivery_executive_location.last_seen.strftime("%l:%M %p, %a  %-d %b"),de.id,de.last_seen_delivery_executive_location.location.speed.to_i]
         end
       end
     end.select(&:present?)
