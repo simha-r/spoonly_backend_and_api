@@ -45,11 +45,13 @@
       var person_last_seen = markers[i][3];
       var myLatlng = new google.maps.LatLng(lat, lng);
       var delivery_executive_id = markers[i][4];
+      var speed = markers[i][5];
+
 
       console.log(person_name);
 
       var contentString = "<html><body><div><p><h2>" + person_name + "</h2></p><p>Last Seen: " +
-          ""+person_last_seen+"</div></body></html>";
+          ""+person_last_seen+"<p>,Speed:"+speed+"</p></div></body></html>";
 
       var marker = new MarkerWithLabel({
         position: myLatlng,
@@ -67,7 +69,6 @@
       global_markers[delivery_executive_id] = marker;
 
       google.maps.event.addListener(global_markers[delivery_executive_id], 'mouseover', function() {
-
         infowindow.setContent(this['infowindow']);
         infowindow.open(map, this);
       });
@@ -87,14 +88,32 @@
       console.log(data);
       lat = data['latitude'];
       long= data['longitude'];
-      updateDeliveryExecutiveMarker(data['delivery_executive_id'],lat,long);
+      last_seen = data['last_seen'];
+      speed = data['speed'];
+
+      person_name = data['person_name'];
+      updateDeliveryExecutiveMarker(data['delivery_executive_id'],lat,long,speed,last_seen,person_name);
 
     });
   }
 
-  function updateDeliveryExecutiveMarker (id,lat,long){
+  function updateDeliveryExecutiveMarker (id,lat,long,speed,last_seen,person_name){
     marker = global_markers[id];
     marker.setPosition(new google.maps.LatLng(lat,long)); //Will cause smooth animation
+
+    var contentString = "<html><body><div><p><h2>" + person_name + "</h2></p><p>Last Seen: " +
+        ""+last_seen+"<p>,Speed:"+speed+"</p></div></body></html>";
+    marker['infowindow']=contentString;
+
+    google.maps.event.addListener(global_markers[id], 'mouseover', function() {
+      infowindow.setContent(global_markers[id]['infowindow']);
+      infowindow.open(map, this);
+    });
+    google.maps.event.addListener(global_markers[id], 'mouseout', function() {
+      infowindow.close(map, this);
+    });
+
+
   }
 
 

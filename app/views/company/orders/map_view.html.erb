@@ -26,10 +26,17 @@
 
 <%= title 'Order-Map View' %>
 <div id="map_canvas"></div>
-
+<!-- SlidingMarker hides details from you - your markers are just animated automagically -->
+<script type="text/javascript" src="../../../../SlidingMarker.js"></script>
+<script>
+  SlidingMarker.initializeGlobally();
+</script>
+<script type="text/javascript" src="http://google-maps-utility-library-v3.googlecode.com/svn/trunk/markerwithlabel/src/markerwithlabel.js"></script>
+<!-- we use markerAnimate to actually animate marker -->
+<script src="../../../../markerAnimate.js"></script>
 <script>
   var map;
-  var global_markers = [];
+  var global_markers = {};
   var global_order_markers=[];
 
   var markers = <%= raw @delivery_hash.to_json %>;
@@ -49,6 +56,7 @@
     map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
     addMarker();
     addOrderMarker();
+    listenForUpdates();
   }
 
   function addMarker() {
@@ -59,19 +67,37 @@
       var person_name = markers[i][2];
       var person_last_seen = markers[i][3];
       var is_selected_delivery_exec = markers[i][4];
+      var delivery_executive_id = markers[i][5];
+      var speed = markers[i][6];
       var myLatlng = new google.maps.LatLng(lat, lng);
 
       var contentString = "<html><body><div><p><h2>" + person_name + "</h2></p><p>Last Seen: " +
-          ""+person_last_seen+"</div></body></html>";
+          ""+person_last_seen+"<p>,Speed:"+speed+"</p></div></body></html>";
 
       if(is_selected_delivery_exec){
-        var marker = new google.maps.Marker({
+//        var marker = new google.maps.Marker({
+//          position: myLatlng,
+//          map: map,
+//          title: "Name: " + person_name,
+//          label: person_name,
+//          icon: '/waiter.png'
+//        });
+
+        var marker = new MarkerWithLabel({
           position: myLatlng,
           map: map,
-          title: "Name: " + person_name,
-          label: person_name,
+          duration: 1000,
+          easing: 'linear',
+          title: "Coordinates: " + lat + " , " + lng + " | Trailhead name: " + person_name,
+          labelContent: person_name,
+          labelAnchor: new google.maps.Point(22, 30),
+          labelClass: "labels", // the CSS class for the label
+          labelStyle: {opacity: 0.78},
+          infowindow: contentString,
           icon: '/waiter.png'
         });
+
+
       }else{
 
         var marker = new google.maps.Marker({
@@ -81,15 +107,35 @@
           label: person_name
         });
 
+        var marker = new MarkerWithLabel({
+          position: myLatlng,
+          map: map,
+          duration: 1000,
+          easing: 'linear',
+          title: "Coordinates: " + lat + " , " + lng + " | Trailhead name: " + person_name,
+          labelContent: person_name,
+          labelAnchor: new google.maps.Point(22, 30),
+          labelClass: "labels", // the CSS class for the label
+          labelStyle: {opacity: 0.78},
+          infowindow: contentString
+        });
       }
-      marker['infowindow'] = contentString;
-      global_markers[i] = marker;
 
-
-      google.maps.event.addListener(global_markers[i], 'click', function() {
+      global_markers[delivery_executive_id] = marker;
+      google.maps.event.addListener(global_markers[delivery_executive_id], 'click', function() {
         infowindow.setContent(this['infowindow']);
         infowindow.open(map, this);
       });
+
+      google.maps.event.addListener(global_markers[delivery_executive_id], 'mouseover', function() {
+        infowindow.setContent(this['infowindow']);
+        infowindow.open(map, this);
+      });
+
+      google.maps.event.addListener(global_markers[delivery_executive_id], 'mouseout', function() {
+        infowindow.close(map, this);
+      });
+
     }
   }
 
@@ -111,11 +157,9 @@
         position: myLatlng,
         map: map,
         title: "ORDER Location",
-        icon: '/burger.png'
-
+        icon: '/burger.png',
+        infowindow: contentString
       });
-
-      marker['infowindow'] = contentString;
 
       global_order_markers[i] = marker;
 
@@ -123,7 +167,46 @@
         infowindow.setContent(this['infowindow']);
         infowindow.open(map, this);
       });
+
+
     }
+  }
+
+  function listenForUpdates(){
+    var pusher = new Pusher("<%= Pusher.key %>", {
+      encrypted: true
+    });
+    var channel = pusher.subscribe('delivery_executive');
+    channel.bind("location_update", function(data) {
+      data = data;
+      console.log(data);
+      lat = data['latitude'];
+      long= data['longitude'];
+      last_seen = data['last_seen'];
+      speed = data['speed'];
+
+      person_name = data['person_name'];
+      updateDeliveryExecutiveMarker(data['delivery_executive_id'],lat,long,speed,last_seen,person_name);
+
+    });
+  }
+
+  function updateDeliveryExecutiveMarker (id,lat,long,speed,last_seen,person_name){
+    marker = global_markers[id];
+    marker.setPosition(new google.maps.LatLng(lat,long)); //Will cause smooth animation
+
+    var contentString = "<html><body><div><p><h2>" + person_name + "</h2></p><p>Last Seen: " +
+        ""+last_seen+"<p>,Speed:"+speed+"</p></div></body></html>";
+    marker['infowindow']=contentString;
+
+    google.maps.event.addListener(global_markers[id], 'mouseover', function() {
+      infowindow.setContent(global_markers[id]['infowindow']);
+      infowindow.open(map, this);
+    });
+    google.maps.event.addListener(global_markers[id], 'mouseout', function() {
+      infowindow.close(map, this);
+    });
+
   }
 
 

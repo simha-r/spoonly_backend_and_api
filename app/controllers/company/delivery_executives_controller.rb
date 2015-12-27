@@ -48,9 +48,9 @@ class Company::DeliveryExecutivesController < Company::BaseController
   end
 
   def update_location
-    lat,long,id,timestamp=params[:lat],params[:lon],params[:id],params[:timestamp]
+    lat,long,id,speed,timestamp=params[:lat],params[:lon],params[:id],params[:speed],params[:timestamp]
     if  delivery_executive = DeliveryExecutive.find_from_tracecar(id)
-     delivery_executive.log_location lat,long,timestamp
+     delivery_executive.log_location lat,long,speed,timestamp
      head 200
     else
      HealthyLunchUtils.log_info "DeliveryExecutive with traccar id #{id} not found"
@@ -64,7 +64,7 @@ class Company::DeliveryExecutivesController < Company::BaseController
       if  de.last_seen_delivery_executive_location
         if de.last_seen_delivery_executive_location.last_seen.to_date == Date.today
           [de.last_seen_delivery_executive_location.location.try(:latitude).try(:to_f),de.last_seen_delivery_executive_location.location.try(:longitude).try(:to_f),de.name,
-           de.last_seen_delivery_executive_location.last_seen.strftime("%l:%M %p, %a  %-d %b"),de.id]
+           de.last_seen_delivery_executive_location.last_seen.strftime("%l:%M %p, %a  %-d %b"),de.id,de.last_seen_delivery_executive_location.location.speed]
         end
       end
     end.select(&:present?)
