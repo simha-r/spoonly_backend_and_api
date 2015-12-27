@@ -62,7 +62,7 @@ class Company::DeliveryExecutivesController < Company::BaseController
     @delivery_executives =DeliveryExecutive.active
     @delivery_hash = @delivery_executives.collect do |de|
       if  de.last_seen_delivery_executive_location
-        if de.last_seen_delivery_executive_location.last_seen.to_date == Date.today
+        if de.last_seen_delivery_executive_location.last_seen > Time.now - 2.hours
           [de.last_seen_delivery_executive_location.location.try(:latitude).try(:to_f),de.last_seen_delivery_executive_location.location.try(:longitude).try(:to_f),de.name,
            de.last_seen_delivery_executive_location.last_seen.strftime("%l:%M %p, %a  %-d %b"),de.id,de.last_seen_delivery_executive_location.location.speed.to_i]
         end

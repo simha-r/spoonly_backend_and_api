@@ -129,7 +129,7 @@ class Company::OrdersController < Company::BaseController
 
       @delivery_executives = DeliveryExecutive.all.select do |d|
         if (d.last_seen_delivery_executive_location)
-          if(d.last_seen_delivery_executive_location.last_seen > Time.now - 5.years)
+          if(d.last_seen_delivery_executive_location.last_seen > Time.now - 2.hours)
             distance = d.last_seen_delivery_executive_location.location.distance_from @address.latitude,@address.longitude
             distance < 5
           end
