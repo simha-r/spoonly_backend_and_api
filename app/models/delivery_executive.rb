@@ -50,8 +50,13 @@ class DeliveryExecutive < ActiveRecord::Base
   def log_location lat,long,speed,timestamp
     last_seen = Time.at(timestamp.to_f).to_datetime
     last_location = locations.last
-    if(!last_location || (last_location.distance_from(lat.to_f,long.to_f) > 0.2))
+    if(!last_location || (last_location.distance_from(lat.to_f,long.to_f) > 0.1))
       location= Location.create(latitude: lat.to_f,longitude: long.to_f,speed: speed.to_f,location_type: 'delivery_guy')
+    else
+      location = last_location
+    end
+
+    if(!last_seen_delivery_executive_location || last_seen_delivery_executive_location.last_seen < (Time.now - 0.3.minute))
       Pusher['delivery_executive'].trigger('location_update', {
         message: 'Location has been updated',
         latitude: location.latitude.to_f,
@@ -61,9 +66,8 @@ class DeliveryExecutive < ActiveRecord::Base
         speed: speed.to_f,
         delivery_executive_id: self.id
       })
-    else
-      location = last_location
     end
+
     if location.persisted?
       delivery_executive_locations.create(last_seen: last_seen,location: location)
     end
