@@ -162,7 +162,7 @@ class User < ActiveRecord::Base
 
   def refer_user user
     general_promotions = GeneralPromotion.all
-    if(user.has_been_referred? || user.orders.delivered.present? || (user.referral_code==referral_code) || GeneralPromotion.applied_for?(user,general_promotions))
+    if(user.has_been_referred? || user.orders.delivered.present? || (user.referral_code==referral_code) || GeneralPromotion.applied_for?(user,general_promotions) || (referrer_user==user))
       return false
     end
     referral = referrals.create!(referred_id: user.id)

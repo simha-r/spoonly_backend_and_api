@@ -28,6 +28,11 @@ class GeneralPromotion < ActiveRecord::Base
     if user.has_been_referred?
       return false
     end
+    general_promotions = GeneralPromotion.all
+    if GeneralPromotion.applied_for?(user,general_promotions)
+      return false
+    end
+
     if applied_for? user
       return false
     else
