@@ -19,6 +19,9 @@
       %td
       %td
         = link_to order.id,[:company,order]
+        - if order.address.has_location?
+          %br
+          = link_to 'See Location',[:map_view,:company,order],target: '_blank'
       %td{'width'=>'250px'}
         = order.user.name
         %br
