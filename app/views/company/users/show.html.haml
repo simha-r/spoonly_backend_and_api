@@ -27,6 +27,12 @@
       %b
         %i No referrer
     %br
+      %b Has Referred:
+      - if @user.referred_users.count>0
+        = link_to "#{@user.referred_users.count} users"
+      - else
+        none
+    %br
     Profile links:
     - @user.authorizations.each do |a|
       = link_to a.provider, a.profile_url

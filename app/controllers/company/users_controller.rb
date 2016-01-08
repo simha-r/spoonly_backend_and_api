@@ -5,9 +5,9 @@ class Company::UsersController < Company::BaseController
 
   def index
     @search_term = params[:search_term]
-    if @search_term.present?
-      wildcard_search = "%#{@search_term}%"
-      @users = User.where("email iLIKE ?", wildcard_search)
+    @referred_by = params[:referred_by]
+    if @search_term.present? || @referred_by.present?
+      @users = User.search @search_term,@referred_by
     else
       case params['sort_by']
         when 'orders'

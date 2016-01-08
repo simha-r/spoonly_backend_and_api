@@ -1,8 +1,8 @@
 = form_tag company_users_path,method: :get do
-  = text_field_tag 'search_term',@search_term
+  = text_field_tag 'search_term',@search_term,placeholder: 'user email'
+  = text_field_tag 'referred_by',@referred_by,placeholder: 'Referred by email'
   = submit_tag 'Search'
-= form_tag company_users_path,method: :get do
-  = select_tag ''
+
 
 
 - if @users.present?

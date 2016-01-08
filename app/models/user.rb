@@ -214,6 +214,36 @@ class User < ActiveRecord::Base
     end
   end
 
+
+
+  def self.search wildcard,referred_by
+    users = all
+    if wildcard.present?
+      wildcard_search = "%#{wildcard}%"
+      users = where("email iLIKE ?", wildcard_search)
+    end
+    if referred_by.present?
+      users = users.get_all_referred_by referred_by
+    end
+    users
+  end
+
+  def self.get_all_referred_by user_email
+    result = []
+    referrer = User.where(email: user_email).first
+    if referrer
+      referrals = Referral.where(referrer_id: referrer.id)
+      if referrals.present?
+        result = where(id: referrals.collect(&:referred_id))
+      else
+        result = all
+      end
+    else
+      result = all
+    end
+    result
+  end
+
   private
 
   def generate_authentication_token
