@@ -41,6 +41,16 @@ class Company::MenusController < Company::BaseController
     redirect_to [:company,:menus] , notice: 'Destroyed menu'
   end
 
+  def notify_users
+    title,message = params[:title],params[:message]
+    if !@menu.notification_sent
+      @menu.notify_users title,message
+      redirect_to request.referrer,notice: 'Users will be notified'
+    else
+      redirect_to request.referrer,alert: 'Already notified! Please check console'
+    end
+  end
+
   private
 
   def load_resource

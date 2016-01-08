@@ -37,6 +37,15 @@
   = hidden_field_tag 'menu_product[menu_id]',@menu.id
   = submit_tag 'Create',class: 'btn btn-primary'
 
+%br
+  %br
+- if !@menu.notification_sent
+  %h4 Send Notification to users
+  = form_tag notify_users_company_menu_path(@menu),method: :post do
+    = text_field_tag 'title','',placeholder: 'Title'
+    = text_area_tag 'message','',cols: 60,placeholder: 'Message'
+    = submit_tag 'Notify Users!'
+
 
 %br
   %br

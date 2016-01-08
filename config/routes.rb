@@ -123,6 +123,7 @@ Rails.application.routes.draw do
     resources :menus do
       member do
         get :add_items
+        post :notify_users
       end
     end
     resources :addresses

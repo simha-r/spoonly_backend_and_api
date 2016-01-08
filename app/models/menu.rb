@@ -103,4 +103,14 @@ class Menu < ActiveRecord::Base
     dinner_end_time - 0.5.hour
   end
 
+  def notify_users title,message
+    update_attributes(notification_sent: true)
+    users = User.all - Order.today.collect(&:user)
+    users.each do |u|
+      u.notify_menu message,title
+    end
+  end
+  handle_asynchronously :notify_users
+
+
 end
