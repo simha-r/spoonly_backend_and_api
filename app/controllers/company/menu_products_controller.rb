@@ -18,6 +18,20 @@ class Company::MenuProductsController < Company::BaseController
     redirect_to request.referrer,notice: 'Item has been removed from the Menu'
   end
 
+  def mark_sold_out
+    @menu_product = MenuProduct.find params[:id]
+    if @menu_product.update_attributes(sold_out: true)
+      redirect_to request.referrer,notice: 'Successfully marked sold out'
+    end
+  end
+
+  def unmark_sold_out
+    @menu_product = MenuProduct.find params[:id]
+    if @menu_product.update_attributes(sold_out: false)
+      redirect_to request.referrer,notice: 'Successfully marked NOT Sold out'
+    end
+  end
+
 
   private
 

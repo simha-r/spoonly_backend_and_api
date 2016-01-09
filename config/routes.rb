@@ -127,7 +127,12 @@ Rails.application.routes.draw do
       end
     end
     resources :addresses
-    resources :menu_products,only: [:create,:update,:destroy]
+    resources :menu_products,only: [:create,:update,:destroy] do
+      member do
+        post :mark_sold_out
+        post :unmark_sold_out
+      end
+    end
     resources :orders,only:[:index,:show] do
       member do
         put :acknowledge
