@@ -338,6 +338,8 @@ class Order < ActiveRecord::Base
     end
   end
 
+  handle_asynchronously :ask_for_feedback
+
   def brief_line_items
     line = ''
     line_items.includes(:menu_product).includes(:product).each do |li|
