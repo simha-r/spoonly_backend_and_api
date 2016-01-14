@@ -1,0 +1,235 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://www.opengis.net/kml/2.2'>
+	<Document>
+		<name>Dec8th_dinner_area</name>
+		<description><![CDATA[]]></description>
+		<Folder>
+			<name>Coverage Polygons</name>
+			<Placemark>
+				<name>Financial District SEZ</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3429909,17.410352100000004,0.0 78.3524323,17.4173952,0.0 78.3635044,17.4494135,0.0 78.3447933,17.4594027,0.0 78.3401585,17.4403245,0.0 78.3344078,17.4380317,0.0 78.3350086,17.430907500000004,0.0 78.3260822,17.4291059,0.0 78.3289146,17.4184599,0.0 78.3429909,17.410352100000004,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Hitech City</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3715725,17.4609583,0.0 78.3687401,17.4542444,0.0 78.3722591,17.4398332,0.0 78.3868504,17.4295153,0.0 78.3907986,17.434428700000005,0.0 78.3829021,17.451869899999995,0.0 78.3743191,17.4639058,0.0 78.3715725,17.4609583,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Phoenix Avance Deloitte</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3636332,17.457560500000003,0.0 78.3609724,17.4408977,0.0 78.3687401,17.435001899999996,0.0 78.3730745,17.439260000000004,0.0 78.3695126,17.4583792,0.0 78.3636332,17.457560500000003,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>beautiful COde banjara hills</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.4333652,17.416258900000003,0.0 78.433612,17.4151329,0.0 78.4351462,17.414892300000005,0.0 78.4352964,17.4161054,0.0 78.4333652,17.416258900000003,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Wells Fargo IBM Building Raidurgam</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3868504,17.4295153,0.0 78.3730745,17.439260000000004,0.0 78.3687401,17.435001899999996,0.0 78.3640623,17.4386868,0.0 78.3601999,17.4329956,0.0 78.3723879,17.419524500000005,0.0 78.3786106,17.4197702,0.0 78.3868504,17.4295153,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Meenakshi skylounge,TCS Kohinor park</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3767223,17.4607127,0.0 78.3773232,17.4642743,0.0 78.374877,17.467917599999996,0.0 78.3447933,17.4594027,0.0 78.3623886,17.449904800000002,0.0 78.3636332,17.457560500000003,0.0 78.3695126,17.4583792,0.0 78.3697271,17.4569054,0.0 78.3767223,17.4607127,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Kondapur Hitex Meenakshi Hafeezpet </name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3433342,17.4534256,0.0 78.3767223,17.4607127,0.0 78.385005,17.4668124,0.0 78.3819151,17.4702919,0.0 78.3801985,17.471970299999995,0.0 78.3703709,17.4749176,0.0 78.3633757,17.4756544,0.0 78.3291292,17.4715609,0.0 78.3433342,17.4534256,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Financial District Periphery</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3429909,17.410352100000004,0.0 78.356638,17.411007299999998,0.0 78.3659077,17.427058599999995,0.0 78.3629036,17.447612100000004,0.0 78.3429909,17.410352100000004,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Madhapur ps limits, kavuri hills, 100 feet road</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3907986,17.434428700000005,0.0 78.3999825,17.4385639,0.0 78.3963346,17.451624300000002,0.0 78.395648,17.454899400000002,0.0 78.3891249,17.457765200000004,0.0 78.3803272,17.455636299999995,0.0 78.3907986,17.434428700000005,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Olive Bistro</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3889532,17.4323405,0.0 78.3911848,17.4287783,0.0 78.3947468,17.4285736,0.0 78.3944035,17.4359845,0.0 78.3889532,17.4323405,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>kavuri hills</name>
+				<description><![CDATA[yupptv]]></description>
+				<styleUrl>#poly-000000-1-76</styleUrl>
+				<ExtendedData>
+				</ExtendedData>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3947468,17.4285736,0.0 78.4034157,17.4284508,0.0 78.4087372,17.435657,0.0 78.395648,17.454899400000002,0.0 78.3900261,17.432709,0.0 78.3947468,17.4285736,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+		</Folder>
+		<Style id='poly-000000-1-76-normal'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>1</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4C000000</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+		</Style>
+		<Style id='poly-000000-1-76-highlight'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>2.0</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4C000000</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+		</Style>
+		<StyleMap id='poly-000000-1-76'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#poly-000000-1-76-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#poly-000000-1-76-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+		<Style id='poly-000000-1-76-nodesc-normal'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>1</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4C000000</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<Style id='poly-000000-1-76-nodesc-highlight'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>2.0</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4C000000</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<StyleMap id='poly-000000-1-76-nodesc'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#poly-000000-1-76-nodesc-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#poly-000000-1-76-nodesc-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+	</Document>
+</kml>
