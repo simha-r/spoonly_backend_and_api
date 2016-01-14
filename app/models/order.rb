@@ -333,8 +333,8 @@ class Order < ActiveRecord::Base
 
   def ask_for_feedback
     if(!feedback_asked and delivered?)
-      user.ask_for_feedback
       mark_feedback_asked
+      user.ask_for_feedback
     end
   end
 
