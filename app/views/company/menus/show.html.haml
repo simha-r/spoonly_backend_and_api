@@ -31,12 +31,13 @@
       = product.price
       = product.desc
     .col-md-4
-      = link_to 'Mark Sold OUT',[:company, menu_product], :method => :delete, :data => { :confirm => 'Are you sure?' },
-            :class => 'btn btn-secondary'
+      - if !menu_product.sold_out?
+        = link_to 'Mark Sold OUT',[:mark_sold_out,:company, menu_product], :method => :post, :data => { :confirm => 'Are you sure?' },
+              :class => 'btn btn-secondary'
+      - else
+        = link_to 'UNMARK Sold OUT',[:unmark_sold_out,:company, menu_product], :method => :post, :data => { :confirm => 'Are you sure?' },
+              :class => 'btn btn-secondary'
 
-    -#.col-md-4
-    -#  = link_to 'Remove from menu',[:company, menu_product], :method => :delete, :data => { :confirm => 'Are you sure?' },
-    -#  :class => 'btn btn-secondary'
 
 %h3  Add to Menu
 
