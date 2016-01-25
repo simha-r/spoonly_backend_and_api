@@ -16,6 +16,6 @@
       %p= @locality
       = link_to "(Change)", main_customer_homes_path(change_location: true),data: { no_turbolink: true }
 
-  - if params[:controller] == "customer/menus" && params[:action] == "lunch"
+  - if params[:controller] == "customer/menus" && ["lunch","dinner"].include?(params[:action])
     .col-xs-4.checkout
       = render 'customer/shared/checkout'
