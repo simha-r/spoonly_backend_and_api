@@ -74,8 +74,8 @@ class Menu < ActiveRecord::Base
                      products: menu_dinner_products.includes(:product).collect{|menu_product| menu_product.product.as_json.merge(menu_product_id: menu_product.id,sold_out: menu_product.sold_out)}}
     hash = {notice: 'No Products available today'} if !menu_dinner_products.present?
     hash[:referral_text] = "<html><body>Earn Free Meals<br />Give &#8377 40, Get &#8377 40</body></html>"
-    hash[:timings]=["07:00 PM - 07:30 PM","07:30 PM - 08:00 PM","08:00 PM - 08:30 PM","08:30 PM - 09:00 PM",
-                    "09:00 PM - 09:30 PM","09:30 PM - 10:00 PM","10:00 PM - 10:30 PM"]
+    hash[:timings]=["07:15 PM - 08:00 PM","08:00 PM - 08:45 PM","08:45 PM - 09:30 PM","09:30 PM - 10:15 PM",
+                    "10:15 PM - 11:00 PM"]
     hash[:buffer_time]=ENV['BUFFER_TIME'].to_i
     hash
   end
@@ -93,14 +93,14 @@ class Menu < ActiveRecord::Base
   end
 
   def dinner_start_time
-    Time.zone.local(menu_date.year,menu_date.month,menu_date.day,MenuProduct::DINNER_START_TIME,0,0)
+    Time.zone.local(menu_date.year,menu_date.month,menu_date.day,MenuProduct::DINNER_START_TIME,15,0)
   end
   def dinner_end_time
-    dinner_start_time+3.5.hours
+    dinner_start_time+225.minutes
   end
 
   def dinner_order_end_time
-    dinner_end_time - 0.5.hour
+    dinner_end_time - 45.minutes
   end
 
   def notify_users title,message
