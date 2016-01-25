@@ -18,7 +18,7 @@ class Api::V1::MenusController < Api::V1::BaseController
       hash['lunch'] = {time: '12:15 - 3:30 PM',url: 'menu/lunch'}
     end
     if LocationCheck.in_dinner_range? params['lat'],params['long']
-      hash['dinner'] = {time: '7:00 - 10:30 PM',url: 'menu/dinner'}
+      hash['dinner'] = {time: '7:15 - 11:00 PM',url: 'menu/dinner'}
     end
 
     if hash['lunch'] || hash['dinner']
