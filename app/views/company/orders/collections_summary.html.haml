@@ -1,5 +1,7 @@
 %h3 Bill Collections
 %br
+%h4 #{@category.upcase}
+%br
 
 = form_tag collections_summary_company_orders_path,method: :get do
   %b Date
