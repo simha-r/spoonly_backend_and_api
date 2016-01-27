@@ -18,7 +18,7 @@ class Customer::OrdersController < ApplicationController
     @order = Order.new
     sum_of_items = 0
     @cart.line_items.each { |item| sum_of_items += (item.quantity * item.price) }
-    @cart_total = sum_of_items
+    @cart_total = sum_of_items + Order::DELIVERY_FEE
   end
 
   # POST /orders
@@ -31,6 +31,9 @@ class Customer::OrdersController < ApplicationController
     @order.category = @cart.category
     if order_params[:delivery_time].present?
       if @order.save
+        if @order.needs_delivery_fee?
+          @order.update_attributes(delivery_fee: Order::DELIVERY_FEE)
+        end
         #TODO Why not @cart.destroy
         Cart.destroy(session[:cart_id])
         session[:cart_id] = nil
