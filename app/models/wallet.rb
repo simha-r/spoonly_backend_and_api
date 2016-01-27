@@ -29,7 +29,7 @@ class Wallet < ActiveRecord::Base
   end
 
   def debit_amount_for_order order
-    debit_amount = (order.total_price >= balance ? balance : order.total_price )
+    debit_amount = (order.grand_total >= balance ? balance : order.grand_total )
     if debit_amount > 0
       new_balance = self.balance.to_f - debit_amount.to_f
       if debits.create(amount: debit_amount,order_id: order.id,latest_wallet_balance: new_balance)
