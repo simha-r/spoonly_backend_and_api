@@ -8,7 +8,7 @@
       = render 'customer/menus/menu_tomorrow'
 
     .menu-row
-      - @menu.menu_lunch_products.includes(:product).each do |menu_product|
+      - @menu.menu_lunch_products.order(:created_at).includes(:product).each do |menu_product|
         .col-xs-6
           .menu-card{'id'=>"menu_product_#{menu_product.id}"}
             = render 'customer/menus/menu_product_preview',menu_product: menu_product
