@@ -30,8 +30,8 @@ class Order < ActiveRecord::Base
   belongs_to :delivery_executive
   has_one :debit
 
-  DELIVERY_FEE = 10
-  MIN_TOTAL_FOR_FREE_DELIVERY = 85
+  DELIVERY_FEE = 5
+  MIN_TOTAL_FOR_FREE_DELIVERY = 600
 
   validates_presence_of :address_id, :user_id, :delivery_time, :category
   validates_presence_of :category, in: MenuProduct::CATEGORIES
