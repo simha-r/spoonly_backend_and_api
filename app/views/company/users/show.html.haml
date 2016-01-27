@@ -112,7 +112,7 @@
     - order.line_items.includes(:menu_product).includes(:product).each do |li|
       %tr
         %td
-          = li.product.name
+          = li.product.try :name
         %td
           = li.quantity
   %h4
