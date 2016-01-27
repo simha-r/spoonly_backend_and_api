@@ -1,12 +1,25 @@
 = title 'Dinner Menu'
-- if @menu.menu_date!=Date.current
-  -#= render 'customer/menus/menu_tomorrow'
+#menu_dinner
+  = render 'location', category: 'dinner'
+  - if @unavailable
+    = render 'customer/menus/menu_unavailable'
+  - else
+    - if @menu.menu_date != Date.current
+      = render 'customer/menus/menu_tomorrow'
 
-Date:
-= @menu.menu_date.strftime("%a %d,%b ")
+    .menu-row
+      - @menu.menu_lunch_products.includes(:product).each do |menu_product|
+        .col-xs-6
+          .menu-card{'id'=>"menu_product_#{menu_product.id}"}
+            = render 'customer/menus/menu_product_preview',menu_product: menu_product
 
-- @menu.menu_dinner_products.includes(:product).each do |menu_product|
-  = render 'customer/menus/menu_product_preview',menu_product: menu_product
+  :javascript
+    analytics.page('Dinner Menu');
+-#Date:
+-#= @menu.menu_date.strftime("%a %d,%b ")
 
-.row-fluid
-  = link_to 'Checkout',new_customer_order_path
+-#- @menu.menu_dinner_products.includes(:product).each do |menu_product|
+  -#= render 'customer/menus/menu_product_preview',menu_product: menu_product
+
+-#.row-fluid
+  -#= link_to 'Checkout',new_customer_order_path
