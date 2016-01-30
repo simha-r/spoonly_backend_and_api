@@ -10,7 +10,7 @@
   - else
     = select_date
   Category
-  = select_tag :category,options_from_collection_for_select(['lunch','dinner'],:to_s,:upcase)
+  = select_tag :category,options_from_collection_for_select(['lunch','dinner'],:to_s,:upcase,params[:category])
   = submit_tag "Search"
 
 %br
