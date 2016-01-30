@@ -3,7 +3,7 @@ class Company::Field::OrdersController < Company::Field::BaseController
   def index
     @undelivered_orders = @delivery_executive.orders.where(state: ['informed_delivery_guy','dispatched']).today.order(delivery_time: :asc)
     @delivered_orders = @delivery_executive.orders.where(state: ['delivered']).today.order(delivery_time: :desc)
-    if Time.now.hour > 18
+    if Time.now.hour > 16
       @undelivered_orders = @undelivered_orders.where(category: 'dinner').order(delivery_time: :asc)
       @delivered_orders = @delivered_orders.where(category: 'dinner').order(delivery_time: :asc)
     end
