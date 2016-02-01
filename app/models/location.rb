@@ -8,6 +8,7 @@
 #  created_at    :datetime
 #  updated_at    :datetime
 #  location_type :string(255)
+#  speed         :float
 #
 
 class Location < ActiveRecord::Base

@@ -2,10 +2,11 @@
 #
 # Table name: menus
 #
-#  id         :integer          not null, primary key
-#  menu_date  :date
-#  created_at :datetime
-#  updated_at :datetime
+#  id                :integer          not null, primary key
+#  menu_date         :date
+#  created_at        :datetime
+#  updated_at        :datetime
+#  notification_sent :boolean          default(FALSE)
 #
 
 class Menu < ActiveRecord::Base

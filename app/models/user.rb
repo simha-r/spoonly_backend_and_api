@@ -23,6 +23,8 @@
 #  referral_code          :string(255)
 #  device_id              :string(255)
 #  promo_code_shown       :boolean
+#  orders_count           :integer          default(0), not null
+#  referrals_count        :integer          default(0), not null
 #
 
 class User < ActiveRecord::Base
