@@ -12,6 +12,10 @@
     %b Phone:
     = @user.profile.phone_number
     %br
+    - if  @user.profile.phone_number &&  !@user.profile.phone_number_verified?
+      %b Code
+      = "#{@user.profile.phone_number_verification_code}"
+    %br
       %b Addresses:
     - @user.addresses.each do |address|
       .row
@@ -41,6 +45,16 @@
       = link_to "#{@user.feedbacks.count} feedbacks",feedbacks_company_user_path(@user)
     - else
       \-
+    %br
+      %b Type:
+      - if @user.device_id.present?
+        - user_count =  User.where(device_id: @user.device_id).count
+        - if user_count == 1
+          No Duplicates
+        - else
+          = "#{user_count} users with that id"
+      - else
+        Web user only
   .col-xs-5
     .row
       .col-xs-1

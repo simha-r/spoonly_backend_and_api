@@ -7,9 +7,9 @@
       %h4 #{@category.upcase} -  Today, #{Date.today.strftime("%a  %-d %b")}
     .col-xs-4
       - if @category=='lunch'
-        .pull-right= link_to "See Dinner Instead",[:company,:current_orders,category: :dinner]
+        .pull-right= link_to "See DINNER ?",[:company,:current_orders,category: :dinner]
       -else
-        .pull-right= link_to "See Lunch Instead",[:company,:current_orders,category: :lunch]
+        .pull-right= link_to "See Lunch ?",[:company,:current_orders,category: :lunch]
 
   .col-xs-offset-4.col-xs-8.text-center
     = form_tag company_current_orders_path,method: :get, class: "form-horizontal" do

@@ -19,7 +19,13 @@ class Company::CurrentOrdersController < Company::BaseController
   end
 
   def chef_summary
-    @orders = Order.today.lunch
+    @category = params[:category] || 'lunch'
+    @orders = Order.today
+    if @category=='lunch'
+      @orders = @orders.lunch
+    elsif @category=='dinner'
+      @orders = @orders.dinner
+    end
     render layout: 'chef/application'
   end
 
