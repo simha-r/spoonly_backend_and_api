@@ -51,7 +51,7 @@ class Api::V1::MenusController < Api::V1::BaseController
     if @menu && @menu.menu_dinner_products.present?
       render json: @menu.show_dinner
     else
-      render json: {notice: 'Dinner is coming next week!'}
+      render json: {notice: 'Dinner menu will be uploaded shortly :)'}
     end
   end
 
