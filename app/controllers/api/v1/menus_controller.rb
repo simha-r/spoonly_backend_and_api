@@ -37,7 +37,7 @@ class Api::V1::MenusController < Api::V1::BaseController
     if @menu
       render json: @menu.show_lunch
     else
-      if [5,6,7].include? Date.today.wday
+      if [6,7].include? Date.today.wday
         notice = ENV['NOT_SERVING_WEEKEND']
       else
         notice = ENV['NOT_SERVING_WEEKDAY']
