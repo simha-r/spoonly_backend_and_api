@@ -70,7 +70,7 @@
         .col-xs-8
           %br
           = "##{order.id}, #{user.name[0..10]}"
-          = link_to 'CALL',"tel:#{user.profile.phone_number}",class: 'btn-primary btn btn-sm'
+          = link_to 'CALL',"tel:0#{user.profile.phone_number}",class: 'btn-primary btn btn-sm'
           %br
           = "#{order.address.formatted}."
           %br

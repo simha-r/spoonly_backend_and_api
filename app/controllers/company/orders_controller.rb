@@ -115,6 +115,7 @@ class Company::OrdersController < Company::BaseController
 
   def ask_feedback
     if @order.delivered?
+      @order.mark_feedback_asked
       @order.ask_for_feedback
       redirect_to request.referrer, notice: 'Asked for feedback'
     else
