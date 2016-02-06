@@ -51,7 +51,12 @@ class Api::V1::MenusController < Api::V1::BaseController
     if @menu && @menu.menu_dinner_products.present?
       render json: @menu.show_dinner
     else
-      render json: {notice: 'Dinner menu will be uploaded shortly :)'}
+      if [6,7].include? Date.today.wday
+        notice = "Orders for today are closed. We'll be back on Monday!"
+      else
+        notice = "Dinner menu will be uploaded shortly :)"
+      end
+      render json: {notice: notice}
     end
   end
 
