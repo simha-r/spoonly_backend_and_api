@@ -123,7 +123,8 @@ Rails.application.routes.draw do
     resources :menus do
       member do
         get :add_items
-        post :notify_users
+        post :notify_users_lunch
+        post :notify_users_dinner
       end
     end
     resources :addresses

@@ -51,12 +51,25 @@
 
 %br
   %br
-- if !@menu.notification_sent
+- if !@menu.lunch_notification_sent
   %h4 Send Notification to users
-  = form_tag notify_users_company_menu_path(@menu),method: :post do
+  = form_tag notify_users_lunch_company_menu_path(@menu),method: :post do
     = text_field_tag 'title','',placeholder: 'Title'
     = text_area_tag 'message','',cols: 60,placeholder: 'Message'
-    = submit_tag 'Notify Users!'
+    = submit_tag 'Notify Lunch!'
+- else
+  Lunch Notification sent!
+
+%br
+  %br
+- if !@menu.dinner_notification_sent
+  %h4 Send Notification to users
+  = form_tag notify_users_dinner_company_menu_path(@menu),method: :post do
+    = text_field_tag 'title','',placeholder: 'Title'
+    = text_area_tag 'message','',cols: 60,placeholder: 'Message'
+    = submit_tag 'Notify Dinner!'
+- else
+  Dinner Notification sent!
 
 
 %br

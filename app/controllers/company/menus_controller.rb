@@ -41,10 +41,22 @@ class Company::MenusController < Company::BaseController
     redirect_to [:company,:menus] , notice: 'Destroyed menu'
   end
 
-  def notify_users
+  def notify_users_lunch
     title,message = params[:title],params[:message]
-    if !@menu.notification_sent
-      @menu.notify_users title,message
+    if !@menu.lunch_notification_sent
+      @menu.notify_users_lunch title,message
+      @menu.update_attributes(lunch_notification_sent: true)
+      redirect_to request.referrer,notice: 'Users will be notified'
+    else
+      redirect_to request.referrer,alert: 'Already notified! Please check console'
+    end
+  end
+
+  def notify_users_dinner
+    title,message = params[:title],params[:message]
+    if !@menu.dinner_notification_sent
+      @menu.notify_users_dinner title,message
+      @menu.update_attributes(dinner_notification_sent: true)
       redirect_to request.referrer,notice: 'Users will be notified'
     else
       redirect_to request.referrer,alert: 'Already notified! Please check console'

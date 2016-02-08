@@ -2,11 +2,12 @@
 #
 # Table name: menus
 #
-#  id                :integer          not null, primary key
-#  menu_date         :date
-#  created_at        :datetime
-#  updated_at        :datetime
-#  notification_sent :boolean          default(FALSE)
+#  id                       :integer          not null, primary key
+#  menu_date                :date
+#  created_at               :datetime
+#  updated_at               :datetime
+#  lunch_notification_sent  :boolean          default(FALSE)
+#  dinner_notification_sent :boolean
 #
 
 class Menu < ActiveRecord::Base
@@ -104,14 +105,24 @@ class Menu < ActiveRecord::Base
     dinner_end_time - 45.minutes
   end
 
-  def notify_users title,message
-    update_attributes(notification_sent: true)
-    users = User.all - Order.today.collect(&:user)
+  def notify_users_lunch title,message
+    update_attributes(lunch_notification_sent: true)
+    users = User.all - Order.today.where(category: 'lunch').collect(&:user)
     users.each do |u|
       u.notify_menu message,title
     end
   end
-  handle_asynchronously :notify_users
+  handle_asynchronously :notify_users_lunch
+
+
+  def notify_users_dinner title,message
+    update_attributes(dinner_notification_sent: true)
+    users = User.all - Order.today.where(category: 'dinner').collect(&:user)
+    users.each do |u|
+      u.notify_menu message,title
+    end
+  end
+  handle_asynchronously :notify_users_dinner
 
 
 end
