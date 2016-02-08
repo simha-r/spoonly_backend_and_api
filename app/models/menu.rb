@@ -106,7 +106,8 @@ class Menu < ActiveRecord::Base
 
   def notify_users title,message
     update_attributes(notification_sent: true)
-    users = User.all - Order.today.collect(&:user)
+    # users = User.all - Order.today.collect(&:user)
+    users = User.where(email: ['itsprdp@gmail.com','simhaece@gmail.com','ngsaip7@gmail.com','goutham2027@gmail.com','venkata.aditya.p@gmail.com']) - Order.today.collect(&:user)
     users.each do |u|
       u.notify_menu message,title
     end
