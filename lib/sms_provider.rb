@@ -32,7 +32,7 @@ module SmsProvider
 
 
   def self.send_message phone_number,message
-    self.send_message_with_telerivet phone_number,message
+    self.send_message_with_infini phone_number,message
   end
 
 end
