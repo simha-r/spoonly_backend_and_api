@@ -9,6 +9,8 @@ module UserPusher
     PushProvider.push self,message,nil,title
   end
 
+  handle_asynchronously :notify_menu
+
   def notify_wallet message,title
     PushProvider.push self,message,"WalletActivity",title
   end

@@ -112,7 +112,6 @@ class Menu < ActiveRecord::Base
       u.notify_menu message,title
     end
   end
-  handle_asynchronously :notify_users_lunch
 
 
   def notify_users_dinner title,message
@@ -122,7 +121,6 @@ class Menu < ActiveRecord::Base
       u.notify_menu message,title
     end
   end
-  handle_asynchronously :notify_users_dinner
 
 
 end
