@@ -81,7 +81,11 @@ class Menu < ActiveRecord::Base
     hash[:referral_text] = "<html><body>Earn Free Meals<br />Give &#8377 50, Get &#8377 50</body></html>"
     hash[:timings]=["07:15 PM - 08:00 PM","08:00 PM - 08:45 PM","08:45 PM - 09:30 PM","09:30 PM - 10:15 PM",
                     "10:15 PM - 11:00 PM"]
-    hash[:extra_info] = {deep_link: 'spoonlyapp://walletpage',image: 'http://i.imgur.com/7sFN6Ce.jpg?1'}
+
+    hash[:extra_info] = {}
+    if ENV['EXTRA_INFO_DEEP_LINK'].present? and ENV['EXTRA_INFO_IMAGE'].present?
+      hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_DEEP_LINK'],image: ENV['EXTRA_INFO_IMAGE']}
+    end
     hash[:buffer_time]=ENV['BUFFER_TIME'].to_i
     hash
   end
