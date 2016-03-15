@@ -83,7 +83,7 @@ class Menu < ActiveRecord::Base
                     "10:15 PM - 11:00 PM"]
 
     hash[:extra_info] = {}
-    if ENV['EXTRA_INFO_DEEP_LINK'].present? and ENV['EXTRA_INFO_IMAGE'].present?
+    if ENV['EXTRA_INFO_DEEP_LINK'].present? and ENV['EXTRA_INFO_IMAGE'].present? and (rand(0..1)==1)
       hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_DEEP_LINK'],image: ENV['EXTRA_INFO_IMAGE']}
     end
     hash[:buffer_time]=ENV['BUFFER_TIME'].to_i
@@ -124,7 +124,7 @@ class Menu < ActiveRecord::Base
 
   def notify_users_dinner title,message
     update_attributes(dinner_notification_sent: true)
-    users = User.all - Order.today.where(category: 'dinner').collect(&:user)
+    users = User.all - Order.today.delivered.collect(&:user)
     users.each do |u|
       u.notify_menu message,title
     end
