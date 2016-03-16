@@ -22,6 +22,7 @@ class DeliveryExecutive < ActiveRecord::Base
   scope :available,->{where(state: 'available')}
   scope :out_for_delivery, ->{where(state: 'available')}
 
+  default_scope {where(active: true)}
   scope :active,->{where(active: true)}
 
   def delivered_orders

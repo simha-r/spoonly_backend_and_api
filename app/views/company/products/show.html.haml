@@ -15,4 +15,4 @@
             = @product.price
             = @product.desc
             = @product.vegetarian? ? 'VEGETARIAN' : 'NON VEG'
-            = image_tag @product.photo.url(:medium)
+            = link_to image_tag(@product.photo.url(:medium)),@product.photo.url,target: '_blank'
