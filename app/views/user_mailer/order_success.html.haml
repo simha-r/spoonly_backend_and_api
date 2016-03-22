@@ -13,7 +13,8 @@
         .logo
           -#= image_tag "spoonly_text.png"
         .header-msg-container
-          %p.header-msg-top Download Android App
+          %p.header-msg-top
+            =link_to "Download Android App", "https://play.google.com/store/apps/details?id=com.freshspoon.spoonly"
           %p.separator
           %p.header-msg-bottom Order Confirmation
       .mail-body
@@ -68,4 +69,7 @@
           .regards
             %p Regards,
             %p Spoonly Team.
+
+        .banner
+          = link_to image_tag('http://res.cloudinary.com/ddg0ozoid/image/upload/v1458664103/grabon-banner_d68jau.png'), 'http://www.google.com'
 
