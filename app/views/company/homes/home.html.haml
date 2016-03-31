@@ -12,7 +12,7 @@
     %li= link_to 'View Delivery Executives',[:company,:delivery_executives]
     %li= link_to 'Live Map View Delivery Executives',[:live_view,:company,:delivery_executives,data: { no_turbolink: true }]
     %li= link_to 'View Daily Bill Summary',[:collections_summary,:company,:orders]
-    %li= link_to 'View CHEF SUMMARY - Lunch',[:chef_summary,:company,:current_orders,category: :dinner]
+    %li= link_to 'View CHEF SUMMARY - Lunch',[:chef_summary,:company,:current_orders,category: :lunch]
     %li= link_to 'View CHEF SUMMARY - Dinner',[:chef_summary,:company,:current_orders,category: :dinner]
     %li= link_to 'View Delivery Dashboard',[:dashboard,:company,:delivery_executives]
 
@@ -20,6 +20,7 @@
     %h3 Admin Stuff
 
     %li= link_to 'View Menus',[:company,:menus]
+    %li= link_to 'View Menus',[:company,:products]
     %li= link_to 'View Users',[:company,:users]
     %li= link_to 'View Feedbacks',[:company,:feedbacks]
     %li= link_to 'View Wallet Promotions',[:company,:wallet_promotions]
