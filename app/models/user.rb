@@ -162,9 +162,24 @@ class User < ActiveRecord::Base
     end
   end
 
+  def trying_to_refer_self? referral_code
+    if device_id.present?
+      # Has this device id  been used to redeem a referral code before ?
+      users = User.where(device_id: device_id)
+      referral_codes = users.collect(&:referral_code)
+      if referral_codes.include? referral_code
+        true
+      else
+        false
+      end
+    else
+      false
+    end
+  end
+
   def refer_user user
     general_promotions = GeneralPromotion.all
-    if((user.has_been_referred?) || (user.orders.delivered.present?) || (user.referral_code==referral_code) || GeneralPromotion.applied_for?(user,general_promotions) || (referrer_user==user))
+    if((user.has_been_referred?) || (user.trying_to_refer_self?(referral_code)) || (user.orders.delivered.present?) || (user.referral_code==referral_code) || GeneralPromotion.applied_for?(user,general_promotions) || (referrer_user==user))
       return false
     end
     referral = referrals.create!(referred_id: user.id)
