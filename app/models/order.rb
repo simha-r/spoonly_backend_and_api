@@ -117,7 +117,7 @@ class Order < ActiveRecord::Base
   end
 
   def self.total_cash_to_pay orders
-    orders.sum &:cash_to_pay
+    orders.inject(0) {|sum,o| sum + o.cash_to_pay}
   end
 
   def prepaid_amount
