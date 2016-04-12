@@ -1,6 +1,6 @@
 %h3 Bill Collections
 %br
-%h4 #{@category.upcase}
+%h4  #{@category.upcase}
 %br
 
 = form_tag collections_summary_company_orders_path,method: :get do
@@ -43,4 +43,6 @@
         = Order.total_cash_to_pay orders
   %br
 
-%h3= "TOTAL AMOUNT: Rs #{Order.total_cash_to_pay @delivered_orders}"
+%h3= " TOTAL AMOUNT DUE:  Rs #{Order.total_cash_to_pay @delivered_orders}"
+
+%br

@@ -68,7 +68,7 @@ class Menu < ActiveRecord::Base
     hash[:timings]=["12:00 PM - 12:30 PM","12:30 PM - 01:00 PM","01:00 PM - 01:30 PM","01:30 PM - 02:00 PM",
                     "02:00 PM - 02:30 PM","02:30 PM - 03:00 PM","03:00 PM - 03:30 PM"]
     hash[:extra_info] = {}
-    if ENV['EXTRA_INFO_DEEP_LINK'].present? and ENV['EXTRA_INFO_IMAGE'].present?
+    if ENV['EXTRA_INFO_IMAGE'].present?
       hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_DEEP_LINK'],image: ENV['EXTRA_INFO_IMAGE']}
     end
 
@@ -85,7 +85,7 @@ class Menu < ActiveRecord::Base
                     "10:15 PM - 11:00 PM"]
 
     hash[:extra_info] = {}
-    if ENV['EXTRA_INFO_DEEP_LINK'].present? and ENV['EXTRA_INFO_IMAGE'].present?
+    if ENV['EXTRA_INFO_IMAGE'].present?
       hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_DEEP_LINK'],image: ENV['EXTRA_INFO_IMAGE']}
     end
     hash[:buffer_time]=ENV['BUFFER_TIME'].to_i
