@@ -68,8 +68,15 @@ class Menu < ActiveRecord::Base
     hash[:timings]=["12:00 PM - 12:30 PM","12:30 PM - 01:00 PM","01:00 PM - 01:30 PM","01:30 PM - 02:00 PM",
                     "02:00 PM - 02:30 PM","02:30 PM - 03:00 PM","03:00 PM - 03:30 PM"]
     hash[:extra_info] = {}
-    if ENV['EXTRA_INFO_IMAGE'].present?
-      hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_DEEP_LINK'],image: ENV['EXTRA_INFO_IMAGE']}
+
+    if rand(0..1)==1
+      if ENV['EXTRA_INFO_REFERRAL_IMAGE'].present?
+        hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_REFERRAL_DEEP_LINK'],image: ENV['EXTRA_INFO_REFERRAL_IMAGE']}
+      end
+    else
+      if ENV['EXTRA_INFO_WALLET_IMAGE'].present?
+        hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_WALLET_DEEP_LINK'],image: ENV['EXTRA_INFO_WALLET_IMAGE']}
+      end
     end
 
     hash[:buffer_time]=ENV['BUFFER_TIME'].to_i
