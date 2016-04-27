@@ -1,4 +1,8 @@
 %h3= "MENU: #{@menu.menu_date.strftime('%a  %-d %b')}"
+%br
+%h4 Buffer Time: #{@menu.buffer_time}
+
+
 -#TODO For editing menu product price..show menu priduct price...dont need to edit product price and mess up all data
 %h3 Lunch
 - @menu.menu_lunch_products.each do |menu_product|

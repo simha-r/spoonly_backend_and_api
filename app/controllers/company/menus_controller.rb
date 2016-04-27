@@ -74,7 +74,7 @@ class Company::MenusController < Company::BaseController
 
     date = Date.new params[:menu]["menu_date(1i)"].to_i, params[:menu]["menu_date(2i)"].to_i,
                     params[:menu]["menu_date(3i)"].to_i
-    {menu_date: date}
-
+    buffer_time = params[:menu][:buffer_time] || 1
+    {menu_date: date,buffer_time: buffer_time}
   end
 end

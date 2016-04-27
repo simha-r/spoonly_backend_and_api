@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160208122125) do
+ActiveRecord::Schema.define(version: 20160427185935) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -231,6 +231,7 @@ ActiveRecord::Schema.define(version: 20160208122125) do
     t.datetime "updated_at"
     t.boolean  "lunch_notification_sent",  default: false
     t.boolean  "dinner_notification_sent"
+    t.integer  "buffer_time",              default: 1
   end
 
   create_table "orders", force: true do |t|
@@ -308,6 +309,7 @@ ActiveRecord::Schema.define(version: 20160208122125) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
+
 
   create_table "user_general_promotions", force: true do |t|
     t.integer  "user_id"

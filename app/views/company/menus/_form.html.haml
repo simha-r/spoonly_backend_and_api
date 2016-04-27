@@ -1,3 +1,14 @@
-= form_for [:company,@menu] do |f|
-  = f.date_select :menu_date,start_year: 2015,end_year: 2016
-  = f.submit
+.row
+  .col-xs-2
+  .col-xs-10
+    = form_for [:company,@menu] do |f|
+      - if !@menu.persisted?
+        = label_tag :menu_date
+        = f.date_select :menu_date,start_year: 2015,end_year: 2016
+      %br
+        %br
+      = label_tag :buffer_time
+      = f.number_field(:buffer_time,min:1,max: 20)
+      %br
+        %br
+      = f.submit

@@ -26,6 +26,8 @@ class Menu < ActiveRecord::Base
   has_many :dinner_products, -> { where(menu_products: {category: 'dinner'}) },
            :through => :menu_products, source: :product
 
+  validates :buffer_time, :numericality => { :greater_than => 0, :less_than_or_equal_to => 20 }
+
 
   def self.today
     where(menu_date: Date.current).first
@@ -79,7 +81,7 @@ class Menu < ActiveRecord::Base
       end
     end
 
-    hash[:buffer_time]=ENV['BUFFER_TIME'].to_i
+    hash[:buffer_time]= self.buffer_time || 1
     hash
   end
 
@@ -95,7 +97,7 @@ class Menu < ActiveRecord::Base
     if ENV['EXTRA_INFO_IMAGE'].present?
       hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_DEEP_LINK'],image: ENV['EXTRA_INFO_IMAGE']}
     end
-    hash[:buffer_time]=ENV['BUFFER_TIME'].to_i
+    hash[:buffer_time]= self.buffer_time || 1
     hash
   end
 
