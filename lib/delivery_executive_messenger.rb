@@ -1,19 +1,19 @@
 module DeliveryExecutiveMessenger
 
 
-  def self.dispatch order
+  def self.dispatch order,message
     delivery_executive =order.delivery_executive
-    user = order.user
-    message = "#{user.name[0..10]},#{user.profile.phone_number}
-#{order.address.formatted}.
-##{order.id}: #{order.sms_formatted_delivery_time}
-#{order.brief_line_items}
-Rs #{order.cash_to_pay.to_i}"
     HealthyLunchUtils.log_info "Sending message to #{delivery_executive.name}"
-    SmsProvider.send_message_with_telerivet delivery_executive.phone_number,message
+    # SmsProvider.send_message_with_telerivet delivery_executive.phone_number,message
     Pusher['orders'].trigger("assigned_to_#{delivery_executive.id}", {
       message: 'New Order Created..Refresh your browser to see it'
     })
+  end
+
+  def self.dispatch_by_sms order,message
+    delivery_executive =order.delivery_executive
+    HealthyLunchUtils.log_info "Sending sms to #{delivery_executive.name}"
+    SmsProvider.send_message_with_telerivet delivery_executive.phone_number,message
   end
 
   def self.inform_on_field order

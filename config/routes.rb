@@ -145,6 +145,7 @@ Rails.application.routes.draw do
         get :bill
         put :ask_feedback
         get :map_view
+        post :send_sms
       end
       collection do
         post :sms_update

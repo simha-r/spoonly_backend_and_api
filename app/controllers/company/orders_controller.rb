@@ -151,6 +151,14 @@ class Company::OrdersController < Company::BaseController
       end
   end
 
+  def send_sms
+    if DeliveryExecutiveMessenger.dispatch_by_sms(@order,@order.sms_form)
+      redirect_to request.referrer,notice: 'SMS has been sent!'
+    else
+      redirect_to request.referrer,alert: 'ERROR: SMS NOT SENT!!!'
+    end
+  end
+
 
   private
 

@@ -177,10 +177,19 @@ class Order < ActiveRecord::Base
 
   def notify_delivery_executive event
     if event=='dispatch'
-      DeliveryExecutiveMessenger.dispatch(self)
+      DeliveryExecutiveMessenger.dispatch(self,sms_form)
     elsif( (event=='withdraw_delivery_request') || (event == 'cancel'))
       DeliveryExecutiveMessenger.withdraw_delivery_request(self)
     end
+  end
+
+  def sms_form
+    message = "#{user.name[0..10]},#{user.profile.phone_number}
+    #{address.formatted}.
+##{id}: #{sms_formatted_delivery_time}
+    #{brief_line_items}
+Rs #{cash_to_pay.to_i}"
+    message
   end
 
   def notify_dispatch
