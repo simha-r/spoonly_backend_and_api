@@ -71,10 +71,14 @@ class Company::MenusController < Company::BaseController
   end
 
   def menu_params
-
-    date = Date.new params[:menu]["menu_date(1i)"].to_i, params[:menu]["menu_date(2i)"].to_i,
-                    params[:menu]["menu_date(3i)"].to_i
-    buffer_time = params[:menu][:buffer_time] || 1
-    {menu_date: date,buffer_time: buffer_time}
+    hash = {}
+    if params[:menu]["menu_date(1i)"] && params[:menu]["menu_date(2i)"] && params[:menu]["menu_date(3i)"]
+      date = Date.new params[:menu]["menu_date(1i)"].to_i, params[:menu]["menu_date(2i)"].to_i,
+                      params[:menu]["menu_date(3i)"].to_i
+      hash[:menu_date] = date
+    end
+    hash[:buffer_time] = params[:menu][:buffer_time] || 1
+    hash
   end
+
 end
