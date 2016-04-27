@@ -2,7 +2,7 @@
 
 %table.table
   %thead
-    %tr.row
+    %tr
       %th
         Order #
       %th
@@ -19,8 +19,20 @@
         State
       %th
         Actions
+  %tbody
+  - previous_order = nil
+  - previous_color = nil
+  - colors = ['#ddd','#CDBCBC']
   - @orders.each do |order|
-    %tr.row
+    - if order.delivery_time == previous_order.try(:delivery_time)
+      - color = previous_color || '#CDBCBC'
+      -#Use same color as previous one
+    - else
+      -#TODO Use different color
+      - color = previous_color ? (colors - [previous_color])[0] : '#ddd'
+    - previous_order= order
+    - previous_color = color
+    %tr{:style => "background-color: #{color}"}
       %td
         = link_to order.id,[:company,order]
         - if order.address.has_location?
