@@ -71,6 +71,8 @@ class Menu < ActiveRecord::Base
                     "02:00 PM - 02:30 PM","02:30 PM - 03:00 PM","03:00 PM - 03:30 PM"]
     hash[:extra_info] = {}
 
+=begin
+    # Logic for showing wallet and share extra infos
     if rand(0..1)==1
       if ENV['EXTRA_INFO_REFERRAL_IMAGE'].present?
         hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_REFERRAL_DEEP_LINK'],image: ENV['EXTRA_INFO_REFERRAL_IMAGE']}
@@ -79,6 +81,11 @@ class Menu < ActiveRecord::Base
       if ENV['EXTRA_INFO_WALLET_IMAGE'].present?
         hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_WALLET_DEEP_LINK'],image: ENV['EXTRA_INFO_WALLET_IMAGE']}
       end
+    end
+=end
+
+    if ENV['EXTRA_INFO_DELIVERY_IMAGE'].present?
+      hash[:extra_info] = {deep_link: '',image: ENV['EXTRA_INFO_DELIVERY_IMAGE']}
     end
 
     hash[:buffer_time]= self.buffer_time || 1
@@ -94,8 +101,14 @@ class Menu < ActiveRecord::Base
                     "10:15 PM - 11:00 PM"]
 
     hash[:extra_info] = {}
-    if ENV['EXTRA_INFO_IMAGE'].present?
-      hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_DEEP_LINK'],image: ENV['EXTRA_INFO_IMAGE']}
+    if rand(0..1)==1
+      if ENV['EXTRA_INFO_REFERRAL_IMAGE'].present?
+        hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_REFERRAL_DEEP_LINK'],image: ENV['EXTRA_INFO_REFERRAL_IMAGE']}
+      end
+    else
+      if ENV['EXTRA_INFO_WALLET_IMAGE'].present?
+        hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_WALLET_DEEP_LINK'],image: ENV['EXTRA_INFO_WALLET_IMAGE']}
+      end
     end
     hash[:buffer_time]= self.buffer_time || 1
     hash
