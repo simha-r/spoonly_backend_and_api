@@ -15,9 +15,27 @@ class Api::V1::OrdersController < Api::V1::BaseController
       new_params = custom_line_item_params(li).merge({price: menu_product.product.price})
       @order.line_items.create!(new_params)
     end
-    if @order.needs_delivery_fee?
-      @order.update_attributes(delivery_fee: Order::DELIVERY_FEE)
+
+
+    # Refactor delivery_fee logic to a method
+    if order_params[:category]=='lunch'
+      @menu  = Menu.current_lunch
+
+      if @menu.menu_date == Date.today
+        if Time.now < Menu.today.lunch_start_time
+          delivery_fee = 5
+        else
+          delivery_fee = 15
+        end
+      else
+        # It is after 3:30 and he is seeing next day menu..so only 5 rs delivery
+        delivery_fee = 5
+      end
+    else
+      delivery_fee = 10
     end
+    @order.update_attributes(delivery_fee: delivery_fee)
+
     @order.start_process!
     render json: @order
   rescue Exception=>e
@@ -50,7 +68,26 @@ class Api::V1::OrdersController < Api::V1::BaseController
         # When u add item to menu...and later change product price...it doesnt get reflected in menu_product price..and it shouldnt..so have a menu to edit the menu product price after a menu priduct has been created
         item_total = item_total + menu_product.product.price*quantity
       end
-      delivery_fee = (item_total < Order::MIN_TOTAL_FOR_FREE_DELIVERY) ? Order::DELIVERY_FEE : 0
+
+      # Refactor delivery_fee logic to a method
+      if order_params[:category]=='lunch'
+        @menu  = Menu.current_lunch
+
+        if @menu.menu_date == Date.today
+          if Time.now < Menu.today.lunch_start_time
+            delivery_fee = 5
+          else
+            delivery_fee = 15
+          end
+        else
+          # It is after 3:30 and he is seeing next day menu..so only 5 rs delivery
+          delivery_fee = 5
+        end
+      else
+        delivery_fee = 10
+      end
+
+
       bill_total = item_total + delivery_fee
       grand_total = bill_total
 
