@@ -12,6 +12,10 @@
         .col-xs-6
           .menu-card{'id'=>"menu_product_#{menu_product.id}"}
             = render 'customer/menus/menu_product_preview',menu_product: menu_product
+      .col-xs-6
+        .menu-card
+          .menu-img
+            = image_tag "https://s3-ap-southeast-1.amazonaws.com/healthylunchproduction/misc/delivery_website.jpg", class: "img-responsive"
 
   :javascript
      analytics.page('Lunch Menu');
