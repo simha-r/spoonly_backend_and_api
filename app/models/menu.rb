@@ -85,7 +85,7 @@ class Menu < ActiveRecord::Base
 =end
 
     if ENV['EXTRA_INFO_DELIVERY_IMAGE'].present?
-      hash[:extra_info] = {deep_link: '',image: ENV['EXTRA_INFO_DELIVERY_IMAGE'],index: 1}
+      hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_DELIVERY_IMAGE_DEEP_LINK'],image: ENV['EXTRA_INFO_DELIVERY_IMAGE'],index: 1}
     end
 
     hash[:buffer_time]= self.buffer_time || 1
