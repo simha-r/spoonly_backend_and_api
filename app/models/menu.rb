@@ -101,15 +101,15 @@ class Menu < ActiveRecord::Base
                     "10:15 PM - 11:00 PM"]
 
     hash[:extra_info] = {}
-    if rand(0..1)==1
-      if ENV['EXTRA_INFO_REFERRAL_IMAGE'].present?
-        hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_REFERRAL_DEEP_LINK'],image: ENV['EXTRA_INFO_REFERRAL_IMAGE']}
-      end
-    else
-      if ENV['EXTRA_INFO_WALLET_IMAGE'].present?
-        hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_WALLET_DEEP_LINK'],image: ENV['EXTRA_INFO_WALLET_IMAGE']}
-      end
+    # if rand(0..1)==1
+    if ENV['EXTRA_INFO_REFERRAL_IMAGE'].present?
+      hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_REFERRAL_DEEP_LINK'],image: ENV['EXTRA_INFO_REFERRAL_IMAGE']}
     end
+    # else
+    #   if ENV['EXTRA_INFO_WALLET_IMAGE'].present?
+    #     hash[:extra_info] = {deep_link: ENV['EXTRA_INFO_WALLET_DEEP_LINK'],image: ENV['EXTRA_INFO_WALLET_IMAGE']}
+    #   end
+    # end
     hash[:buffer_time]= self.buffer_time || 1
     hash
   end
