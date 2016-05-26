@@ -7,9 +7,12 @@ class Api::V1::AccountsController <Api::V1::BaseController
   end
 
   def update
+    render json: current_user, status: 200
+=begin
     if current_user.profile.update_attributes(profile_params)
       render json: current_user, status: 200
     end
+=end
   end
 
 
