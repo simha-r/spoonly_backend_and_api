@@ -1,8 +1,9 @@
 class Company::OrdersController < Company::BaseController
 
   before_filter :authenticate_dispatcher!, except: [:sms_update]
-  before_filter :set_order, except: [:index, :sms_update, :by_date, :collections_summary]
+  before_filter :set_order, except: [:index, :sms_update, :by_date, :collections_summary,:last_3_months]
   before_filter :authenticate_sms_sender!, only: [:sms_update]
+  before_filter :authenticate_admin!, only: [:last_3_months]
 
   def index
     @orders = Order.order(delivery_time: :desc).includes(:user).includes(:address).paginate page: params[:page]
@@ -157,6 +158,22 @@ class Company::OrdersController < Company::BaseController
     else
       redirect_to request.referrer,alert: 'ERROR: SMS NOT SENT!!!'
     end
+  end
+
+  def last_3_months
+    @orders = Order.where("created_at > ?",85.days.ago).order(:created_at)
+
+    spreadsheet_name = 'Spoonly 3 month orders'
+    book = Spreadsheet::Workbook.new
+    sheet1 = book.create_worksheet :name => spreadsheet_name
+
+    @orders.each_with_index  { |order, i|
+      sheet1.row(i).replace [order.id, order.user_id, order.formatted_delivery_time, order.detail_line_items,order.grand_total]
+    }
+    export_file_path = [Rails.root, "public","spoonly_#{ DateTime.now.to_s }.xls"].join("/")
+    book.write export_file_path
+    send_file export_file_path, :content_type => "application/vnd.ms-excel", :disposition => 'inline'
+
   end
 
 

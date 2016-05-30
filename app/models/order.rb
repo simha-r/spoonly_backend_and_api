@@ -379,6 +379,14 @@ Rs #{cash_to_pay.to_i}"
     total_price < Order::MIN_TOTAL_FOR_FREE_DELIVERY
   end
 
+  def detail_line_items
+    line = ''
+    line_items.includes(:menu_product).includes(:product).each do |li|
+      line << "#{li.product.name}(#{li.product.category}) => #{li.quantity}"
+    end
+    line
+  end
+
   private
 
   def record_dispatch_time

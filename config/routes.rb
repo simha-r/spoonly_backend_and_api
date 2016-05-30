@@ -151,6 +151,7 @@ Rails.application.routes.draw do
         post :sms_update
         get :by_date
         get :collections_summary
+        get :last_3_months
       end
     end
     resources :current_orders do
