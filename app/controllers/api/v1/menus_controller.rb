@@ -54,7 +54,7 @@ class Api::V1::MenusController < Api::V1::BaseController
       if [6,7].include? Date.today.wday
         notice = "Orders for today are closed. We'll be back on Monday!"
       else
-        notice = "Dinner menu will be uploaded shortly :)"
+        notice = ENV['NOT_SERVING_WEEKDAY_DINNER']
       end
       render json: {notice: notice}
     end
