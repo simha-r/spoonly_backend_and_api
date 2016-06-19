@@ -14,17 +14,20 @@
       = product.price
       = product.desc
     .col-md-4
-      - if !menu_product.sold_out?
-        = link_to 'Mark Sold OUT',[:mark_sold_out,:company, menu_product], :method => :post, :data => { :confirm => 'Are you sure?' },
-              :class => 'btn btn-secondary'
-      - else
-        = link_to 'UNMARK Sold OUT',[:unmark_sold_out,:company, menu_product], :method => :post, :data => { :confirm => 'Are you sure?' },
-              :class => 'btn btn-secondary'
+      .col-md-6
+        - if !menu_product.sold_out?
+          = link_to 'Mark Sold OUT',[:mark_sold_out,:company, menu_product], :method => :post, :data => { :confirm => 'Are you sure?' },
+                :class => 'btn btn-secondary'
+        - else
+          = link_to 'UNMARK Sold OUT',[:unmark_sold_out,:company, menu_product], :method => :post, :data => { :confirm => 'Are you sure?' },
+                :class => 'btn btn-secondary'
+      .col-md-6
+        .btn.btn-danger= link_to "Remove from Menu (DANGER!!)", [:company,menu_product],method: :delete
     -#.col-md-4
     -#  = link_to 'Remove From Menu',[:company, menu_product], :method => :delete, :data => { :confirm => 'Are you sure?' },
     -#  :class => 'btn btn-secondary'
 
-
+  %br
 %h3 Dinner
 - @menu.menu_dinner_products.each do |menu_product|
   - product = menu_product.product
