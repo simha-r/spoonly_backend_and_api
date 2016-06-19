@@ -22,7 +22,7 @@
           = link_to 'UNMARK Sold OUT',[:unmark_sold_out,:company, menu_product], :method => :post, :data => { :confirm => 'Are you sure?' },
                 :class => 'btn btn-secondary'
       .col-md-6
-        .btn.btn-danger= link_to "Remove from Menu (DANGER!!)", [:company,menu_product],method: :delete
+        .btn.btn-danger= link_to "Remove from Menu (DANGER!!)", [:company,menu_product],method: :delete,:data => { :confirm => 'DANGER! Do you want to remove this item from the menu?' }
     -#.col-md-4
     -#  = link_to 'Remove From Menu',[:company, menu_product], :method => :delete, :data => { :confirm => 'Are you sure?' },
     -#  :class => 'btn btn-secondary'
