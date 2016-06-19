@@ -171,6 +171,8 @@ Rails.application.routes.draw do
         put :enable_otp
         put :disable_otp
         get :show_otp
+        get :edit_roles
+        put :update_roles
       end
     end
     resources :delivery_executives do

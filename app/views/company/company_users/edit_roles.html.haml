@@ -1,0 +1,30 @@
+%br
+  %br
+.row
+  .col-xs-5
+    %h3= "Email: #{@company_user.email}"
+
+
+%fieldset
+  %legend User Roles
+
+  .row-fluid
+    .col-xs-1
+    .col-xs-8
+      = form_tag update_roles_company_company_user_path(@company_user),method: :put do
+        = label_tag (:admin) do
+          Delivery Executive:
+          = hidden_field_tag(:delivery_executive, 0)
+          = check_box_tag(:delivery_executive, 1, @company_user.has_role?(:delivery_executive))
+        %br
+        = label_tag (:dispatcher) do
+          Dispatcher:
+          = hidden_field_tag(:dispatcher, 0)
+          = check_box_tag(:dispatcher, 1, @company_user.has_role?(:dispatcher))
+        %br
+        = label_tag (:dispatcher) do
+          Admin:
+          = hidden_field_tag(:admin, 0)
+          = check_box_tag(:admin, 1, @company_user.has_role?(:admin))
+        %br
+        = submit_tag "Update"

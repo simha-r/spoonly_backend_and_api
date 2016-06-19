@@ -1,0 +1,10 @@
+.row-fluid
+  .span8.offset2
+    .widget
+      .widget-header
+        %i.icon-plus
+        %span Edit Company User
+      .widget-content
+        = render 'form'
+        = link_to 'Show', [:company,@company_user]
+        = link_to 'Back', [:company,:company_users]
