@@ -86,7 +86,7 @@ class Company::DeliveryExecutivesController < Company::BaseController
   private
 
   def delivery_executive_params
-    params.require(:delivery_executive).permit(:name,:phone_number)
+    params.require(:delivery_executive).permit(:name,:phone_number,:email)
   end
 
   def set_delivery_executive
