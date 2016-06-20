@@ -12,6 +12,7 @@
 
   - if @undelivered_orders.present?
 
+
     .row
       - line_items = LineItem.where(order: @undelivered_orders)
       .col-xs-6
@@ -35,7 +36,7 @@
           %br
           %b= "#{order.formatted_delivery_time.split(' ')[0]+" "+order.formatted_delivery_time.split(' ')[1]}"
           %br
-          = "#{order.brief_line_items}"
+          = "#{order.detail_line_items}"
           &#8377
           ="#{order.cash_to_pay.to_i}"
         .col-xs-4

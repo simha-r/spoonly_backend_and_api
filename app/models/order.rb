@@ -358,6 +358,8 @@ Rs #{cash_to_pay.to_i}"
   end
 
 
+
+
   def cashback_for_customer_satisfaction wallet_promotion_name,custom_message
     wallet_promotion=WalletPromotion.where(name: wallet_promotion_name).first
     if user.wallet.apply_promotion wallet_promotion
@@ -382,7 +384,7 @@ Rs #{cash_to_pay.to_i}"
   def detail_line_items
     line = ''
     line_items.includes(:menu_product).includes(:product).each do |li|
-      line << "#{li.product.name}(#{li.product.category}) => #{li.quantity}"
+      line << "#{li.product.name}(#{li.product.category}) => #{li.quantity},"
     end
     line
   end
