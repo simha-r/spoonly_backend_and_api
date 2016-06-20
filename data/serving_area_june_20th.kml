@@ -1,0 +1,204 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<kml xmlns='http://www.opengis.net/kml/2.2'>
+	<Document>
+		<name>Jan15th_general_area</name>
+		<description><![CDATA[]]></description>
+		<Folder>
+			<name>Coverage Polygons</name>
+			<Placemark>
+				<name>Financial District SEZ</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3429909,17.410352100000008,0.0 78.3524323,17.4173952,0.0 78.3635044,17.4494135,0.0 78.3447933,17.4594027,0.0 78.3401585,17.4403245,0.0 78.3344078,17.4380317,0.0 78.3350086,17.430907500000004,0.0 78.3260822,17.4291059,0.0 78.3289146,17.4184599,0.0 78.3429909,17.410352100000008,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Hitech City</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3715725,17.4609583,0.0 78.3687401,17.4542444,0.0 78.3722591,17.4398332,0.0 78.3868504,17.4295153,0.0 78.3907986,17.434428700000005,0.0 78.3829021,17.45186989999999,0.0 78.3743191,17.4639058,0.0 78.3715725,17.4609583,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Phoenix Avance Deloitte</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3636332,17.457560500000007,0.0 78.3609724,17.4408977,0.0 78.3687401,17.435001899999993,0.0 78.3730745,17.439260000000008,0.0 78.3695126,17.4583792,0.0 78.3636332,17.457560500000007,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>beautiful COde banjara hills</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.4333652,17.416258900000003,0.0 78.433612,17.4151329,0.0 78.4351462,17.414892300000005,0.0 78.4352964,17.4161054,0.0 78.4333652,17.416258900000003,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Wells Fargo IBM Building Raidurgam</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3868504,17.4295153,0.0 78.3730745,17.439260000000008,0.0 78.3687401,17.435001899999993,0.0 78.3640623,17.4386868,0.0 78.3601999,17.4329956,0.0 78.3723879,17.41952450000001,0.0 78.3786106,17.4197702,0.0 78.3868504,17.4295153,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Meenakshi skylounge,TCS Kohinor park</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3767223,17.4607127,0.0 78.3773232,17.4642743,0.0 78.374877,17.467917599999993,0.0 78.3447933,17.4594027,0.0 78.3623886,17.449904800000006,0.0 78.3636332,17.457560500000007,0.0 78.3695126,17.4583792,0.0 78.3697271,17.4569054,0.0 78.3767223,17.4607127,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Kondapur Hitex Meenakshi Hafeezpet </name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3433342,17.4534256,0.0 78.3767223,17.4607127,0.0 78.385005,17.4668124,0.0 78.3819151,17.4702919,0.0 78.3801985,17.47197029999999,0.0 78.3703709,17.4749176,0.0 78.3633757,17.4756544,0.0 78.3291292,17.4715609,0.0 78.3433342,17.4534256,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Financial District Periphery</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3429909,17.410352100000008,0.0 78.356638,17.411007299999994,0.0 78.3659077,17.42705859999999,0.0 78.3629036,17.447612100000004,0.0 78.3429909,17.410352100000008,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Madhapur ps limits, kavuri hills, 100 feet road</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3907986,17.434428700000005,0.0 78.3999825,17.4385639,0.0 78.3963346,17.451624300000006,0.0 78.395648,17.454899400000006,0.0 78.3891249,17.457765200000004,0.0 78.3803272,17.45563629999999,0.0 78.3907986,17.434428700000005,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Olive Bistro</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3889532,17.4323405,0.0 78.3911848,17.4287783,0.0 78.3947468,17.4285736,0.0 78.3944035,17.4359845,0.0 78.3889532,17.4323405,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>kavuri hills yupptv and co</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.4020424,17.4236192,0.0 78.41053960000002,17.434428700000005,0.0 78.403244,17.457847,0.0 78.395648,17.454899400000002,0.0 78.3868504,17.4295153,0.0 78.3984375,17.4191969,0.0 78.4020424,17.4236192,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>Mylan Labs region</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.4188652,17.4161566,0.0 78.4187043,17.4151329,0.0 78.4196162,17.4150305,0.0 78.4203243,17.4153683,0.0 78.4207213,17.4160542,0.0 78.4202278,17.4168629,0.0 78.4188652,17.4161566,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+			<Placemark>
+				<name>KPHB Zone</name>
+				<styleUrl>#poly-000000-1-76-nodesc</styleUrl>
+				<Polygon>
+					<outerBoundaryIs>
+						<LinearRing>
+							<tessellate>1</tessellate>
+							<coordinates>78.3703709,17.4749176,0.0 78.3892536,17.4687364,0.0 78.4002399,17.4673445,0.0 78.4052181,17.4692685,0.0 78.4065056,17.467058,0.0 78.4161615,17.4676311,0.0 78.4272337,17.4700054,0.0 78.4087372,17.4709469,0.0 78.4014416,17.4687773,0.0 78.3961201,17.4712335,0.0 78.3912706,17.468941,0.0 78.3968067,17.476555,0.0 78.4024715,17.4928871,0.0 78.4010124,17.5023828,0.0 78.3906698,17.4992722,0.0 78.3703709,17.4749176,0.0</coordinates>
+						</LinearRing>
+					</outerBoundaryIs>
+				</Polygon>
+			</Placemark>
+		</Folder>
+		<Style id='poly-000000-1-76-nodesc-normal'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>1</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4C000000</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<Style id='poly-000000-1-76-nodesc-highlight'>
+			<LineStyle>
+				<color>ff000000</color>
+				<width>2.0</width>
+			</LineStyle>
+			<PolyStyle>
+				<color>4C000000</color>
+				<fill>1</fill>
+				<outline>1</outline>
+			</PolyStyle>
+			<BalloonStyle>
+				<text><![CDATA[<h3>$[name]</h3>]]></text>
+			</BalloonStyle>
+		</Style>
+		<StyleMap id='poly-000000-1-76-nodesc'>
+			<Pair>
+				<key>normal</key>
+				<styleUrl>#poly-000000-1-76-nodesc-normal</styleUrl>
+			</Pair>
+			<Pair>
+				<key>highlight</key>
+				<styleUrl>#poly-000000-1-76-nodesc-highlight</styleUrl>
+			</Pair>
+		</StyleMap>
+	</Document>
+</kml>
