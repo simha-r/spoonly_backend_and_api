@@ -1,20 +1,20 @@
 ---
 development:
   cloud_name: hzew3wraw
-  api_key: '441451692895287'
-  api_secret: kzPB71_yUaaweDaIRIL4zti8kzU
+  api_key: '<%= ENV["CLOUDINARY_API_KEY"] %>'
+  api_secret: '<%= ENV["CLOUDINARY_API_SECRET"] %>'
   enhance_image_tag: true
   static_image_support: false
 production:
   cloud_name: hzew3wraw
-  api_key: '441451692895287'
-  api_secret: kzPB71_yUaaweDaIRIL4zti8kzU
+  api_key: '<%= ENV["CLOUDINARY_API_KEY"] %>'
+  api_secret: '<%= ENV["CLOUDINARY_API_SECRET"] %>'
   enhance_image_tag: true
   static_image_support: true
   cdn_subdomain: true
 test:
   cloud_name: hzew3wraw
-  api_key: '441451692895287'
-  api_secret: kzPB71_yUaaweDaIRIL4zti8kzU
+  api_key: '<%= ENV["CLOUDINARY_API_KEY"] %>'
+  api_secret: '<%= ENV["CLOUDINARY_API_SECRET"] %>'
   enhance_image_tag: true
   static_image_support: false
